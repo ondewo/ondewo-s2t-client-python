@@ -23,7 +23,7 @@ setuptools.setup(
         "Development Status :: 3 - Alpha",
         "Topic :: Software Development :: Libraries",
     ],
-    python_requires=">=3.0.1",
+    python_requires=">=2.7, !=3.0.1",
     install_requires=requires,
 )
 
