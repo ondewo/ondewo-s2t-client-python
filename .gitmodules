@@ -1,3 +1,4 @@
 [submodule "ondewo-s2t-api"]
 	path = ondewo-s2t-api
-	url = git@github.com:ondewo/ondewo-s2t-api.git
+	url = https://github.com/ondewo/ondewo-s2t-api.git
+        branch = .
