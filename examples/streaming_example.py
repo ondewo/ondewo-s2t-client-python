@@ -2,35 +2,16 @@
 # coding: utf-8
 
 # EXAMPLE DESC: TODO
-
+import argparse
 import wave
 from typing import Iterator
 
-import grpc
 from google.protobuf.empty_pb2 import Empty
 
-from ondewo.s2t import speech_to_text_pb2, speech_to_text_pb2_grpc
-
-# Set up the parameters of the grpc server.
-# The example below is for the case when server is running locally
-MAX_MESSAGE_LENGTH: int = 6 * 1024 * 1024  # max message length in bytes
-GRPC_HOST: str = "localhost"
-GRPC_PORT: str = "50655"
-CHANNEL: str = f"{GRPC_HOST}:{GRPC_PORT}"
+from ondewo.s2t import speech_to_text_pb2, grpc_utils
 
 AUDIO_FILE: str = "examples/audiofiles/sample_2.wav"
 CHUNK_SIZE: int = 8000
-
-
-def create_stub():
-    options = [
-        ('grpc.max_send_message_length', MAX_MESSAGE_LENGTH),
-        ('grpc.max_receive_message_length', MAX_MESSAGE_LENGTH),
-    ]
-    channel = grpc.insecure_channel(CHANNEL, options=options)
-    stub = speech_to_text_pb2_grpc.Speech2TextStub(channel=channel)
-
-    return stub
 
 
 # We are going to make to send the file chunk-by-chunk to simulate a stream
@@ -65,7 +46,12 @@ def create_streaming_request(
 
 
 def main():
-    stub = create_stub()
+    parser = argparse.ArgumentParser(description='Streaming example.')
+    parser.add_argument("--config", type=str)
+    parser.add_argument("--secure", default=False, action='store_true')
+    args = parser.parse_args()
+
+    stub = grpc_utils.create_stub(args.config, args.secure)
 
     # List all speech-2-text pipelines (model setups) present on the server
     # We are going to pick the first pipeline (model setup)
