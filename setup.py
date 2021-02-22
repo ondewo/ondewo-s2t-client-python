@@ -8,7 +8,7 @@ with open("requirements.txt") as f:
     requires = f.read().splitlines()
 
 setuptools.setup(
-    name="ONDEWO Speech-to-Text Client",
+    name="ondewo-s2t-client-python",
     version="1.3.0",
     author="ONDEWO GbmH",
     author_email="info@ondewo.com",
@@ -26,4 +26,3 @@ setuptools.setup(
     python_requires=">=2.7, !=3.0.1",
     install_requires=requires,
 )
-
