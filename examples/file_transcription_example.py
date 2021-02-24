@@ -15,8 +15,10 @@ AUDIO_FILE: str = "examples/audiofiles/sample_1.wav"
 
 def main():
     parser = argparse.ArgumentParser(description='File transcription example.')
-    parser.add_argument("--config", type=str)
-    parser.add_argument("--secure", default=False, action='store_true')
+    parser.add_argument("--config", type=str, help="The GRPC configuration file. "
+                                                   "See examples/configs in the ondewo-s2t-client-python repository.")
+    parser.add_argument("--secure", default=False, action='store_true',
+                        help="Use secure GRPC connection (default is insecure).")
     args = parser.parse_args()
 
     stub = grpc_utils.create_stub(args.config, args.secure)
