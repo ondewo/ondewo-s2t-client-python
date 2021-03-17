@@ -16,7 +16,13 @@ setuptools.setup(
     long_description=long_description,
     long_description_content_type="text/markdown",
     url="https://github.com/ondewo/ondewo-s2t-client-python",
-    packages=setuptools.find_packages(),
+    packages=[
+        np
+        for np in filter(
+            lambda n: n.startswith('ondewo.') or n == 'ondewo',
+            setuptools.find_packages()
+        )
+    ],
     classifiers=[
         "Programming Language :: Python :: 3",
         "Operating System :: OS Independent",
