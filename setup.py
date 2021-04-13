@@ -8,8 +8,8 @@ with open("requirements.txt") as f:
     requires = f.read().splitlines()
 
 setuptools.setup(
-    name="ondewo-s2t-client-python",
-    version="1.3.0",
+    name="ondewo-s2t-client",
+    version="1.4.0",
     author="ONDEWO GbmH",
     author_email="info@ondewo.com",
     description="exposes the ondewo-s2t-grpc-server endpoints in a user-friendly way",
