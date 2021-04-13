@@ -1,6 +1,15 @@
 # Release History
 *****************
 
+## ONDEWO-S2T Python Client 1.4.1
+
+### New Features
+
+* added to the pypi
+
+
+*****************
+
 ## ONDEWO-S2T Python Client 1.3.0
 
 ### New Features
