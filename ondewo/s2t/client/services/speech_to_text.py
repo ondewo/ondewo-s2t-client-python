@@ -39,19 +39,19 @@ class Speech2Text(BaseServicesInterface):
         return response
 
     def get_s2t_pipeline(self, request: S2tPipelineId) -> Speech2TextConfig:
-        config: Speech2TextConfig = self.stub.GetS2tPipeline(request)
-        return config
+        response: Speech2TextConfig = self.stub.GetS2tPipeline(request)
+        return response
 
-    def create_s2t_pipeline(self, config: Speech2TextConfig) -> S2tPipelineId:
-        response: S2tPipelineId = self.stub.CreateS2tPipeline(config)
+    def create_s2t_pipeline(self, request: Speech2TextConfig) -> S2tPipelineId:
+        response: S2tPipelineId = self.stub.CreateS2tPipeline(request)
         return response
 
     def delete_s2t_pipeline(self, request: S2tPipelineId) -> Empty:
         response: Empty = self.stub.DeleteS2tPipeline(request)
         return response
 
-    def update_s2t_pipeline(self, config: Speech2TextConfig) -> Empty:
-        response: Empty = self.stub.UpdateS2tPipeline(config)
+    def update_s2t_pipeline(self, request: Speech2TextConfig) -> Empty:
+        response: Empty = self.stub.UpdateS2tPipeline(request)
         return response
 
     def list_s2t_pipelines(self, request: ListS2tPipelinesRequest) -> ListS2tPipelinesResponse:
