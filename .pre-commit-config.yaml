@@ -4,7 +4,7 @@ fail_fast: false
 
 repos:
   - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v3.1.0
+    rev: v3.4.0
     hooks:
     - id: no-commit-to-branch
       args: [--branch, master, --branch, develop]
@@ -30,28 +30,28 @@ repos:
   ## consider using seed-isort-config
   ## (pip install seed-isort-config)
   ##
-  - repo: https://github.com/pre-commit/mirrors-isort
-    rev: 'v4.3.21'
-    hooks:
-    - id: isort
+  # - repo: https://github.com/pre-commit/mirrors-isort
+  #   rev: 'v4.3.21'
+  #   hooks:
+  #   - id: isort
 
-  - repo: https://github.com/asottile/seed-isort-config
-    rev: 'v2.1.1'
-    hooks:
-    - id: seed-isort-config
+  # - repo: https://github.com/asottile/seed-isort-config
+  #   rev: 'v2.1.1'
+  #   hooks:
+  #   - id: seed-isort-config
 
-  - repo: https://github.com/pre-commit/mirrors-mypy
-    rev: 'v0.770'
-    hooks:
-    - id: mypy
+  # - repo: https://github.com/pre-commit/mirrors-mypy
+  #   rev: 'v0.770'
+  #   hooks:
+  #   - id: mypy
 
   ## use either black *or* autopep8
 
   - repo: https://github.com/ambv/black
-    rev: 19.10b0
+    rev: 20.8b1
     hooks:
     - id: black
-      args: ['--line-length=120']     # if this is different from the length you set flake8 to, you can get stuck in a refactor loop
+      args: ['--line-length=110']     # if this is different from the length you set flake8 to, you can get stuck in a refactor loop
 
   # - repo: https://github.com/pre-commit/mirrors-autopep8
   #   rev: ''  # Use the sha / tag you want to point at
@@ -64,13 +64,13 @@ repos:
   #   - id: python-bandit-vulnerability-check
 
   - repo: https://gitlab.com/pycqa/flake8
-    rev: 3.7.9
+    rev: 3.9.1
     hooks:
     - id: flake8
       args: ['--config=.flake8']
 
   - repo: https://github.com/milin/giticket
-    rev: 6f166c66f2423e8e27898b39385d1166f9b643a3
+    rev: v1.1
     hooks:
     - id: giticket  # Prepend the commit message with the JIRA ticket
       args: ['--regex=(?:feature|bugfix|support|hotfix)/(OND[0-9]{3}-[0-9]{1,5})[_-][\w-]+',
