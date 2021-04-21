@@ -2,13 +2,13 @@ from google.protobuf.empty_pb2 import Empty
 from ondewo.utils.base_services_interface import BaseServicesInterface
 
 from ondewo.s2t.speech_to_text_pb2 import (
-    S2tPipelineId,
     ListS2tDomainsRequest,
     ListS2tDomainsResponse,
     ListS2tLanguagesRequest,
     ListS2tLanguagesResponse,
     ListS2tPipelinesRequest,
     ListS2tPipelinesResponse,
+    S2tPipelineId,
     Speech2TextConfig,
     TranscribeFileRequest,
     TranscribeFileResponse,
