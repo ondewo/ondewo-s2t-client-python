@@ -17,27 +17,41 @@
 import argparse
 import wave
 
-from google.protobuf.empty_pb2 import Empty
-
-from ondewo.s2t import speech_to_text_pb2, grpc_utils
+from ondewo.s2t import speech_to_text_pb2
+from ondewo.s2t.client.client import Client
+from ondewo.s2t.client.client_config import ClientConfig
+from ondewo.s2t.client.services.speech_to_text import Speech2Text
+from ondewo.s2t.speech_to_text_pb2 import ListS2tPipelinesRequest, Speech2TextConfig
 
 AUDIO_FILE: str = "examples/audiofiles/sample_1.wav"
 
 
 def main():
-    parser = argparse.ArgumentParser(description='File transcription example.')
-    parser.add_argument("--config", type=str, help="The GRPC configuration file path. "
-                                                   "See examples/configs in the ondewo-s2t-client-python repository.")
-    parser.add_argument("--secure", default=False, action='store_true',
-                        help="Use secure GRPC connection (default is insecure).")
+    parser = argparse.ArgumentParser(description="File transcription example.")
+    parser.add_argument(
+        "--config",
+        type=str,
+        help="The GRPC configuration file path. "
+        "See examples/configs in the ondewo-s2t-client-python repository.",
+    )
+    parser.add_argument(
+        "--secure",
+        default=False,
+        action="store_true",
+        help="Use secure GRPC connection (default is insecure).",
+    )
     args = parser.parse_args()
 
-    stub = grpc_utils.create_stub(args.config, args.secure)
+    with open(args.config) as f:
+        config: ClientConfig = ClientConfig.from_json(f.read())
+
+    client: Client = Client(config=config, use_secure_channel=args.secure)
+    s2t_service: Speech2Text = client.services.speech_to_text
 
     # List all speech-2-text pipelines (model setups) present on the server
     # We are going to pick the first pipeline (model setup)
-    pipelines = stub.ListS2tPipelines(request=Empty()).pipeline_configs
-    pipeline = pipelines[0]
+    pipelines = s2t_service.list_s2t_pipelines(request=ListS2tPipelinesRequest()).pipeline_configs
+    pipeline: Speech2TextConfig = pipelines[0]
 
     # Read file which we want to transcribe
     with wave.open(AUDIO_FILE) as w:
@@ -47,13 +61,13 @@ def main():
     request = speech_to_text_pb2.TranscribeFileRequest(
         s2t_pipeline_id=pipeline.id,
         audio_file=audio,
-        ctc_decoding=speech_to_text_pb2.CTCDecoding.BEAM_SEARCH_WITH_LM
+        ctc_decoding=speech_to_text_pb2.CTCDecoding.BEAM_SEARCH_WITH_LM,
     )
     # Send transcription request and get response
-    transcribe_response = stub.TranscribeFile(request=request)
+    transcribe_response = s2t_service.transcribe_file(request=request)
 
     print(f"File transcript: {transcribe_response.transcription}")
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()

@@ -1,3 +1,5 @@
+from typing import Iterator
+
 from google.protobuf.empty_pb2 import Empty
 from ondewo.utils.base_services_interface import BaseServicesInterface
 
@@ -34,8 +36,10 @@ class Speech2Text(BaseServicesInterface):
         response: TranscribeFileResponse = self.stub.TranscribeFile(request)
         return response
 
-    def transcribe_stream(self, request: TranscribeStreamRequest) -> TranscribeStreamResponse:
-        response: TranscribeStreamResponse = self.stub.TranscribeStream(request)
+    def transcribe_stream(
+        self, request: Iterator[TranscribeStreamRequest]
+    ) -> Iterator[TranscribeStreamResponse]:
+        response: Iterator[TranscribeStreamResponse] = self.stub.TranscribeStream(request)
         return response
 
     def get_s2t_pipeline(self, request: S2tPipelineId) -> Speech2TextConfig:
