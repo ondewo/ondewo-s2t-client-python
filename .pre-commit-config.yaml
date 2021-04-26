@@ -49,7 +49,7 @@ repos:
   ## use either black *or* autopep8
 
   - repo: https://github.com/ambv/black
-    rev: 20.8b1
+    rev: 21.4b0
     hooks:
     - id: black
       args: ['--line-length=110']     # if this is different from the length you set flake8 to, you can get stuck in a refactor loop

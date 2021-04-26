@@ -37,9 +37,10 @@ class Speech2Text(BaseServicesInterface):
         return response
 
     def transcribe_stream(
-        self, request: Iterator[TranscribeStreamRequest]
+        self,
+        request_iterator: Iterator[TranscribeStreamRequest],
     ) -> Iterator[TranscribeStreamResponse]:
-        response: Iterator[TranscribeStreamResponse] = self.stub.TranscribeStream(request)
+        response: Iterator[TranscribeStreamResponse] = self.stub.TranscribeStream(request_iterator)
         return response
 
     def get_s2t_pipeline(self, request: S2tPipelineId) -> Speech2TextConfig:

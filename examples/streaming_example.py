@@ -88,7 +88,7 @@ def main():
 
     # Transcribe the stream and get back responses
     response_gen: Iterator[speech_to_text_pb2.TranscribeStreamResponse] = s2t_service.transcribe_stream(
-        streaming_request
+        request_iterator=streaming_request
     )
 
     # Print transcribed utterances
