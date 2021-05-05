@@ -4,19 +4,11 @@ with open("README.md", "r") as f:
     long_description = f.read()
 
 with open("requirements.txt") as f:
-    requires = []
-    for line in f:
-        req = line.strip()
-        if "#egg=" in req:
-            req_url, req_name = req.split("#egg=")
-            req_str = f"{req_name} @ {req_url}"
-        else:
-            req_str = req
-        requires.append(req_str)
+    requires = f.read().splitlines()
 
 setuptools.setup(
     name="ondewo-s2t-client",
-    version="1.4.0",
+    version="1.4.1",
     author="ONDEWO GbmH",
     author_email="info@ondewo.com",
     description="exposes the ondewo-s2t-grpc-server endpoints in a user-friendly way",
