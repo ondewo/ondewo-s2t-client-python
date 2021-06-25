@@ -21,7 +21,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   syntax='proto3',
   serialized_options=None,
   create_key=_descriptor._internal_create_key,
-  serialized_pb=b'\n\x1fondewo/s2t/speech-to-text.proto\x12\nondewo.s2t\x1a\x1bgoogle/protobuf/empty.proto\"\xc9\x01\n\x17TranscribeStreamRequest\x12\x17\n\x0fs2t_pipeline_id\x18\x01 \x01(\t\x12\x13\n\x0b\x61udio_chunk\x18\x02 \x01(\x0c\x12-\n\x0c\x63tc_decoding\x18\x03 \x01(\x0e\x32\x17.ondewo.s2t.CTCDecoding\x12\x1b\n\x13spelling_correction\x18\x04 \x01(\x08\x12\x1d\n\x15\x64isable_normalization\x18\x05 \x01(\x08\x12\x15\n\rend_of_stream\x18\x06 \x01(\x08\"N\n\x18TranscribeStreamResponse\x12\x15\n\rtranscription\x18\x01 \x01(\t\x12\x0c\n\x04time\x18\x02 \x01(\x02\x12\r\n\x05\x66inal\x18\x03 \x01(\x08\"\xc7\x01\n\x15TranscribeFileRequest\x12\x17\n\x0fs2t_pipeline_id\x18\x01 \x01(\t\x12\x12\n\naudio_file\x18\x02 \x01(\x0c\x12-\n\x0c\x63tc_decoding\x18\x03 \x01(\x0e\x32\x17.ondewo.s2t.CTCDecoding\x12\x1b\n\x13spelling_correction\x18\x04 \x01(\x08\x12\x1d\n\x15\x64isable_normalization\x18\x05 \x01(\x08\x12\x16\n\x0einclude_timing\x18\x06 \x01(\x08\"j\n\x16TranscribeFileResponse\x12\x15\n\rtranscription\x18\x01 \x01(\t\x12\x0c\n\x04time\x18\x02 \x01(\x02\x12+\n\x0bword_timing\x18\x03 \x03(\x0b\x32\x16.ondewo.s2t.WordTiming\"6\n\nWordTiming\x12\x0c\n\x04word\x18\x01 \x01(\t\x12\r\n\x05\x62\x65gin\x18\x02 \x01(\x05\x12\x0b\n\x03\x65nd\x18\x03 \x01(\x05\"\x1b\n\rS2tPipelineId\x12\n\n\x02id\x18\x01 \x01(\t\"V\n\x17ListS2tPipelinesRequest\x12\x11\n\tlanguages\x18\x01 \x03(\t\x12\x17\n\x0fpipeline_owners\x18\x02 \x03(\t\x12\x0f\n\x07\x64omains\x18\x03 \x03(\t\"S\n\x18ListS2tPipelinesResponse\x12\x37\n\x10pipeline_configs\x18\x01 \x03(\x0b\x32\x1d.ondewo.s2t.Speech2TextConfig\"C\n\x17ListS2tLanguagesRequest\x12\x0f\n\x07\x64omains\x18\x01 \x03(\t\x12\x17\n\x0fpipeline_owners\x18\x02 \x03(\t\"-\n\x18ListS2tLanguagesResponse\x12\x11\n\tlanguages\x18\x01 \x03(\t\"C\n\x15ListS2tDomainsRequest\x12\x11\n\tlanguages\x18\x01 \x03(\t\x12\x17\n\x0fpipeline_owners\x18\x02 \x03(\t\")\n\x16ListS2tDomainsResponse\x12\x0f\n\x07\x64omains\x18\x01 \x03(\t\"\xdf\x02\n\x11Speech2TextConfig\x12\n\n\x02id\x18\x01 \x01(\t\x12,\n\x0b\x64\x65scription\x18\x02 \x01(\x0b\x32\x17.ondewo.s2t.Description\x12\x0e\n\x06\x61\x63tive\x18\x03 \x01(\x08\x12(\n\tinference\x18\x04 \x01(\x0b\x32\x15.ondewo.s2t.Inference\x12\x35\n\x10streaming_server\x18\x05 \x01(\x0b\x32\x1b.ondewo.s2t.StreamingServer\x12\x44\n\x18voice_activity_detection\x18\x06 \x01(\x0b\x32\".ondewo.s2t.VoiceActivityDetection\x12\x33\n\x0fpost_processing\x18\x07 \x01(\x0b\x32\x1a.ondewo.s2t.PostProcessing\x12$\n\x07logging\x18\x08 \x01(\x0b\x32\x13.ondewo.s2t.Logging\"Y\n\x0b\x44\x65scription\x12\x10\n\x08language\x18\x01 \x01(\t\x12\x16\n\x0epipeline_owner\x18\x02 \x01(\t\x12\x0e\n\x06\x64omain\x18\x03 \x01(\t\x12\x10\n\x08\x63omments\x18\x04 \x01(\t\"z\n\tInference\x12:\n\x13\x63tc_acoustic_models\x18\x01 \x01(\x0b\x32\x1d.ondewo.s2t.CtcAcousticModels\x12\x31\n\x0elanguage_model\x18\x02 \x01(\x0b\x32\x19.ondewo.s2t.LanguageModel\"\xa8\x01\n\x11\x43tcAcousticModels\x12\x0c\n\x04type\x18\x01 \x01(\t\x12(\n\tquartznet\x18\x02 \x01(\x0b\x32\x15.ondewo.s2t.Quartznet\x12\x35\n\x10quartznet_triton\x18\x03 \x01(\x0b\x32\x1b.ondewo.s2t.QuartznetTriton\x12$\n\x07wav2vec\x18\x04 \x01(\x0b\x32\x13.ondewo.s2t.Wav2Vec\".\n\x07Wav2Vec\x12\x12\n\nmodel_path\x18\x01 \x01(\t\x12\x0f\n\x07use_gpu\x18\x02 \x01(\x08\"\x83\x01\n\tQuartznet\x12\x13\n\x0b\x63onfig_path\x18\x01 \x01(\t\x12\x11\n\tload_type\x18\x02 \x01(\t\x12%\n\x08pt_files\x18\x03 \x01(\x0b\x32\x13.ondewo.s2t.PtFiles\x12\'\n\tckpt_file\x18\x04 \x01(\x0b\x32\x14.ondewo.s2t.CkptFile\"%\n\x07PtFiles\x12\x0c\n\x04path\x18\x01 \x01(\t\x12\x0c\n\x04step\x18\x02 \x01(\t\"\x18\n\x08\x43kptFile\x12\x0c\n\x04path\x18\x01 \x01(\t\"P\n\x0fQuartznetTriton\x12\x13\n\x0b\x63onfig_path\x18\x01 \x01(\t\x12\x12\n\ntriton_url\x18\x02 \x01(\t\x12\x14\n\x0ctriton_model\x18\x03 \x01(\t\"s\n\rLanguageModel\x12\x0c\n\x04path\x18\x01 \x01(\t\x12\x11\n\tbeam_size\x18\x02 \x01(\x03\x12 \n\x18\x62\x65\x61m_search_scorer_alpha\x18\x03 \x01(\x02\x12\x1f\n\x17\x62\x65\x61m_search_scorer_beta\x18\x04 \x01(\x02\"\x91\x01\n\x0fStreamingServer\x12\x0c\n\x04host\x18\x01 \x01(\t\x12\x0c\n\x04port\x18\x02 \x01(\x03\x12\x14\n\x0coutput_style\x18\x03 \x01(\t\x12L\n\x1cstreaming_speech_recognition\x18\x04 \x01(\x0b\x32&.ondewo.s2t.StreamingSpeechRecognition\"\xd6\x01\n\x1aStreamingSpeechRecognition\x12\x1c\n\x14transcribe_not_final\x18\x01 \x01(\x08\x12\x1b\n\x13\x63tc_decoding_method\x18\x02 \x01(\t\x12\x15\n\rsampling_rate\x18\x03 \x01(\x03\x12\x1c\n\x14min_audio_chunk_size\x18\x04 \x01(\x03\x12$\n\x1cstart_of_utterance_threshold\x18\x05 \x01(\x02\x12\"\n\x1a\x65nd_of_utterance_threshold\x18\x06 \x01(\x02\"\x8f\x01\n\x16VoiceActivityDetection\x12\x0e\n\x06\x61\x63tive\x18\x01 \x01(\t\x12\x15\n\rsampling_rate\x18\x02 \x01(\x03\x12&\n\x08pyannote\x18\x03 \x01(\x0b\x32\x14.ondewo.s2t.Pyannote\x12&\n\x08matchbox\x18\x04 \x01(\x0b\x32\x14.ondewo.s2t.Matchbox\"\x9b\x01\n\x08Pyannote\x12\x12\n\nmodel_path\x18\x01 \x01(\t\x12\x16\n\x0emin_audio_size\x18\x02 \x01(\x03\x12\x0e\n\x06offset\x18\x03 \x01(\x02\x12\r\n\x05onset\x18\x04 \x01(\x02\x12\x11\n\tlog_scale\x18\x05 \x01(\x08\x12\x18\n\x10min_duration_off\x18\x06 \x01(\x02\x12\x17\n\x0fmin_duration_on\x18\x07 \x01(\x02\"L\n\x08Matchbox\x12\x14\n\x0cmodel_config\x18\x01 \x01(\t\x12\x14\n\x0c\x65ncoder_path\x18\x02 \x01(\t\x12\x14\n\x0c\x64\x65\x63oder_path\x18\x03 \x01(\t\"W\n\x0ePostProcessing\x12\x10\n\x08pipeline\x18\x01 \x03(\t\x12\x33\n\x0fpost_processors\x18\x02 \x01(\x0b\x32\x1a.ondewo.s2t.PostProcessors\"k\n\x0ePostProcessors\x12\'\n\tsym_spell\x18\x01 \x01(\x0b\x32\x14.ondewo.s2t.SymSpell\x12\x30\n\rnormalization\x18\x02 \x01(\x0b\x32\x19.ondewo.s2t.Normalization\"Z\n\x08SymSpell\x12\x11\n\tdict_path\x18\x01 \x01(\t\x12$\n\x1cmax_dictionary_edit_distance\x18\x02 \x01(\x03\x12\x15\n\rprefix_length\x18\x03 \x01(\x03\"!\n\rNormalization\x12\x10\n\x08language\x18\x01 \x01(\t\"%\n\x07Logging\x12\x0c\n\x04type\x18\x01 \x01(\t\x12\x0c\n\x04path\x18\x02 \x01(\t*2\n\x0b\x43TCDecoding\x12\n\n\x06GREEDY\x10\x00\x12\x17\n\x13\x42\x45\x41M_SEARCH_WITH_LM\x10\x01\x32\xa1\x06\n\x0bSpeech2Text\x12Y\n\x0eTranscribeFile\x12!.ondewo.s2t.TranscribeFileRequest\x1a\".ondewo.s2t.TranscribeFileResponse\"\x00\x12\x63\n\x10TranscribeStream\x12#.ondewo.s2t.TranscribeStreamRequest\x1a$.ondewo.s2t.TranscribeStreamResponse\"\x00(\x01\x30\x01\x12L\n\x0eGetS2tPipeline\x12\x19.ondewo.s2t.S2tPipelineId\x1a\x1d.ondewo.s2t.Speech2TextConfig\"\x00\x12O\n\x11\x43reateS2tPipeline\x12\x1d.ondewo.s2t.Speech2TextConfig\x1a\x19.ondewo.s2t.S2tPipelineId\"\x00\x12H\n\x11\x44\x65leteS2tPipeline\x12\x19.ondewo.s2t.S2tPipelineId\x1a\x16.google.protobuf.Empty\"\x00\x12L\n\x11UpdateS2tPipeline\x12\x1d.ondewo.s2t.Speech2TextConfig\x1a\x16.google.protobuf.Empty\"\x00\x12_\n\x10ListS2tPipelines\x12#.ondewo.s2t.ListS2tPipelinesRequest\x1a$.ondewo.s2t.ListS2tPipelinesResponse\"\x00\x12_\n\x10ListS2tLanguages\x12#.ondewo.s2t.ListS2tLanguagesRequest\x1a$.ondewo.s2t.ListS2tLanguagesResponse\"\x00\x12Y\n\x0eListS2tDomains\x12!.ondewo.s2t.ListS2tDomainsRequest\x1a\".ondewo.s2t.ListS2tDomainsResponse\"\x00\x62\x06proto3'
+  serialized_pb=b'\n\x1fondewo/s2t/speech-to-text.proto\x12\nondewo.s2t\x1a\x1bgoogle/protobuf/empty.proto\"\xff\x01\n\x17TranscribeStreamRequest\x12\x17\n\x0fs2t_pipeline_id\x18\x01 \x01(\t\x12\x13\n\x0b\x61udio_chunk\x18\x02 \x01(\x0c\x12-\n\x0c\x63tc_decoding\x18\x03 \x01(\x0e\x32\x17.ondewo.s2t.CTCDecoding\x12\x1b\n\x13spelling_correction\x18\x04 \x01(\x08\x12\x1d\n\x15\x64isable_normalization\x18\x05 \x01(\x08\x12\x15\n\rend_of_stream\x18\x06 \x01(\x08\x12\x1e\n\x16return_start_of_speech\x18\x07 \x01(\x08\x12\x14\n\x0creturn_audio\x18\x08 \x01(\x08\"\x8c\x01\n\x18TranscribeStreamResponse\x12\x15\n\rtranscription\x18\x01 \x01(\t\x12\x0c\n\x04time\x18\x02 \x01(\x02\x12\r\n\x05\x66inal\x18\x03 \x01(\x08\x12\x14\n\x0creturn_audio\x18\x04 \x01(\x08\x12\r\n\x05\x61udio\x18\x05 \x01(\x0c\x12\x17\n\x0futterance_start\x18\x06 \x01(\x08\"\xc7\x01\n\x15TranscribeFileRequest\x12\x17\n\x0fs2t_pipeline_id\x18\x01 \x01(\t\x12\x12\n\naudio_file\x18\x02 \x01(\x0c\x12-\n\x0c\x63tc_decoding\x18\x03 \x01(\x0e\x32\x17.ondewo.s2t.CTCDecoding\x12\x1b\n\x13spelling_correction\x18\x04 \x01(\x08\x12\x1d\n\x15\x64isable_normalization\x18\x05 \x01(\x08\x12\x16\n\x0einclude_timing\x18\x06 \x01(\x08\"j\n\x16TranscribeFileResponse\x12\x15\n\rtranscription\x18\x01 \x01(\t\x12\x0c\n\x04time\x18\x02 \x01(\x02\x12+\n\x0bword_timing\x18\x03 \x03(\x0b\x32\x16.ondewo.s2t.WordTiming\"6\n\nWordTiming\x12\x0c\n\x04word\x18\x01 \x01(\t\x12\r\n\x05\x62\x65gin\x18\x02 \x01(\x05\x12\x0b\n\x03\x65nd\x18\x03 \x01(\x05\"\x1b\n\rS2tPipelineId\x12\n\n\x02id\x18\x01 \x01(\t\"V\n\x17ListS2tPipelinesRequest\x12\x11\n\tlanguages\x18\x01 \x03(\t\x12\x17\n\x0fpipeline_owners\x18\x02 \x03(\t\x12\x0f\n\x07\x64omains\x18\x03 \x03(\t\"S\n\x18ListS2tPipelinesResponse\x12\x37\n\x10pipeline_configs\x18\x01 \x03(\x0b\x32\x1d.ondewo.s2t.Speech2TextConfig\"C\n\x17ListS2tLanguagesRequest\x12\x0f\n\x07\x64omains\x18\x01 \x03(\t\x12\x17\n\x0fpipeline_owners\x18\x02 \x03(\t\"-\n\x18ListS2tLanguagesResponse\x12\x11\n\tlanguages\x18\x01 \x03(\t\"C\n\x15ListS2tDomainsRequest\x12\x11\n\tlanguages\x18\x01 \x03(\t\x12\x17\n\x0fpipeline_owners\x18\x02 \x03(\t\")\n\x16ListS2tDomainsResponse\x12\x0f\n\x07\x64omains\x18\x01 \x03(\t\"\xdf\x02\n\x11Speech2TextConfig\x12\n\n\x02id\x18\x01 \x01(\t\x12,\n\x0b\x64\x65scription\x18\x02 \x01(\x0b\x32\x17.ondewo.s2t.Description\x12\x0e\n\x06\x61\x63tive\x18\x03 \x01(\x08\x12(\n\tinference\x18\x04 \x01(\x0b\x32\x15.ondewo.s2t.Inference\x12\x35\n\x10streaming_server\x18\x05 \x01(\x0b\x32\x1b.ondewo.s2t.StreamingServer\x12\x44\n\x18voice_activity_detection\x18\x06 \x01(\x0b\x32\".ondewo.s2t.VoiceActivityDetection\x12\x33\n\x0fpost_processing\x18\x07 \x01(\x0b\x32\x1a.ondewo.s2t.PostProcessing\x12$\n\x07logging\x18\x08 \x01(\x0b\x32\x13.ondewo.s2t.Logging\"Y\n\x0b\x44\x65scription\x12\x10\n\x08language\x18\x01 \x01(\t\x12\x16\n\x0epipeline_owner\x18\x02 \x01(\t\x12\x0e\n\x06\x64omain\x18\x03 \x01(\t\x12\x10\n\x08\x63omments\x18\x04 \x01(\t\"z\n\tInference\x12:\n\x13\x63tc_acoustic_models\x18\x01 \x01(\x0b\x32\x1d.ondewo.s2t.CtcAcousticModels\x12\x31\n\x0elanguage_model\x18\x02 \x01(\x0b\x32\x19.ondewo.s2t.LanguageModel\"\xa8\x01\n\x11\x43tcAcousticModels\x12\x0c\n\x04type\x18\x01 \x01(\t\x12(\n\tquartznet\x18\x02 \x01(\x0b\x32\x15.ondewo.s2t.Quartznet\x12\x35\n\x10quartznet_triton\x18\x03 \x01(\x0b\x32\x1b.ondewo.s2t.QuartznetTriton\x12$\n\x07wav2vec\x18\x04 \x01(\x0b\x32\x13.ondewo.s2t.Wav2Vec\".\n\x07Wav2Vec\x12\x12\n\nmodel_path\x18\x01 \x01(\t\x12\x0f\n\x07use_gpu\x18\x02 \x01(\x08\"\x94\x01\n\tQuartznet\x12\x13\n\x0b\x63onfig_path\x18\x01 \x01(\t\x12\x11\n\tload_type\x18\x02 \x01(\t\x12%\n\x08pt_files\x18\x03 \x01(\x0b\x32\x13.ondewo.s2t.PtFiles\x12\'\n\tckpt_file\x18\x04 \x01(\x0b\x32\x14.ondewo.s2t.CkptFile\x12\x0f\n\x07use_gpu\x18\x05 \x01(\x08\"%\n\x07PtFiles\x12\x0c\n\x04path\x18\x01 \x01(\t\x12\x0c\n\x04step\x18\x02 \x01(\t\"\x18\n\x08\x43kptFile\x12\x0c\n\x04path\x18\x01 \x01(\t\"P\n\x0fQuartznetTriton\x12\x13\n\x0b\x63onfig_path\x18\x01 \x01(\t\x12\x12\n\ntriton_url\x18\x02 \x01(\t\x12\x14\n\x0ctriton_model\x18\x03 \x01(\t\"s\n\rLanguageModel\x12\x0c\n\x04path\x18\x01 \x01(\t\x12\x11\n\tbeam_size\x18\x02 \x01(\x03\x12 \n\x18\x62\x65\x61m_search_scorer_alpha\x18\x03 \x01(\x02\x12\x1f\n\x17\x62\x65\x61m_search_scorer_beta\x18\x04 \x01(\x02\"\x91\x01\n\x0fStreamingServer\x12\x0c\n\x04host\x18\x01 \x01(\t\x12\x0c\n\x04port\x18\x02 \x01(\x03\x12\x14\n\x0coutput_style\x18\x03 \x01(\t\x12L\n\x1cstreaming_speech_recognition\x18\x04 \x01(\x0b\x32&.ondewo.s2t.StreamingSpeechRecognition\"\xd6\x01\n\x1aStreamingSpeechRecognition\x12\x1c\n\x14transcribe_not_final\x18\x01 \x01(\x08\x12\x1b\n\x13\x63tc_decoding_method\x18\x02 \x01(\t\x12\x15\n\rsampling_rate\x18\x03 \x01(\x03\x12\x1c\n\x14min_audio_chunk_size\x18\x04 \x01(\x03\x12$\n\x1cstart_of_utterance_threshold\x18\x05 \x01(\x02\x12\"\n\x1a\x65nd_of_utterance_threshold\x18\x06 \x01(\x02\"\x8f\x01\n\x16VoiceActivityDetection\x12\x0e\n\x06\x61\x63tive\x18\x01 \x01(\t\x12\x15\n\rsampling_rate\x18\x02 \x01(\x03\x12&\n\x08pyannote\x18\x03 \x01(\x0b\x32\x14.ondewo.s2t.Pyannote\x12&\n\x08matchbox\x18\x04 \x01(\x0b\x32\x14.ondewo.s2t.Matchbox\"\x9b\x01\n\x08Pyannote\x12\x12\n\nmodel_path\x18\x01 \x01(\t\x12\x16\n\x0emin_audio_size\x18\x02 \x01(\x03\x12\x0e\n\x06offset\x18\x03 \x01(\x02\x12\r\n\x05onset\x18\x04 \x01(\x02\x12\x11\n\tlog_scale\x18\x05 \x01(\x08\x12\x18\n\x10min_duration_off\x18\x06 \x01(\x02\x12\x17\n\x0fmin_duration_on\x18\x07 \x01(\x02\"L\n\x08Matchbox\x12\x14\n\x0cmodel_config\x18\x01 \x01(\t\x12\x14\n\x0c\x65ncoder_path\x18\x02 \x01(\t\x12\x14\n\x0c\x64\x65\x63oder_path\x18\x03 \x01(\t\"W\n\x0ePostProcessing\x12\x10\n\x08pipeline\x18\x01 \x03(\t\x12\x33\n\x0fpost_processors\x18\x02 \x01(\x0b\x32\x1a.ondewo.s2t.PostProcessors\"k\n\x0ePostProcessors\x12\'\n\tsym_spell\x18\x01 \x01(\x0b\x32\x14.ondewo.s2t.SymSpell\x12\x30\n\rnormalization\x18\x02 \x01(\x0b\x32\x19.ondewo.s2t.Normalization\"Z\n\x08SymSpell\x12\x11\n\tdict_path\x18\x01 \x01(\t\x12$\n\x1cmax_dictionary_edit_distance\x18\x02 \x01(\x03\x12\x15\n\rprefix_length\x18\x03 \x01(\x03\"!\n\rNormalization\x12\x10\n\x08language\x18\x01 \x01(\t\"%\n\x07Logging\x12\x0c\n\x04type\x18\x01 \x01(\t\x12\x0c\n\x04path\x18\x02 \x01(\t*2\n\x0b\x43TCDecoding\x12\n\n\x06GREEDY\x10\x00\x12\x17\n\x13\x42\x45\x41M_SEARCH_WITH_LM\x10\x01\x32\xa1\x06\n\x0bSpeech2Text\x12Y\n\x0eTranscribeFile\x12!.ondewo.s2t.TranscribeFileRequest\x1a\".ondewo.s2t.TranscribeFileResponse\"\x00\x12\x63\n\x10TranscribeStream\x12#.ondewo.s2t.TranscribeStreamRequest\x1a$.ondewo.s2t.TranscribeStreamResponse\"\x00(\x01\x30\x01\x12L\n\x0eGetS2tPipeline\x12\x19.ondewo.s2t.S2tPipelineId\x1a\x1d.ondewo.s2t.Speech2TextConfig\"\x00\x12O\n\x11\x43reateS2tPipeline\x12\x1d.ondewo.s2t.Speech2TextConfig\x1a\x19.ondewo.s2t.S2tPipelineId\"\x00\x12H\n\x11\x44\x65leteS2tPipeline\x12\x19.ondewo.s2t.S2tPipelineId\x1a\x16.google.protobuf.Empty\"\x00\x12L\n\x11UpdateS2tPipeline\x12\x1d.ondewo.s2t.Speech2TextConfig\x1a\x16.google.protobuf.Empty\"\x00\x12_\n\x10ListS2tPipelines\x12#.ondewo.s2t.ListS2tPipelinesRequest\x1a$.ondewo.s2t.ListS2tPipelinesResponse\"\x00\x12_\n\x10ListS2tLanguages\x12#.ondewo.s2t.ListS2tLanguagesRequest\x1a$.ondewo.s2t.ListS2tLanguagesResponse\"\x00\x12Y\n\x0eListS2tDomains\x12!.ondewo.s2t.ListS2tDomainsRequest\x1a\".ondewo.s2t.ListS2tDomainsResponse\"\x00\x62\x06proto3'
   ,
   dependencies=[google_dot_protobuf_dot_empty__pb2.DESCRIPTOR,])
 
@@ -45,8 +45,8 @@ _CTCDECODING = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   serialized_options=None,
-  serialized_start=3453,
-  serialized_end=3503,
+  serialized_start=3587,
+  serialized_end=3637,
 )
 _sym_db.RegisterEnumDescriptor(_CTCDECODING)
 
@@ -106,6 +106,20 @@ _TRANSCRIBESTREAMREQUEST = _descriptor.Descriptor(
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='return_start_of_speech', full_name='ondewo.s2t.TranscribeStreamRequest.return_start_of_speech', index=6,
+      number=7, type=8, cpp_type=7, label=1,
+      has_default_value=False, default_value=False,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='return_audio', full_name='ondewo.s2t.TranscribeStreamRequest.return_audio', index=7,
+      number=8, type=8, cpp_type=7, label=1,
+      has_default_value=False, default_value=False,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
   ],
   extensions=[
   ],
@@ -119,7 +133,7 @@ _TRANSCRIBESTREAMREQUEST = _descriptor.Descriptor(
   oneofs=[
   ],
   serialized_start=77,
-  serialized_end=278,
+  serialized_end=332,
 )
 
 
@@ -152,6 +166,27 @@ _TRANSCRIBESTREAMRESPONSE = _descriptor.Descriptor(
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='return_audio', full_name='ondewo.s2t.TranscribeStreamResponse.return_audio', index=3,
+      number=4, type=8, cpp_type=7, label=1,
+      has_default_value=False, default_value=False,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='audio', full_name='ondewo.s2t.TranscribeStreamResponse.audio', index=4,
+      number=5, type=12, cpp_type=9, label=1,
+      has_default_value=False, default_value=b"",
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='utterance_start', full_name='ondewo.s2t.TranscribeStreamResponse.utterance_start', index=5,
+      number=6, type=8, cpp_type=7, label=1,
+      has_default_value=False, default_value=False,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
   ],
   extensions=[
   ],
@@ -164,8 +199,8 @@ _TRANSCRIBESTREAMRESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=280,
-  serialized_end=358,
+  serialized_start=335,
+  serialized_end=475,
 )
 
 
@@ -231,8 +266,8 @@ _TRANSCRIBEFILEREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=361,
-  serialized_end=560,
+  serialized_start=478,
+  serialized_end=677,
 )
 
 
@@ -277,8 +312,8 @@ _TRANSCRIBEFILERESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=562,
-  serialized_end=668,
+  serialized_start=679,
+  serialized_end=785,
 )
 
 
@@ -323,8 +358,8 @@ _WORDTIMING = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=670,
-  serialized_end=724,
+  serialized_start=787,
+  serialized_end=841,
 )
 
 
@@ -355,8 +390,8 @@ _S2TPIPELINEID = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=726,
-  serialized_end=753,
+  serialized_start=843,
+  serialized_end=870,
 )
 
 
@@ -401,8 +436,8 @@ _LISTS2TPIPELINESREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=755,
-  serialized_end=841,
+  serialized_start=872,
+  serialized_end=958,
 )
 
 
@@ -433,8 +468,8 @@ _LISTS2TPIPELINESRESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=843,
-  serialized_end=926,
+  serialized_start=960,
+  serialized_end=1043,
 )
 
 
@@ -472,8 +507,8 @@ _LISTS2TLANGUAGESREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=928,
-  serialized_end=995,
+  serialized_start=1045,
+  serialized_end=1112,
 )
 
 
@@ -504,8 +539,8 @@ _LISTS2TLANGUAGESRESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=997,
-  serialized_end=1042,
+  serialized_start=1114,
+  serialized_end=1159,
 )
 
 
@@ -543,8 +578,8 @@ _LISTS2TDOMAINSREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1044,
-  serialized_end=1111,
+  serialized_start=1161,
+  serialized_end=1228,
 )
 
 
@@ -575,8 +610,8 @@ _LISTS2TDOMAINSRESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1113,
-  serialized_end=1154,
+  serialized_start=1230,
+  serialized_end=1271,
 )
 
 
@@ -656,8 +691,8 @@ _SPEECH2TEXTCONFIG = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1157,
-  serialized_end=1508,
+  serialized_start=1274,
+  serialized_end=1625,
 )
 
 
@@ -709,8 +744,8 @@ _DESCRIPTION = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1510,
-  serialized_end=1599,
+  serialized_start=1627,
+  serialized_end=1716,
 )
 
 
@@ -748,8 +783,8 @@ _INFERENCE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1601,
-  serialized_end=1723,
+  serialized_start=1718,
+  serialized_end=1840,
 )
 
 
@@ -801,8 +836,8 @@ _CTCACOUSTICMODELS = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1726,
-  serialized_end=1894,
+  serialized_start=1843,
+  serialized_end=2011,
 )
 
 
@@ -840,8 +875,8 @@ _WAV2VEC = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1896,
-  serialized_end=1942,
+  serialized_start=2013,
+  serialized_end=2059,
 )
 
 
@@ -881,6 +916,13 @@ _QUARTZNET = _descriptor.Descriptor(
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='use_gpu', full_name='ondewo.s2t.Quartznet.use_gpu', index=4,
+      number=5, type=8, cpp_type=7, label=1,
+      has_default_value=False, default_value=False,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
   ],
   extensions=[
   ],
@@ -893,8 +935,8 @@ _QUARTZNET = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1945,
-  serialized_end=2076,
+  serialized_start=2062,
+  serialized_end=2210,
 )
 
 
@@ -932,8 +974,8 @@ _PTFILES = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=2078,
-  serialized_end=2115,
+  serialized_start=2212,
+  serialized_end=2249,
 )
 
 
@@ -964,8 +1006,8 @@ _CKPTFILE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=2117,
-  serialized_end=2141,
+  serialized_start=2251,
+  serialized_end=2275,
 )
 
 
@@ -1010,8 +1052,8 @@ _QUARTZNETTRITON = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=2143,
-  serialized_end=2223,
+  serialized_start=2277,
+  serialized_end=2357,
 )
 
 
@@ -1063,8 +1105,8 @@ _LANGUAGEMODEL = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=2225,
-  serialized_end=2340,
+  serialized_start=2359,
+  serialized_end=2474,
 )
 
 
@@ -1116,8 +1158,8 @@ _STREAMINGSERVER = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=2343,
-  serialized_end=2488,
+  serialized_start=2477,
+  serialized_end=2622,
 )
 
 
@@ -1183,8 +1225,8 @@ _STREAMINGSPEECHRECOGNITION = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=2491,
-  serialized_end=2705,
+  serialized_start=2625,
+  serialized_end=2839,
 )
 
 
@@ -1236,8 +1278,8 @@ _VOICEACTIVITYDETECTION = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=2708,
-  serialized_end=2851,
+  serialized_start=2842,
+  serialized_end=2985,
 )
 
 
@@ -1310,8 +1352,8 @@ _PYANNOTE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=2854,
-  serialized_end=3009,
+  serialized_start=2988,
+  serialized_end=3143,
 )
 
 
@@ -1356,8 +1398,8 @@ _MATCHBOX = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=3011,
-  serialized_end=3087,
+  serialized_start=3145,
+  serialized_end=3221,
 )
 
 
@@ -1395,8 +1437,8 @@ _POSTPROCESSING = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=3089,
-  serialized_end=3176,
+  serialized_start=3223,
+  serialized_end=3310,
 )
 
 
@@ -1434,8 +1476,8 @@ _POSTPROCESSORS = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=3178,
-  serialized_end=3285,
+  serialized_start=3312,
+  serialized_end=3419,
 )
 
 
@@ -1480,8 +1522,8 @@ _SYMSPELL = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=3287,
-  serialized_end=3377,
+  serialized_start=3421,
+  serialized_end=3511,
 )
 
 
@@ -1512,8 +1554,8 @@ _NORMALIZATION = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=3379,
-  serialized_end=3412,
+  serialized_start=3513,
+  serialized_end=3546,
 )
 
 
@@ -1551,8 +1593,8 @@ _LOGGING = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=3414,
-  serialized_end=3451,
+  serialized_start=3548,
+  serialized_end=3585,
 )
 
 _TRANSCRIBESTREAMREQUEST.fields_by_name['ctc_decoding'].enum_type = _CTCDECODING
@@ -1846,8 +1888,8 @@ _SPEECH2TEXT = _descriptor.ServiceDescriptor(
   index=0,
   serialized_options=None,
   create_key=_descriptor._internal_create_key,
-  serialized_start=3506,
-  serialized_end=4307,
+  serialized_start=3640,
+  serialized_end=4441,
   methods=[
   _descriptor.MethodDescriptor(
     name='TranscribeFile',

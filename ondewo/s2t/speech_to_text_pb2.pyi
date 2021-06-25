@@ -65,6 +65,8 @@ class TranscribeStreamRequest(google___protobuf___message___Message):
     spelling_correction = ... # type: builtin___bool
     disable_normalization = ... # type: builtin___bool
     end_of_stream = ... # type: builtin___bool
+    return_start_of_speech = ... # type: builtin___bool
+    return_audio = ... # type: builtin___bool
 
     def __init__(self,
         *,
@@ -74,6 +76,8 @@ class TranscribeStreamRequest(google___protobuf___message___Message):
         spelling_correction : typing___Optional[builtin___bool] = None,
         disable_normalization : typing___Optional[builtin___bool] = None,
         end_of_stream : typing___Optional[builtin___bool] = None,
+        return_start_of_speech : typing___Optional[builtin___bool] = None,
+        return_audio : typing___Optional[builtin___bool] = None,
         ) -> None: ...
     if sys.version_info >= (3,):
         @classmethod
@@ -83,7 +87,7 @@ class TranscribeStreamRequest(google___protobuf___message___Message):
         def FromString(cls, s: typing___Union[builtin___bytes, builtin___buffer, builtin___unicode]) -> TranscribeStreamRequest: ...
     def MergeFrom(self, other_msg: google___protobuf___message___Message) -> None: ...
     def CopyFrom(self, other_msg: google___protobuf___message___Message) -> None: ...
-    def ClearField(self, field_name: typing_extensions___Literal[u"audio_chunk",b"audio_chunk",u"ctc_decoding",b"ctc_decoding",u"disable_normalization",b"disable_normalization",u"end_of_stream",b"end_of_stream",u"s2t_pipeline_id",b"s2t_pipeline_id",u"spelling_correction",b"spelling_correction"]) -> None: ...
+    def ClearField(self, field_name: typing_extensions___Literal[u"audio_chunk",b"audio_chunk",u"ctc_decoding",b"ctc_decoding",u"disable_normalization",b"disable_normalization",u"end_of_stream",b"end_of_stream",u"return_audio",b"return_audio",u"return_start_of_speech",b"return_start_of_speech",u"s2t_pipeline_id",b"s2t_pipeline_id",u"spelling_correction",b"spelling_correction"]) -> None: ...
 global___TranscribeStreamRequest = TranscribeStreamRequest
 
 class TranscribeStreamResponse(google___protobuf___message___Message):
@@ -91,12 +95,18 @@ class TranscribeStreamResponse(google___protobuf___message___Message):
     transcription = ... # type: typing___Text
     time = ... # type: builtin___float
     final = ... # type: builtin___bool
+    return_audio = ... # type: builtin___bool
+    audio = ... # type: builtin___bytes
+    utterance_start = ... # type: builtin___bool
 
     def __init__(self,
         *,
         transcription : typing___Optional[typing___Text] = None,
         time : typing___Optional[builtin___float] = None,
         final : typing___Optional[builtin___bool] = None,
+        return_audio : typing___Optional[builtin___bool] = None,
+        audio : typing___Optional[builtin___bytes] = None,
+        utterance_start : typing___Optional[builtin___bool] = None,
         ) -> None: ...
     if sys.version_info >= (3,):
         @classmethod
@@ -106,7 +116,7 @@ class TranscribeStreamResponse(google___protobuf___message___Message):
         def FromString(cls, s: typing___Union[builtin___bytes, builtin___buffer, builtin___unicode]) -> TranscribeStreamResponse: ...
     def MergeFrom(self, other_msg: google___protobuf___message___Message) -> None: ...
     def CopyFrom(self, other_msg: google___protobuf___message___Message) -> None: ...
-    def ClearField(self, field_name: typing_extensions___Literal[u"final",b"final",u"time",b"time",u"transcription",b"transcription"]) -> None: ...
+    def ClearField(self, field_name: typing_extensions___Literal[u"audio",b"audio",u"final",b"final",u"return_audio",b"return_audio",u"time",b"time",u"transcription",b"transcription",u"utterance_start",b"utterance_start"]) -> None: ...
 global___TranscribeStreamResponse = TranscribeStreamResponse
 
 class TranscribeFileRequest(google___protobuf___message___Message):
@@ -483,6 +493,7 @@ class Quartznet(google___protobuf___message___Message):
     DESCRIPTOR: google___protobuf___descriptor___Descriptor = ...
     config_path = ... # type: typing___Text
     load_type = ... # type: typing___Text
+    use_gpu = ... # type: builtin___bool
 
     @property
     def pt_files(self) -> global___PtFiles: ...
@@ -496,6 +507,7 @@ class Quartznet(google___protobuf___message___Message):
         load_type : typing___Optional[typing___Text] = None,
         pt_files : typing___Optional[global___PtFiles] = None,
         ckpt_file : typing___Optional[global___CkptFile] = None,
+        use_gpu : typing___Optional[builtin___bool] = None,
         ) -> None: ...
     if sys.version_info >= (3,):
         @classmethod
@@ -506,7 +518,7 @@ class Quartznet(google___protobuf___message___Message):
     def MergeFrom(self, other_msg: google___protobuf___message___Message) -> None: ...
     def CopyFrom(self, other_msg: google___protobuf___message___Message) -> None: ...
     def HasField(self, field_name: typing_extensions___Literal[u"ckpt_file",b"ckpt_file",u"pt_files",b"pt_files"]) -> builtin___bool: ...
-    def ClearField(self, field_name: typing_extensions___Literal[u"ckpt_file",b"ckpt_file",u"config_path",b"config_path",u"load_type",b"load_type",u"pt_files",b"pt_files"]) -> None: ...
+    def ClearField(self, field_name: typing_extensions___Literal[u"ckpt_file",b"ckpt_file",u"config_path",b"config_path",u"load_type",b"load_type",u"pt_files",b"pt_files",u"use_gpu",b"use_gpu"]) -> None: ...
 global___Quartznet = Quartznet
 
 class PtFiles(google___protobuf___message___Message):
