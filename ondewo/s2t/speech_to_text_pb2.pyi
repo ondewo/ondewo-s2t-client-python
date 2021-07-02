@@ -339,6 +339,25 @@ class ListS2tDomainsResponse(google___protobuf___message___Message):
     def ClearField(self, field_name: typing_extensions___Literal[u"domains",b"domains"]) -> None: ...
 global___ListS2tDomainsResponse = ListS2tDomainsResponse
 
+class GetServiceInfoResponse(google___protobuf___message___Message):
+    DESCRIPTOR: google___protobuf___descriptor___Descriptor = ...
+    version = ... # type: typing___Text
+
+    def __init__(self,
+        *,
+        version : typing___Optional[typing___Text] = None,
+        ) -> None: ...
+    if sys.version_info >= (3,):
+        @classmethod
+        def FromString(cls, s: builtin___bytes) -> GetServiceInfoResponse: ...
+    else:
+        @classmethod
+        def FromString(cls, s: typing___Union[builtin___bytes, builtin___buffer, builtin___unicode]) -> GetServiceInfoResponse: ...
+    def MergeFrom(self, other_msg: google___protobuf___message___Message) -> None: ...
+    def CopyFrom(self, other_msg: google___protobuf___message___Message) -> None: ...
+    def ClearField(self, field_name: typing_extensions___Literal[u"version",b"version"]) -> None: ...
+global___GetServiceInfoResponse = GetServiceInfoResponse
+
 class Speech2TextConfig(google___protobuf___message___Message):
     DESCRIPTOR: google___protobuf___descriptor___Descriptor = ...
     id = ... # type: typing___Text
@@ -645,6 +664,7 @@ class StreamingSpeechRecognition(google___protobuf___message___Message):
     min_audio_chunk_size = ... # type: builtin___int
     start_of_utterance_threshold = ... # type: builtin___float
     end_of_utterance_threshold = ... # type: builtin___float
+    next_chunk_timeout = ... # type: builtin___float
 
     def __init__(self,
         *,
@@ -654,6 +674,7 @@ class StreamingSpeechRecognition(google___protobuf___message___Message):
         min_audio_chunk_size : typing___Optional[builtin___int] = None,
         start_of_utterance_threshold : typing___Optional[builtin___float] = None,
         end_of_utterance_threshold : typing___Optional[builtin___float] = None,
+        next_chunk_timeout : typing___Optional[builtin___float] = None,
         ) -> None: ...
     if sys.version_info >= (3,):
         @classmethod
@@ -663,7 +684,7 @@ class StreamingSpeechRecognition(google___protobuf___message___Message):
         def FromString(cls, s: typing___Union[builtin___bytes, builtin___buffer, builtin___unicode]) -> StreamingSpeechRecognition: ...
     def MergeFrom(self, other_msg: google___protobuf___message___Message) -> None: ...
     def CopyFrom(self, other_msg: google___protobuf___message___Message) -> None: ...
-    def ClearField(self, field_name: typing_extensions___Literal[u"ctc_decoding_method",b"ctc_decoding_method",u"end_of_utterance_threshold",b"end_of_utterance_threshold",u"min_audio_chunk_size",b"min_audio_chunk_size",u"sampling_rate",b"sampling_rate",u"start_of_utterance_threshold",b"start_of_utterance_threshold",u"transcribe_not_final",b"transcribe_not_final"]) -> None: ...
+    def ClearField(self, field_name: typing_extensions___Literal[u"ctc_decoding_method",b"ctc_decoding_method",u"end_of_utterance_threshold",b"end_of_utterance_threshold",u"min_audio_chunk_size",b"min_audio_chunk_size",u"next_chunk_timeout",b"next_chunk_timeout",u"sampling_rate",b"sampling_rate",u"start_of_utterance_threshold",b"start_of_utterance_threshold",u"transcribe_not_final",b"transcribe_not_final"]) -> None: ...
 global___StreamingSpeechRecognition = StreamingSpeechRecognition
 
 class VoiceActivityDetection(google___protobuf___message___Message):
