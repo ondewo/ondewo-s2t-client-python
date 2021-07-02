@@ -61,6 +61,11 @@ class Speech2TextStub(object):
                 request_serializer=ondewo_dot_s2t_dot_speech__to__text__pb2.ListS2tDomainsRequest.SerializeToString,
                 response_deserializer=ondewo_dot_s2t_dot_speech__to__text__pb2.ListS2tDomainsResponse.FromString,
                 )
+        self.GetServiceInfo = channel.unary_unary(
+                '/ondewo.s2t.Speech2Text/GetServiceInfo',
+                request_serializer=google_dot_protobuf_dot_empty__pb2.Empty.SerializeToString,
+                response_deserializer=ondewo_dot_s2t_dot_speech__to__text__pb2.GetServiceInfoResponse.FromString,
+                )
 
 
 class Speech2TextServicer(object):
@@ -121,6 +126,12 @@ class Speech2TextServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
+    def GetServiceInfo(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
 
 def add_Speech2TextServicer_to_server(servicer, server):
     rpc_method_handlers = {
@@ -168,6 +179,11 @@ def add_Speech2TextServicer_to_server(servicer, server):
                     servicer.ListS2tDomains,
                     request_deserializer=ondewo_dot_s2t_dot_speech__to__text__pb2.ListS2tDomainsRequest.FromString,
                     response_serializer=ondewo_dot_s2t_dot_speech__to__text__pb2.ListS2tDomainsResponse.SerializeToString,
+            ),
+            'GetServiceInfo': grpc.unary_unary_rpc_method_handler(
+                    servicer.GetServiceInfo,
+                    request_deserializer=google_dot_protobuf_dot_empty__pb2.Empty.FromString,
+                    response_serializer=ondewo_dot_s2t_dot_speech__to__text__pb2.GetServiceInfoResponse.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -330,5 +346,22 @@ class Speech2Text(object):
         return grpc.experimental.unary_unary(request, target, '/ondewo.s2t.Speech2Text/ListS2tDomains',
             ondewo_dot_s2t_dot_speech__to__text__pb2.ListS2tDomainsRequest.SerializeToString,
             ondewo_dot_s2t_dot_speech__to__text__pb2.ListS2tDomainsResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def GetServiceInfo(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/ondewo.s2t.Speech2Text/GetServiceInfo',
+            google_dot_protobuf_dot_empty__pb2.Empty.SerializeToString,
+            ondewo_dot_s2t_dot_speech__to__text__pb2.GetServiceInfoResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
