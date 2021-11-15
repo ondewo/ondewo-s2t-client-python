@@ -66,6 +66,11 @@ class Speech2TextStub(object):
                 request_serializer=google_dot_protobuf_dot_empty__pb2.Empty.SerializeToString,
                 response_deserializer=ondewo_dot_s2t_dot_speech__to__text__pb2.GetServiceInfoResponse.FromString,
                 )
+        self.ListS2tLanguageModels = channel.unary_unary(
+                '/ondewo.s2t.Speech2Text/ListS2tLanguageModels',
+                request_serializer=ondewo_dot_s2t_dot_speech__to__text__pb2.ListS2tLanguageModelsRequest.SerializeToString,
+                response_deserializer=ondewo_dot_s2t_dot_speech__to__text__pb2.ListS2tLanguageModelsResponse.FromString,
+                )
 
 
 class Speech2TextServicer(object):
@@ -79,55 +84,75 @@ class Speech2TextServicer(object):
         raise NotImplementedError('Method not implemented!')
 
     def TranscribeStream(self, request_iterator, context):
-        """Missing associated documentation comment in .proto file."""
+        """Transcribes an audio stream.
+        """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
     def GetS2tPipeline(self, request, context):
-        """Missing associated documentation comment in .proto file."""
+        """Gets a speech to text pipeline corresponding to the id specified in S2tPipelineId. If no corresponding id is
+        found, raises ModuleNotFoundError in server.
+        """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
     def CreateS2tPipeline(self, request, context):
-        """Missing associated documentation comment in .proto file."""
+        """Creates a new speech to text pipeline from a Speech2TextConfig and registers the new pipeline in the server.
+        """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
     def DeleteS2tPipeline(self, request, context):
-        """Missing associated documentation comment in .proto file."""
+        """Deletes a pipeline corresponding to the id parsed in S2TPipelineId. If no corresponding id is
+        found, raises ModuleNotFoundError in server.
+        """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
     def UpdateS2tPipeline(self, request, context):
-        """Missing associated documentation comment in .proto file."""
+        """Updates a pipeline with the id specified in Speech2TextConfig with the new config. If no corresponding id is
+        found, raises ModuleNotFoundError in server.
+        """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
     def ListS2tPipelines(self, request, context):
-        """Missing associated documentation comment in .proto file."""
+        """Lists all speech to text pipelines.
+        """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
     def ListS2tLanguages(self, request, context):
-        """Missing associated documentation comment in .proto file."""
+        """Returns a message containing a list of all languages for which there exist pipelines.
+        """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
     def ListS2tDomains(self, request, context):
-        """Missing associated documentation comment in .proto file."""
+        """Returns a message containing a list of all domains for which there exist pipelines.
+        """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
     def GetServiceInfo(self, request, context):
-        """Missing associated documentation comment in .proto file."""
+        """Returns a message containing the version of the running speech to text server.
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def ListS2tLanguageModels(self, request, context):
+        """Given a list of pipeline ids, returns a list of LanguageModelPipelineId messages containing the pipeline
+        id and a list of the language models loaded in the pipeline.
+        """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
@@ -184,6 +209,11 @@ def add_Speech2TextServicer_to_server(servicer, server):
                     servicer.GetServiceInfo,
                     request_deserializer=google_dot_protobuf_dot_empty__pb2.Empty.FromString,
                     response_serializer=ondewo_dot_s2t_dot_speech__to__text__pb2.GetServiceInfoResponse.SerializeToString,
+            ),
+            'ListS2tLanguageModels': grpc.unary_unary_rpc_method_handler(
+                    servicer.ListS2tLanguageModels,
+                    request_deserializer=ondewo_dot_s2t_dot_speech__to__text__pb2.ListS2tLanguageModelsRequest.FromString,
+                    response_serializer=ondewo_dot_s2t_dot_speech__to__text__pb2.ListS2tLanguageModelsResponse.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -363,5 +393,22 @@ class Speech2Text(object):
         return grpc.experimental.unary_unary(request, target, '/ondewo.s2t.Speech2Text/GetServiceInfo',
             google_dot_protobuf_dot_empty__pb2.Empty.SerializeToString,
             ondewo_dot_s2t_dot_speech__to__text__pb2.GetServiceInfoResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def ListS2tLanguageModels(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/ondewo.s2t.Speech2Text/ListS2tLanguageModels',
+            ondewo_dot_s2t_dot_speech__to__text__pb2.ListS2tLanguageModelsRequest.SerializeToString,
+            ondewo_dot_s2t_dot_speech__to__text__pb2.ListS2tLanguageModelsResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
