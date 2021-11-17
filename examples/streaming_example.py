@@ -15,6 +15,7 @@
 # limitations under the License.
 
 import argparse
+import os
 import wave
 from typing import Iterator
 
@@ -46,18 +47,26 @@ def create_streaming_request(
     for i, chunk in enumerate(audio_stream):
         yield speech_to_text_pb2.TranscribeStreamRequest(
             audio_chunk=chunk,
-            s2t_pipeline_id=pipeline_id,
-            spelling_correction=False,
-            ctc_decoding=speech_to_text_pb2.CTCDecoding.GREEDY,
             end_of_stream=False,
+            config=speech_to_text_pb2.TranscribeRequestConfig(
+                s2t_pipeline_id=pipeline_id,
+                post_processing=speech_to_text_pb2.PostProcessingOptions(
+                    spelling_correction=False,
+                ),
+                ctc_decoding=speech_to_text_pb2.CTCDecoding.GREEDY,
+            )
         )
     # End the stream
     yield speech_to_text_pb2.TranscribeStreamRequest(
         audio_chunk=b"",
-        s2t_pipeline_id=pipeline_id,
-        spelling_correction=False,
-        ctc_decoding=speech_to_text_pb2.CTCDecoding.GREEDY,
         end_of_stream=True,
+        config=speech_to_text_pb2.TranscribeRequestConfig(
+            s2t_pipeline_id=pipeline_id,
+            post_processing=speech_to_text_pb2.PostProcessingOptions(
+                spelling_correction=False,
+            ),
+            ctc_decoding=speech_to_text_pb2.CTCDecoding.GREEDY,
+        )
     )
 
 
@@ -93,7 +102,8 @@ def main():
 
     # Print transcribed utterances
     for i, response_chunk in enumerate(response_gen):
-        print(response_chunk.transcription)
+        for transcribe_message in response_chunk.transcriptions:
+            print(f"{i}. response_chunk: {transcribe_message.transcription}")
 
 
 if __name__ == "__main__":
