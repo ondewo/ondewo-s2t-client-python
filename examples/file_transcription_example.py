@@ -59,14 +59,17 @@ def main():
 
     # Create transcription request
     request = speech_to_text_pb2.TranscribeFileRequest(
-        s2t_pipeline_id=pipeline.id,
         audio_file=audio,
-        ctc_decoding=speech_to_text_pb2.CTCDecoding.BEAM_SEARCH_WITH_LM,
+        config=speech_to_text_pb2.TranscribeRequestConfig(
+            s2t_pipeline_id=pipeline.id,
+            ctc_decoding=speech_to_text_pb2.CTCDecoding.BEAM_SEARCH_WITH_LM,
+        )
     )
     # Send transcription request and get response
     transcribe_response = s2t_service.transcribe_file(request=request)
 
-    print(f"File transcript: {transcribe_response.transcription}")
+    for transcribe_message in transcribe_response.transcriptions:
+        print(f"File transcript: {transcribe_message.transcription}")
 
 
 if __name__ == "__main__":
