@@ -171,7 +171,7 @@ global___UtteranceDetectionOptions = UtteranceDetectionOptions
 class PostProcessingOptions(google___protobuf___message___Message):
     DESCRIPTOR: google___protobuf___descriptor___Descriptor = ...
     spelling_correction = ... # type: builtin___bool
-    normalization = ... # type: builtin___bool
+    normalize = ... # type: builtin___bool
 
     @property
     def config(self) -> global___PostProcessing: ...
@@ -179,7 +179,7 @@ class PostProcessingOptions(google___protobuf___message___Message):
     def __init__(self,
         *,
         spelling_correction : typing___Optional[builtin___bool] = None,
-        normalization : typing___Optional[builtin___bool] = None,
+        normalize : typing___Optional[builtin___bool] = None,
         config : typing___Optional[global___PostProcessing] = None,
         ) -> None: ...
     if sys.version_info >= (3,):
@@ -191,7 +191,7 @@ class PostProcessingOptions(google___protobuf___message___Message):
     def MergeFrom(self, other_msg: google___protobuf___message___Message) -> None: ...
     def CopyFrom(self, other_msg: google___protobuf___message___Message) -> None: ...
     def HasField(self, field_name: typing_extensions___Literal[u"config",b"config"]) -> builtin___bool: ...
-    def ClearField(self, field_name: typing_extensions___Literal[u"config",b"config",u"normalization",b"normalization",u"spelling_correction",b"spelling_correction"]) -> None: ...
+    def ClearField(self, field_name: typing_extensions___Literal[u"config",b"config",u"normalize",b"normalize",u"spelling_correction",b"spelling_correction"]) -> None: ...
 global___PostProcessingOptions = PostProcessingOptions
 
 class TranscribeStreamRequest(google___protobuf___message___Message):
