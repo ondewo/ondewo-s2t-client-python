@@ -64,7 +64,7 @@ class Speech2TextStub(object):
         self.GetServiceInfo = channel.unary_unary(
                 '/ondewo.s2t.Speech2Text/GetServiceInfo',
                 request_serializer=google_dot_protobuf_dot_empty__pb2.Empty.SerializeToString,
-                response_deserializer=ondewo_dot_s2t_dot_speech__to__text__pb2.GetServiceInfoResponse.FromString,
+                response_deserializer=ondewo_dot_s2t_dot_speech__to__text__pb2.S2TGetServiceInfoResponse.FromString,
                 )
         self.ListS2tLanguageModels = channel.unary_unary(
                 '/ondewo.s2t.Speech2Text/ListS2tLanguageModels',
@@ -208,7 +208,7 @@ def add_Speech2TextServicer_to_server(servicer, server):
             'GetServiceInfo': grpc.unary_unary_rpc_method_handler(
                     servicer.GetServiceInfo,
                     request_deserializer=google_dot_protobuf_dot_empty__pb2.Empty.FromString,
-                    response_serializer=ondewo_dot_s2t_dot_speech__to__text__pb2.GetServiceInfoResponse.SerializeToString,
+                    response_serializer=ondewo_dot_s2t_dot_speech__to__text__pb2.S2TGetServiceInfoResponse.SerializeToString,
             ),
             'ListS2tLanguageModels': grpc.unary_unary_rpc_method_handler(
                     servicer.ListS2tLanguageModels,
@@ -392,7 +392,7 @@ class Speech2Text(object):
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/ondewo.s2t.Speech2Text/GetServiceInfo',
             google_dot_protobuf_dot_empty__pb2.Empty.SerializeToString,
-            ondewo_dot_s2t_dot_speech__to__text__pb2.GetServiceInfoResponse.FromString,
+            ondewo_dot_s2t_dot_speech__to__text__pb2.S2TGetServiceInfoResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
