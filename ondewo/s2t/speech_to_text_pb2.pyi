@@ -55,7 +55,6 @@ class TranscribeRequestConfig(google.protobuf.message.Message):
     PYANNOTE_FIELD_NUMBER: builtins.int
     MATCHBOX_FIELD_NUMBER: builtins.int
     RETURN_OPTIONS_FIELD_NUMBER: builtins.int
-    MUTE_AUDIO_FIELD_NUMBER: builtins.int
     s2t_pipeline_id: typing.Text = ...
     """Required. id of the pipeline (model setup) that will generate audio"""
 
@@ -73,9 +72,6 @@ class TranscribeRequestConfig(google.protobuf.message.Message):
     def matchbox(self) -> global___Matchbox: ...
     @property
     def return_options(self) -> global___TranscriptionReturnOptions: ...
-    mute_audio: builtins.bool = ...
-    """Whether or not to mute the audio signal. Defaults to false."""
-
     def __init__(self,
         *,
         s2t_pipeline_id : typing.Text = ...,
@@ -86,10 +82,9 @@ class TranscribeRequestConfig(google.protobuf.message.Message):
         pyannote : typing.Optional[global___Pyannote] = ...,
         matchbox : typing.Optional[global___Matchbox] = ...,
         return_options : typing.Optional[global___TranscriptionReturnOptions] = ...,
-        mute_audio : builtins.bool = ...,
         ) -> None: ...
     def HasField(self, field_name: typing_extensions.Literal["language_model_name",b"language_model_name","matchbox",b"matchbox","oneof_language_model_name",b"oneof_language_model_name","oneof_post_processing",b"oneof_post_processing","oneof_return_options",b"oneof_return_options","oneof_utterance_detection",b"oneof_utterance_detection","post_processing",b"post_processing","pyannote",b"pyannote","return_options",b"return_options","utterance_detection",b"utterance_detection","voice_activity_detection",b"voice_activity_detection"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["ctc_decoding",b"ctc_decoding","language_model_name",b"language_model_name","matchbox",b"matchbox","mute_audio",b"mute_audio","oneof_language_model_name",b"oneof_language_model_name","oneof_post_processing",b"oneof_post_processing","oneof_return_options",b"oneof_return_options","oneof_utterance_detection",b"oneof_utterance_detection","post_processing",b"post_processing","pyannote",b"pyannote","return_options",b"return_options","s2t_pipeline_id",b"s2t_pipeline_id","utterance_detection",b"utterance_detection","voice_activity_detection",b"voice_activity_detection"]) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["ctc_decoding",b"ctc_decoding","language_model_name",b"language_model_name","matchbox",b"matchbox","oneof_language_model_name",b"oneof_language_model_name","oneof_post_processing",b"oneof_post_processing","oneof_return_options",b"oneof_return_options","oneof_utterance_detection",b"oneof_utterance_detection","post_processing",b"post_processing","pyannote",b"pyannote","return_options",b"return_options","s2t_pipeline_id",b"s2t_pipeline_id","utterance_detection",b"utterance_detection","voice_activity_detection",b"voice_activity_detection"]) -> None: ...
     @typing.overload
     def WhichOneof(self, oneof_group: typing_extensions.Literal["oneof_language_model_name",b"oneof_language_model_name"]) -> typing.Optional[typing_extensions.Literal["language_model_name"]]: ...
     @typing.overload
@@ -200,6 +195,7 @@ class TranscribeStreamRequest(google.protobuf.message.Message):
     AUDIO_CHUNK_FIELD_NUMBER: builtins.int
     END_OF_STREAM_FIELD_NUMBER: builtins.int
     CONFIG_FIELD_NUMBER: builtins.int
+    MUTE_AUDIO_FIELD_NUMBER: builtins.int
     audio_chunk: builtins.bytes = ...
     """wav file to transcribe"""
 
@@ -210,14 +206,18 @@ class TranscribeStreamRequest(google.protobuf.message.Message):
     def config(self) -> global___TranscribeRequestConfig:
         """The configuration to override the default configuration"""
         pass
+    mute_audio: builtins.bool = ...
+    """Whether or not to mute the audio signal. Defaults to false."""
+
     def __init__(self,
         *,
         audio_chunk : builtins.bytes = ...,
         end_of_stream : builtins.bool = ...,
         config : typing.Optional[global___TranscribeRequestConfig] = ...,
+        mute_audio : builtins.bool = ...,
         ) -> None: ...
     def HasField(self, field_name: typing_extensions.Literal["config",b"config"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["audio_chunk",b"audio_chunk","config",b"config","end_of_stream",b"end_of_stream"]) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["audio_chunk",b"audio_chunk","config",b"config","end_of_stream",b"end_of_stream","mute_audio",b"mute_audio"]) -> None: ...
 global___TranscribeStreamRequest = TranscribeStreamRequest
 
 class Transcription(google.protobuf.message.Message):
