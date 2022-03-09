@@ -1,6 +1,11 @@
 # Release History
 *****************
+## ONDEWO-S2T Python Client 3.1.0
 
+### New Features
+* [[OND231-338]] -
+Add mute_audio field in TranscribeStreamRequest.
+  
 ## ONDEWO-S2T Python Client 3.0.0
 
 ### New breaking Features
