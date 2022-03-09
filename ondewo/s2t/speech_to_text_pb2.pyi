@@ -195,6 +195,7 @@ class TranscribeStreamRequest(google.protobuf.message.Message):
     AUDIO_CHUNK_FIELD_NUMBER: builtins.int
     END_OF_STREAM_FIELD_NUMBER: builtins.int
     CONFIG_FIELD_NUMBER: builtins.int
+    MUTE_AUDIO_FIELD_NUMBER: builtins.int
     audio_chunk: builtins.bytes = ...
     """wav file to transcribe"""
 
@@ -205,14 +206,18 @@ class TranscribeStreamRequest(google.protobuf.message.Message):
     def config(self) -> global___TranscribeRequestConfig:
         """The configuration to override the default configuration"""
         pass
+    mute_audio: builtins.bool = ...
+    """Whether or not to mute the audio signal. Defaults to false."""
+
     def __init__(self,
         *,
         audio_chunk : builtins.bytes = ...,
         end_of_stream : builtins.bool = ...,
         config : typing.Optional[global___TranscribeRequestConfig] = ...,
+        mute_audio : builtins.bool = ...,
         ) -> None: ...
     def HasField(self, field_name: typing_extensions.Literal["config",b"config"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["audio_chunk",b"audio_chunk","config",b"config","end_of_stream",b"end_of_stream"]) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["audio_chunk",b"audio_chunk","config",b"config","end_of_stream",b"end_of_stream","mute_audio",b"mute_audio"]) -> None: ...
 global___TranscribeStreamRequest = TranscribeStreamRequest
 
 class Transcription(google.protobuf.message.Message):
