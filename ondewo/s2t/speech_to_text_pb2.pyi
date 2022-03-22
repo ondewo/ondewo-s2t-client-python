@@ -396,19 +396,26 @@ class ListS2tPipelinesRequest(google.protobuf.message.Message):
     LANGUAGES_FIELD_NUMBER: builtins.int
     PIPELINE_OWNERS_FIELD_NUMBER: builtins.int
     DOMAINS_FIELD_NUMBER: builtins.int
+    REGISTERED_ONLY_FIELD_NUMBER: builtins.int
     @property
     def languages(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[typing.Text]: ...
     @property
     def pipeline_owners(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[typing.Text]: ...
     @property
     def domains(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[typing.Text]: ...
+    registered_only: builtins.bool = ...
+    """If true, return only registered pipelines.
+    Default false: return registered and persisted (from config files) configs.
+    """
+
     def __init__(self,
         *,
         languages : typing.Optional[typing.Iterable[typing.Text]] = ...,
         pipeline_owners : typing.Optional[typing.Iterable[typing.Text]] = ...,
         domains : typing.Optional[typing.Iterable[typing.Text]] = ...,
+        registered_only : builtins.bool = ...,
         ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["domains",b"domains","languages",b"languages","pipeline_owners",b"pipeline_owners"]) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["domains",b"domains","languages",b"languages","pipeline_owners",b"pipeline_owners","registered_only",b"registered_only"]) -> None: ...
 global___ListS2tPipelinesRequest = ListS2tPipelinesRequest
 
 class ListS2tPipelinesResponse(google.protobuf.message.Message):

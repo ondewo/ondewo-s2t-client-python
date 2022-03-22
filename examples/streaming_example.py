@@ -43,6 +43,7 @@ def get_streaming_audio(audio_path: str) -> Iterator[bytes]:
 def create_streaming_request(
     audio_stream: Iterator[bytes],
     pipeline_id: str,
+    transcribe_not_final: bool = False,
 ) -> Iterator[speech_to_text_pb2.TranscribeStreamRequest]:
     for i, chunk in enumerate(audio_stream):
         yield speech_to_text_pb2.TranscribeStreamRequest(
@@ -54,6 +55,9 @@ def create_streaming_request(
                     spelling_correction=False,
                 ),
                 ctc_decoding=speech_to_text_pb2.CTCDecoding.GREEDY,
+                utterance_detection=speech_to_text_pb2.UtteranceDetectionOptions(
+                    transcribe_not_final=transcribe_not_final,
+                )
             )
         )
     # End the stream
