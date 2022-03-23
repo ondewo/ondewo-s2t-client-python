@@ -1,5 +1,11 @@
 # Release History
 *****************
+## ONDEWO-S2T Python Client 3.1.1
+
+### New Features
+Add boolean registered_only option in ListS2tPipelinesRequest.
+
+*****************
 ## ONDEWO-S2T Python Client 3.1.0
 
 ### New Features
