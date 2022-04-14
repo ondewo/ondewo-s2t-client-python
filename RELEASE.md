@@ -1,5 +1,11 @@
 # Release History
 *****************
+## ONDEWO-S2T Python Client 3.1.2
+
+### New Features
+Update examples in examples/ondewo-s2t-wit-certificate.ipynb notebook.
+
+*****************
 ## ONDEWO-S2T Python Client 3.1.1
 
 ### New Features
