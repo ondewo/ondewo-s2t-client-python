@@ -1,15 +1,10 @@
 # Release History
 *****************
-## ONDEWO-S2T Python Client 3.1.2
-
-### New Features
-Update examples in examples/ondewo-s2t-wit-certificate.ipynb notebook.
-
-*****************
 ## ONDEWO-S2T Python Client 3.1.1
 
 ### New Features
-Add boolean registered_only option in ListS2tPipelinesRequest.
+* Update examples in examples/ondewo-s2t-wit-certificate.ipynb notebook.
+* Add boolean registered_only option in ListS2tPipelinesRequest.
 
 *****************
 ## ONDEWO-S2T Python Client 3.1.0
