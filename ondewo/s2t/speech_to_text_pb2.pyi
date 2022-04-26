@@ -600,6 +600,7 @@ class CtcAcousticModels(google.protobuf.message.Message):
     QUARTZNET_FIELD_NUMBER: builtins.int
     QUARTZNET_TRITON_FIELD_NUMBER: builtins.int
     WAV2VEC_FIELD_NUMBER: builtins.int
+    WAV2VEC_TRITON_FIELD_NUMBER: builtins.int
     type: typing.Text
     @property
     def quartznet(self) -> global___Quartznet: ...
@@ -607,15 +608,18 @@ class CtcAcousticModels(google.protobuf.message.Message):
     def quartznet_triton(self) -> global___QuartznetTriton: ...
     @property
     def wav2vec(self) -> global___Wav2Vec: ...
+    @property
+    def wav2vec_triton(self) -> global___Wav2VecTriton: ...
     def __init__(self,
         *,
         type: typing.Text = ...,
         quartznet: typing.Optional[global___Quartznet] = ...,
         quartznet_triton: typing.Optional[global___QuartznetTriton] = ...,
         wav2vec: typing.Optional[global___Wav2Vec] = ...,
+        wav2vec_triton: typing.Optional[global___Wav2VecTriton] = ...,
         ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["quartznet",b"quartznet","quartznet_triton",b"quartznet_triton","wav2vec",b"wav2vec"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["quartznet",b"quartznet","quartznet_triton",b"quartznet_triton","type",b"type","wav2vec",b"wav2vec"]) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["quartznet",b"quartznet","quartznet_triton",b"quartznet_triton","wav2vec",b"wav2vec","wav2vec_triton",b"wav2vec_triton"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["quartznet",b"quartznet","quartznet_triton",b"quartznet_triton","type",b"type","wav2vec",b"wav2vec","wav2vec_triton",b"wav2vec_triton"]) -> None: ...
 global___CtcAcousticModels = CtcAcousticModels
 
 class Wav2Vec(google.protobuf.message.Message):
@@ -631,6 +635,26 @@ class Wav2Vec(google.protobuf.message.Message):
         ) -> None: ...
     def ClearField(self, field_name: typing_extensions.Literal["model_path",b"model_path","use_gpu",b"use_gpu"]) -> None: ...
 global___Wav2Vec = Wav2Vec
+
+class Wav2VecTriton(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    PROCESSOR_PATH_FIELD_NUMBER: builtins.int
+    TRITON_MODEL_NAME_FIELD_NUMBER: builtins.int
+    TRITON_MODEL_VERSION_FIELD_NUMBER: builtins.int
+    CHECK_STATUS_TIMEOUT_FIELD_NUMBER: builtins.int
+    processor_path: typing.Text
+    triton_model_name: typing.Text
+    triton_model_version: typing.Text
+    check_status_timeout: builtins.int
+    def __init__(self,
+        *,
+        processor_path: typing.Text = ...,
+        triton_model_name: typing.Text = ...,
+        triton_model_version: typing.Text = ...,
+        check_status_timeout: builtins.int = ...,
+        ) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["check_status_timeout",b"check_status_timeout","processor_path",b"processor_path","triton_model_name",b"triton_model_name","triton_model_version",b"triton_model_version"]) -> None: ...
+global___Wav2VecTriton = Wav2VecTriton
 
 class Quartznet(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
