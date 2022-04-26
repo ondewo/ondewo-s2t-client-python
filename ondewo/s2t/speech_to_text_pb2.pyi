@@ -10,31 +10,32 @@ import google.protobuf.message
 import typing
 import typing_extensions
 
-DESCRIPTOR: google.protobuf.descriptor.FileDescriptor = ...
+DESCRIPTOR: google.protobuf.descriptor.FileDescriptor
+
+class _CTCDecoding:
+    ValueType = typing.NewType('ValueType', builtins.int)
+    V: typing_extensions.TypeAlias = ValueType
+class _CTCDecodingEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_CTCDecoding.ValueType], builtins.type):
+    DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
+    DEFAULT: _CTCDecoding.ValueType  # 0
+    """decoding will be defined by the pipeline config"""
+
+    GREEDY: _CTCDecoding.ValueType  # 1
+    """greedy decoding will be used independently on pipeline config"""
+
+    BEAM_SEARCH_WITH_LM: _CTCDecoding.ValueType  # 2
+    """beam search will be used independently on pipeline config"""
 
 class CTCDecoding(_CTCDecoding, metaclass=_CTCDecodingEnumTypeWrapper):
     pass
-class _CTCDecoding:
-    V = typing.NewType('V', builtins.int)
-class _CTCDecodingEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_CTCDecoding.V], builtins.type):
-    DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor = ...
-    DEFAULT = CTCDecoding.V(0)
-    """decoding will be defined by the pipeline config"""
 
-    GREEDY = CTCDecoding.V(1)
-    """greedy decoding will be used independently on pipeline config"""
-
-    BEAM_SEARCH_WITH_LM = CTCDecoding.V(2)
-    """beam search will be used independently on pipeline config"""
-
-
-DEFAULT = CTCDecoding.V(0)
+DEFAULT: CTCDecoding.ValueType  # 0
 """decoding will be defined by the pipeline config"""
 
-GREEDY = CTCDecoding.V(1)
+GREEDY: CTCDecoding.ValueType  # 1
 """greedy decoding will be used independently on pipeline config"""
 
-BEAM_SEARCH_WITH_LM = CTCDecoding.V(2)
+BEAM_SEARCH_WITH_LM: CTCDecoding.ValueType  # 2
 """beam search will be used independently on pipeline config"""
 
 global___CTCDecoding = CTCDecoding
@@ -46,7 +47,7 @@ class TranscribeRequestConfig(google.protobuf.message.Message):
     /////////////////////////
 
     """
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor = ...
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
     S2T_PIPELINE_ID_FIELD_NUMBER: builtins.int
     CTC_DECODING_FIELD_NUMBER: builtins.int
     LANGUAGE_MODEL_NAME_FIELD_NUMBER: builtins.int
@@ -55,13 +56,13 @@ class TranscribeRequestConfig(google.protobuf.message.Message):
     PYANNOTE_FIELD_NUMBER: builtins.int
     MATCHBOX_FIELD_NUMBER: builtins.int
     RETURN_OPTIONS_FIELD_NUMBER: builtins.int
-    s2t_pipeline_id: typing.Text = ...
+    s2t_pipeline_id: typing.Text
     """Required. id of the pipeline (model setup) that will generate audio"""
 
-    ctc_decoding: global___CTCDecoding.V = ...
+    ctc_decoding: global___CTCDecoding.ValueType
     """Optional. CTC decoding type"""
 
-    language_model_name: typing.Text = ...
+    language_model_name: typing.Text
     @property
     def post_processing(self) -> global___PostProcessingOptions: ...
     @property
@@ -74,14 +75,14 @@ class TranscribeRequestConfig(google.protobuf.message.Message):
     def return_options(self) -> global___TranscriptionReturnOptions: ...
     def __init__(self,
         *,
-        s2t_pipeline_id : typing.Text = ...,
-        ctc_decoding : global___CTCDecoding.V = ...,
-        language_model_name : typing.Text = ...,
-        post_processing : typing.Optional[global___PostProcessingOptions] = ...,
-        utterance_detection : typing.Optional[global___UtteranceDetectionOptions] = ...,
-        pyannote : typing.Optional[global___Pyannote] = ...,
-        matchbox : typing.Optional[global___Matchbox] = ...,
-        return_options : typing.Optional[global___TranscriptionReturnOptions] = ...,
+        s2t_pipeline_id: typing.Text = ...,
+        ctc_decoding: global___CTCDecoding.ValueType = ...,
+        language_model_name: typing.Text = ...,
+        post_processing: typing.Optional[global___PostProcessingOptions] = ...,
+        utterance_detection: typing.Optional[global___UtteranceDetectionOptions] = ...,
+        pyannote: typing.Optional[global___Pyannote] = ...,
+        matchbox: typing.Optional[global___Matchbox] = ...,
+        return_options: typing.Optional[global___TranscriptionReturnOptions] = ...,
         ) -> None: ...
     def HasField(self, field_name: typing_extensions.Literal["language_model_name",b"language_model_name","matchbox",b"matchbox","oneof_language_model_name",b"oneof_language_model_name","oneof_post_processing",b"oneof_post_processing","oneof_return_options",b"oneof_return_options","oneof_utterance_detection",b"oneof_utterance_detection","post_processing",b"post_processing","pyannote",b"pyannote","return_options",b"return_options","utterance_detection",b"utterance_detection","voice_activity_detection",b"voice_activity_detection"]) -> builtins.bool: ...
     def ClearField(self, field_name: typing_extensions.Literal["ctc_decoding",b"ctc_decoding","language_model_name",b"language_model_name","matchbox",b"matchbox","oneof_language_model_name",b"oneof_language_model_name","oneof_post_processing",b"oneof_post_processing","oneof_return_options",b"oneof_return_options","oneof_utterance_detection",b"oneof_utterance_detection","post_processing",b"post_processing","pyannote",b"pyannote","return_options",b"return_options","s2t_pipeline_id",b"s2t_pipeline_id","utterance_detection",b"utterance_detection","voice_activity_detection",b"voice_activity_detection"]) -> None: ...
@@ -98,60 +99,60 @@ class TranscribeRequestConfig(google.protobuf.message.Message):
 global___TranscribeRequestConfig = TranscribeRequestConfig
 
 class TranscriptionReturnOptions(google.protobuf.message.Message):
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor = ...
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
     RETURN_START_OF_SPEECH_FIELD_NUMBER: builtins.int
     RETURN_AUDIO_FIELD_NUMBER: builtins.int
     RETURN_ALTERNATIVE_TRANSCRIPTIONS_FIELD_NUMBER: builtins.int
     RETURN_CONFIDENCE_SCORE_FIELD_NUMBER: builtins.int
     RETURN_WORD_TIMING_FIELD_NUMBER: builtins.int
-    return_start_of_speech: builtins.bool = ...
+    return_start_of_speech: builtins.bool
     """should server make response indicating that the beginning of the speech was detected"""
 
-    return_audio: builtins.bool = ...
+    return_audio: builtins.bool
     """should s2t server return audio bytes of transcribed utterance"""
 
-    return_alternative_transcriptions: builtins.bool = ...
+    return_alternative_transcriptions: builtins.bool
     """Whether or not to return alternative results from beam-search"""
 
-    return_confidence_score: builtins.bool = ...
+    return_confidence_score: builtins.bool
     """Whether or not to return confidence scores"""
 
-    return_word_timing: builtins.bool = ...
+    return_word_timing: builtins.bool
     """Optional. Whether or not to return timestamps of start and end of the words. Only used in TranscribeFile."""
 
     def __init__(self,
         *,
-        return_start_of_speech : builtins.bool = ...,
-        return_audio : builtins.bool = ...,
-        return_alternative_transcriptions : builtins.bool = ...,
-        return_confidence_score : builtins.bool = ...,
-        return_word_timing : builtins.bool = ...,
+        return_start_of_speech: builtins.bool = ...,
+        return_audio: builtins.bool = ...,
+        return_alternative_transcriptions: builtins.bool = ...,
+        return_confidence_score: builtins.bool = ...,
+        return_word_timing: builtins.bool = ...,
         ) -> None: ...
     def ClearField(self, field_name: typing_extensions.Literal["return_alternative_transcriptions",b"return_alternative_transcriptions","return_audio",b"return_audio","return_confidence_score",b"return_confidence_score","return_start_of_speech",b"return_start_of_speech","return_word_timing",b"return_word_timing"]) -> None: ...
 global___TranscriptionReturnOptions = TranscriptionReturnOptions
 
 class UtteranceDetectionOptions(google.protobuf.message.Message):
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor = ...
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
     TRANSCRIBE_NOT_FINAL_FIELD_NUMBER: builtins.int
     START_OF_UTTERANCE_THRESHOLD_FIELD_NUMBER: builtins.int
     END_OF_UTTERANCE_THRESHOLD_FIELD_NUMBER: builtins.int
     NEXT_CHUNK_TIMEOUT_FIELD_NUMBER: builtins.int
-    transcribe_not_final: builtins.bool = ...
-    start_of_utterance_threshold: builtins.float = ...
+    transcribe_not_final: builtins.bool
+    start_of_utterance_threshold: builtins.float
     """Specifies the minimal duration of voice signal to indicate the start of an utterance"""
 
-    end_of_utterance_threshold: builtins.float = ...
+    end_of_utterance_threshold: builtins.float
     """Specifies the minimal duration of a non-voice signal to indicate the end of an utterance"""
 
-    next_chunk_timeout: builtins.float = ...
+    next_chunk_timeout: builtins.float
     """if time between audio chunks exceeds next_chunk_timeout, stream will be stopped"""
 
     def __init__(self,
         *,
-        transcribe_not_final : builtins.bool = ...,
-        start_of_utterance_threshold : builtins.float = ...,
-        end_of_utterance_threshold : builtins.float = ...,
-        next_chunk_timeout : builtins.float = ...,
+        transcribe_not_final: builtins.bool = ...,
+        start_of_utterance_threshold: builtins.float = ...,
+        end_of_utterance_threshold: builtins.float = ...,
+        next_chunk_timeout: builtins.float = ...,
         ) -> None: ...
     def HasField(self, field_name: typing_extensions.Literal["oneof_transcribe_not_final",b"oneof_transcribe_not_final","transcribe_not_final",b"transcribe_not_final"]) -> builtins.bool: ...
     def ClearField(self, field_name: typing_extensions.Literal["end_of_utterance_threshold",b"end_of_utterance_threshold","next_chunk_timeout",b"next_chunk_timeout","oneof_transcribe_not_final",b"oneof_transcribe_not_final","start_of_utterance_threshold",b"start_of_utterance_threshold","transcribe_not_final",b"transcribe_not_final"]) -> None: ...
@@ -159,14 +160,14 @@ class UtteranceDetectionOptions(google.protobuf.message.Message):
 global___UtteranceDetectionOptions = UtteranceDetectionOptions
 
 class PostProcessingOptions(google.protobuf.message.Message):
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor = ...
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
     SPELLING_CORRECTION_FIELD_NUMBER: builtins.int
     NORMALIZE_FIELD_NUMBER: builtins.int
     CONFIG_FIELD_NUMBER: builtins.int
-    spelling_correction: builtins.bool = ...
+    spelling_correction: builtins.bool
     """Whether or not to use spelling correction"""
 
-    normalize: builtins.bool = ...
+    normalize: builtins.bool
     """Whether or not to disable normalization"""
 
     @property
@@ -177,9 +178,9 @@ class PostProcessingOptions(google.protobuf.message.Message):
         pass
     def __init__(self,
         *,
-        spelling_correction : builtins.bool = ...,
-        normalize : builtins.bool = ...,
-        config : typing.Optional[global___PostProcessing] = ...,
+        spelling_correction: builtins.bool = ...,
+        normalize: builtins.bool = ...,
+        config: typing.Optional[global___PostProcessing] = ...,
         ) -> None: ...
     def HasField(self, field_name: typing_extensions.Literal["config",b"config"]) -> builtins.bool: ...
     def ClearField(self, field_name: typing_extensions.Literal["config",b"config","normalize",b"normalize","spelling_correction",b"spelling_correction"]) -> None: ...
@@ -191,55 +192,55 @@ class TranscribeStreamRequest(google.protobuf.message.Message):
     /////////////////////
 
     """
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor = ...
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
     AUDIO_CHUNK_FIELD_NUMBER: builtins.int
     END_OF_STREAM_FIELD_NUMBER: builtins.int
     CONFIG_FIELD_NUMBER: builtins.int
     MUTE_AUDIO_FIELD_NUMBER: builtins.int
-    audio_chunk: builtins.bytes = ...
+    audio_chunk: builtins.bytes
     """wav file to transcribe"""
 
-    end_of_stream: builtins.bool = ...
+    end_of_stream: builtins.bool
     """if it's the final chunk of the stream"""
 
     @property
     def config(self) -> global___TranscribeRequestConfig:
         """The configuration to override the default configuration"""
         pass
-    mute_audio: builtins.bool = ...
+    mute_audio: builtins.bool
     """Whether or not to mute the audio signal. Defaults to false."""
 
     def __init__(self,
         *,
-        audio_chunk : builtins.bytes = ...,
-        end_of_stream : builtins.bool = ...,
-        config : typing.Optional[global___TranscribeRequestConfig] = ...,
-        mute_audio : builtins.bool = ...,
+        audio_chunk: builtins.bytes = ...,
+        end_of_stream: builtins.bool = ...,
+        config: typing.Optional[global___TranscribeRequestConfig] = ...,
+        mute_audio: builtins.bool = ...,
         ) -> None: ...
     def HasField(self, field_name: typing_extensions.Literal["config",b"config"]) -> builtins.bool: ...
     def ClearField(self, field_name: typing_extensions.Literal["audio_chunk",b"audio_chunk","config",b"config","end_of_stream",b"end_of_stream","mute_audio",b"mute_audio"]) -> None: ...
 global___TranscribeStreamRequest = TranscribeStreamRequest
 
 class Transcription(google.protobuf.message.Message):
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor = ...
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
     TRANSCRIPTION_FIELD_NUMBER: builtins.int
     CONFIDENCE_SCORE_FIELD_NUMBER: builtins.int
-    transcription: typing.Text = ...
+    transcription: typing.Text
     """The transcribed text"""
 
-    confidence_score: builtins.float = ...
+    confidence_score: builtins.float
     """The corresponding confidence score"""
 
     def __init__(self,
         *,
-        transcription : typing.Text = ...,
-        confidence_score : builtins.float = ...,
+        transcription: typing.Text = ...,
+        confidence_score: builtins.float = ...,
         ) -> None: ...
     def ClearField(self, field_name: typing_extensions.Literal["confidence_score",b"confidence_score","transcription",b"transcription"]) -> None: ...
 global___Transcription = Transcription
 
 class TranscribeStreamResponse(google.protobuf.message.Message):
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor = ...
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
     TRANSCRIPTIONS_FIELD_NUMBER: builtins.int
     TIME_FIELD_NUMBER: builtins.int
     FINAL_FIELD_NUMBER: builtins.int
@@ -252,38 +253,38 @@ class TranscribeStreamResponse(google.protobuf.message.Message):
     def transcriptions(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___Transcription]:
         """List of transcriptions with confidence level"""
         pass
-    time: builtins.float = ...
+    time: builtins.float
     """The time the transcription took"""
 
-    final: builtins.bool = ...
+    final: builtins.bool
     """Whether or not this transcription is final (transcribed texts might change if transcription is
     started before the end of an utterance).
     """
 
-    return_audio: builtins.bool = ...
+    return_audio: builtins.bool
     """is audio bytes of the utterance in response"""
 
-    audio: builtins.bytes = ...
+    audio: builtins.bytes
     """audio bytes of the transcribed utterance"""
 
-    utterance_start: builtins.bool = ...
+    utterance_start: builtins.bool
     """is it a start of the utterance"""
 
-    audio_uuid: typing.Text = ...
+    audio_uuid: typing.Text
     """id of the transcribed audio file"""
 
     @property
     def config(self) -> global___TranscribeRequestConfig: ...
     def __init__(self,
         *,
-        transcriptions : typing.Optional[typing.Iterable[global___Transcription]] = ...,
-        time : builtins.float = ...,
-        final : builtins.bool = ...,
-        return_audio : builtins.bool = ...,
-        audio : builtins.bytes = ...,
-        utterance_start : builtins.bool = ...,
-        audio_uuid : typing.Text = ...,
-        config : typing.Optional[global___TranscribeRequestConfig] = ...,
+        transcriptions: typing.Optional[typing.Iterable[global___Transcription]] = ...,
+        time: builtins.float = ...,
+        final: builtins.bool = ...,
+        return_audio: builtins.bool = ...,
+        audio: builtins.bytes = ...,
+        utterance_start: builtins.bool = ...,
+        audio_uuid: typing.Text = ...,
+        config: typing.Optional[global___TranscribeRequestConfig] = ...,
         ) -> None: ...
     def HasField(self, field_name: typing_extensions.Literal["config",b"config","oneof_config",b"oneof_config"]) -> builtins.bool: ...
     def ClearField(self, field_name: typing_extensions.Literal["audio",b"audio","audio_uuid",b"audio_uuid","config",b"config","final",b"final","oneof_config",b"oneof_config","return_audio",b"return_audio","time",b"time","transcriptions",b"transcriptions","utterance_start",b"utterance_start"]) -> None: ...
@@ -296,10 +297,10 @@ class TranscribeFileRequest(google.protobuf.message.Message):
     ///////////////////
 
     """
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor = ...
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
     AUDIO_FILE_FIELD_NUMBER: builtins.int
     CONFIG_FIELD_NUMBER: builtins.int
-    audio_file: builtins.bytes = ...
+    audio_file: builtins.bytes
     """wav file to transcribe"""
 
     @property
@@ -308,15 +309,15 @@ class TranscribeFileRequest(google.protobuf.message.Message):
         pass
     def __init__(self,
         *,
-        audio_file : builtins.bytes = ...,
-        config : typing.Optional[global___TranscribeRequestConfig] = ...,
+        audio_file: builtins.bytes = ...,
+        config: typing.Optional[global___TranscribeRequestConfig] = ...,
         ) -> None: ...
     def HasField(self, field_name: typing_extensions.Literal["config",b"config"]) -> builtins.bool: ...
     def ClearField(self, field_name: typing_extensions.Literal["audio_file",b"audio_file","config",b"config"]) -> None: ...
 global___TranscribeFileRequest = TranscribeFileRequest
 
 class TranscribeFileResponse(google.protobuf.message.Message):
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor = ...
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
     TRANSCRIPTIONS_FIELD_NUMBER: builtins.int
     TIME_FIELD_NUMBER: builtins.int
     WORD_TIMING_FIELD_NUMBER: builtins.int
@@ -325,45 +326,45 @@ class TranscribeFileResponse(google.protobuf.message.Message):
     def transcriptions(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___Transcription]:
         """List of transcriptions with confidence level"""
         pass
-    time: builtins.float = ...
+    time: builtins.float
     """The time the transcription took"""
 
     @property
     def word_timing(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___WordTiming]:
         """List of words with timestamps for their start and end"""
         pass
-    audio_uuid: typing.Text = ...
+    audio_uuid: typing.Text
     """id of the transcribed audio file"""
 
     def __init__(self,
         *,
-        transcriptions : typing.Optional[typing.Iterable[global___Transcription]] = ...,
-        time : builtins.float = ...,
-        word_timing : typing.Optional[typing.Iterable[global___WordTiming]] = ...,
-        audio_uuid : typing.Text = ...,
+        transcriptions: typing.Optional[typing.Iterable[global___Transcription]] = ...,
+        time: builtins.float = ...,
+        word_timing: typing.Optional[typing.Iterable[global___WordTiming]] = ...,
+        audio_uuid: typing.Text = ...,
         ) -> None: ...
     def ClearField(self, field_name: typing_extensions.Literal["audio_uuid",b"audio_uuid","time",b"time","transcriptions",b"transcriptions","word_timing",b"word_timing"]) -> None: ...
 global___TranscribeFileResponse = TranscribeFileResponse
 
 class WordTiming(google.protobuf.message.Message):
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor = ...
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
     WORD_FIELD_NUMBER: builtins.int
     BEGIN_FIELD_NUMBER: builtins.int
     END_FIELD_NUMBER: builtins.int
-    word: typing.Text = ...
+    word: typing.Text
     """Transcribed word"""
 
-    begin: builtins.int = ...
+    begin: builtins.int
     """Timestamp for start of word"""
 
-    end: builtins.int = ...
+    end: builtins.int
     """Timestamp for end of word"""
 
     def __init__(self,
         *,
-        word : typing.Text = ...,
-        begin : builtins.int = ...,
-        end : builtins.int = ...,
+        word: typing.Text = ...,
+        begin: builtins.int = ...,
+        end: builtins.int = ...,
         ) -> None: ...
     def ClearField(self, field_name: typing_extensions.Literal["begin",b"begin","end",b"end","word",b"word"]) -> None: ...
 global___WordTiming = WordTiming
@@ -374,14 +375,14 @@ class S2tPipelineId(google.protobuf.message.Message):
     ////////////////////
 
     """
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor = ...
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
     ID_FIELD_NUMBER: builtins.int
-    id: typing.Text = ...
+    id: typing.Text
     """id of the model that will generate audio"""
 
     def __init__(self,
         *,
-        id : typing.Text = ...,
+        id: typing.Text = ...,
         ) -> None: ...
     def ClearField(self, field_name: typing_extensions.Literal["id",b"id"]) -> None: ...
 global___S2tPipelineId = S2tPipelineId
@@ -392,7 +393,7 @@ class ListS2tPipelinesRequest(google.protobuf.message.Message):
     //////////////////////
 
     """
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor = ...
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
     LANGUAGES_FIELD_NUMBER: builtins.int
     PIPELINE_OWNERS_FIELD_NUMBER: builtins.int
     DOMAINS_FIELD_NUMBER: builtins.int
@@ -403,29 +404,29 @@ class ListS2tPipelinesRequest(google.protobuf.message.Message):
     def pipeline_owners(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[typing.Text]: ...
     @property
     def domains(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[typing.Text]: ...
-    registered_only: builtins.bool = ...
+    registered_only: builtins.bool
     """If true, return only registered pipelines.
     Default false: return registered and persisted (from config files) configs.
     """
 
     def __init__(self,
         *,
-        languages : typing.Optional[typing.Iterable[typing.Text]] = ...,
-        pipeline_owners : typing.Optional[typing.Iterable[typing.Text]] = ...,
-        domains : typing.Optional[typing.Iterable[typing.Text]] = ...,
-        registered_only : builtins.bool = ...,
+        languages: typing.Optional[typing.Iterable[typing.Text]] = ...,
+        pipeline_owners: typing.Optional[typing.Iterable[typing.Text]] = ...,
+        domains: typing.Optional[typing.Iterable[typing.Text]] = ...,
+        registered_only: builtins.bool = ...,
         ) -> None: ...
     def ClearField(self, field_name: typing_extensions.Literal["domains",b"domains","languages",b"languages","pipeline_owners",b"pipeline_owners","registered_only",b"registered_only"]) -> None: ...
 global___ListS2tPipelinesRequest = ListS2tPipelinesRequest
 
 class ListS2tPipelinesResponse(google.protobuf.message.Message):
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor = ...
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
     PIPELINE_CONFIGS_FIELD_NUMBER: builtins.int
     @property
     def pipeline_configs(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___Speech2TextConfig]: ...
     def __init__(self,
         *,
-        pipeline_configs : typing.Optional[typing.Iterable[global___Speech2TextConfig]] = ...,
+        pipeline_configs: typing.Optional[typing.Iterable[global___Speech2TextConfig]] = ...,
         ) -> None: ...
     def ClearField(self, field_name: typing_extensions.Literal["pipeline_configs",b"pipeline_configs"]) -> None: ...
 global___ListS2tPipelinesResponse = ListS2tPipelinesResponse
@@ -436,7 +437,7 @@ class ListS2tLanguagesRequest(google.protobuf.message.Message):
     //////////////////////
 
     """
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor = ...
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
     DOMAINS_FIELD_NUMBER: builtins.int
     PIPELINE_OWNERS_FIELD_NUMBER: builtins.int
     @property
@@ -445,20 +446,20 @@ class ListS2tLanguagesRequest(google.protobuf.message.Message):
     def pipeline_owners(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[typing.Text]: ...
     def __init__(self,
         *,
-        domains : typing.Optional[typing.Iterable[typing.Text]] = ...,
-        pipeline_owners : typing.Optional[typing.Iterable[typing.Text]] = ...,
+        domains: typing.Optional[typing.Iterable[typing.Text]] = ...,
+        pipeline_owners: typing.Optional[typing.Iterable[typing.Text]] = ...,
         ) -> None: ...
     def ClearField(self, field_name: typing_extensions.Literal["domains",b"domains","pipeline_owners",b"pipeline_owners"]) -> None: ...
 global___ListS2tLanguagesRequest = ListS2tLanguagesRequest
 
 class ListS2tLanguagesResponse(google.protobuf.message.Message):
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor = ...
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
     LANGUAGES_FIELD_NUMBER: builtins.int
     @property
     def languages(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[typing.Text]: ...
     def __init__(self,
         *,
-        languages : typing.Optional[typing.Iterable[typing.Text]] = ...,
+        languages: typing.Optional[typing.Iterable[typing.Text]] = ...,
         ) -> None: ...
     def ClearField(self, field_name: typing_extensions.Literal["languages",b"languages"]) -> None: ...
 global___ListS2tLanguagesResponse = ListS2tLanguagesResponse
@@ -469,7 +470,7 @@ class ListS2tDomainsRequest(google.protobuf.message.Message):
     ////////////////////
 
     """
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor = ...
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
     LANGUAGES_FIELD_NUMBER: builtins.int
     PIPELINE_OWNERS_FIELD_NUMBER: builtins.int
     @property
@@ -478,20 +479,20 @@ class ListS2tDomainsRequest(google.protobuf.message.Message):
     def pipeline_owners(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[typing.Text]: ...
     def __init__(self,
         *,
-        languages : typing.Optional[typing.Iterable[typing.Text]] = ...,
-        pipeline_owners : typing.Optional[typing.Iterable[typing.Text]] = ...,
+        languages: typing.Optional[typing.Iterable[typing.Text]] = ...,
+        pipeline_owners: typing.Optional[typing.Iterable[typing.Text]] = ...,
         ) -> None: ...
     def ClearField(self, field_name: typing_extensions.Literal["languages",b"languages","pipeline_owners",b"pipeline_owners"]) -> None: ...
 global___ListS2tDomainsRequest = ListS2tDomainsRequest
 
 class ListS2tDomainsResponse(google.protobuf.message.Message):
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor = ...
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
     DOMAINS_FIELD_NUMBER: builtins.int
     @property
     def domains(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[typing.Text]: ...
     def __init__(self,
         *,
-        domains : typing.Optional[typing.Iterable[typing.Text]] = ...,
+        domains: typing.Optional[typing.Iterable[typing.Text]] = ...,
         ) -> None: ...
     def ClearField(self, field_name: typing_extensions.Literal["domains",b"domains"]) -> None: ...
 global___ListS2tDomainsResponse = ListS2tDomainsResponse
@@ -502,12 +503,12 @@ class S2TGetServiceInfoResponse(google.protobuf.message.Message):
     ////////////////////
 
     """
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor = ...
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
     VERSION_FIELD_NUMBER: builtins.int
-    version: typing.Text = ...
+    version: typing.Text
     def __init__(self,
         *,
-        version : typing.Text = ...,
+        version: typing.Text = ...,
         ) -> None: ...
     def ClearField(self, field_name: typing_extensions.Literal["version",b"version"]) -> None: ...
 global___S2TGetServiceInfoResponse = S2TGetServiceInfoResponse
@@ -518,7 +519,7 @@ class Speech2TextConfig(google.protobuf.message.Message):
     /////////////////////////////////
 
     """
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor = ...
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
     ID_FIELD_NUMBER: builtins.int
     DESCRIPTION_FIELD_NUMBER: builtins.int
     ACTIVE_FIELD_NUMBER: builtins.int
@@ -527,10 +528,10 @@ class Speech2TextConfig(google.protobuf.message.Message):
     VOICE_ACTIVITY_DETECTION_FIELD_NUMBER: builtins.int
     POST_PROCESSING_FIELD_NUMBER: builtins.int
     LOGGING_FIELD_NUMBER: builtins.int
-    id: typing.Text = ...
+    id: typing.Text
     @property
     def description(self) -> global___S2TDescription: ...
-    active: builtins.bool = ...
+    active: builtins.bool
     @property
     def inference(self) -> global___S2TInference: ...
     @property
@@ -543,41 +544,41 @@ class Speech2TextConfig(google.protobuf.message.Message):
     def logging(self) -> global___Logging: ...
     def __init__(self,
         *,
-        id : typing.Text = ...,
-        description : typing.Optional[global___S2TDescription] = ...,
-        active : builtins.bool = ...,
-        inference : typing.Optional[global___S2TInference] = ...,
-        streaming_server : typing.Optional[global___StreamingServer] = ...,
-        voice_activity_detection : typing.Optional[global___VoiceActivityDetection] = ...,
-        post_processing : typing.Optional[global___PostProcessing] = ...,
-        logging : typing.Optional[global___Logging] = ...,
+        id: typing.Text = ...,
+        description: typing.Optional[global___S2TDescription] = ...,
+        active: builtins.bool = ...,
+        inference: typing.Optional[global___S2TInference] = ...,
+        streaming_server: typing.Optional[global___StreamingServer] = ...,
+        voice_activity_detection: typing.Optional[global___VoiceActivityDetection] = ...,
+        post_processing: typing.Optional[global___PostProcessing] = ...,
+        logging: typing.Optional[global___Logging] = ...,
         ) -> None: ...
     def HasField(self, field_name: typing_extensions.Literal["description",b"description","inference",b"inference","logging",b"logging","post_processing",b"post_processing","streaming_server",b"streaming_server","voice_activity_detection",b"voice_activity_detection"]) -> builtins.bool: ...
     def ClearField(self, field_name: typing_extensions.Literal["active",b"active","description",b"description","id",b"id","inference",b"inference","logging",b"logging","post_processing",b"post_processing","streaming_server",b"streaming_server","voice_activity_detection",b"voice_activity_detection"]) -> None: ...
 global___Speech2TextConfig = Speech2TextConfig
 
 class S2TDescription(google.protobuf.message.Message):
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor = ...
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
     LANGUAGE_FIELD_NUMBER: builtins.int
     PIPELINE_OWNER_FIELD_NUMBER: builtins.int
     DOMAIN_FIELD_NUMBER: builtins.int
     COMMENTS_FIELD_NUMBER: builtins.int
-    language: typing.Text = ...
-    pipeline_owner: typing.Text = ...
-    domain: typing.Text = ...
-    comments: typing.Text = ...
+    language: typing.Text
+    pipeline_owner: typing.Text
+    domain: typing.Text
+    comments: typing.Text
     def __init__(self,
         *,
-        language : typing.Text = ...,
-        pipeline_owner : typing.Text = ...,
-        domain : typing.Text = ...,
-        comments : typing.Text = ...,
+        language: typing.Text = ...,
+        pipeline_owner: typing.Text = ...,
+        domain: typing.Text = ...,
+        comments: typing.Text = ...,
         ) -> None: ...
     def ClearField(self, field_name: typing_extensions.Literal["comments",b"comments","domain",b"domain","language",b"language","pipeline_owner",b"pipeline_owner"]) -> None: ...
 global___S2TDescription = S2TDescription
 
 class S2TInference(google.protobuf.message.Message):
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor = ...
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
     CTC_ACOUSTIC_MODELS_FIELD_NUMBER: builtins.int
     LANGUAGE_MODELS_FIELD_NUMBER: builtins.int
     @property
@@ -586,20 +587,20 @@ class S2TInference(google.protobuf.message.Message):
     def language_models(self) -> global___LanguageModels: ...
     def __init__(self,
         *,
-        ctc_acoustic_models : typing.Optional[global___CtcAcousticModels] = ...,
-        language_models : typing.Optional[global___LanguageModels] = ...,
+        ctc_acoustic_models: typing.Optional[global___CtcAcousticModels] = ...,
+        language_models: typing.Optional[global___LanguageModels] = ...,
         ) -> None: ...
     def HasField(self, field_name: typing_extensions.Literal["ctc_acoustic_models",b"ctc_acoustic_models","language_models",b"language_models"]) -> builtins.bool: ...
     def ClearField(self, field_name: typing_extensions.Literal["ctc_acoustic_models",b"ctc_acoustic_models","language_models",b"language_models"]) -> None: ...
 global___S2TInference = S2TInference
 
 class CtcAcousticModels(google.protobuf.message.Message):
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor = ...
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
     TYPE_FIELD_NUMBER: builtins.int
     QUARTZNET_FIELD_NUMBER: builtins.int
     QUARTZNET_TRITON_FIELD_NUMBER: builtins.int
     WAV2VEC_FIELD_NUMBER: builtins.int
-    type: typing.Text = ...
+    type: typing.Text
     @property
     def quartznet(self) -> global___Quartznet: ...
     @property
@@ -608,148 +609,148 @@ class CtcAcousticModels(google.protobuf.message.Message):
     def wav2vec(self) -> global___Wav2Vec: ...
     def __init__(self,
         *,
-        type : typing.Text = ...,
-        quartznet : typing.Optional[global___Quartznet] = ...,
-        quartznet_triton : typing.Optional[global___QuartznetTriton] = ...,
-        wav2vec : typing.Optional[global___Wav2Vec] = ...,
+        type: typing.Text = ...,
+        quartznet: typing.Optional[global___Quartznet] = ...,
+        quartznet_triton: typing.Optional[global___QuartznetTriton] = ...,
+        wav2vec: typing.Optional[global___Wav2Vec] = ...,
         ) -> None: ...
     def HasField(self, field_name: typing_extensions.Literal["quartznet",b"quartznet","quartznet_triton",b"quartznet_triton","wav2vec",b"wav2vec"]) -> builtins.bool: ...
     def ClearField(self, field_name: typing_extensions.Literal["quartznet",b"quartznet","quartznet_triton",b"quartznet_triton","type",b"type","wav2vec",b"wav2vec"]) -> None: ...
 global___CtcAcousticModels = CtcAcousticModels
 
 class Wav2Vec(google.protobuf.message.Message):
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor = ...
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
     MODEL_PATH_FIELD_NUMBER: builtins.int
     USE_GPU_FIELD_NUMBER: builtins.int
-    model_path: typing.Text = ...
-    use_gpu: builtins.bool = ...
+    model_path: typing.Text
+    use_gpu: builtins.bool
     def __init__(self,
         *,
-        model_path : typing.Text = ...,
-        use_gpu : builtins.bool = ...,
+        model_path: typing.Text = ...,
+        use_gpu: builtins.bool = ...,
         ) -> None: ...
     def ClearField(self, field_name: typing_extensions.Literal["model_path",b"model_path","use_gpu",b"use_gpu"]) -> None: ...
 global___Wav2Vec = Wav2Vec
 
 class Quartznet(google.protobuf.message.Message):
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor = ...
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
     CONFIG_PATH_FIELD_NUMBER: builtins.int
     LOAD_TYPE_FIELD_NUMBER: builtins.int
     PT_FILES_FIELD_NUMBER: builtins.int
     CKPT_FILE_FIELD_NUMBER: builtins.int
     USE_GPU_FIELD_NUMBER: builtins.int
-    config_path: typing.Text = ...
-    load_type: typing.Text = ...
+    config_path: typing.Text
+    load_type: typing.Text
     @property
     def pt_files(self) -> global___PtFiles: ...
     @property
     def ckpt_file(self) -> global___CkptFile: ...
-    use_gpu: builtins.bool = ...
+    use_gpu: builtins.bool
     def __init__(self,
         *,
-        config_path : typing.Text = ...,
-        load_type : typing.Text = ...,
-        pt_files : typing.Optional[global___PtFiles] = ...,
-        ckpt_file : typing.Optional[global___CkptFile] = ...,
-        use_gpu : builtins.bool = ...,
+        config_path: typing.Text = ...,
+        load_type: typing.Text = ...,
+        pt_files: typing.Optional[global___PtFiles] = ...,
+        ckpt_file: typing.Optional[global___CkptFile] = ...,
+        use_gpu: builtins.bool = ...,
         ) -> None: ...
     def HasField(self, field_name: typing_extensions.Literal["ckpt_file",b"ckpt_file","pt_files",b"pt_files"]) -> builtins.bool: ...
     def ClearField(self, field_name: typing_extensions.Literal["ckpt_file",b"ckpt_file","config_path",b"config_path","load_type",b"load_type","pt_files",b"pt_files","use_gpu",b"use_gpu"]) -> None: ...
 global___Quartznet = Quartznet
 
 class PtFiles(google.protobuf.message.Message):
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor = ...
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
     PATH_FIELD_NUMBER: builtins.int
     STEP_FIELD_NUMBER: builtins.int
-    path: typing.Text = ...
-    step: typing.Text = ...
+    path: typing.Text
+    step: typing.Text
     def __init__(self,
         *,
-        path : typing.Text = ...,
-        step : typing.Text = ...,
+        path: typing.Text = ...,
+        step: typing.Text = ...,
         ) -> None: ...
     def ClearField(self, field_name: typing_extensions.Literal["path",b"path","step",b"step"]) -> None: ...
 global___PtFiles = PtFiles
 
 class CkptFile(google.protobuf.message.Message):
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor = ...
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
     PATH_FIELD_NUMBER: builtins.int
-    path: typing.Text = ...
+    path: typing.Text
     def __init__(self,
         *,
-        path : typing.Text = ...,
+        path: typing.Text = ...,
         ) -> None: ...
     def ClearField(self, field_name: typing_extensions.Literal["path",b"path"]) -> None: ...
 global___CkptFile = CkptFile
 
 class QuartznetTriton(google.protobuf.message.Message):
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor = ...
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
     CONFIG_PATH_FIELD_NUMBER: builtins.int
     TRITON_URL_FIELD_NUMBER: builtins.int
     TRITON_MODEL_FIELD_NUMBER: builtins.int
-    config_path: typing.Text = ...
-    triton_url: typing.Text = ...
-    triton_model: typing.Text = ...
+    config_path: typing.Text
+    triton_url: typing.Text
+    triton_model: typing.Text
     def __init__(self,
         *,
-        config_path : typing.Text = ...,
-        triton_url : typing.Text = ...,
-        triton_model : typing.Text = ...,
+        config_path: typing.Text = ...,
+        triton_url: typing.Text = ...,
+        triton_model: typing.Text = ...,
         ) -> None: ...
     def ClearField(self, field_name: typing_extensions.Literal["config_path",b"config_path","triton_model",b"triton_model","triton_url",b"triton_url"]) -> None: ...
 global___QuartznetTriton = QuartznetTriton
 
 class LanguageModels(google.protobuf.message.Message):
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor = ...
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
     PATH_FIELD_NUMBER: builtins.int
     BEAM_SIZE_FIELD_NUMBER: builtins.int
     DEFAULT_LM_FIELD_NUMBER: builtins.int
     BEAM_SEARCH_SCORER_ALPHA_FIELD_NUMBER: builtins.int
     BEAM_SEARCH_SCORER_BETA_FIELD_NUMBER: builtins.int
-    path: typing.Text = ...
+    path: typing.Text
     """Path to the directory of language models"""
 
-    beam_size: builtins.int = ...
-    default_lm: typing.Text = ...
+    beam_size: builtins.int
+    default_lm: typing.Text
     """this language model will be selected if none is given"""
 
-    beam_search_scorer_alpha: builtins.float = ...
-    beam_search_scorer_beta: builtins.float = ...
+    beam_search_scorer_alpha: builtins.float
+    beam_search_scorer_beta: builtins.float
     def __init__(self,
         *,
-        path : typing.Text = ...,
-        beam_size : builtins.int = ...,
-        default_lm : typing.Text = ...,
-        beam_search_scorer_alpha : builtins.float = ...,
-        beam_search_scorer_beta : builtins.float = ...,
+        path: typing.Text = ...,
+        beam_size: builtins.int = ...,
+        default_lm: typing.Text = ...,
+        beam_search_scorer_alpha: builtins.float = ...,
+        beam_search_scorer_beta: builtins.float = ...,
         ) -> None: ...
     def ClearField(self, field_name: typing_extensions.Literal["beam_search_scorer_alpha",b"beam_search_scorer_alpha","beam_search_scorer_beta",b"beam_search_scorer_beta","beam_size",b"beam_size","default_lm",b"default_lm","path",b"path"]) -> None: ...
 global___LanguageModels = LanguageModels
 
 class StreamingServer(google.protobuf.message.Message):
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor = ...
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
     HOST_FIELD_NUMBER: builtins.int
     PORT_FIELD_NUMBER: builtins.int
     OUTPUT_STYLE_FIELD_NUMBER: builtins.int
     STREAMING_SPEECH_RECOGNITION_FIELD_NUMBER: builtins.int
-    host: typing.Text = ...
-    port: builtins.int = ...
-    output_style: typing.Text = ...
+    host: typing.Text
+    port: builtins.int
+    output_style: typing.Text
     @property
     def streaming_speech_recognition(self) -> global___StreamingSpeechRecognition: ...
     def __init__(self,
         *,
-        host : typing.Text = ...,
-        port : builtins.int = ...,
-        output_style : typing.Text = ...,
-        streaming_speech_recognition : typing.Optional[global___StreamingSpeechRecognition] = ...,
+        host: typing.Text = ...,
+        port: builtins.int = ...,
+        output_style: typing.Text = ...,
+        streaming_speech_recognition: typing.Optional[global___StreamingSpeechRecognition] = ...,
         ) -> None: ...
     def HasField(self, field_name: typing_extensions.Literal["streaming_speech_recognition",b"streaming_speech_recognition"]) -> builtins.bool: ...
     def ClearField(self, field_name: typing_extensions.Literal["host",b"host","output_style",b"output_style","port",b"port","streaming_speech_recognition",b"streaming_speech_recognition"]) -> None: ...
 global___StreamingServer = StreamingServer
 
 class StreamingSpeechRecognition(google.protobuf.message.Message):
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor = ...
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
     TRANSCRIBE_NOT_FINAL_FIELD_NUMBER: builtins.int
     CTC_DECODING_METHOD_FIELD_NUMBER: builtins.int
     SAMPLING_RATE_FIELD_NUMBER: builtins.int
@@ -757,53 +758,53 @@ class StreamingSpeechRecognition(google.protobuf.message.Message):
     START_OF_UTTERANCE_THRESHOLD_FIELD_NUMBER: builtins.int
     END_OF_UTTERANCE_THRESHOLD_FIELD_NUMBER: builtins.int
     NEXT_CHUNK_TIMEOUT_FIELD_NUMBER: builtins.int
-    transcribe_not_final: builtins.bool = ...
-    ctc_decoding_method: typing.Text = ...
-    sampling_rate: builtins.int = ...
-    min_audio_chunk_size: builtins.int = ...
-    start_of_utterance_threshold: builtins.float = ...
-    end_of_utterance_threshold: builtins.float = ...
-    next_chunk_timeout: builtins.float = ...
+    transcribe_not_final: builtins.bool
+    ctc_decoding_method: typing.Text
+    sampling_rate: builtins.int
+    min_audio_chunk_size: builtins.int
+    start_of_utterance_threshold: builtins.float
+    end_of_utterance_threshold: builtins.float
+    next_chunk_timeout: builtins.float
     """if time between audio chunks exceeds next_chunk_timeout, stream will be stopped"""
 
     def __init__(self,
         *,
-        transcribe_not_final : builtins.bool = ...,
-        ctc_decoding_method : typing.Text = ...,
-        sampling_rate : builtins.int = ...,
-        min_audio_chunk_size : builtins.int = ...,
-        start_of_utterance_threshold : builtins.float = ...,
-        end_of_utterance_threshold : builtins.float = ...,
-        next_chunk_timeout : builtins.float = ...,
+        transcribe_not_final: builtins.bool = ...,
+        ctc_decoding_method: typing.Text = ...,
+        sampling_rate: builtins.int = ...,
+        min_audio_chunk_size: builtins.int = ...,
+        start_of_utterance_threshold: builtins.float = ...,
+        end_of_utterance_threshold: builtins.float = ...,
+        next_chunk_timeout: builtins.float = ...,
         ) -> None: ...
     def ClearField(self, field_name: typing_extensions.Literal["ctc_decoding_method",b"ctc_decoding_method","end_of_utterance_threshold",b"end_of_utterance_threshold","min_audio_chunk_size",b"min_audio_chunk_size","next_chunk_timeout",b"next_chunk_timeout","sampling_rate",b"sampling_rate","start_of_utterance_threshold",b"start_of_utterance_threshold","transcribe_not_final",b"transcribe_not_final"]) -> None: ...
 global___StreamingSpeechRecognition = StreamingSpeechRecognition
 
 class VoiceActivityDetection(google.protobuf.message.Message):
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor = ...
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
     ACTIVE_FIELD_NUMBER: builtins.int
     SAMPLING_RATE_FIELD_NUMBER: builtins.int
     PYANNOTE_FIELD_NUMBER: builtins.int
     MATCHBOX_FIELD_NUMBER: builtins.int
-    active: typing.Text = ...
-    sampling_rate: builtins.int = ...
+    active: typing.Text
+    sampling_rate: builtins.int
     @property
     def pyannote(self) -> global___Pyannote: ...
     @property
     def matchbox(self) -> global___Matchbox: ...
     def __init__(self,
         *,
-        active : typing.Text = ...,
-        sampling_rate : builtins.int = ...,
-        pyannote : typing.Optional[global___Pyannote] = ...,
-        matchbox : typing.Optional[global___Matchbox] = ...,
+        active: typing.Text = ...,
+        sampling_rate: builtins.int = ...,
+        pyannote: typing.Optional[global___Pyannote] = ...,
+        matchbox: typing.Optional[global___Matchbox] = ...,
         ) -> None: ...
     def HasField(self, field_name: typing_extensions.Literal["matchbox",b"matchbox","pyannote",b"pyannote"]) -> builtins.bool: ...
     def ClearField(self, field_name: typing_extensions.Literal["active",b"active","matchbox",b"matchbox","pyannote",b"pyannote","sampling_rate",b"sampling_rate"]) -> None: ...
 global___VoiceActivityDetection = VoiceActivityDetection
 
 class Pyannote(google.protobuf.message.Message):
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor = ...
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
     MODEL_PATH_FIELD_NUMBER: builtins.int
     MIN_AUDIO_SIZE_FIELD_NUMBER: builtins.int
     OFFSET_FIELD_NUMBER: builtins.int
@@ -811,22 +812,22 @@ class Pyannote(google.protobuf.message.Message):
     LOG_SCALE_FIELD_NUMBER: builtins.int
     MIN_DURATION_OFF_FIELD_NUMBER: builtins.int
     MIN_DURATION_ON_FIELD_NUMBER: builtins.int
-    model_path: typing.Text = ...
-    min_audio_size: builtins.int = ...
-    offset: builtins.float = ...
-    onset: builtins.float = ...
-    log_scale: builtins.bool = ...
-    min_duration_off: builtins.float = ...
-    min_duration_on: builtins.float = ...
+    model_path: typing.Text
+    min_audio_size: builtins.int
+    offset: builtins.float
+    onset: builtins.float
+    log_scale: builtins.bool
+    min_duration_off: builtins.float
+    min_duration_on: builtins.float
     def __init__(self,
         *,
-        model_path : typing.Text = ...,
-        min_audio_size : builtins.int = ...,
-        offset : builtins.float = ...,
-        onset : builtins.float = ...,
-        log_scale : builtins.bool = ...,
-        min_duration_off : builtins.float = ...,
-        min_duration_on : builtins.float = ...,
+        model_path: typing.Text = ...,
+        min_audio_size: builtins.int = ...,
+        offset: builtins.float = ...,
+        onset: builtins.float = ...,
+        log_scale: builtins.bool = ...,
+        min_duration_off: builtins.float = ...,
+        min_duration_on: builtins.float = ...,
         ) -> None: ...
     def HasField(self, field_name: typing_extensions.Literal["log_scale",b"log_scale","oneof_log_scale",b"oneof_log_scale"]) -> builtins.bool: ...
     def ClearField(self, field_name: typing_extensions.Literal["log_scale",b"log_scale","min_audio_size",b"min_audio_size","min_duration_off",b"min_duration_off","min_duration_on",b"min_duration_on","model_path",b"model_path","offset",b"offset","oneof_log_scale",b"oneof_log_scale","onset",b"onset"]) -> None: ...
@@ -834,24 +835,24 @@ class Pyannote(google.protobuf.message.Message):
 global___Pyannote = Pyannote
 
 class Matchbox(google.protobuf.message.Message):
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor = ...
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
     MODEL_CONFIG_FIELD_NUMBER: builtins.int
     ENCODER_PATH_FIELD_NUMBER: builtins.int
     DECODER_PATH_FIELD_NUMBER: builtins.int
-    model_config: typing.Text = ...
-    encoder_path: typing.Text = ...
-    decoder_path: typing.Text = ...
+    model_config: typing.Text
+    encoder_path: typing.Text
+    decoder_path: typing.Text
     def __init__(self,
         *,
-        model_config : typing.Text = ...,
-        encoder_path : typing.Text = ...,
-        decoder_path : typing.Text = ...,
+        model_config: typing.Text = ...,
+        encoder_path: typing.Text = ...,
+        decoder_path: typing.Text = ...,
         ) -> None: ...
     def ClearField(self, field_name: typing_extensions.Literal["decoder_path",b"decoder_path","encoder_path",b"encoder_path","model_config",b"model_config"]) -> None: ...
 global___Matchbox = Matchbox
 
 class PostProcessing(google.protobuf.message.Message):
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor = ...
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
     PIPELINE_FIELD_NUMBER: builtins.int
     POST_PROCESSORS_FIELD_NUMBER: builtins.int
     @property
@@ -864,15 +865,15 @@ class PostProcessing(google.protobuf.message.Message):
         pass
     def __init__(self,
         *,
-        pipeline : typing.Optional[typing.Iterable[typing.Text]] = ...,
-        post_processors : typing.Optional[global___PostProcessors] = ...,
+        pipeline: typing.Optional[typing.Iterable[typing.Text]] = ...,
+        post_processors: typing.Optional[global___PostProcessors] = ...,
         ) -> None: ...
     def HasField(self, field_name: typing_extensions.Literal["post_processors",b"post_processors"]) -> builtins.bool: ...
     def ClearField(self, field_name: typing_extensions.Literal["pipeline",b"pipeline","post_processors",b"post_processors"]) -> None: ...
 global___PostProcessing = PostProcessing
 
 class PostProcessors(google.protobuf.message.Message):
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor = ...
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
     SYM_SPELL_FIELD_NUMBER: builtins.int
     NORMALIZATION_FIELD_NUMBER: builtins.int
     @property
@@ -885,61 +886,61 @@ class PostProcessors(google.protobuf.message.Message):
         pass
     def __init__(self,
         *,
-        sym_spell : typing.Optional[global___SymSpell] = ...,
-        normalization : typing.Optional[global___S2TNormalization] = ...,
+        sym_spell: typing.Optional[global___SymSpell] = ...,
+        normalization: typing.Optional[global___S2TNormalization] = ...,
         ) -> None: ...
     def HasField(self, field_name: typing_extensions.Literal["normalization",b"normalization","sym_spell",b"sym_spell"]) -> builtins.bool: ...
     def ClearField(self, field_name: typing_extensions.Literal["normalization",b"normalization","sym_spell",b"sym_spell"]) -> None: ...
 global___PostProcessors = PostProcessors
 
 class SymSpell(google.protobuf.message.Message):
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor = ...
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
     DICT_PATH_FIELD_NUMBER: builtins.int
     MAX_DICTIONARY_EDIT_DISTANCE_FIELD_NUMBER: builtins.int
     PREFIX_LENGTH_FIELD_NUMBER: builtins.int
-    dict_path: typing.Text = ...
+    dict_path: typing.Text
     """Path to the dictionary used by symspell"""
 
-    max_dictionary_edit_distance: builtins.int = ...
+    max_dictionary_edit_distance: builtins.int
     """The maximal edit-distance to consider for spelling correction (affects performance - bigger number
     takes longer to process!)
     """
 
-    prefix_length: builtins.int = ...
+    prefix_length: builtins.int
     """The length (number of characters) of the prefix to consider for filtering"""
 
     def __init__(self,
         *,
-        dict_path : typing.Text = ...,
-        max_dictionary_edit_distance : builtins.int = ...,
-        prefix_length : builtins.int = ...,
+        dict_path: typing.Text = ...,
+        max_dictionary_edit_distance: builtins.int = ...,
+        prefix_length: builtins.int = ...,
         ) -> None: ...
     def ClearField(self, field_name: typing_extensions.Literal["dict_path",b"dict_path","max_dictionary_edit_distance",b"max_dictionary_edit_distance","prefix_length",b"prefix_length"]) -> None: ...
 global___SymSpell = SymSpell
 
 class S2TNormalization(google.protobuf.message.Message):
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor = ...
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
     LANGUAGE_FIELD_NUMBER: builtins.int
-    language: typing.Text = ...
+    language: typing.Text
     """In which language to normalization transcription."""
 
     def __init__(self,
         *,
-        language : typing.Text = ...,
+        language: typing.Text = ...,
         ) -> None: ...
     def ClearField(self, field_name: typing_extensions.Literal["language",b"language"]) -> None: ...
 global___S2TNormalization = S2TNormalization
 
 class Logging(google.protobuf.message.Message):
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor = ...
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
     TYPE_FIELD_NUMBER: builtins.int
     PATH_FIELD_NUMBER: builtins.int
-    type: typing.Text = ...
-    path: typing.Text = ...
+    type: typing.Text
+    path: typing.Text
     def __init__(self,
         *,
-        type : typing.Text = ...,
-        path : typing.Text = ...,
+        type: typing.Text = ...,
+        path: typing.Text = ...,
         ) -> None: ...
     def ClearField(self, field_name: typing_extensions.Literal["path",b"path","type",b"type"]) -> None: ...
 global___Logging = Logging
@@ -950,7 +951,7 @@ class ListS2tLanguageModelsRequest(google.protobuf.message.Message):
     /////////////////////////////////////////
 
     """
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor = ...
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
     IDS_FIELD_NUMBER: builtins.int
     @property
     def ids(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[typing.Text]:
@@ -958,16 +959,16 @@ class ListS2tLanguageModelsRequest(google.protobuf.message.Message):
         pass
     def __init__(self,
         *,
-        ids : typing.Optional[typing.Iterable[typing.Text]] = ...,
+        ids: typing.Optional[typing.Iterable[typing.Text]] = ...,
         ) -> None: ...
     def ClearField(self, field_name: typing_extensions.Literal["ids",b"ids"]) -> None: ...
 global___ListS2tLanguageModelsRequest = ListS2tLanguageModelsRequest
 
 class LanguageModelPipelineId(google.protobuf.message.Message):
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor = ...
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
     PIPELINE_ID_FIELD_NUMBER: builtins.int
     MODEL_NAMES_FIELD_NUMBER: builtins.int
-    pipeline_id: typing.Text = ...
+    pipeline_id: typing.Text
     """One pipeline id"""
 
     @property
@@ -976,14 +977,14 @@ class LanguageModelPipelineId(google.protobuf.message.Message):
         pass
     def __init__(self,
         *,
-        pipeline_id : typing.Text = ...,
-        model_names : typing.Optional[typing.Iterable[typing.Text]] = ...,
+        pipeline_id: typing.Text = ...,
+        model_names: typing.Optional[typing.Iterable[typing.Text]] = ...,
         ) -> None: ...
     def ClearField(self, field_name: typing_extensions.Literal["model_names",b"model_names","pipeline_id",b"pipeline_id"]) -> None: ...
 global___LanguageModelPipelineId = LanguageModelPipelineId
 
 class ListS2tLanguageModelsResponse(google.protobuf.message.Message):
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor = ...
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
     LM_PIPELINE_IDS_FIELD_NUMBER: builtins.int
     @property
     def lm_pipeline_ids(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___LanguageModelPipelineId]:
@@ -991,7 +992,7 @@ class ListS2tLanguageModelsResponse(google.protobuf.message.Message):
         pass
     def __init__(self,
         *,
-        lm_pipeline_ids : typing.Optional[typing.Iterable[global___LanguageModelPipelineId]] = ...,
+        lm_pipeline_ids: typing.Optional[typing.Iterable[global___LanguageModelPipelineId]] = ...,
         ) -> None: ...
     def ClearField(self, field_name: typing_extensions.Literal["lm_pipeline_ids",b"lm_pipeline_ids"]) -> None: ...
 global___ListS2tLanguageModelsResponse = ListS2tLanguageModelsResponse
