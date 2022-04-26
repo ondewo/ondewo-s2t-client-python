@@ -1,5 +1,11 @@
 # Release History
 *****************
+## ONDEWO-S2T Python Client 3.1.2
+
+### New Features
+* Update grpcio libraries to versions 1.44.0.
+* 
+*****************
 ## ONDEWO-S2T Python Client 3.1.1
 
 ### New Features
