@@ -3,7 +3,7 @@
 import grpc
 
 from google.protobuf import empty_pb2 as google_dot_protobuf_dot_empty__pb2
-from s2t import speech_to_text_pb2 as s2t_dot_speech__to__text__pb2
+from ondewo.s2t import speech_to_text_pb2 as ondewo_dot_s2t_dot_speech__to__text__pb2
 
 
 class Speech2TextStub(object):
@@ -18,58 +18,58 @@ class Speech2TextStub(object):
         """
         self.TranscribeFile = channel.unary_unary(
                 '/ondewo.s2t.Speech2Text/TranscribeFile',
-                request_serializer=s2t_dot_speech__to__text__pb2.TranscribeFileRequest.SerializeToString,
-                response_deserializer=s2t_dot_speech__to__text__pb2.TranscribeFileResponse.FromString,
+                request_serializer=ondewo_dot_s2t_dot_speech__to__text__pb2.TranscribeFileRequest.SerializeToString,
+                response_deserializer=ondewo_dot_s2t_dot_speech__to__text__pb2.TranscribeFileResponse.FromString,
                 )
         self.TranscribeStream = channel.stream_stream(
                 '/ondewo.s2t.Speech2Text/TranscribeStream',
-                request_serializer=s2t_dot_speech__to__text__pb2.TranscribeStreamRequest.SerializeToString,
-                response_deserializer=s2t_dot_speech__to__text__pb2.TranscribeStreamResponse.FromString,
+                request_serializer=ondewo_dot_s2t_dot_speech__to__text__pb2.TranscribeStreamRequest.SerializeToString,
+                response_deserializer=ondewo_dot_s2t_dot_speech__to__text__pb2.TranscribeStreamResponse.FromString,
                 )
         self.GetS2tPipeline = channel.unary_unary(
                 '/ondewo.s2t.Speech2Text/GetS2tPipeline',
-                request_serializer=s2t_dot_speech__to__text__pb2.S2tPipelineId.SerializeToString,
-                response_deserializer=s2t_dot_speech__to__text__pb2.Speech2TextConfig.FromString,
+                request_serializer=ondewo_dot_s2t_dot_speech__to__text__pb2.S2tPipelineId.SerializeToString,
+                response_deserializer=ondewo_dot_s2t_dot_speech__to__text__pb2.Speech2TextConfig.FromString,
                 )
         self.CreateS2tPipeline = channel.unary_unary(
                 '/ondewo.s2t.Speech2Text/CreateS2tPipeline',
-                request_serializer=s2t_dot_speech__to__text__pb2.Speech2TextConfig.SerializeToString,
-                response_deserializer=s2t_dot_speech__to__text__pb2.S2tPipelineId.FromString,
+                request_serializer=ondewo_dot_s2t_dot_speech__to__text__pb2.Speech2TextConfig.SerializeToString,
+                response_deserializer=ondewo_dot_s2t_dot_speech__to__text__pb2.S2tPipelineId.FromString,
                 )
         self.DeleteS2tPipeline = channel.unary_unary(
                 '/ondewo.s2t.Speech2Text/DeleteS2tPipeline',
-                request_serializer=s2t_dot_speech__to__text__pb2.S2tPipelineId.SerializeToString,
+                request_serializer=ondewo_dot_s2t_dot_speech__to__text__pb2.S2tPipelineId.SerializeToString,
                 response_deserializer=google_dot_protobuf_dot_empty__pb2.Empty.FromString,
                 )
         self.UpdateS2tPipeline = channel.unary_unary(
                 '/ondewo.s2t.Speech2Text/UpdateS2tPipeline',
-                request_serializer=s2t_dot_speech__to__text__pb2.Speech2TextConfig.SerializeToString,
+                request_serializer=ondewo_dot_s2t_dot_speech__to__text__pb2.Speech2TextConfig.SerializeToString,
                 response_deserializer=google_dot_protobuf_dot_empty__pb2.Empty.FromString,
                 )
         self.ListS2tPipelines = channel.unary_unary(
                 '/ondewo.s2t.Speech2Text/ListS2tPipelines',
-                request_serializer=s2t_dot_speech__to__text__pb2.ListS2tPipelinesRequest.SerializeToString,
-                response_deserializer=s2t_dot_speech__to__text__pb2.ListS2tPipelinesResponse.FromString,
+                request_serializer=ondewo_dot_s2t_dot_speech__to__text__pb2.ListS2tPipelinesRequest.SerializeToString,
+                response_deserializer=ondewo_dot_s2t_dot_speech__to__text__pb2.ListS2tPipelinesResponse.FromString,
                 )
         self.ListS2tLanguages = channel.unary_unary(
                 '/ondewo.s2t.Speech2Text/ListS2tLanguages',
-                request_serializer=s2t_dot_speech__to__text__pb2.ListS2tLanguagesRequest.SerializeToString,
-                response_deserializer=s2t_dot_speech__to__text__pb2.ListS2tLanguagesResponse.FromString,
+                request_serializer=ondewo_dot_s2t_dot_speech__to__text__pb2.ListS2tLanguagesRequest.SerializeToString,
+                response_deserializer=ondewo_dot_s2t_dot_speech__to__text__pb2.ListS2tLanguagesResponse.FromString,
                 )
         self.ListS2tDomains = channel.unary_unary(
                 '/ondewo.s2t.Speech2Text/ListS2tDomains',
-                request_serializer=s2t_dot_speech__to__text__pb2.ListS2tDomainsRequest.SerializeToString,
-                response_deserializer=s2t_dot_speech__to__text__pb2.ListS2tDomainsResponse.FromString,
+                request_serializer=ondewo_dot_s2t_dot_speech__to__text__pb2.ListS2tDomainsRequest.SerializeToString,
+                response_deserializer=ondewo_dot_s2t_dot_speech__to__text__pb2.ListS2tDomainsResponse.FromString,
                 )
         self.GetServiceInfo = channel.unary_unary(
                 '/ondewo.s2t.Speech2Text/GetServiceInfo',
                 request_serializer=google_dot_protobuf_dot_empty__pb2.Empty.SerializeToString,
-                response_deserializer=s2t_dot_speech__to__text__pb2.S2TGetServiceInfoResponse.FromString,
+                response_deserializer=ondewo_dot_s2t_dot_speech__to__text__pb2.S2TGetServiceInfoResponse.FromString,
                 )
         self.ListS2tLanguageModels = channel.unary_unary(
                 '/ondewo.s2t.Speech2Text/ListS2tLanguageModels',
-                request_serializer=s2t_dot_speech__to__text__pb2.ListS2tLanguageModelsRequest.SerializeToString,
-                response_deserializer=s2t_dot_speech__to__text__pb2.ListS2tLanguageModelsResponse.FromString,
+                request_serializer=ondewo_dot_s2t_dot_speech__to__text__pb2.ListS2tLanguageModelsRequest.SerializeToString,
+                response_deserializer=ondewo_dot_s2t_dot_speech__to__text__pb2.ListS2tLanguageModelsResponse.FromString,
                 )
 
 
@@ -162,58 +162,58 @@ def add_Speech2TextServicer_to_server(servicer, server):
     rpc_method_handlers = {
             'TranscribeFile': grpc.unary_unary_rpc_method_handler(
                     servicer.TranscribeFile,
-                    request_deserializer=s2t_dot_speech__to__text__pb2.TranscribeFileRequest.FromString,
-                    response_serializer=s2t_dot_speech__to__text__pb2.TranscribeFileResponse.SerializeToString,
+                    request_deserializer=ondewo_dot_s2t_dot_speech__to__text__pb2.TranscribeFileRequest.FromString,
+                    response_serializer=ondewo_dot_s2t_dot_speech__to__text__pb2.TranscribeFileResponse.SerializeToString,
             ),
             'TranscribeStream': grpc.stream_stream_rpc_method_handler(
                     servicer.TranscribeStream,
-                    request_deserializer=s2t_dot_speech__to__text__pb2.TranscribeStreamRequest.FromString,
-                    response_serializer=s2t_dot_speech__to__text__pb2.TranscribeStreamResponse.SerializeToString,
+                    request_deserializer=ondewo_dot_s2t_dot_speech__to__text__pb2.TranscribeStreamRequest.FromString,
+                    response_serializer=ondewo_dot_s2t_dot_speech__to__text__pb2.TranscribeStreamResponse.SerializeToString,
             ),
             'GetS2tPipeline': grpc.unary_unary_rpc_method_handler(
                     servicer.GetS2tPipeline,
-                    request_deserializer=s2t_dot_speech__to__text__pb2.S2tPipelineId.FromString,
-                    response_serializer=s2t_dot_speech__to__text__pb2.Speech2TextConfig.SerializeToString,
+                    request_deserializer=ondewo_dot_s2t_dot_speech__to__text__pb2.S2tPipelineId.FromString,
+                    response_serializer=ondewo_dot_s2t_dot_speech__to__text__pb2.Speech2TextConfig.SerializeToString,
             ),
             'CreateS2tPipeline': grpc.unary_unary_rpc_method_handler(
                     servicer.CreateS2tPipeline,
-                    request_deserializer=s2t_dot_speech__to__text__pb2.Speech2TextConfig.FromString,
-                    response_serializer=s2t_dot_speech__to__text__pb2.S2tPipelineId.SerializeToString,
+                    request_deserializer=ondewo_dot_s2t_dot_speech__to__text__pb2.Speech2TextConfig.FromString,
+                    response_serializer=ondewo_dot_s2t_dot_speech__to__text__pb2.S2tPipelineId.SerializeToString,
             ),
             'DeleteS2tPipeline': grpc.unary_unary_rpc_method_handler(
                     servicer.DeleteS2tPipeline,
-                    request_deserializer=s2t_dot_speech__to__text__pb2.S2tPipelineId.FromString,
+                    request_deserializer=ondewo_dot_s2t_dot_speech__to__text__pb2.S2tPipelineId.FromString,
                     response_serializer=google_dot_protobuf_dot_empty__pb2.Empty.SerializeToString,
             ),
             'UpdateS2tPipeline': grpc.unary_unary_rpc_method_handler(
                     servicer.UpdateS2tPipeline,
-                    request_deserializer=s2t_dot_speech__to__text__pb2.Speech2TextConfig.FromString,
+                    request_deserializer=ondewo_dot_s2t_dot_speech__to__text__pb2.Speech2TextConfig.FromString,
                     response_serializer=google_dot_protobuf_dot_empty__pb2.Empty.SerializeToString,
             ),
             'ListS2tPipelines': grpc.unary_unary_rpc_method_handler(
                     servicer.ListS2tPipelines,
-                    request_deserializer=s2t_dot_speech__to__text__pb2.ListS2tPipelinesRequest.FromString,
-                    response_serializer=s2t_dot_speech__to__text__pb2.ListS2tPipelinesResponse.SerializeToString,
+                    request_deserializer=ondewo_dot_s2t_dot_speech__to__text__pb2.ListS2tPipelinesRequest.FromString,
+                    response_serializer=ondewo_dot_s2t_dot_speech__to__text__pb2.ListS2tPipelinesResponse.SerializeToString,
             ),
             'ListS2tLanguages': grpc.unary_unary_rpc_method_handler(
                     servicer.ListS2tLanguages,
-                    request_deserializer=s2t_dot_speech__to__text__pb2.ListS2tLanguagesRequest.FromString,
-                    response_serializer=s2t_dot_speech__to__text__pb2.ListS2tLanguagesResponse.SerializeToString,
+                    request_deserializer=ondewo_dot_s2t_dot_speech__to__text__pb2.ListS2tLanguagesRequest.FromString,
+                    response_serializer=ondewo_dot_s2t_dot_speech__to__text__pb2.ListS2tLanguagesResponse.SerializeToString,
             ),
             'ListS2tDomains': grpc.unary_unary_rpc_method_handler(
                     servicer.ListS2tDomains,
-                    request_deserializer=s2t_dot_speech__to__text__pb2.ListS2tDomainsRequest.FromString,
-                    response_serializer=s2t_dot_speech__to__text__pb2.ListS2tDomainsResponse.SerializeToString,
+                    request_deserializer=ondewo_dot_s2t_dot_speech__to__text__pb2.ListS2tDomainsRequest.FromString,
+                    response_serializer=ondewo_dot_s2t_dot_speech__to__text__pb2.ListS2tDomainsResponse.SerializeToString,
             ),
             'GetServiceInfo': grpc.unary_unary_rpc_method_handler(
                     servicer.GetServiceInfo,
                     request_deserializer=google_dot_protobuf_dot_empty__pb2.Empty.FromString,
-                    response_serializer=s2t_dot_speech__to__text__pb2.S2TGetServiceInfoResponse.SerializeToString,
+                    response_serializer=ondewo_dot_s2t_dot_speech__to__text__pb2.S2TGetServiceInfoResponse.SerializeToString,
             ),
             'ListS2tLanguageModels': grpc.unary_unary_rpc_method_handler(
                     servicer.ListS2tLanguageModels,
-                    request_deserializer=s2t_dot_speech__to__text__pb2.ListS2tLanguageModelsRequest.FromString,
-                    response_serializer=s2t_dot_speech__to__text__pb2.ListS2tLanguageModelsResponse.SerializeToString,
+                    request_deserializer=ondewo_dot_s2t_dot_speech__to__text__pb2.ListS2tLanguageModelsRequest.FromString,
+                    response_serializer=ondewo_dot_s2t_dot_speech__to__text__pb2.ListS2tLanguageModelsResponse.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -238,8 +238,8 @@ class Speech2Text(object):
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/ondewo.s2t.Speech2Text/TranscribeFile',
-            s2t_dot_speech__to__text__pb2.TranscribeFileRequest.SerializeToString,
-            s2t_dot_speech__to__text__pb2.TranscribeFileResponse.FromString,
+            ondewo_dot_s2t_dot_speech__to__text__pb2.TranscribeFileRequest.SerializeToString,
+            ondewo_dot_s2t_dot_speech__to__text__pb2.TranscribeFileResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
@@ -255,8 +255,8 @@ class Speech2Text(object):
             timeout=None,
             metadata=None):
         return grpc.experimental.stream_stream(request_iterator, target, '/ondewo.s2t.Speech2Text/TranscribeStream',
-            s2t_dot_speech__to__text__pb2.TranscribeStreamRequest.SerializeToString,
-            s2t_dot_speech__to__text__pb2.TranscribeStreamResponse.FromString,
+            ondewo_dot_s2t_dot_speech__to__text__pb2.TranscribeStreamRequest.SerializeToString,
+            ondewo_dot_s2t_dot_speech__to__text__pb2.TranscribeStreamResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
@@ -272,8 +272,8 @@ class Speech2Text(object):
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/ondewo.s2t.Speech2Text/GetS2tPipeline',
-            s2t_dot_speech__to__text__pb2.S2tPipelineId.SerializeToString,
-            s2t_dot_speech__to__text__pb2.Speech2TextConfig.FromString,
+            ondewo_dot_s2t_dot_speech__to__text__pb2.S2tPipelineId.SerializeToString,
+            ondewo_dot_s2t_dot_speech__to__text__pb2.Speech2TextConfig.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
@@ -289,8 +289,8 @@ class Speech2Text(object):
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/ondewo.s2t.Speech2Text/CreateS2tPipeline',
-            s2t_dot_speech__to__text__pb2.Speech2TextConfig.SerializeToString,
-            s2t_dot_speech__to__text__pb2.S2tPipelineId.FromString,
+            ondewo_dot_s2t_dot_speech__to__text__pb2.Speech2TextConfig.SerializeToString,
+            ondewo_dot_s2t_dot_speech__to__text__pb2.S2tPipelineId.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
@@ -306,7 +306,7 @@ class Speech2Text(object):
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/ondewo.s2t.Speech2Text/DeleteS2tPipeline',
-            s2t_dot_speech__to__text__pb2.S2tPipelineId.SerializeToString,
+            ondewo_dot_s2t_dot_speech__to__text__pb2.S2tPipelineId.SerializeToString,
             google_dot_protobuf_dot_empty__pb2.Empty.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
@@ -323,7 +323,7 @@ class Speech2Text(object):
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/ondewo.s2t.Speech2Text/UpdateS2tPipeline',
-            s2t_dot_speech__to__text__pb2.Speech2TextConfig.SerializeToString,
+            ondewo_dot_s2t_dot_speech__to__text__pb2.Speech2TextConfig.SerializeToString,
             google_dot_protobuf_dot_empty__pb2.Empty.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
@@ -340,8 +340,8 @@ class Speech2Text(object):
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/ondewo.s2t.Speech2Text/ListS2tPipelines',
-            s2t_dot_speech__to__text__pb2.ListS2tPipelinesRequest.SerializeToString,
-            s2t_dot_speech__to__text__pb2.ListS2tPipelinesResponse.FromString,
+            ondewo_dot_s2t_dot_speech__to__text__pb2.ListS2tPipelinesRequest.SerializeToString,
+            ondewo_dot_s2t_dot_speech__to__text__pb2.ListS2tPipelinesResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
@@ -357,8 +357,8 @@ class Speech2Text(object):
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/ondewo.s2t.Speech2Text/ListS2tLanguages',
-            s2t_dot_speech__to__text__pb2.ListS2tLanguagesRequest.SerializeToString,
-            s2t_dot_speech__to__text__pb2.ListS2tLanguagesResponse.FromString,
+            ondewo_dot_s2t_dot_speech__to__text__pb2.ListS2tLanguagesRequest.SerializeToString,
+            ondewo_dot_s2t_dot_speech__to__text__pb2.ListS2tLanguagesResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
@@ -374,8 +374,8 @@ class Speech2Text(object):
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/ondewo.s2t.Speech2Text/ListS2tDomains',
-            s2t_dot_speech__to__text__pb2.ListS2tDomainsRequest.SerializeToString,
-            s2t_dot_speech__to__text__pb2.ListS2tDomainsResponse.FromString,
+            ondewo_dot_s2t_dot_speech__to__text__pb2.ListS2tDomainsRequest.SerializeToString,
+            ondewo_dot_s2t_dot_speech__to__text__pb2.ListS2tDomainsResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
@@ -392,7 +392,7 @@ class Speech2Text(object):
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/ondewo.s2t.Speech2Text/GetServiceInfo',
             google_dot_protobuf_dot_empty__pb2.Empty.SerializeToString,
-            s2t_dot_speech__to__text__pb2.S2TGetServiceInfoResponse.FromString,
+            ondewo_dot_s2t_dot_speech__to__text__pb2.S2TGetServiceInfoResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
@@ -408,7 +408,7 @@ class Speech2Text(object):
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/ondewo.s2t.Speech2Text/ListS2tLanguageModels',
-            s2t_dot_speech__to__text__pb2.ListS2tLanguageModelsRequest.SerializeToString,
-            s2t_dot_speech__to__text__pb2.ListS2tLanguageModelsResponse.FromString,
+            ondewo_dot_s2t_dot_speech__to__text__pb2.ListS2tLanguageModelsRequest.SerializeToString,
+            ondewo_dot_s2t_dot_speech__to__text__pb2.ListS2tLanguageModelsResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)

@@ -5,7 +5,7 @@ ONDEWO-S2T Client Library
 
 This library facilitates the interaction between a user and an ONDEWO-S2T server instance. 
 
-It is structured around a series of python files generated from protobuf files. These protobuf files specify the details of the interface, and can be used to generate code in 10+ high-level languages. They are found in the [apis submodule](./ondewo-s2t-api).
+It is structured around a series of python files generated from protobuf files. These protobuf files specify the details of the interface, and can be used to generate code in 10+ high-level languages. They are found in the [apis submodule](ondewo-s2t-api).
 
 Python Installation
 -------------------
