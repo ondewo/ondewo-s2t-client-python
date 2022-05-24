@@ -1,5 +1,5 @@
-grpcio==1.42.0
-grpcio-reflection==1.42.0
-grpcio-tools==1.42.0
+grpcio==1.44.0
+grpcio-reflection==1.44.0
+grpcio-tools==1.44.0
 mypy-protobuf==3.00
 ondewo-client-utils>=0.1.0

@@ -1,5 +1,11 @@
 # Release History
 *****************
+## ONDEWO-S2T Python Client 3.1.2
+
+### New Features
+* Delegate proto generation to ondewo-proto-compiler.
+
+*****************
 ## ONDEWO-S2T Python Client 3.1.1
 
 ### New Features
