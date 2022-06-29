@@ -8,7 +8,7 @@ with open("requirements.txt") as f:
 
 setuptools.setup(
     name="ondewo-s2t-client",
-    version="3.1.2",
+    version="3.2.0",
     author="ONDEWO GbmH",
     author_email="info@ondewo.com",
     description="exposes the ondewo-s2t-grpc-server endpoints in a user-friendly way",
