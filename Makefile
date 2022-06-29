@@ -4,24 +4,18 @@ install:
 	pip install -r requirements.txt
 
 # GENERATE PYTHON FILES FROM PROTOS
-PROTO_OUTPUT_FOLDER=ondewo
-PROTO_COMPILER_IMAGE_NAME=registry-dev.ondewo.com:5000/ondewo/ondewo-python-proto-compiler
-PROTO_DIR=ondewo-s2t-api
-EXTRA_PROTO_DIR=googleapis/google
-TARGET_DIR=
-INCLUDE_DIR=ondewo-s2t-api
+ONDEWO_S2T_API_DIR=ondewo-s2t-api
+ONDEWO_PROTOS_DIR=${ONDEWO_S2T_API_DIR}/ondewo/
+
+build_compiler:
+	make -C ondewo-proto-compiler/python build
+
 
 generate_ondewo_protos:
-	-mkdir ${PROTO_OUTPUT_FOLDER}
-	docker run -it\
-		--user ${shell id -u}:${shell id -g} \
-		-v ${shell pwd}/${PROTO_OUTPUT_FOLDER}:/home/ondewo/ondewo-proto-compiler/output/${PROTO_OUTPUT_FOLDER} \
-		-v ${shell pwd}/${PROTO_DIR}:/home/ondewo/ondewo-proto-compiler/protos/${shell basename ${PROTO_DIR}} \
-		-v ${shell pwd}/${EXTRA_PROTO_DIR}:/home/ondewo/ondewo-proto-compiler/protos/${shell basename ${EXTRA_PROTO_DIR}} \
-		-e INTERNAL_TARGET_PROTO_DIR=${TARGET_DIR} \
-		-e INCLUDE_DIR=${INCLUDE_DIR} \
-		${PROTO_COMPILER_IMAGE_NAME}
-
+	make -f ondewo-proto-compiler/python/Makefile run \
+		PROTO_DIR=${ONDEWO_PROTOS_DIR} \
+		TARGET_DIR='ondewo' \
+		OUTPUT_DIR='.'
 
 push_to_pypi: build_package upload_package clear_package_data
 	echo 'pushed to pypi :)'
