@@ -1,5 +1,13 @@
 # Release History
 *****************
+## ONDEWO-S2T Python Client 3.2.0
+
+### New Features
+* Proto complier introduced as submodule.
+* Proto generation is dockerized.
+* Libraries are updated.
+
+*****************
 ## ONDEWO-S2T Python Client 3.1.2
 
 ### New Features
