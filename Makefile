@@ -74,6 +74,7 @@ generate_ondewo_protos:  ## Generate python code from proto files
 		OUTPUT_DIR=${OUTPUT_DIR}
 
 push_to_pypi: build_package upload_package clear_package_data
+	@echo 'Pushed to pypi : )'
 
 build_package:
 	python setup.py sdist bdist_wheel
