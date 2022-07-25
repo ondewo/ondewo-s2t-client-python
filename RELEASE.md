@@ -1,6 +1,13 @@
 # Release History
+
 *****************
-## ONDEWO-S2T Python Client 3.2.0
+## Release ONDEWO S2T Python Client 3.3.0
+
+### New Features
+* [[OND211-2039]](https://ondewo.atlassian.net/browse/OND211-2039) - Improved automated release process
+
+*****************
+## Release ONDEWO S2T Python Client 3.2.0
 
 ### New Features
 * Proto complier introduced as submodule.
@@ -8,33 +15,34 @@
 * Libraries are updated.
 
 *****************
-## ONDEWO-S2T Python Client 3.1.2
+## Release ONDEWO S2T Python Client 3.1.2
 
 ### New Features
 * Delegate proto generation to ondewo-proto-compiler.
 
 *****************
-## ONDEWO-S2T Python Client 3.1.1
+
+## Release ONDEWO S2T Python Client 3.1.1
 
 ### New Features
 * Update examples in examples/ondewo-s2t-wit-certificate.ipynb notebook.
 * Add boolean registered_only option in ListS2tPipelinesRequest.
 
 *****************
-## ONDEWO-S2T Python Client 3.1.0
+## Release ONDEWO S2T Python Client 3.1.0
 
 ### New Features
 * [[OND231-338]] -
 Add mute_audio field in TranscribeStreamRequest.
   
-## ONDEWO-S2T Python Client 3.0.0
+## Release ONDEWO S2T Python Client 3.0.0
 
 ### New breaking Features
 * [[OND231-334]] -
 Rename Description, GetServiceInfoResponse, Inference and Normalization messages to include S2T
 
 
-## ONDEWO-S2T Python Client 2.0.0
+## Release ONDEWO S2T Python Client 2.0.0
 
 ### New breaking Features
 
@@ -42,14 +50,14 @@ Rename Description, GetServiceInfoResponse, Inference and Normalization messages
 * Instead of a single transcription text of type string, the response messages TranscribeStreamResponse and TranscribeFileResponse now include a list (repeated field) of Transcription messages, each of which contains a transcription text (str) and a score (float).
 * Update examples in _/example_s folder.
 
-## ONDEWO-S2T Python Client 1.5.0
+## Release ONDEWO S2T Python Client 1.5.0
 
 ### New Features
 
 * Compatible with ONDEWO-S2T 1.5.* GRPC server
 
 
-## ONDEWO-S2T Python Client 1.4.1
+## Release ONDEWO S2T Python Client 1.4.1
 
 ### New Features
 
@@ -58,7 +66,7 @@ Rename Description, GetServiceInfoResponse, Inference and Normalization messages
 
 *****************
 
-## ONDEWO-S2T Python Client 1.3.0
+## Release ONDEWO S2T Python Client 1.3.0
 
 ### New Features
  * First public version
