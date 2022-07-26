@@ -1065,12 +1065,17 @@ class TrainUserLanguageModelRequest(google.protobuf.message.Message):
     """
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
     LANGUAGE_MODEL_NAME_FIELD_NUMBER: builtins.int
+    ORDER_FIELD_NUMBER: builtins.int
     language_model_name: typing.Text
     """Name of the language model to train"""
+
+    order: builtins.int
+    """Order n of the ngram"""
 
     def __init__(self,
         *,
         language_model_name: typing.Text = ...,
+        order: builtins.int = ...,
         ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["language_model_name",b"language_model_name"]) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["language_model_name",b"language_model_name","order",b"order"]) -> None: ...
 global___TrainUserLanguageModelRequest = TrainUserLanguageModelRequest
