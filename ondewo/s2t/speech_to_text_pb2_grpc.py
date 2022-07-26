@@ -71,6 +71,11 @@ class Speech2TextStub(object):
                 request_serializer=ondewo_dot_s2t_dot_speech__to__text__pb2.ListS2tLanguageModelsRequest.SerializeToString,
                 response_deserializer=ondewo_dot_s2t_dot_speech__to__text__pb2.ListS2tLanguageModelsResponse.FromString,
                 )
+        self.CreateUserLanguageModel = channel.unary_unary(
+                '/ondewo.s2t.Speech2Text/CreateUserLanguageModel',
+                request_serializer=ondewo_dot_s2t_dot_speech__to__text__pb2.CreateUserLanguageModelRequest.SerializeToString,
+                response_deserializer=ondewo_dot_s2t_dot_speech__to__text__pb2.CreateUserLanguageModelResponse.FromString,
+                )
 
 
 class Speech2TextServicer(object):
@@ -157,6 +162,13 @@ class Speech2TextServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
+    def CreateUserLanguageModel(self, request, context):
+        """Create a user language model.
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
 
 def add_Speech2TextServicer_to_server(servicer, server):
     rpc_method_handlers = {
@@ -214,6 +226,11 @@ def add_Speech2TextServicer_to_server(servicer, server):
                     servicer.ListS2tLanguageModels,
                     request_deserializer=ondewo_dot_s2t_dot_speech__to__text__pb2.ListS2tLanguageModelsRequest.FromString,
                     response_serializer=ondewo_dot_s2t_dot_speech__to__text__pb2.ListS2tLanguageModelsResponse.SerializeToString,
+            ),
+            'CreateUserLanguageModel': grpc.unary_unary_rpc_method_handler(
+                    servicer.CreateUserLanguageModel,
+                    request_deserializer=ondewo_dot_s2t_dot_speech__to__text__pb2.CreateUserLanguageModelRequest.FromString,
+                    response_serializer=ondewo_dot_s2t_dot_speech__to__text__pb2.CreateUserLanguageModelResponse.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -410,5 +427,22 @@ class Speech2Text(object):
         return grpc.experimental.unary_unary(request, target, '/ondewo.s2t.Speech2Text/ListS2tLanguageModels',
             ondewo_dot_s2t_dot_speech__to__text__pb2.ListS2tLanguageModelsRequest.SerializeToString,
             ondewo_dot_s2t_dot_speech__to__text__pb2.ListS2tLanguageModelsResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def CreateUserLanguageModel(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/ondewo.s2t.Speech2Text/CreateUserLanguageModel',
+            ondewo_dot_s2t_dot_speech__to__text__pb2.CreateUserLanguageModelRequest.SerializeToString,
+            ondewo_dot_s2t_dot_speech__to__text__pb2.CreateUserLanguageModelResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)

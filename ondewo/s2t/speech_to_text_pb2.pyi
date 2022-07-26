@@ -1020,3 +1020,35 @@ class ListS2tLanguageModelsResponse(google.protobuf.message.Message):
         ) -> None: ...
     def ClearField(self, field_name: typing_extensions.Literal["lm_pipeline_ids",b"lm_pipeline_ids"]) -> None: ...
 global___ListS2tLanguageModelsResponse = ListS2tLanguageModelsResponse
+
+class CreateUserLanguageModelRequest(google.protobuf.message.Message):
+    """//////////////////////////////
+    CREATE USER LANGUAGE MODEL //
+    //////////////////////////////
+
+    """
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    SENTENCES_FIELD_NUMBER: builtins.int
+    @property
+    def sentences(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[typing.Text]:
+        """List of sentences to estimate the language model on"""
+        pass
+    def __init__(self,
+        *,
+        sentences: typing.Optional[typing.Iterable[typing.Text]] = ...,
+        ) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["sentences",b"sentences"]) -> None: ...
+global___CreateUserLanguageModelRequest = CreateUserLanguageModelRequest
+
+class CreateUserLanguageModelResponse(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    PIPELINE_ID_FIELD_NUMBER: builtins.int
+    pipeline_id: typing.Text
+    """One pipeline id"""
+
+    def __init__(self,
+        *,
+        pipeline_id: typing.Text = ...,
+        ) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["pipeline_id",b"pipeline_id"]) -> None: ...
+global___CreateUserLanguageModelResponse = CreateUserLanguageModelResponse
