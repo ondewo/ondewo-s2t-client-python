@@ -1038,3 +1038,21 @@ class CreateUserLanguageModelRequest(google.protobuf.message.Message):
         ) -> None: ...
     def ClearField(self, field_name: typing_extensions.Literal["language_model_name",b"language_model_name"]) -> None: ...
 global___CreateUserLanguageModelRequest = CreateUserLanguageModelRequest
+
+class DeleteUserLanguageModelRequest(google.protobuf.message.Message):
+    """//////////////////////////////
+    DELETE USER LANGUAGE MODEL //
+    //////////////////////////////
+
+    """
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    LANGUAGE_MODEL_NAME_FIELD_NUMBER: builtins.int
+    language_model_name: typing.Text
+    """Name of the language model to delete"""
+
+    def __init__(self,
+        *,
+        language_model_name: typing.Text = ...,
+        ) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["language_model_name",b"language_model_name"]) -> None: ...
+global___DeleteUserLanguageModelRequest = DeleteUserLanguageModelRequest
