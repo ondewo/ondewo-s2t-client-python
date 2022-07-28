@@ -81,6 +81,11 @@ class Speech2TextStub(object):
                 request_serializer=ondewo_dot_s2t_dot_speech__to__text__pb2.DeleteUserLanguageModelRequest.SerializeToString,
                 response_deserializer=google_dot_protobuf_dot_empty__pb2.Empty.FromString,
                 )
+        self.AddDataToUserLanguageModel = channel.unary_unary(
+                '/ondewo.s2t.Speech2Text/AddDataToUserLanguageModel',
+                request_serializer=ondewo_dot_s2t_dot_speech__to__text__pb2.AddDataToUserLanguageModelRequest.SerializeToString,
+                response_deserializer=google_dot_protobuf_dot_empty__pb2.Empty.FromString,
+                )
         self.TrainUserLanguageModel = channel.unary_unary(
                 '/ondewo.s2t.Speech2Text/TrainUserLanguageModel',
                 request_serializer=ondewo_dot_s2t_dot_speech__to__text__pb2.TrainUserLanguageModelRequest.SerializeToString,
@@ -186,6 +191,13 @@ class Speech2TextServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
+    def AddDataToUserLanguageModel(self, request, context):
+        """Add data to a user language model.
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
     def TrainUserLanguageModel(self, request, context):
         """Train a user language model.
         """
@@ -259,6 +271,11 @@ def add_Speech2TextServicer_to_server(servicer, server):
             'DeleteUserLanguageModel': grpc.unary_unary_rpc_method_handler(
                     servicer.DeleteUserLanguageModel,
                     request_deserializer=ondewo_dot_s2t_dot_speech__to__text__pb2.DeleteUserLanguageModelRequest.FromString,
+                    response_serializer=google_dot_protobuf_dot_empty__pb2.Empty.SerializeToString,
+            ),
+            'AddDataToUserLanguageModel': grpc.unary_unary_rpc_method_handler(
+                    servicer.AddDataToUserLanguageModel,
+                    request_deserializer=ondewo_dot_s2t_dot_speech__to__text__pb2.AddDataToUserLanguageModelRequest.FromString,
                     response_serializer=google_dot_protobuf_dot_empty__pb2.Empty.SerializeToString,
             ),
             'TrainUserLanguageModel': grpc.unary_unary_rpc_method_handler(
@@ -494,6 +511,23 @@ class Speech2Text(object):
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/ondewo.s2t.Speech2Text/DeleteUserLanguageModel',
             ondewo_dot_s2t_dot_speech__to__text__pb2.DeleteUserLanguageModelRequest.SerializeToString,
+            google_dot_protobuf_dot_empty__pb2.Empty.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def AddDataToUserLanguageModel(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/ondewo.s2t.Speech2Text/AddDataToUserLanguageModel',
+            ondewo_dot_s2t_dot_speech__to__text__pb2.AddDataToUserLanguageModelRequest.SerializeToString,
             google_dot_protobuf_dot_empty__pb2.Empty.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
