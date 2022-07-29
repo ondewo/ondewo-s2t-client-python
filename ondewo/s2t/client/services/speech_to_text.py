@@ -16,6 +16,10 @@ from ondewo.s2t.speech_to_text_pb2 import (
     TranscribeFileResponse,
     TranscribeStreamRequest,
     TranscribeStreamResponse,
+    CreateUserLanguageModelRequest,
+    DeleteUserLanguageModelRequest,
+    AddDataToUserLanguageModelRequest,
+    TrainUserLanguageModelRequest,
 )
 from ondewo.s2t.speech_to_text_pb2_grpc import Speech2TextStub
 
@@ -69,4 +73,20 @@ class Speech2Text(BaseServicesInterface):
 
     def list_s2t_domains(self, request: ListS2tDomainsRequest) -> ListS2tDomainsResponse:
         response: ListS2tDomainsResponse = self.stub.ListS2tDomains(request)
+        return response
+
+    def create_user_language_model(self, request: CreateUserLanguageModelRequest) -> Empty:
+        response: Empty = self.stub.CreateUserLanguageModel(request)
+        return response
+
+    def delete_user_language_model(self, request: DeleteUserLanguageModelRequest) -> Empty:
+        response: Empty = self.stub.DeleteUserLanguageModel(request)
+        return response
+
+    def add_data_to_user_language_model(self, request: AddDataToUserLanguageModelRequest) -> Empty:
+        response: Empty = self.stub.AddDataToUserLanguageModel(request)
+        return response
+
+    def train_user_language_model(self, request: TrainUserLanguageModelRequest) -> Empty:
+        response: Empty = self.stub.TrainUserLanguageModel(request)
         return response
