@@ -1,4 +1,10 @@
 # Release History
+*****************
+## Release ONDEWO S2T Python Client 3.4.0
+
+### New Features
+* [[OND211-2039]](https://ondewo.atlassian.net/browse/OND211-2039) -Refactored automatic release
+* Added endpoint to client for user language models
 
 *****************
 ## Release ONDEWO S2T Python Client 3.3.0
@@ -33,7 +39,7 @@
 ### New Features
 * [[OND231-338]] -
 Add mute_audio field in TranscribeStreamRequest.
-  
+
 ## Release ONDEWO S2T Python Client 3.0.0
 
 ### New breaking Features
@@ -76,4 +82,3 @@ Rename Description, GetServiceInfoResponse, Inference and Normalization messages
 ### Known issues not covered in this release
  * CI/CD Integration is missing
  * Extend the README.md with an examples usage
-
