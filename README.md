@@ -3,7 +3,7 @@
 ONDEWO-S2T Client Library
 ======================
 
-This library facilitates the interaction between a user and an ONDEWO-S2T server instance. 
+This library facilitates the interaction between a user and an ONDEWO-S2T server instance.
 
 It is structured around a series of python files generated from protobuf files. These protobuf files specify the details of the interface, and can be used to generate code in 10+ high-level languages. They are found in the [apis submodule](ondewo-s2t-api).
 
@@ -30,15 +30,15 @@ ls examples
 Automatic Release Process
 ------------------
 The entire process is automated to make development easier. The actual steps are simple:
- 
+
 TODOs in Pull Request before the release:
- 
+
  - Update the Version number inside the Makefile
    - ! : Major and Minor Version Number must be the same for Client and API at all times
       >example: API 2.9.0 --> Client 2.9.X
- 
+
  - Check if RELEASE.md is up-to-date
- 
+
  - Update the Version number inside the setup.py by using:
     ```bash
     make update_setup
@@ -59,7 +59,7 @@ TODOs after Pull Request was merged in:
     make ondewo_release
     ```
 
-The   ``` make ondewo_release``` command can be divided into 5 steps: 
+The   ``` make ondewo_release``` command can be divided into 5 steps:
 
 - cloning the devops-accounts repository and extracting the credentials
 - creating and pushing the release branch

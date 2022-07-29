@@ -7,11 +7,11 @@ with open('requirements.txt') as f:
     requires = f.read().splitlines()
 
 setuptools.setup(
-    name='ondewo-s2t-client',
-    version='3.3.0',
-    author='ONDEWO GbmH',
-    author_email='info@ondewo.com',
-    description='exposes the ondewo-s2t-grpc-server endpoints in a user-friendly way',
+    name="ondewo-s2t-client",
+    version='3.4.0',
+    author="ONDEWO GbmH",
+    author_email="info@ondewo.com",
+    description="exposes the ondewo-s2t-grpc-server endpoints in a user-friendly way",
     long_description=long_description,
     long_description_content_type='text/markdown',
     url='https://github.com/ondewo/ondewo-s2t-client-python',
