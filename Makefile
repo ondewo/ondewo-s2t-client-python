@@ -57,8 +57,6 @@ precommit_hooks_run_all_files: ## Runs all pre-commit hooks on all files and not
 
 install_dependencies_locally: ## Install dependencies locally
 	pip install -r requirements-dev.txt
-
-install:  ## Install requirements
 	pip install -r requirements.txt
 
 flake8:
@@ -122,17 +120,45 @@ generate_ondewo_protos:  ## Generate python code from proto files
 		TARGET_DIR='ondewo' \
 		OUTPUT_DIR=${OUTPUT_DIR}
 
-build_and_push_to_pypi_via_docker: push_to_pypi_via_docker_image  ## Release automation for building and pushing to pypi via a docker image
+push_to_pypi_via_docker: push_to_pypi_via_docker_image  ## Release automation for building and pushing to pypi via a docker image
 
-build_and_release_to_github_via_docker: build build_utils_docker_image release_to_github_via_docker_image  ## Release automation for building and releasing on GitHub via a docker image
+release_to_github_via_docker: build_utils_docker_image release_to_github_via_docker_image  ## Release automation for building and releasing on GitHub via a docker image
 
 build_utils_docker_image:  ## Build utils docker image
 	docker build -f Dockerfile.utils -t ${IMAGE_UTILS_NAME} .
 
+setup_conda_env: ## Checks for CONDA Environment
+	@echo "\n START SETTING UP CONDA ENV \n"
+	@conda env list | grep -q ondewo-s2t-client-python \
+	&& make release || ( echo "\n CONDA ENV FOR REPO DOESNT EXIST \n" \
+	&& make create_conda_env)
+
+create_conda_env: ##Creates CONDA Environment
+	conda create -y --name ondewo-s2t-client-python python=3.8
+	/bin/bash -c 'source `conda info --base`/bin/activate ondewo-s2t-client-python; make setup_developer_environment_locally && echo "\n PRECOMMIT INSTALLED \n"'
+	make release
+
 ########################################################
 #		Release
 
-release: create_release_branch create_release_tag build_and_release_to_github_via_docker build_and_push_to_pypi_via_docker ## Automate the entire release process
+release: ## Automate the entire release process
+	@echo "Start Release"
+	make build
+	/bin/bash -c 'source `conda info --base`/bin/activate ondewo-s2t-client-python; make precommit_hooks_run_all_files || echo "PRECOMMIT FOUND SOMETHING"'
+	git status
+	make check_build
+	git add ondewo
+	git add Makefile
+	git add RELEASE.md
+	git add setup.py
+	git add ${ONDEWO_PROTO_COMPILER_DIR}
+	git status
+	git commit -m "PREPARING FOR RELEASE ${ONDEWO_S2T_VERSION}"
+	git push
+	make create_release_branch
+	make create_release_tag
+	make release_to_github_via_docker
+	make push_to_pypi_via_docker
 	@echo "Release Finished"
 
 create_release_branch: ## Create Release Branch and push it to origin
@@ -168,14 +194,14 @@ checkout_defined_submodule_versions:  ## Update submodule versions
 ########################################################
 #		PYPI
 
-build_package:
+build_package: ## Builds PYPI Package
 	python setup.py sdist bdist_wheel
 	chmod a+rw dist -R
 
-upload_package:
+upload_package: ## Uploads PYPI Package
 	twine upload --verbose -r pypi dist/* -u${PYPI_USERNAME} -p${PYPI_PASSWORD}
 
-clear_package_data:
+clear_package_data: ## Clears PYPI Package
 	rm -rf build dist/* ondewo_s2t_client.egg-info
 
 
@@ -189,10 +215,10 @@ push_to_pypi_via_docker_image:  ## Push source code to pypi via docker
 	rm -rf dist
 
 
-push_to_pypi: build_package upload_package clear_package_data
+push_to_pypi: build_package upload_package clear_package_data ## Builds -> Uploads -> Clears PYPI Package
 	@echo 'YAY - Pushed to pypi : )'
 
-show_pypi: build_package
+show_pypi: build_package ## Shows PYPI Package in Dockerimage
 	tar xvfz dist/ondewo-s2t-client-${ONDEWO_S2T_VERSION}.tar.gz
 	tree ondewo-s2t-client-${ONDEWO_S2T_VERSION}
 	cat ondewo-s2t-client-${ONDEWO_S2T_VERSION}/ondewo_s2t_client.egg-info/requires.txt
@@ -229,7 +255,7 @@ clone_devops_accounts: ## Clones devops-accounts repo
 
 run_release_with_devops:
 	$(eval info:= $(shell cat ${DEVOPS_ACCOUNT_DIR}/account_github.env | grep GITHUB_GH & cat ${DEVOPS_ACCOUNT_DIR}/account_pypi.env | grep PYPI_USERNAME & cat ${DEVOPS_ACCOUNT_DIR}/account_pypi.env | grep PYPI_PASSWORD))
-	make release $(info)
+	@echo ${CONDA_PREFIX} | grep -q s2t-client-python && make release $(info) || (make setup_conda_env $(info))
 
 spc: ## Checks if the Release Branch, Tag and Pypi version already exist
 	$(eval filtered_branches:= $(shell git branch --all | grep "release/${ONDEWO_S2T_VERSION}"))
