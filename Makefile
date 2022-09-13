@@ -153,12 +153,12 @@ release: ## Automate the entire release process
 	git add setup.py
 	git add ${ONDEWO_PROTO_COMPILER_DIR}
 	git status
-# git commit -m "PREPARING FOR RELEASE ${ONDEWO_S2T_VERSION}"
-# git push
-# make create_release_branch
-# make create_release_tag
-# make release_to_github_via_docker
-# make push_to_pypi_via_docker
+	git commit -m "PREPARING FOR RELEASE ${ONDEWO_S2T_VERSION}"
+	git push
+	make create_release_branch
+	make create_release_tag
+	make release_to_github_via_docker
+	make push_to_pypi_via_docker
 	@echo "Release Finished"
 
 create_release_branch: ## Create Release Branch and push it to origin
@@ -194,14 +194,14 @@ checkout_defined_submodule_versions:  ## Update submodule versions
 ########################################################
 #		PYPI
 
-build_package:
+build_package: ## Builds PYPI Package
 	python setup.py sdist bdist_wheel
 	chmod a+rw dist -R
 
-upload_package:
+upload_package: ## Uploads PYPI Package
 	twine upload --verbose -r pypi dist/* -u${PYPI_USERNAME} -p${PYPI_PASSWORD}
 
-clear_package_data:
+clear_package_data: ## Clears PYPI Package
 	rm -rf build dist/* ondewo_s2t_client.egg-info
 
 
@@ -215,10 +215,10 @@ push_to_pypi_via_docker_image:  ## Push source code to pypi via docker
 	rm -rf dist
 
 
-push_to_pypi: build_package upload_package clear_package_data
+push_to_pypi: build_package upload_package clear_package_data ## Builds -> Uploads -> Clears PYPI Package
 	@echo 'YAY - Pushed to pypi : )'
 
-show_pypi: build_package
+show_pypi: build_package ## Shows PYPI Package in Dockerimage
 	tar xvfz dist/ondewo-s2t-client-${ONDEWO_S2T_VERSION}.tar.gz
 	tree ondewo-s2t-client-${ONDEWO_S2T_VERSION}
 	cat ondewo-s2t-client-${ONDEWO_S2T_VERSION}/ondewo_s2t_client.egg-info/requires.txt
@@ -261,6 +261,6 @@ spc: ## Checks if the Release Branch, Tag and Pypi version already exist
 	$(eval filtered_branches:= $(shell git branch --all | grep "release/${ONDEWO_S2T_VERSION}"))
 	$(eval filtered_tags:= $(shell git tag --list | grep "${ONDEWO_S2T_VERSION}"))
 	$(eval setuppy_version:= $(shell cat setup.py | grep "version"))
-# @if test "$(filtered_branches)" != ""; then echo "-- Test 1: Branch exists!!" & exit 1; else echo "-- Test 1: Branch is fine";fi
-# @if test "$(filtered_tags)" != ""; then echo "-- Test 2: Tag exists!!" & exit 1; else echo "-- Test 2: Tag is fine";fi
-# @if test "$(setuppy_version)" != "version='${ONDEWO_S2T_VERSION}',"; then echo "-- Test 3: Setup.py not updated!!" & exit 1; else echo "-- Test 3: Setup.py is fine";fi
+	@if test "$(filtered_branches)" != ""; then echo "-- Test 1: Branch exists!!" & exit 1; else echo "-- Test 1: Branch is fine";fi
+	@if test "$(filtered_tags)" != ""; then echo "-- Test 2: Tag exists!!" & exit 1; else echo "-- Test 2: Tag is fine";fi
+	@if test "$(setuppy_version)" != "version='${ONDEWO_S2T_VERSION}',"; then echo "-- Test 3: Setup.py not updated!!" & exit 1; else echo "-- Test 3: Setup.py is fine";fi
