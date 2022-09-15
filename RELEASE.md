@@ -1,4 +1,11 @@
 # Release History
+
+*****************
+## Release ONDEWO S2T Python Client 4.0.0
+
+### Improvements
+ * Tracking API Version [4.0.0](https://github.com/ondewo/ondewo-s2t-api/releases/tag/4.0.0) ( [Documentation](https://ondewo.github.io/ondewo-s2t-api/) )
+
 *****************
 ## Release ONDEWO S2T Python Client 3.4.0
 
