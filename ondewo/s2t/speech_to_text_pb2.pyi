@@ -601,6 +601,8 @@ class CtcAcousticModels(google.protobuf.message.Message):
     QUARTZNET_TRITON_FIELD_NUMBER: builtins.int
     WAV2VEC_FIELD_NUMBER: builtins.int
     WAV2VEC_TRITON_FIELD_NUMBER: builtins.int
+    WHISPER_FIELD_NUMBER: builtins.int
+    WHISPER_TRITON_FIELD_NUMBER: builtins.int
     type: typing.Text
     @property
     def quartznet(self) -> global___Quartznet: ...
@@ -610,6 +612,10 @@ class CtcAcousticModels(google.protobuf.message.Message):
     def wav2vec(self) -> global___Wav2Vec: ...
     @property
     def wav2vec_triton(self) -> global___Wav2VecTriton: ...
+    @property
+    def whisper(self) -> global___Whisper: ...
+    @property
+    def whisper_triton(self) -> global___WhisperTriton: ...
     def __init__(self,
         *,
         type: typing.Text = ...,
@@ -617,10 +623,46 @@ class CtcAcousticModels(google.protobuf.message.Message):
         quartznet_triton: typing.Optional[global___QuartznetTriton] = ...,
         wav2vec: typing.Optional[global___Wav2Vec] = ...,
         wav2vec_triton: typing.Optional[global___Wav2VecTriton] = ...,
+        whisper: typing.Optional[global___Whisper] = ...,
+        whisper_triton: typing.Optional[global___WhisperTriton] = ...,
         ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["quartznet",b"quartznet","quartznet_triton",b"quartznet_triton","wav2vec",b"wav2vec","wav2vec_triton",b"wav2vec_triton"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["quartznet",b"quartznet","quartznet_triton",b"quartznet_triton","type",b"type","wav2vec",b"wav2vec","wav2vec_triton",b"wav2vec_triton"]) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["quartznet",b"quartznet","quartznet_triton",b"quartznet_triton","wav2vec",b"wav2vec","wav2vec_triton",b"wav2vec_triton","whisper",b"whisper","whisper_triton",b"whisper_triton"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["quartznet",b"quartznet","quartznet_triton",b"quartznet_triton","type",b"type","wav2vec",b"wav2vec","wav2vec_triton",b"wav2vec_triton","whisper",b"whisper","whisper_triton",b"whisper_triton"]) -> None: ...
 global___CtcAcousticModels = CtcAcousticModels
+
+class Whisper(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    MODEL_PATH_FIELD_NUMBER: builtins.int
+    USE_GPU_FIELD_NUMBER: builtins.int
+    model_path: typing.Text
+    use_gpu: builtins.bool
+    def __init__(self,
+        *,
+        model_path: typing.Text = ...,
+        use_gpu: builtins.bool = ...,
+        ) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["model_path",b"model_path","use_gpu",b"use_gpu"]) -> None: ...
+global___Whisper = Whisper
+
+class WhisperTriton(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    PROCESSOR_PATH_FIELD_NUMBER: builtins.int
+    TRITON_MODEL_NAME_FIELD_NUMBER: builtins.int
+    TRITON_MODEL_VERSION_FIELD_NUMBER: builtins.int
+    CHECK_STATUS_TIMEOUT_FIELD_NUMBER: builtins.int
+    processor_path: typing.Text
+    triton_model_name: typing.Text
+    triton_model_version: typing.Text
+    check_status_timeout: builtins.int
+    def __init__(self,
+        *,
+        processor_path: typing.Text = ...,
+        triton_model_name: typing.Text = ...,
+        triton_model_version: typing.Text = ...,
+        check_status_timeout: builtins.int = ...,
+        ) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["check_status_timeout",b"check_status_timeout","processor_path",b"processor_path","triton_model_name",b"triton_model_name","triton_model_version",b"triton_model_version"]) -> None: ...
+global___WhisperTriton = WhisperTriton
 
 class Wav2Vec(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
