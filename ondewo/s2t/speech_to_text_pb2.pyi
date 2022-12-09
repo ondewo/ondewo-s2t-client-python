@@ -634,14 +634,17 @@ class Whisper(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
     MODEL_PATH_FIELD_NUMBER: builtins.int
     USE_GPU_FIELD_NUMBER: builtins.int
+    LANGUAGE_FIELD_NUMBER: builtins.int
     model_path: typing.Text
     use_gpu: builtins.bool
+    language: typing.Text
     def __init__(self,
         *,
         model_path: typing.Text = ...,
         use_gpu: builtins.bool = ...,
+        language: typing.Text = ...,
         ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["model_path",b"model_path","use_gpu",b"use_gpu"]) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["language",b"language","model_path",b"model_path","use_gpu",b"use_gpu"]) -> None: ...
 global___Whisper = Whisper
 
 class WhisperTriton(google.protobuf.message.Message):
@@ -650,18 +653,21 @@ class WhisperTriton(google.protobuf.message.Message):
     TRITON_MODEL_NAME_FIELD_NUMBER: builtins.int
     TRITON_MODEL_VERSION_FIELD_NUMBER: builtins.int
     CHECK_STATUS_TIMEOUT_FIELD_NUMBER: builtins.int
+    LANGUAGE_FIELD_NUMBER: builtins.int
     processor_path: typing.Text
     triton_model_name: typing.Text
     triton_model_version: typing.Text
     check_status_timeout: builtins.int
+    language: typing.Text
     def __init__(self,
         *,
         processor_path: typing.Text = ...,
         triton_model_name: typing.Text = ...,
         triton_model_version: typing.Text = ...,
         check_status_timeout: builtins.int = ...,
+        language: typing.Text = ...,
         ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["check_status_timeout",b"check_status_timeout","processor_path",b"processor_path","triton_model_name",b"triton_model_name","triton_model_version",b"triton_model_version"]) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["check_status_timeout",b"check_status_timeout","language",b"language","processor_path",b"processor_path","triton_model_name",b"triton_model_name","triton_model_version",b"triton_model_version"]) -> None: ...
 global___WhisperTriton = WhisperTriton
 
 class Wav2Vec(google.protobuf.message.Message):
