@@ -142,3 +142,6 @@ cython_debug/
 .idea
 **/__pycache__/**
 *grpc.json
+
+# sample audios
+examples/audiofiles
