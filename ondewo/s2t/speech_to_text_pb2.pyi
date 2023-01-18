@@ -12,33 +12,62 @@ import typing_extensions
 
 DESCRIPTOR: google.protobuf.descriptor.FileDescriptor
 
-class _CTCDecoding:
+class _Decoding:
     ValueType = typing.NewType('ValueType', builtins.int)
     V: typing_extensions.TypeAlias = ValueType
-class _CTCDecodingEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_CTCDecoding.ValueType], builtins.type):
+class _DecodingEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_Decoding.ValueType], builtins.type):
     DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
-    DEFAULT: _CTCDecoding.ValueType  # 0
+    DEFAULT: _Decoding.ValueType  # 0
     """decoding will be defined by the pipeline config"""
 
-    GREEDY: _CTCDecoding.ValueType  # 1
+    GREEDY: _Decoding.ValueType  # 1
     """greedy decoding will be used independently on pipeline config"""
 
-    BEAM_SEARCH_WITH_LM: _CTCDecoding.ValueType  # 2
+    BEAM_SEARCH_WITH_LM: _Decoding.ValueType  # 2
     """beam search will be used independently on pipeline config"""
 
-class CTCDecoding(_CTCDecoding, metaclass=_CTCDecodingEnumTypeWrapper):
+    BEAM_SEARCH: _Decoding.ValueType  # 3
+    """beam search whitout LM head, to configure decoding mode for seq2seq models."""
+
+class Decoding(_Decoding, metaclass=_DecodingEnumTypeWrapper):
     pass
 
-DEFAULT: CTCDecoding.ValueType  # 0
+DEFAULT: Decoding.ValueType  # 0
 """decoding will be defined by the pipeline config"""
 
-GREEDY: CTCDecoding.ValueType  # 1
+GREEDY: Decoding.ValueType  # 1
 """greedy decoding will be used independently on pipeline config"""
 
-BEAM_SEARCH_WITH_LM: CTCDecoding.ValueType  # 2
+BEAM_SEARCH_WITH_LM: Decoding.ValueType  # 2
 """beam search will be used independently on pipeline config"""
 
-global___CTCDecoding = CTCDecoding
+BEAM_SEARCH: Decoding.ValueType  # 3
+"""beam search whitout LM head, to configure decoding mode for seq2seq models."""
+
+global___Decoding = Decoding
+
+
+class _Architecture:
+    ValueType = typing.NewType('ValueType', builtins.int)
+    V: typing_extensions.TypeAlias = ValueType
+class _ArchitectureEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_Architecture.ValueType], builtins.type):
+    DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
+    CTC: _Architecture.ValueType  # 0
+    """ctc acoustic models (encoder models): wav2vec"""
+
+    SEQ2SEQ: _Architecture.ValueType  # 1
+    """sequence to sequence models (encoder-decoder models): whisper"""
+
+class Architecture(_Architecture, metaclass=_ArchitectureEnumTypeWrapper):
+    pass
+
+CTC: Architecture.ValueType  # 0
+"""ctc acoustic models (encoder models): wav2vec"""
+
+SEQ2SEQ: Architecture.ValueType  # 1
+"""sequence to sequence models (encoder-decoder models): whisper"""
+
+global___Architecture = Architecture
 
 
 class TranscribeRequestConfig(google.protobuf.message.Message):
@@ -49,7 +78,7 @@ class TranscribeRequestConfig(google.protobuf.message.Message):
     """
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
     S2T_PIPELINE_ID_FIELD_NUMBER: builtins.int
-    CTC_DECODING_FIELD_NUMBER: builtins.int
+    DECODING_FIELD_NUMBER: builtins.int
     LANGUAGE_MODEL_NAME_FIELD_NUMBER: builtins.int
     POST_PROCESSING_FIELD_NUMBER: builtins.int
     UTTERANCE_DETECTION_FIELD_NUMBER: builtins.int
@@ -59,8 +88,8 @@ class TranscribeRequestConfig(google.protobuf.message.Message):
     s2t_pipeline_id: typing.Text
     """Required. id of the pipeline (model setup) that will generate audio"""
 
-    ctc_decoding: global___CTCDecoding.ValueType
-    """Optional. CTC decoding type"""
+    decoding: global___Decoding.ValueType
+    """Optional. decoding type"""
 
     language_model_name: typing.Text
     @property
@@ -76,7 +105,7 @@ class TranscribeRequestConfig(google.protobuf.message.Message):
     def __init__(self,
         *,
         s2t_pipeline_id: typing.Text = ...,
-        ctc_decoding: global___CTCDecoding.ValueType = ...,
+        decoding: global___Decoding.ValueType = ...,
         language_model_name: typing.Text = ...,
         post_processing: typing.Optional[global___PostProcessingOptions] = ...,
         utterance_detection: typing.Optional[global___UtteranceDetectionOptions] = ...,
@@ -85,7 +114,7 @@ class TranscribeRequestConfig(google.protobuf.message.Message):
         return_options: typing.Optional[global___TranscriptionReturnOptions] = ...,
         ) -> None: ...
     def HasField(self, field_name: typing_extensions.Literal["language_model_name",b"language_model_name","matchbox",b"matchbox","oneof_language_model_name",b"oneof_language_model_name","oneof_post_processing",b"oneof_post_processing","oneof_return_options",b"oneof_return_options","oneof_utterance_detection",b"oneof_utterance_detection","post_processing",b"post_processing","pyannote",b"pyannote","return_options",b"return_options","utterance_detection",b"utterance_detection","voice_activity_detection",b"voice_activity_detection"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["ctc_decoding",b"ctc_decoding","language_model_name",b"language_model_name","matchbox",b"matchbox","oneof_language_model_name",b"oneof_language_model_name","oneof_post_processing",b"oneof_post_processing","oneof_return_options",b"oneof_return_options","oneof_utterance_detection",b"oneof_utterance_detection","post_processing",b"post_processing","pyannote",b"pyannote","return_options",b"return_options","s2t_pipeline_id",b"s2t_pipeline_id","utterance_detection",b"utterance_detection","voice_activity_detection",b"voice_activity_detection"]) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["decoding",b"decoding","language_model_name",b"language_model_name","matchbox",b"matchbox","oneof_language_model_name",b"oneof_language_model_name","oneof_post_processing",b"oneof_post_processing","oneof_return_options",b"oneof_return_options","oneof_utterance_detection",b"oneof_utterance_detection","post_processing",b"post_processing","pyannote",b"pyannote","return_options",b"return_options","s2t_pipeline_id",b"s2t_pipeline_id","utterance_detection",b"utterance_detection","voice_activity_detection",b"voice_activity_detection"]) -> None: ...
     @typing.overload
     def WhichOneof(self, oneof_group: typing_extensions.Literal["oneof_language_model_name",b"oneof_language_model_name"]) -> typing.Optional[typing_extensions.Literal["language_model_name"]]: ...
     @typing.overload
@@ -579,29 +608,33 @@ global___S2TDescription = S2TDescription
 
 class S2TInference(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
-    CTC_ACOUSTIC_MODELS_FIELD_NUMBER: builtins.int
+    ACOUSTIC_MODELS_FIELD_NUMBER: builtins.int
     LANGUAGE_MODELS_FIELD_NUMBER: builtins.int
     @property
-    def ctc_acoustic_models(self) -> global___CtcAcousticModels: ...
+    def acoustic_models(self) -> global___AcousticModels: ...
     @property
     def language_models(self) -> global___LanguageModels: ...
     def __init__(self,
         *,
-        ctc_acoustic_models: typing.Optional[global___CtcAcousticModels] = ...,
+        acoustic_models: typing.Optional[global___AcousticModels] = ...,
         language_models: typing.Optional[global___LanguageModels] = ...,
         ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["ctc_acoustic_models",b"ctc_acoustic_models","language_models",b"language_models"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["ctc_acoustic_models",b"ctc_acoustic_models","language_models",b"language_models"]) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["acoustic_models",b"acoustic_models","language_models",b"language_models"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["acoustic_models",b"acoustic_models","language_models",b"language_models"]) -> None: ...
 global___S2TInference = S2TInference
 
-class CtcAcousticModels(google.protobuf.message.Message):
+class AcousticModels(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
     TYPE_FIELD_NUMBER: builtins.int
+    ARCHITECTURE_FIELD_NUMBER: builtins.int
     QUARTZNET_FIELD_NUMBER: builtins.int
     QUARTZNET_TRITON_FIELD_NUMBER: builtins.int
     WAV2VEC_FIELD_NUMBER: builtins.int
     WAV2VEC_TRITON_FIELD_NUMBER: builtins.int
+    WHISPER_FIELD_NUMBER: builtins.int
+    WHISPER_TRITON_FIELD_NUMBER: builtins.int
     type: typing.Text
+    architecture: typing.Text
     @property
     def quartznet(self) -> global___Quartznet: ...
     @property
@@ -610,17 +643,61 @@ class CtcAcousticModels(google.protobuf.message.Message):
     def wav2vec(self) -> global___Wav2Vec: ...
     @property
     def wav2vec_triton(self) -> global___Wav2VecTriton: ...
+    @property
+    def whisper(self) -> global___Whisper: ...
+    @property
+    def whisper_triton(self) -> global___WhisperTriton: ...
     def __init__(self,
         *,
         type: typing.Text = ...,
+        architecture: typing.Text = ...,
         quartznet: typing.Optional[global___Quartznet] = ...,
         quartznet_triton: typing.Optional[global___QuartznetTriton] = ...,
         wav2vec: typing.Optional[global___Wav2Vec] = ...,
         wav2vec_triton: typing.Optional[global___Wav2VecTriton] = ...,
+        whisper: typing.Optional[global___Whisper] = ...,
+        whisper_triton: typing.Optional[global___WhisperTriton] = ...,
         ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["quartznet",b"quartznet","quartznet_triton",b"quartznet_triton","wav2vec",b"wav2vec","wav2vec_triton",b"wav2vec_triton"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["quartznet",b"quartznet","quartznet_triton",b"quartznet_triton","type",b"type","wav2vec",b"wav2vec","wav2vec_triton",b"wav2vec_triton"]) -> None: ...
-global___CtcAcousticModels = CtcAcousticModels
+    def HasField(self, field_name: typing_extensions.Literal["quartznet",b"quartznet","quartznet_triton",b"quartznet_triton","wav2vec",b"wav2vec","wav2vec_triton",b"wav2vec_triton","whisper",b"whisper","whisper_triton",b"whisper_triton"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["architecture",b"architecture","quartznet",b"quartznet","quartznet_triton",b"quartznet_triton","type",b"type","wav2vec",b"wav2vec","wav2vec_triton",b"wav2vec_triton","whisper",b"whisper","whisper_triton",b"whisper_triton"]) -> None: ...
+global___AcousticModels = AcousticModels
+
+class Whisper(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    MODEL_PATH_FIELD_NUMBER: builtins.int
+    USE_GPU_FIELD_NUMBER: builtins.int
+    LANGUAGE_FIELD_NUMBER: builtins.int
+    model_path: typing.Text
+    use_gpu: builtins.bool
+    language: typing.Text
+    def __init__(self,
+        *,
+        model_path: typing.Text = ...,
+        use_gpu: builtins.bool = ...,
+        language: typing.Text = ...,
+        ) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["language",b"language","model_path",b"model_path","use_gpu",b"use_gpu"]) -> None: ...
+global___Whisper = Whisper
+
+class WhisperTriton(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    PROCESSOR_PATH_FIELD_NUMBER: builtins.int
+    TRITON_MODEL_NAME_FIELD_NUMBER: builtins.int
+    TRITON_MODEL_VERSION_FIELD_NUMBER: builtins.int
+    CHECK_STATUS_TIMEOUT_FIELD_NUMBER: builtins.int
+    processor_path: typing.Text
+    triton_model_name: typing.Text
+    triton_model_version: typing.Text
+    check_status_timeout: builtins.int
+    def __init__(self,
+        *,
+        processor_path: typing.Text = ...,
+        triton_model_name: typing.Text = ...,
+        triton_model_version: typing.Text = ...,
+        check_status_timeout: builtins.int = ...,
+        ) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["check_status_timeout",b"check_status_timeout","processor_path",b"processor_path","triton_model_name",b"triton_model_name","triton_model_version",b"triton_model_version"]) -> None: ...
+global___WhisperTriton = WhisperTriton
 
 class Wav2Vec(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
@@ -776,14 +853,14 @@ global___StreamingServer = StreamingServer
 class StreamingSpeechRecognition(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
     TRANSCRIBE_NOT_FINAL_FIELD_NUMBER: builtins.int
-    CTC_DECODING_METHOD_FIELD_NUMBER: builtins.int
+    DECODING_METHOD_FIELD_NUMBER: builtins.int
     SAMPLING_RATE_FIELD_NUMBER: builtins.int
     MIN_AUDIO_CHUNK_SIZE_FIELD_NUMBER: builtins.int
     START_OF_UTTERANCE_THRESHOLD_FIELD_NUMBER: builtins.int
     END_OF_UTTERANCE_THRESHOLD_FIELD_NUMBER: builtins.int
     NEXT_CHUNK_TIMEOUT_FIELD_NUMBER: builtins.int
     transcribe_not_final: builtins.bool
-    ctc_decoding_method: typing.Text
+    decoding_method: typing.Text
     sampling_rate: builtins.int
     min_audio_chunk_size: builtins.int
     start_of_utterance_threshold: builtins.float
@@ -794,14 +871,14 @@ class StreamingSpeechRecognition(google.protobuf.message.Message):
     def __init__(self,
         *,
         transcribe_not_final: builtins.bool = ...,
-        ctc_decoding_method: typing.Text = ...,
+        decoding_method: typing.Text = ...,
         sampling_rate: builtins.int = ...,
         min_audio_chunk_size: builtins.int = ...,
         start_of_utterance_threshold: builtins.float = ...,
         end_of_utterance_threshold: builtins.float = ...,
         next_chunk_timeout: builtins.float = ...,
         ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["ctc_decoding_method",b"ctc_decoding_method","end_of_utterance_threshold",b"end_of_utterance_threshold","min_audio_chunk_size",b"min_audio_chunk_size","next_chunk_timeout",b"next_chunk_timeout","sampling_rate",b"sampling_rate","start_of_utterance_threshold",b"start_of_utterance_threshold","transcribe_not_final",b"transcribe_not_final"]) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["decoding_method",b"decoding_method","end_of_utterance_threshold",b"end_of_utterance_threshold","min_audio_chunk_size",b"min_audio_chunk_size","next_chunk_timeout",b"next_chunk_timeout","sampling_rate",b"sampling_rate","start_of_utterance_threshold",b"start_of_utterance_threshold","transcribe_not_final",b"transcribe_not_final"]) -> None: ...
 global___StreamingSpeechRecognition = StreamingSpeechRecognition
 
 class VoiceActivityDetection(google.protobuf.message.Message):
