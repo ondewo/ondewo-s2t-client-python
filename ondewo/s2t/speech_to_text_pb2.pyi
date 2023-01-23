@@ -47,29 +47,6 @@ BEAM_SEARCH: Decoding.ValueType  # 3
 global___Decoding = Decoding
 
 
-class _Architecture:
-    ValueType = typing.NewType('ValueType', builtins.int)
-    V: typing_extensions.TypeAlias = ValueType
-class _ArchitectureEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_Architecture.ValueType], builtins.type):
-    DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
-    CTC: _Architecture.ValueType  # 0
-    """ctc acoustic models (encoder models): wav2vec"""
-
-    SEQ2SEQ: _Architecture.ValueType  # 1
-    """sequence to sequence models (encoder-decoder models): whisper"""
-
-class Architecture(_Architecture, metaclass=_ArchitectureEnumTypeWrapper):
-    pass
-
-CTC: Architecture.ValueType  # 0
-"""ctc acoustic models (encoder models): wav2vec"""
-
-SEQ2SEQ: Architecture.ValueType  # 1
-"""sequence to sequence models (encoder-decoder models): whisper"""
-
-global___Architecture = Architecture
-
-
 class TranscribeRequestConfig(google.protobuf.message.Message):
     """/////////////////////////
     Configuration Message //
@@ -626,7 +603,6 @@ global___S2TInference = S2TInference
 class AcousticModels(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
     TYPE_FIELD_NUMBER: builtins.int
-    ARCHITECTURE_FIELD_NUMBER: builtins.int
     QUARTZNET_FIELD_NUMBER: builtins.int
     QUARTZNET_TRITON_FIELD_NUMBER: builtins.int
     WAV2VEC_FIELD_NUMBER: builtins.int
@@ -634,7 +610,6 @@ class AcousticModels(google.protobuf.message.Message):
     WHISPER_FIELD_NUMBER: builtins.int
     WHISPER_TRITON_FIELD_NUMBER: builtins.int
     type: typing.Text
-    architecture: typing.Text
     @property
     def quartznet(self) -> global___Quartznet: ...
     @property
@@ -650,7 +625,6 @@ class AcousticModels(google.protobuf.message.Message):
     def __init__(self,
         *,
         type: typing.Text = ...,
-        architecture: typing.Text = ...,
         quartznet: typing.Optional[global___Quartznet] = ...,
         quartznet_triton: typing.Optional[global___QuartznetTriton] = ...,
         wav2vec: typing.Optional[global___Wav2Vec] = ...,
@@ -659,7 +633,7 @@ class AcousticModels(google.protobuf.message.Message):
         whisper_triton: typing.Optional[global___WhisperTriton] = ...,
         ) -> None: ...
     def HasField(self, field_name: typing_extensions.Literal["quartznet",b"quartznet","quartznet_triton",b"quartznet_triton","wav2vec",b"wav2vec","wav2vec_triton",b"wav2vec_triton","whisper",b"whisper","whisper_triton",b"whisper_triton"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["architecture",b"architecture","quartznet",b"quartznet","quartznet_triton",b"quartznet_triton","type",b"type","wav2vec",b"wav2vec","wav2vec_triton",b"wav2vec_triton","whisper",b"whisper","whisper_triton",b"whisper_triton"]) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["quartznet",b"quartznet","quartznet_triton",b"quartznet_triton","type",b"type","wav2vec",b"wav2vec","wav2vec_triton",b"wav2vec_triton","whisper",b"whisper","whisper_triton",b"whisper_triton"]) -> None: ...
 global___AcousticModels = AcousticModels
 
 class Whisper(google.protobuf.message.Message):
