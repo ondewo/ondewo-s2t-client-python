@@ -77,7 +77,7 @@ TEST:
 	@echo ${GITHUB_GH_TOKEN}
 	@echo ${PYPI_USERNAME}
 	@echo ${PYPI_PASSWORD}
-	@echo ${CURRENT_RELEASE_NOTES}
+	@echo "\n${CURRENT_RELEASE_NOTES}"
 
 check_build: ## Checks if all built proto-code is there
 	@rm -rf build_check.txt
