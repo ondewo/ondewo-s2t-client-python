@@ -6,3 +6,4 @@ exclude =
     # No need to traverse our git directory
     .git,
     ondewo/s2t/speech_to_text_pb2.py
+    ondewo/s2t/speech_to_text_pb2_grpc.py
