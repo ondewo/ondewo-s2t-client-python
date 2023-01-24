@@ -53,7 +53,7 @@ def create_streaming_request(
                 post_processing=speech_to_text_pb2.PostProcessingOptions(
                     spelling_correction=False,
                 ),
-                ctc_decoding=speech_to_text_pb2.CTCDecoding.GREEDY,
+                decoding=speech_to_text_pb2.Decoding.GREEDY,
                 utterance_detection=speech_to_text_pb2.UtteranceDetectionOptions(
                     transcribe_not_final=transcribe_not_final,
                 )
@@ -68,7 +68,7 @@ def create_streaming_request(
             post_processing=speech_to_text_pb2.PostProcessingOptions(
                 spelling_correction=False,
             ),
-            ctc_decoding=speech_to_text_pb2.CTCDecoding.GREEDY,
+            decoding=speech_to_text_pb2.Decoding.GREEDY,
         )
     )
 
