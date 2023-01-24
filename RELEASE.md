@@ -8,13 +8,6 @@
 
 
 *****************
-## Release ONDEWO S2T Python Client 5.1.0
-
-### Improvements
- * Tracking API Version [5.1.0](https://github.com/ondewo/ondewo-s2t-api/releases/tag/5.1.0) ( [Documentation](https://ondewo.github.io/ondewo-s2t-api/) )
-
-
-*****************
 ## Release ONDEWO S2T Python Client 5.0.0
 
 ### Improvements
