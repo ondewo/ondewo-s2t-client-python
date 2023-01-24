@@ -119,6 +119,8 @@ generate_ondewo_protos:  ## Generate python code from proto files
 		EXTRA_PROTO_DIR=${GOOGLE_PROTOS_DIR} \
 		TARGET_DIR='ondewo' \
 		OUTPUT_DIR=${OUTPUT_DIR}
+		-make precommit_hooks_run_all_files
+		make precommit_hooks_run_all_files
 
 push_to_pypi_via_docker: push_to_pypi_via_docker_image  ## Release automation for building and pushing to pypi via a docker image
 
