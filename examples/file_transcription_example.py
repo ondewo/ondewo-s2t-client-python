@@ -32,7 +32,7 @@ def main():
         "--config",
         type=str,
         help="The GRPC configuration file path. "
-        "See examples/configs in the ondewo-s2t-client-python repository.",
+             "See examples/configs in the ondewo-s2t-client-python repository.",
     )
     parser.add_argument(
         "--secure",
@@ -62,7 +62,7 @@ def main():
         audio_file=audio,
         config=speech_to_text_pb2.TranscribeRequestConfig(
             s2t_pipeline_id=pipeline.id,
-            ctc_decoding=speech_to_text_pb2.CTCDecoding.BEAM_SEARCH_WITH_LM,
+            decoding=speech_to_text_pb2.Decoding.BEAM_SEARCH_WITH_LM,
         )
     )
     # Send transcription request and get response
