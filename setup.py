@@ -18,6 +18,10 @@ setuptools.setup(
     packages=[
         np for np in filter(lambda n: n.startswith("ondewo.") or n == "ondewo", setuptools.find_packages())
     ],
+    include_package_data=True,
+    package_data={
+        'ondewo.s2t': ['py.typed', '*.pyi'],
+    },
     classifiers=[
         'Programming Language :: Python :: 3',
         'Operating System :: OS Independent',
