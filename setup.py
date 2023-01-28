@@ -1,4 +1,4 @@
-import setuptools
+from setuptools import setup, find_packages
 
 with open('README.md', 'r') as f:
     long_description = f.read()
@@ -6,7 +6,7 @@ with open('README.md', 'r') as f:
 with open('requirements.txt') as f:
     requires = f.read().splitlines()
 
-setuptools.setup(
+setup(
     name="ondewo-s2t-client",
     version='5.2.0',
     author="ONDEWO GbmH",
@@ -16,7 +16,11 @@ setuptools.setup(
     long_description_content_type='text/markdown',
     url='https://github.com/ondewo/ondewo-s2t-client-python',
     packages=[
-        np for np in filter(lambda n: n.startswith("ondewo.") or n == "ondewo", setuptools.find_packages())
+        np
+        for np in filter(
+            lambda n: n.startswith('ondewo.') or n == 'ondewo',
+            find_packages()
+        )
     ],
     include_package_data=True,
     package_data={
