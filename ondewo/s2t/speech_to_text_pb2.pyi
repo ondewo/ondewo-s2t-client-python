@@ -12,6 +12,40 @@ import typing_extensions
 
 DESCRIPTOR: google.protobuf.descriptor.FileDescriptor
 
+class _InferenceBackend:
+    ValueType = typing.NewType('ValueType', builtins.int)
+    V: typing_extensions.TypeAlias = ValueType
+class _InferenceBackendEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_InferenceBackend.ValueType], builtins.type):
+    DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
+    INFERENCE_BACKEND_UNKNOWN: _InferenceBackend.ValueType  # 0
+    """Not set"""
+
+    INFERENCE_BACKEND_PYTORCH: _InferenceBackend.ValueType  # 1
+    """Run pytorch model"""
+
+    INFERENCE_BACKEND_FLAX: _InferenceBackend.ValueType  # 2
+    """Run flax model"""
+
+class InferenceBackend(_InferenceBackend, metaclass=_InferenceBackendEnumTypeWrapper):
+    """/////////////////////////
+            Enums         //
+    /////////////////////////
+
+    """
+    pass
+
+INFERENCE_BACKEND_UNKNOWN: InferenceBackend.ValueType  # 0
+"""Not set"""
+
+INFERENCE_BACKEND_PYTORCH: InferenceBackend.ValueType  # 1
+"""Run pytorch model"""
+
+INFERENCE_BACKEND_FLAX: InferenceBackend.ValueType  # 2
+"""Run flax model"""
+
+global___InferenceBackend = InferenceBackend
+
+
 class _Decoding:
     ValueType = typing.NewType('ValueType', builtins.int)
     V: typing_extensions.TypeAlias = ValueType
@@ -27,9 +61,10 @@ class _DecodingEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumT
     """beam search will be used independently on pipeline config"""
 
     BEAM_SEARCH: _Decoding.ValueType  # 3
-    """beam search whitout LM head, to configure decoding mode for seq2seq models."""
+    """beam search without LM head, to configure decoding mode for seq2seq models."""
 
 class Decoding(_Decoding, metaclass=_DecodingEnumTypeWrapper):
+    """The decoding configuration"""
     pass
 
 DEFAULT: Decoding.ValueType  # 0
@@ -42,7 +77,7 @@ BEAM_SEARCH_WITH_LM: Decoding.ValueType  # 2
 """beam search will be used independently on pipeline config"""
 
 BEAM_SEARCH: Decoding.ValueType  # 3
-"""beam search whitout LM head, to configure decoding mode for seq2seq models."""
+"""beam search without LM head, to configure decoding mode for seq2seq models."""
 
 global___Decoding = Decoding
 
@@ -52,6 +87,7 @@ class TranscribeRequestConfig(google.protobuf.message.Message):
     Configuration Message //
     /////////////////////////
 
+    Configuration for a request to transcribe audio
     """
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
     S2T_PIPELINE_ID_FIELD_NUMBER: builtins.int
@@ -105,11 +141,15 @@ class TranscribeRequestConfig(google.protobuf.message.Message):
 global___TranscribeRequestConfig = TranscribeRequestConfig
 
 class TranscriptionReturnOptions(google.protobuf.message.Message):
+    """Configuration of the return values of a transcribe request"""
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
     RETURN_START_OF_SPEECH_FIELD_NUMBER: builtins.int
     RETURN_AUDIO_FIELD_NUMBER: builtins.int
-    RETURN_ALTERNATIVE_TRANSCRIPTIONS_FIELD_NUMBER: builtins.int
     RETURN_CONFIDENCE_SCORE_FIELD_NUMBER: builtins.int
+    RETURN_ALTERNATIVE_TRANSCRIPTIONS_FIELD_NUMBER: builtins.int
+    RETURN_ALTERNATIVE_TRANSCRIPTIONS_NR_FIELD_NUMBER: builtins.int
+    RETURN_ALTERNATIVE_WORDS_FIELD_NUMBER: builtins.int
+    RETURN_ALTERNATIVE_WORDS_NR_FIELD_NUMBER: builtins.int
     RETURN_WORD_TIMING_FIELD_NUMBER: builtins.int
     return_start_of_speech: builtins.bool
     """should server make response indicating that the beginning of the speech was detected"""
@@ -117,11 +157,20 @@ class TranscriptionReturnOptions(google.protobuf.message.Message):
     return_audio: builtins.bool
     """should s2t server return audio bytes of transcribed utterance"""
 
+    return_confidence_score: builtins.bool
+    """Whether or not to return confidence scores"""
+
     return_alternative_transcriptions: builtins.bool
     """Whether or not to return alternative results from beam-search"""
 
-    return_confidence_score: builtins.bool
-    """Whether or not to return confidence scores"""
+    return_alternative_transcriptions_nr: builtins.int
+    """Optional. Number of alternative transciptions results from beam-search or greedy-search"""
+
+    return_alternative_words: builtins.bool
+    """Whether or not to return alternative results from beam-search"""
+
+    return_alternative_words_nr: builtins.int
+    """Optional. Number of alternative words to results"""
 
     return_word_timing: builtins.bool
     """Optional. Whether or not to return timestamps of start and end of the words. Only used in TranscribeFile."""
@@ -130,14 +179,18 @@ class TranscriptionReturnOptions(google.protobuf.message.Message):
         *,
         return_start_of_speech: builtins.bool = ...,
         return_audio: builtins.bool = ...,
-        return_alternative_transcriptions: builtins.bool = ...,
         return_confidence_score: builtins.bool = ...,
+        return_alternative_transcriptions: builtins.bool = ...,
+        return_alternative_transcriptions_nr: builtins.int = ...,
+        return_alternative_words: builtins.bool = ...,
+        return_alternative_words_nr: builtins.int = ...,
         return_word_timing: builtins.bool = ...,
         ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["return_alternative_transcriptions",b"return_alternative_transcriptions","return_audio",b"return_audio","return_confidence_score",b"return_confidence_score","return_start_of_speech",b"return_start_of_speech","return_word_timing",b"return_word_timing"]) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["return_alternative_transcriptions",b"return_alternative_transcriptions","return_alternative_transcriptions_nr",b"return_alternative_transcriptions_nr","return_alternative_words",b"return_alternative_words","return_alternative_words_nr",b"return_alternative_words_nr","return_audio",b"return_audio","return_confidence_score",b"return_confidence_score","return_start_of_speech",b"return_start_of_speech","return_word_timing",b"return_word_timing"]) -> None: ...
 global___TranscriptionReturnOptions = TranscriptionReturnOptions
 
 class UtteranceDetectionOptions(google.protobuf.message.Message):
+    """Configuration of the options to detect utterances"""
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
     TRANSCRIBE_NOT_FINAL_FIELD_NUMBER: builtins.int
     START_OF_UTTERANCE_THRESHOLD_FIELD_NUMBER: builtins.int
@@ -166,15 +219,16 @@ class UtteranceDetectionOptions(google.protobuf.message.Message):
 global___UtteranceDetectionOptions = UtteranceDetectionOptions
 
 class PostProcessingOptions(google.protobuf.message.Message):
+    """Configuration of the post-processing options"""
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
     SPELLING_CORRECTION_FIELD_NUMBER: builtins.int
     NORMALIZE_FIELD_NUMBER: builtins.int
     CONFIG_FIELD_NUMBER: builtins.int
     spelling_correction: builtins.bool
-    """Whether or not to use spelling correction"""
+    """Whether to use spelling correction"""
 
     normalize: builtins.bool
-    """Whether or not to disable normalization"""
+    """Whether to disable normalization"""
 
     @property
     def config(self) -> global___PostProcessing:
@@ -197,6 +251,7 @@ class TranscribeStreamRequest(google.protobuf.message.Message):
     TRANSCRIBE STREAM //
     /////////////////////
 
+    Request to transcribe an audio stream
     """
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
     AUDIO_CHUNK_FIELD_NUMBER: builtins.int
@@ -228,6 +283,7 @@ class TranscribeStreamRequest(google.protobuf.message.Message):
 global___TranscribeStreamRequest = TranscribeStreamRequest
 
 class Transcription(google.protobuf.message.Message):
+    """The transcription message"""
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
     TRANSCRIPTION_FIELD_NUMBER: builtins.int
     CONFIDENCE_SCORE_FIELD_NUMBER: builtins.int
@@ -246,6 +302,7 @@ class Transcription(google.protobuf.message.Message):
 global___Transcription = Transcription
 
 class TranscribeStreamResponse(google.protobuf.message.Message):
+    """The response message of a stream transcription"""
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
     TRANSCRIPTIONS_FIELD_NUMBER: builtins.int
     TIME_FIELD_NUMBER: builtins.int
@@ -302,6 +359,7 @@ class TranscribeFileRequest(google.protobuf.message.Message):
     TRANSCRIBE FILE //
     ///////////////////
 
+    A request to transcribe an audio file
     """
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
     AUDIO_FILE_FIELD_NUMBER: builtins.int
@@ -323,6 +381,7 @@ class TranscribeFileRequest(google.protobuf.message.Message):
 global___TranscribeFileRequest = TranscribeFileRequest
 
 class TranscribeFileResponse(google.protobuf.message.Message):
+    """The response message for a transcribe file request"""
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
     TRANSCRIPTIONS_FIELD_NUMBER: builtins.int
     TIME_FIELD_NUMBER: builtins.int
@@ -353,6 +412,7 @@ class TranscribeFileResponse(google.protobuf.message.Message):
 global___TranscribeFileResponse = TranscribeFileResponse
 
 class WordTiming(google.protobuf.message.Message):
+    """Message structure for word timings"""
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
     WORD_FIELD_NUMBER: builtins.int
     BEGIN_FIELD_NUMBER: builtins.int
@@ -380,6 +440,7 @@ class S2tPipelineId(google.protobuf.message.Message):
     GET S2T PIPELINE //
     ////////////////////
 
+    The pipeline id for a specific pipeline configuration
     """
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
     ID_FIELD_NUMBER: builtins.int
@@ -398,6 +459,7 @@ class ListS2tPipelinesRequest(google.protobuf.message.Message):
     LIST S2T PIPELINES //
     //////////////////////
 
+    Request to list all speech-to-text pipelines. Optionally also filter criteria can be set
     """
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
     LANGUAGES_FIELD_NUMBER: builtins.int
@@ -405,11 +467,17 @@ class ListS2tPipelinesRequest(google.protobuf.message.Message):
     DOMAINS_FIELD_NUMBER: builtins.int
     REGISTERED_ONLY_FIELD_NUMBER: builtins.int
     @property
-    def languages(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[typing.Text]: ...
+    def languages(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[typing.Text]:
+        """Filter for languages"""
+        pass
     @property
-    def pipeline_owners(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[typing.Text]: ...
+    def pipeline_owners(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[typing.Text]:
+        """Filter for pipeline owners"""
+        pass
     @property
-    def domains(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[typing.Text]: ...
+    def domains(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[typing.Text]:
+        """Filter for domains"""
+        pass
     registered_only: builtins.bool
     """If true, return only registered pipelines.
     Default false: return registered and persisted (from config files) configs.
@@ -426,10 +494,16 @@ class ListS2tPipelinesRequest(google.protobuf.message.Message):
 global___ListS2tPipelinesRequest = ListS2tPipelinesRequest
 
 class ListS2tPipelinesResponse(google.protobuf.message.Message):
+    """ListS2tPipelinesResponse is used to return a list of all speech-to-text pipelines."""
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
     PIPELINE_CONFIGS_FIELD_NUMBER: builtins.int
     @property
-    def pipeline_configs(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___Speech2TextConfig]: ...
+    def pipeline_configs(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___Speech2TextConfig]:
+        """A list of Speech2TextConfig message instances containing the configuration of each pipeline.
+        Example: [{id: "pipeline_1", description: {language: "en"}, active: true, ...}, {id: "pipeline_2",
+        description: {language: "fr"}, active: true, ...}]
+        """
+        pass
     def __init__(self,
         *,
         pipeline_configs: typing.Optional[typing.Iterable[global___Speech2TextConfig]] = ...,
@@ -442,14 +516,21 @@ class ListS2tLanguagesRequest(google.protobuf.message.Message):
     LIST S2T LANGUAGES //
     //////////////////////
 
+    ListS2tLanguagesRequest is used to request a list of available languages. Optionally, filters can be set.
     """
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
     DOMAINS_FIELD_NUMBER: builtins.int
     PIPELINE_OWNERS_FIELD_NUMBER: builtins.int
     @property
-    def domains(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[typing.Text]: ...
+    def domains(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[typing.Text]:
+        """Filter for domains.  Example: ["medical", "finance"]"""
+        pass
     @property
-    def pipeline_owners(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[typing.Text]: ...
+    def pipeline_owners(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[typing.Text]:
+        """Filter for pipeline owners.
+        Example: ["ondewo", "partner_company"]
+        """
+        pass
     def __init__(self,
         *,
         domains: typing.Optional[typing.Iterable[typing.Text]] = ...,
@@ -459,10 +540,13 @@ class ListS2tLanguagesRequest(google.protobuf.message.Message):
 global___ListS2tLanguagesRequest = ListS2tLanguagesRequest
 
 class ListS2tLanguagesResponse(google.protobuf.message.Message):
+    """Response message to list available languages"""
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
     LANGUAGES_FIELD_NUMBER: builtins.int
     @property
-    def languages(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[typing.Text]: ...
+    def languages(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[typing.Text]:
+        """available languages"""
+        pass
     def __init__(self,
         *,
         languages: typing.Optional[typing.Iterable[typing.Text]] = ...,
@@ -475,14 +559,19 @@ class ListS2tDomainsRequest(google.protobuf.message.Message):
     LIST S2T DOMAINS //
     ////////////////////
 
+    Request message to list available domains. Optionally also filters can be set.
     """
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
     LANGUAGES_FIELD_NUMBER: builtins.int
     PIPELINE_OWNERS_FIELD_NUMBER: builtins.int
     @property
-    def languages(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[typing.Text]: ...
+    def languages(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[typing.Text]:
+        """Filter for languages"""
+        pass
     @property
-    def pipeline_owners(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[typing.Text]: ...
+    def pipeline_owners(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[typing.Text]:
+        """Filter for pipeline owner"""
+        pass
     def __init__(self,
         *,
         languages: typing.Optional[typing.Iterable[typing.Text]] = ...,
@@ -492,10 +581,13 @@ class ListS2tDomainsRequest(google.protobuf.message.Message):
 global___ListS2tDomainsRequest = ListS2tDomainsRequest
 
 class ListS2tDomainsResponse(google.protobuf.message.Message):
+    """Response message to list available domains"""
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
     DOMAINS_FIELD_NUMBER: builtins.int
     @property
-    def domains(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[typing.Text]: ...
+    def domains(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[typing.Text]:
+        """domains available. Example: ["medical", "finance"]"""
+        pass
     def __init__(self,
         *,
         domains: typing.Optional[typing.Iterable[typing.Text]] = ...,
@@ -508,10 +600,13 @@ class S2TGetServiceInfoResponse(google.protobuf.message.Message):
     GET SERVICE INFO //
     ////////////////////
 
+    S2TGetServiceInfoResponse is used to return version information about the speech-to-text service.
     """
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
     VERSION_FIELD_NUMBER: builtins.int
     version: typing.Text
+    """Version number based on semantic versioning, e.g. "4.2.0"."""
+
     def __init__(self,
         *,
         version: typing.Text = ...,
@@ -524,6 +619,7 @@ class Speech2TextConfig(google.protobuf.message.Message):
     SPEECH-2-TEXT PIPELINE CONFIG //
     /////////////////////////////////
 
+    Speech2TextConfig is a configuration message for the speech-to-text pipeline
     """
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
     ID_FIELD_NUMBER: builtins.int
@@ -535,19 +631,35 @@ class Speech2TextConfig(google.protobuf.message.Message):
     POST_PROCESSING_FIELD_NUMBER: builtins.int
     LOGGING_FIELD_NUMBER: builtins.int
     id: typing.Text
+    """Unique identifier for the configuration."""
+
     @property
-    def description(self) -> global___S2TDescription: ...
+    def description(self) -> global___S2TDescription:
+        """Description of the speech-to-text system."""
+        pass
     active: builtins.bool
+    """Indicates if the configuration is active."""
+
     @property
-    def inference(self) -> global___S2TInference: ...
+    def inference(self) -> global___S2TInference:
+        """Configuration for inference models."""
+        pass
     @property
-    def streaming_server(self) -> global___StreamingServer: ...
+    def streaming_server(self) -> global___StreamingServer:
+        """Configuration for the streaming server."""
+        pass
     @property
-    def voice_activity_detection(self) -> global___VoiceActivityDetection: ...
+    def voice_activity_detection(self) -> global___VoiceActivityDetection:
+        """Configuration for voice activity detection."""
+        pass
     @property
-    def post_processing(self) -> global___PostProcessing: ...
+    def post_processing(self) -> global___PostProcessing:
+        """Configuration for post-processing."""
+        pass
     @property
-    def logging(self) -> global___Logging: ...
+    def logging(self) -> global___Logging:
+        """Configuration for logging."""
+        pass
     def __init__(self,
         *,
         id: typing.Text = ...,
@@ -564,15 +676,24 @@ class Speech2TextConfig(google.protobuf.message.Message):
 global___Speech2TextConfig = Speech2TextConfig
 
 class S2TDescription(google.protobuf.message.Message):
+    """S2TDescription contains descriptive information about the speech-to-text pipeline."""
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
     LANGUAGE_FIELD_NUMBER: builtins.int
     PIPELINE_OWNER_FIELD_NUMBER: builtins.int
     DOMAIN_FIELD_NUMBER: builtins.int
     COMMENTS_FIELD_NUMBER: builtins.int
     language: typing.Text
+    """Language of the speech-to-text system."""
+
     pipeline_owner: typing.Text
+    """Owner of the pipeline."""
+
     domain: typing.Text
+    """Domain of the speech-to-text system."""
+
     comments: typing.Text
+    """Comments about the system."""
+
     def __init__(self,
         *,
         language: typing.Text = ...,
@@ -584,23 +705,34 @@ class S2TDescription(google.protobuf.message.Message):
 global___S2TDescription = S2TDescription
 
 class S2TInference(google.protobuf.message.Message):
+    """S2TInference contains information about inference models used in the speech-to-text pipeline."""
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
     ACOUSTIC_MODELS_FIELD_NUMBER: builtins.int
     LANGUAGE_MODELS_FIELD_NUMBER: builtins.int
+    INFERENCE_BACKEND_FIELD_NUMBER: builtins.int
     @property
-    def acoustic_models(self) -> global___AcousticModels: ...
+    def acoustic_models(self) -> global___AcousticModels:
+        """Configuration for the acoustic models."""
+        pass
     @property
-    def language_models(self) -> global___LanguageModels: ...
+    def language_models(self) -> global___LanguageModels:
+        """Configuration for the language models."""
+        pass
+    inference_backend: global___InferenceBackend.ValueType
+    """Configuration for the inference backend."""
+
     def __init__(self,
         *,
         acoustic_models: typing.Optional[global___AcousticModels] = ...,
         language_models: typing.Optional[global___LanguageModels] = ...,
+        inference_backend: global___InferenceBackend.ValueType = ...,
         ) -> None: ...
     def HasField(self, field_name: typing_extensions.Literal["acoustic_models",b"acoustic_models","language_models",b"language_models"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["acoustic_models",b"acoustic_models","language_models",b"language_models"]) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["acoustic_models",b"acoustic_models","inference_backend",b"inference_backend","language_models",b"language_models"]) -> None: ...
 global___S2TInference = S2TInference
 
 class AcousticModels(google.protobuf.message.Message):
+    """AcousticModels contains information about different types of acoustic models."""
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
     TYPE_FIELD_NUMBER: builtins.int
     QUARTZNET_FIELD_NUMBER: builtins.int
@@ -610,18 +742,32 @@ class AcousticModels(google.protobuf.message.Message):
     WHISPER_FIELD_NUMBER: builtins.int
     WHISPER_TRITON_FIELD_NUMBER: builtins.int
     type: typing.Text
+    """Type of the acoustic model."""
+
     @property
-    def quartznet(self) -> global___Quartznet: ...
+    def quartznet(self) -> global___Quartznet:
+        """Configuration for the Quartznet model."""
+        pass
     @property
-    def quartznet_triton(self) -> global___QuartznetTriton: ...
+    def quartznet_triton(self) -> global___QuartznetTriton:
+        """Configuration for the Quartznet model using Triton."""
+        pass
     @property
-    def wav2vec(self) -> global___Wav2Vec: ...
+    def wav2vec(self) -> global___Wav2Vec:
+        """Configuration for the Wav2Vec model."""
+        pass
     @property
-    def wav2vec_triton(self) -> global___Wav2VecTriton: ...
+    def wav2vec_triton(self) -> global___Wav2VecTriton:
+        """Configuration for the Wav2Vec model using Triton."""
+        pass
     @property
-    def whisper(self) -> global___Whisper: ...
+    def whisper(self) -> global___Whisper:
+        """Configuration for the Whisper model."""
+        pass
     @property
-    def whisper_triton(self) -> global___WhisperTriton: ...
+    def whisper_triton(self) -> global___WhisperTriton:
+        """Configuration for the Whisper model using Triton."""
+        pass
     def __init__(self,
         *,
         type: typing.Text = ...,
@@ -637,13 +783,20 @@ class AcousticModels(google.protobuf.message.Message):
 global___AcousticModels = AcousticModels
 
 class Whisper(google.protobuf.message.Message):
+    """Whisper contains information about the Whisper model."""
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
     MODEL_PATH_FIELD_NUMBER: builtins.int
     USE_GPU_FIELD_NUMBER: builtins.int
     LANGUAGE_FIELD_NUMBER: builtins.int
     model_path: typing.Text
+    """Path to the model."""
+
     use_gpu: builtins.bool
+    """Indicates if GPU is used."""
+
     language: typing.Text
+    """Language of the model."""
+
     def __init__(self,
         *,
         model_path: typing.Text = ...,
@@ -654,15 +807,24 @@ class Whisper(google.protobuf.message.Message):
 global___Whisper = Whisper
 
 class WhisperTriton(google.protobuf.message.Message):
+    """WhisperTriton contains information about the Whisper model using Triton."""
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
     PROCESSOR_PATH_FIELD_NUMBER: builtins.int
     TRITON_MODEL_NAME_FIELD_NUMBER: builtins.int
     TRITON_MODEL_VERSION_FIELD_NUMBER: builtins.int
     CHECK_STATUS_TIMEOUT_FIELD_NUMBER: builtins.int
     processor_path: typing.Text
+    """Path to the processor."""
+
     triton_model_name: typing.Text
+    """Name of the Triton model."""
+
     triton_model_version: typing.Text
+    """Version of the Triton model."""
+
     check_status_timeout: builtins.int
+    """Timeout for checking model status."""
+
     def __init__(self,
         *,
         processor_path: typing.Text = ...,
@@ -674,11 +836,16 @@ class WhisperTriton(google.protobuf.message.Message):
 global___WhisperTriton = WhisperTriton
 
 class Wav2Vec(google.protobuf.message.Message):
+    """Wav2Vec contains information about the Wav2Vec model."""
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
     MODEL_PATH_FIELD_NUMBER: builtins.int
     USE_GPU_FIELD_NUMBER: builtins.int
     model_path: typing.Text
+    """Path to the model."""
+
     use_gpu: builtins.bool
+    """Indicates if GPU is used."""
+
     def __init__(self,
         *,
         model_path: typing.Text = ...,
@@ -688,15 +855,24 @@ class Wav2Vec(google.protobuf.message.Message):
 global___Wav2Vec = Wav2Vec
 
 class Wav2VecTriton(google.protobuf.message.Message):
+    """Wav2VecTriton contains information about the Wav2Vec model using Triton."""
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
     PROCESSOR_PATH_FIELD_NUMBER: builtins.int
     TRITON_MODEL_NAME_FIELD_NUMBER: builtins.int
     TRITON_MODEL_VERSION_FIELD_NUMBER: builtins.int
     CHECK_STATUS_TIMEOUT_FIELD_NUMBER: builtins.int
     processor_path: typing.Text
+    """Path to the processor."""
+
     triton_model_name: typing.Text
+    """Name of the Triton model."""
+
     triton_model_version: typing.Text
+    """Version of the Triton model."""
+
     check_status_timeout: builtins.int
+    """Timeout for checking model status."""
+
     def __init__(self,
         *,
         processor_path: typing.Text = ...,
@@ -708,6 +884,7 @@ class Wav2VecTriton(google.protobuf.message.Message):
 global___Wav2VecTriton = Wav2VecTriton
 
 class Quartznet(google.protobuf.message.Message):
+    """Quartznet contains information about the Quartznet model."""
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
     CONFIG_PATH_FIELD_NUMBER: builtins.int
     LOAD_TYPE_FIELD_NUMBER: builtins.int
@@ -715,12 +892,22 @@ class Quartznet(google.protobuf.message.Message):
     CKPT_FILE_FIELD_NUMBER: builtins.int
     USE_GPU_FIELD_NUMBER: builtins.int
     config_path: typing.Text
+    """Path to the configuration file."""
+
     load_type: typing.Text
+    """Type of loading for the model."""
+
     @property
-    def pt_files(self) -> global___PtFiles: ...
+    def pt_files(self) -> global___PtFiles:
+        """Configuration for PT files."""
+        pass
     @property
-    def ckpt_file(self) -> global___CkptFile: ...
+    def ckpt_file(self) -> global___CkptFile:
+        """Configuration for checkpoint files."""
+        pass
     use_gpu: builtins.bool
+    """Indicates if GPU is used."""
+
     def __init__(self,
         *,
         config_path: typing.Text = ...,
@@ -734,11 +921,16 @@ class Quartznet(google.protobuf.message.Message):
 global___Quartznet = Quartznet
 
 class PtFiles(google.protobuf.message.Message):
+    """PtFiles contains information about PT files."""
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
     PATH_FIELD_NUMBER: builtins.int
     STEP_FIELD_NUMBER: builtins.int
     path: typing.Text
+    """Path to the PT files."""
+
     step: typing.Text
+    """Step for the PT files."""
+
     def __init__(self,
         *,
         path: typing.Text = ...,
@@ -748,9 +940,12 @@ class PtFiles(google.protobuf.message.Message):
 global___PtFiles = PtFiles
 
 class CkptFile(google.protobuf.message.Message):
+    """CkptFile contains information about checkpoint files."""
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
     PATH_FIELD_NUMBER: builtins.int
     path: typing.Text
+    """Path to the checkpoint file."""
+
     def __init__(self,
         *,
         path: typing.Text = ...,
@@ -759,13 +954,20 @@ class CkptFile(google.protobuf.message.Message):
 global___CkptFile = CkptFile
 
 class QuartznetTriton(google.protobuf.message.Message):
+    """QuartznetTriton contains information about the Quartznet model using Triton."""
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
     CONFIG_PATH_FIELD_NUMBER: builtins.int
     TRITON_URL_FIELD_NUMBER: builtins.int
     TRITON_MODEL_FIELD_NUMBER: builtins.int
     config_path: typing.Text
+    """Path to the configuration file."""
+
     triton_url: typing.Text
+    """URL for the Triton server."""
+
     triton_model: typing.Text
+    """Triton model name."""
+
     def __init__(self,
         *,
         config_path: typing.Text = ...,
@@ -776,6 +978,7 @@ class QuartznetTriton(google.protobuf.message.Message):
 global___QuartznetTriton = QuartznetTriton
 
 class LanguageModels(google.protobuf.message.Message):
+    """LanguageModels contains information about language models."""
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
     PATH_FIELD_NUMBER: builtins.int
     BEAM_SIZE_FIELD_NUMBER: builtins.int
@@ -783,14 +986,20 @@ class LanguageModels(google.protobuf.message.Message):
     BEAM_SEARCH_SCORER_ALPHA_FIELD_NUMBER: builtins.int
     BEAM_SEARCH_SCORER_BETA_FIELD_NUMBER: builtins.int
     path: typing.Text
-    """Path to the directory of language models"""
+    """Path to the directory of language models."""
 
     beam_size: builtins.int
+    """Beam size for the search algorithm."""
+
     default_lm: typing.Text
-    """this language model will be selected if none is given"""
+    """Default language model to be selected if none is given."""
 
     beam_search_scorer_alpha: builtins.float
+    """Weight for the language model scorer (alpha)."""
+
     beam_search_scorer_beta: builtins.float
+    """Weight for the word insertion penalty (beta)."""
+
     def __init__(self,
         *,
         path: typing.Text = ...,
@@ -803,16 +1012,25 @@ class LanguageModels(google.protobuf.message.Message):
 global___LanguageModels = LanguageModels
 
 class StreamingServer(google.protobuf.message.Message):
+    """StreamingServer contains information about the streaming server."""
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
     HOST_FIELD_NUMBER: builtins.int
     PORT_FIELD_NUMBER: builtins.int
     OUTPUT_STYLE_FIELD_NUMBER: builtins.int
     STREAMING_SPEECH_RECOGNITION_FIELD_NUMBER: builtins.int
     host: typing.Text
+    """Hostname of the streaming server."""
+
     port: builtins.int
+    """Port number of the streaming server."""
+
     output_style: typing.Text
+    """Output style for the streaming server."""
+
     @property
-    def streaming_speech_recognition(self) -> global___StreamingSpeechRecognition: ...
+    def streaming_speech_recognition(self) -> global___StreamingSpeechRecognition:
+        """Configuration for streaming speech recognition."""
+        pass
     def __init__(self,
         *,
         host: typing.Text = ...,
@@ -825,6 +1043,7 @@ class StreamingServer(google.protobuf.message.Message):
 global___StreamingServer = StreamingServer
 
 class StreamingSpeechRecognition(google.protobuf.message.Message):
+    """StreamingSpeechRecognition contains information about streaming speech recognition settings."""
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
     TRANSCRIBE_NOT_FINAL_FIELD_NUMBER: builtins.int
     DECODING_METHOD_FIELD_NUMBER: builtins.int
@@ -834,13 +1053,25 @@ class StreamingSpeechRecognition(google.protobuf.message.Message):
     END_OF_UTTERANCE_THRESHOLD_FIELD_NUMBER: builtins.int
     NEXT_CHUNK_TIMEOUT_FIELD_NUMBER: builtins.int
     transcribe_not_final: builtins.bool
+    """Indicates whether to transcribe non-final results."""
+
     decoding_method: typing.Text
+    """Decoding method for speech recognition."""
+
     sampling_rate: builtins.int
+    """Sampling rate for audio input."""
+
     min_audio_chunk_size: builtins.int
+    """Minimum audio chunk size for processing."""
+
     start_of_utterance_threshold: builtins.float
+    """Threshold for detecting the start of an utterance."""
+
     end_of_utterance_threshold: builtins.float
+    """Threshold for detecting the end of an utterance."""
+
     next_chunk_timeout: builtins.float
-    """if time between audio chunks exceeds next_chunk_timeout, stream will be stopped"""
+    """Timeout between audio chunks; if exceeded, the stream will be stopped."""
 
     def __init__(self,
         *,
@@ -856,17 +1087,26 @@ class StreamingSpeechRecognition(google.protobuf.message.Message):
 global___StreamingSpeechRecognition = StreamingSpeechRecognition
 
 class VoiceActivityDetection(google.protobuf.message.Message):
+    """VoiceActivityDetection contains information about voice activity detection settings."""
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
     ACTIVE_FIELD_NUMBER: builtins.int
     SAMPLING_RATE_FIELD_NUMBER: builtins.int
     PYANNOTE_FIELD_NUMBER: builtins.int
     MATCHBOX_FIELD_NUMBER: builtins.int
     active: typing.Text
+    """Indicates if voice activity detection is active."""
+
     sampling_rate: builtins.int
+    """Sampling rate for voice activity detection."""
+
     @property
-    def pyannote(self) -> global___Pyannote: ...
+    def pyannote(self) -> global___Pyannote:
+        """Configuration for the Pyannote model."""
+        pass
     @property
-    def matchbox(self) -> global___Matchbox: ...
+    def matchbox(self) -> global___Matchbox:
+        """Configuration for the Matchbox model."""
+        pass
     def __init__(self,
         *,
         active: typing.Text = ...,
@@ -879,6 +1119,7 @@ class VoiceActivityDetection(google.protobuf.message.Message):
 global___VoiceActivityDetection = VoiceActivityDetection
 
 class Pyannote(google.protobuf.message.Message):
+    """Pyannote contains configuration for the Pyannote voice activity detection model."""
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
     MODEL_PATH_FIELD_NUMBER: builtins.int
     MIN_AUDIO_SIZE_FIELD_NUMBER: builtins.int
@@ -888,12 +1129,26 @@ class Pyannote(google.protobuf.message.Message):
     MIN_DURATION_OFF_FIELD_NUMBER: builtins.int
     MIN_DURATION_ON_FIELD_NUMBER: builtins.int
     model_path: typing.Text
+    """Path to the Pyannote model."""
+
     min_audio_size: builtins.int
+    """Minimum audio size for processing."""
+
     offset: builtins.float
+    """Offset for voice activity detection."""
+
     onset: builtins.float
+    """Onset for voice activity detection."""
+
     log_scale: builtins.bool
+    """whether to use log scale"""
+
     min_duration_off: builtins.float
+    """Minimum duration for an off segment."""
+
     min_duration_on: builtins.float
+    """Minimum duration for an on segment."""
+
     def __init__(self,
         *,
         model_path: typing.Text = ...,
@@ -910,13 +1165,20 @@ class Pyannote(google.protobuf.message.Message):
 global___Pyannote = Pyannote
 
 class Matchbox(google.protobuf.message.Message):
+    """Matchbox contains configuration for the Matchbox voice activity detection model."""
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
     MODEL_CONFIG_FIELD_NUMBER: builtins.int
     ENCODER_PATH_FIELD_NUMBER: builtins.int
     DECODER_PATH_FIELD_NUMBER: builtins.int
     model_config: typing.Text
+    """Path to the Matchbox model configuration."""
+
     encoder_path: typing.Text
+    """Path to the Matchbox encoder."""
+
     decoder_path: typing.Text
+    """Path to the Matchbox decoder."""
+
     def __init__(self,
         *,
         model_config: typing.Text = ...,
@@ -927,12 +1189,13 @@ class Matchbox(google.protobuf.message.Message):
 global___Matchbox = Matchbox
 
 class PostProcessing(google.protobuf.message.Message):
+    """PostProcessing contains the configuration for post-processing."""
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
     PIPELINE_FIELD_NUMBER: builtins.int
     POST_PROCESSORS_FIELD_NUMBER: builtins.int
     @property
     def pipeline(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[typing.Text]:
-        """List of names of active post-processors"""
+        """List of names of active post-processors."""
         pass
     @property
     def post_processors(self) -> global___PostProcessors:
@@ -948,16 +1211,17 @@ class PostProcessing(google.protobuf.message.Message):
 global___PostProcessing = PostProcessing
 
 class PostProcessors(google.protobuf.message.Message):
+    """PostProcessors contains configurations for post-processors."""
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
     SYM_SPELL_FIELD_NUMBER: builtins.int
     NORMALIZATION_FIELD_NUMBER: builtins.int
     @property
     def sym_spell(self) -> global___SymSpell:
-        """Configuration of the sym-spell spelling correction"""
+        """Configuration of the SymSpell spelling correction."""
         pass
     @property
     def normalization(self) -> global___S2TNormalization:
-        """Configuration of the normalization object"""
+        """Configuration of the normalization object."""
         pass
     def __init__(self,
         *,
@@ -969,6 +1233,7 @@ class PostProcessors(google.protobuf.message.Message):
 global___PostProcessors = PostProcessors
 
 class SymSpell(google.protobuf.message.Message):
+    """SymSpell contains configuration for the SymSpell spelling correction."""
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
     DICT_PATH_FIELD_NUMBER: builtins.int
     MAX_DICTIONARY_EDIT_DISTANCE_FIELD_NUMBER: builtins.int
@@ -994,10 +1259,11 @@ class SymSpell(google.protobuf.message.Message):
 global___SymSpell = SymSpell
 
 class S2TNormalization(google.protobuf.message.Message):
+    """S2TNormalization contains configuration for the speech-to-text normalization."""
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
     LANGUAGE_FIELD_NUMBER: builtins.int
     language: typing.Text
-    """In which language to normalization transcription."""
+    """Language for normalization of transcriptions."""
 
     def __init__(self,
         *,
@@ -1007,11 +1273,16 @@ class S2TNormalization(google.protobuf.message.Message):
 global___S2TNormalization = S2TNormalization
 
 class Logging(google.protobuf.message.Message):
+    """Logging contains configuration for logging."""
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
     TYPE_FIELD_NUMBER: builtins.int
     PATH_FIELD_NUMBER: builtins.int
     type: typing.Text
+    """Type of logging."""
+
     path: typing.Text
+    """Path for logging."""
+
     def __init__(self,
         *,
         type: typing.Text = ...,
@@ -1025,12 +1296,15 @@ class ListS2tLanguageModelsRequest(google.protobuf.message.Message):
     GET LIST OF AVAILABLE LANGUAGE MODELS //
     /////////////////////////////////////////
 
+    ListS2tLanguageModelsRequest is used to request a list of available language models for specified pipelines.
     """
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
     IDS_FIELD_NUMBER: builtins.int
     @property
     def ids(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[typing.Text]:
-        """List of pipeline id(s) to see their available language models"""
+        """List of pipeline IDs to retrieve their available language models.
+        Example: ["pipeline_1", "pipeline_2"]
+        """
         pass
     def __init__(self,
         *,
@@ -1040,15 +1314,16 @@ class ListS2tLanguageModelsRequest(google.protobuf.message.Message):
 global___ListS2tLanguageModelsRequest = ListS2tLanguageModelsRequest
 
 class LanguageModelPipelineId(google.protobuf.message.Message):
+    """LanguageModelPipelineId contains information about a pipeline and its available language models."""
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
     PIPELINE_ID_FIELD_NUMBER: builtins.int
     MODEL_NAMES_FIELD_NUMBER: builtins.int
     pipeline_id: typing.Text
-    """One pipeline id"""
+    """A pipeline ID. Example: "pipeline_1" """
 
     @property
     def model_names(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[typing.Text]:
-        """A list of all available language models for above pipeline id"""
+        """A list of all available language models for the corresponding pipeline ID. Example: ["model_1", "model_2"]"""
         pass
     def __init__(self,
         *,
@@ -1059,11 +1334,16 @@ class LanguageModelPipelineId(google.protobuf.message.Message):
 global___LanguageModelPipelineId = LanguageModelPipelineId
 
 class ListS2tLanguageModelsResponse(google.protobuf.message.Message):
+    """ListS2tLanguageModelsResponse is used to return the available language models for specified pipelines."""
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
     LM_PIPELINE_IDS_FIELD_NUMBER: builtins.int
     @property
     def lm_pipeline_ids(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___LanguageModelPipelineId]:
-        """Response is a dictionary of type Dict[pipeline id, List of available language models]"""
+        """Response is a list of LanguageModelPipelineId, where each element contains a pipeline ID and its associated
+        language models.
+        Example: [{pipeline_id: "pipeline_1", model_names: ["model_1", "model_2"]}, {pipeline_id: "pipeline_2",
+        model_names: ["model_3"]}]
+        """
         pass
     def __init__(self,
         *,
@@ -1073,15 +1353,16 @@ class ListS2tLanguageModelsResponse(google.protobuf.message.Message):
 global___ListS2tLanguageModelsResponse = ListS2tLanguageModelsResponse
 
 class CreateUserLanguageModelRequest(google.protobuf.message.Message):
-    """/////////////////////////////
-    USER LANGUAGE MODEL TOOLS //
-    /////////////////////////////
+    """///////////////////////////////////
+    CUSTOM LANGUAGE MODEL FEATURES  //
+    ///////////////////////////////////
 
+    CreateUserLanguageModelRequest is used to request the creation of a new user-specific language model.
     """
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
     LANGUAGE_MODEL_NAME_FIELD_NUMBER: builtins.int
     language_model_name: typing.Text
-    """Name of the language model to create"""
+    """Name of the language model to create. Example: "user_lm_1" """
 
     def __init__(self,
         *,
@@ -1091,10 +1372,11 @@ class CreateUserLanguageModelRequest(google.protobuf.message.Message):
 global___CreateUserLanguageModelRequest = CreateUserLanguageModelRequest
 
 class DeleteUserLanguageModelRequest(google.protobuf.message.Message):
+    """DeleteUserLanguageModelRequest is used to request the deletion of a user-specific language model."""
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
     LANGUAGE_MODEL_NAME_FIELD_NUMBER: builtins.int
     language_model_name: typing.Text
-    """Name of the language model to delete"""
+    """Name of the language model to delete. Example: "user_lm_1" """
 
     def __init__(self,
         *,
@@ -1104,14 +1386,17 @@ class DeleteUserLanguageModelRequest(google.protobuf.message.Message):
 global___DeleteUserLanguageModelRequest = DeleteUserLanguageModelRequest
 
 class AddDataToUserLanguageModelRequest(google.protobuf.message.Message):
+    """AddDataToUserLanguageModelRequest is used to request the addition of data to a user-specific language model."""
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
     LANGUAGE_MODEL_NAME_FIELD_NUMBER: builtins.int
     ZIPPED_DATA_FIELD_NUMBER: builtins.int
     language_model_name: typing.Text
-    """Name of the language model to which to add data"""
+    """Name of the language model to which to add data. Example: "user_lm_1" """
 
     zipped_data: builtins.bytes
-    """Zip file containing data in the form of text files"""
+    """Zip file containing data in the form of text files.
+    Example: A zip file with text files containing sentences or phrases in the target language.
+    """
 
     def __init__(self,
         *,
@@ -1122,14 +1407,15 @@ class AddDataToUserLanguageModelRequest(google.protobuf.message.Message):
 global___AddDataToUserLanguageModelRequest = AddDataToUserLanguageModelRequest
 
 class TrainUserLanguageModelRequest(google.protobuf.message.Message):
+    """TrainUserLanguageModelRequest is used to request the training of a user-specific language model."""
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
     LANGUAGE_MODEL_NAME_FIELD_NUMBER: builtins.int
     ORDER_FIELD_NUMBER: builtins.int
     language_model_name: typing.Text
-    """Name of the language model to train"""
+    """Name of the language model to train. Example: "user_lm_1" """
 
     order: builtins.int
-    """Order n of the ngram"""
+    """Order n of the ngram. Example: 3 (for trigram model)"""
 
     def __init__(self,
         *,

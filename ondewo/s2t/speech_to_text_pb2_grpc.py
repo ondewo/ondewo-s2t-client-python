@@ -7,7 +7,7 @@ from ondewo.s2t import speech_to_text_pb2 as ondewo_dot_s2t_dot_speech__to__text
 
 
 class Speech2TextStub(object):
-    """endpoints of speech-to-text service
+    """Speech-to-text service
     """
 
     def __init__(self, channel):
@@ -94,11 +94,12 @@ class Speech2TextStub(object):
 
 
 class Speech2TextServicer(object):
-    """endpoints of speech-to-text service
+    """Speech-to-text service
     """
 
     def TranscribeFile(self, request, context):
-        """Missing associated documentation comment in .proto file."""
+        """Transcribes an audio file
+        """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
@@ -291,7 +292,7 @@ def add_Speech2TextServicer_to_server(servicer, server):
 
  # This class is part of an EXPERIMENTAL API.
 class Speech2Text(object):
-    """endpoints of speech-to-text service
+    """Speech-to-text service
     """
 
     @staticmethod
