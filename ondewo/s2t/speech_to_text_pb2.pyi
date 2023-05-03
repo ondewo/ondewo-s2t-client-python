@@ -12,40 +12,6 @@ import typing_extensions
 
 DESCRIPTOR: google.protobuf.descriptor.FileDescriptor
 
-class _InferenceBackend:
-    ValueType = typing.NewType('ValueType', builtins.int)
-    V: typing_extensions.TypeAlias = ValueType
-class _InferenceBackendEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_InferenceBackend.ValueType], builtins.type):
-    DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
-    INFERENCE_BACKEND_UNKNOWN: _InferenceBackend.ValueType  # 0
-    """Not set"""
-
-    INFERENCE_BACKEND_PYTORCH: _InferenceBackend.ValueType  # 1
-    """Run pytorch model"""
-
-    INFERENCE_BACKEND_FLAX: _InferenceBackend.ValueType  # 2
-    """Run flax model"""
-
-class InferenceBackend(_InferenceBackend, metaclass=_InferenceBackendEnumTypeWrapper):
-    """/////////////////////////
-            Enums         //
-    /////////////////////////
-
-    """
-    pass
-
-INFERENCE_BACKEND_UNKNOWN: InferenceBackend.ValueType  # 0
-"""Not set"""
-
-INFERENCE_BACKEND_PYTORCH: InferenceBackend.ValueType  # 1
-"""Run pytorch model"""
-
-INFERENCE_BACKEND_FLAX: InferenceBackend.ValueType  # 2
-"""Run flax model"""
-
-global___InferenceBackend = InferenceBackend
-
-
 class _Decoding:
     ValueType = typing.NewType('ValueType', builtins.int)
     V: typing_extensions.TypeAlias = ValueType
@@ -64,7 +30,12 @@ class _DecodingEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumT
     """beam search without LM head, to configure decoding mode for seq2seq models."""
 
 class Decoding(_Decoding, metaclass=_DecodingEnumTypeWrapper):
-    """The decoding configuration"""
+    """/////////////////////////
+            Enums         //
+    /////////////////////////
+
+    The decoding configuration
+    """
     pass
 
 DEFAULT: Decoding.ValueType  # 0
@@ -80,6 +51,35 @@ BEAM_SEARCH: Decoding.ValueType  # 3
 """beam search without LM head, to configure decoding mode for seq2seq models."""
 
 global___Decoding = Decoding
+
+
+class _InferenceBackend:
+    ValueType = typing.NewType('ValueType', builtins.int)
+    V: typing_extensions.TypeAlias = ValueType
+class _InferenceBackendEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_InferenceBackend.ValueType], builtins.type):
+    DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
+    INFERENCE_BACKEND_UNKNOWN: _InferenceBackend.ValueType  # 0
+    """Not set"""
+
+    INFERENCE_BACKEND_PYTORCH: _InferenceBackend.ValueType  # 1
+    """Run pytorch model"""
+
+    INFERENCE_BACKEND_FLAX: _InferenceBackend.ValueType  # 2
+    """Run flax model"""
+
+class InferenceBackend(_InferenceBackend, metaclass=_InferenceBackendEnumTypeWrapper):
+    pass
+
+INFERENCE_BACKEND_UNKNOWN: InferenceBackend.ValueType  # 0
+"""Not set"""
+
+INFERENCE_BACKEND_PYTORCH: InferenceBackend.ValueType  # 1
+"""Run pytorch model"""
+
+INFERENCE_BACKEND_FLAX: InferenceBackend.ValueType  # 2
+"""Run flax model"""
+
+global___InferenceBackend = InferenceBackend
 
 
 class TranscribeRequestConfig(google.protobuf.message.Message):
@@ -164,7 +164,7 @@ class TranscriptionReturnOptions(google.protobuf.message.Message):
     """Whether or not to return alternative results from beam-search"""
 
     return_alternative_transcriptions_nr: builtins.int
-    """Optional. Number of alternative transciptions results from beam-search or greedy-search"""
+    """Optional. Number of alternative transcriptions results from beam-search or greedy-search"""
 
     return_alternative_words: builtins.bool
     """Whether or not to return alternative results from beam-search"""
@@ -246,6 +246,127 @@ class PostProcessingOptions(google.protobuf.message.Message):
     def ClearField(self, field_name: typing_extensions.Literal["config",b"config","normalize",b"normalize","spelling_correction",b"spelling_correction"]) -> None: ...
 global___PostProcessingOptions = PostProcessingOptions
 
+class Transcription(google.protobuf.message.Message):
+    """/////////////////////////
+     TRANSCRIPTION TYPE  //
+    /////////////////////////
+
+    The transcription message
+    """
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    TRANSCRIPTION_FIELD_NUMBER: builtins.int
+    CONFIDENCE_SCORE_FIELD_NUMBER: builtins.int
+    WORDS_FIELD_NUMBER: builtins.int
+    ALTERNATIVES_FIELD_NUMBER: builtins.int
+    transcription: typing.Text
+    """The transcribed text"""
+
+    confidence_score: builtins.float
+    """The corresponding confidence score. The confidence estimate between 0.0 and 1.0. A higher number
+    indicates an estimated greater likelihood that the recognized words are correct.
+    """
+
+    @property
+    def words(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___WordDetail]:
+        """List of the words of transcription with their confidence scores and probable alternatives"""
+        pass
+    @property
+    def alternatives(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___TranscriptionAlternative]:
+        """List of alternative transcriptions, confidence scores, words timings and alternative words"""
+        pass
+    def __init__(self,
+        *,
+        transcription: typing.Text = ...,
+        confidence_score: builtins.float = ...,
+        words: typing.Optional[typing.Iterable[global___WordDetail]] = ...,
+        alternatives: typing.Optional[typing.Iterable[global___TranscriptionAlternative]] = ...,
+        ) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["alternatives",b"alternatives","confidence_score",b"confidence_score","transcription",b"transcription","words",b"words"]) -> None: ...
+global___Transcription = Transcription
+
+class TranscriptionAlternative(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    TRANSCRIPT_FIELD_NUMBER: builtins.int
+    CONFIDENCE_FIELD_NUMBER: builtins.int
+    WORDS_FIELD_NUMBER: builtins.int
+    transcript: typing.Text
+    """The alternative transcribed text"""
+
+    confidence: builtins.float
+    """The corresponding confidence score to the alternative transcript."""
+
+    @property
+    def words(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___WordDetail]:
+        """A list of word-specific information for each recognized word, including word timings, confidence score of
+        the word and alternative words.
+        """
+        pass
+    def __init__(self,
+        *,
+        transcript: typing.Text = ...,
+        confidence: builtins.float = ...,
+        words: typing.Optional[typing.Iterable[global___WordDetail]] = ...,
+        ) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["confidence",b"confidence","transcript",b"transcript","words",b"words"]) -> None: ...
+global___TranscriptionAlternative = TranscriptionAlternative
+
+class WordDetail(google.protobuf.message.Message):
+    """WordDetail provides word-specific information for recognized words."""
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    START_TIME_FIELD_NUMBER: builtins.int
+    END_TIME_FIELD_NUMBER: builtins.int
+    WORD_FIELD_NUMBER: builtins.int
+    CONFIDENCE_FIELD_NUMBER: builtins.int
+    WORD_ALTERNATIVES_FIELD_NUMBER: builtins.int
+    start_time: builtins.float
+    """The start time of the spoken word relative to the beginning of the audio.
+    The accuracy of the time offset can vary, and this is an experimental feature.
+    """
+
+    end_time: builtins.float
+    """The end time of the spoken word relative to the beginning of the audio.
+    The accuracy of the time offset can vary, and this is an experimental feature.
+    """
+
+    word: typing.Text
+    """The recognized word corresponding to this set of information."""
+
+    confidence: builtins.float
+    """The corresponding confidence score to the word."""
+
+    @property
+    def word_alternatives(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___WordAlternative]:
+        """List of alternative words and confidence scores of each."""
+        pass
+    def __init__(self,
+        *,
+        start_time: builtins.float = ...,
+        end_time: builtins.float = ...,
+        word: typing.Text = ...,
+        confidence: builtins.float = ...,
+        word_alternatives: typing.Optional[typing.Iterable[global___WordAlternative]] = ...,
+        ) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["confidence",b"confidence","end_time",b"end_time","start_time",b"start_time","word",b"word","word_alternatives",b"word_alternatives"]) -> None: ...
+global___WordDetail = WordDetail
+
+class WordAlternative(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    WORD_FIELD_NUMBER: builtins.int
+    CONFIDENCE_FIELD_NUMBER: builtins.int
+    word: typing.Text
+    """The recognized word corresponding to this set of information."""
+
+    confidence: builtins.float
+    """The corresponding confidence score to the alternative word."""
+
+    def __init__(self,
+        *,
+        word: typing.Text = ...,
+        confidence: builtins.float = ...,
+        ) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["confidence",b"confidence","word",b"word"]) -> None: ...
+global___WordAlternative = WordAlternative
+
 class TranscribeStreamRequest(google.protobuf.message.Message):
     """/////////////////////
     TRANSCRIBE STREAM //
@@ -281,25 +402,6 @@ class TranscribeStreamRequest(google.protobuf.message.Message):
     def HasField(self, field_name: typing_extensions.Literal["config",b"config"]) -> builtins.bool: ...
     def ClearField(self, field_name: typing_extensions.Literal["audio_chunk",b"audio_chunk","config",b"config","end_of_stream",b"end_of_stream","mute_audio",b"mute_audio"]) -> None: ...
 global___TranscribeStreamRequest = TranscribeStreamRequest
-
-class Transcription(google.protobuf.message.Message):
-    """The transcription message"""
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
-    TRANSCRIPTION_FIELD_NUMBER: builtins.int
-    CONFIDENCE_SCORE_FIELD_NUMBER: builtins.int
-    transcription: typing.Text
-    """The transcribed text"""
-
-    confidence_score: builtins.float
-    """The corresponding confidence score"""
-
-    def __init__(self,
-        *,
-        transcription: typing.Text = ...,
-        confidence_score: builtins.float = ...,
-        ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["confidence_score",b"confidence_score","transcription",b"transcription"]) -> None: ...
-global___Transcription = Transcription
 
 class TranscribeStreamResponse(google.protobuf.message.Message):
     """The response message of a stream transcription"""
@@ -385,7 +487,6 @@ class TranscribeFileResponse(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
     TRANSCRIPTIONS_FIELD_NUMBER: builtins.int
     TIME_FIELD_NUMBER: builtins.int
-    WORD_TIMING_FIELD_NUMBER: builtins.int
     AUDIO_UUID_FIELD_NUMBER: builtins.int
     @property
     def transcriptions(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___Transcription]:
@@ -394,10 +495,6 @@ class TranscribeFileResponse(google.protobuf.message.Message):
     time: builtins.float
     """The time the transcription took"""
 
-    @property
-    def word_timing(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___WordTiming]:
-        """List of words with timestamps for their start and end"""
-        pass
     audio_uuid: typing.Text
     """id of the transcribed audio file"""
 
@@ -405,35 +502,10 @@ class TranscribeFileResponse(google.protobuf.message.Message):
         *,
         transcriptions: typing.Optional[typing.Iterable[global___Transcription]] = ...,
         time: builtins.float = ...,
-        word_timing: typing.Optional[typing.Iterable[global___WordTiming]] = ...,
         audio_uuid: typing.Text = ...,
         ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["audio_uuid",b"audio_uuid","time",b"time","transcriptions",b"transcriptions","word_timing",b"word_timing"]) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["audio_uuid",b"audio_uuid","time",b"time","transcriptions",b"transcriptions"]) -> None: ...
 global___TranscribeFileResponse = TranscribeFileResponse
-
-class WordTiming(google.protobuf.message.Message):
-    """Message structure for word timings"""
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
-    WORD_FIELD_NUMBER: builtins.int
-    BEGIN_FIELD_NUMBER: builtins.int
-    END_FIELD_NUMBER: builtins.int
-    word: typing.Text
-    """Transcribed word"""
-
-    begin: builtins.int
-    """Timestamp for start of word"""
-
-    end: builtins.int
-    """Timestamp for end of word"""
-
-    def __init__(self,
-        *,
-        word: typing.Text = ...,
-        begin: builtins.int = ...,
-        end: builtins.int = ...,
-        ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["begin",b"begin","end",b"end","word",b"word"]) -> None: ...
-global___WordTiming = WordTiming
 
 class S2tPipelineId(google.protobuf.message.Message):
     """////////////////////
