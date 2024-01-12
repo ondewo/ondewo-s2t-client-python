@@ -957,7 +957,7 @@ class WhisperTriton(google.protobuf.message.Message):
     """Default task of the model. E.g., transcribe, translate, etc."""
     triton_server_host: builtins.str
     """Host name of triton inference server that serves the WhisperTriton model"""
-    triton_server_port: builtins.str
+    triton_server_port: builtins.int
     """Port number of triton inference server that serves the WhisperTriton model"""
     def __init__(
         self,
@@ -969,7 +969,7 @@ class WhisperTriton(google.protobuf.message.Message):
         language: builtins.str | None = ...,
         task: builtins.str | None = ...,
         triton_server_host: builtins.str = ...,
-        triton_server_port: builtins.str = ...,
+        triton_server_port: builtins.int = ...,
     ) -> None: ...
     def HasField(self, field_name: typing_extensions.Literal["_language", b"_language", "_task", b"_task", "language", b"language", "task", b"task"]) -> builtins.bool: ...
     def ClearField(self, field_name: typing_extensions.Literal["_language", b"_language", "_task", b"_task", "check_status_timeout", b"check_status_timeout", "language", b"language", "processor_path", b"processor_path", "task", b"task", "triton_model_name", b"triton_model_name", "triton_model_version", b"triton_model_version", "triton_server_host", b"triton_server_host", "triton_server_port", b"triton_server_port"]) -> None: ...
@@ -1024,7 +1024,7 @@ class Wav2VecTriton(google.protobuf.message.Message):
     """Timeout for checking model status."""
     triton_server_host: builtins.str
     """Host name of triton inference server that serves the Wav2VecTriton model"""
-    triton_server_port: builtins.str
+    triton_server_port: builtins.int
     """Port number of triton inference server that serves the Wav2VecTriton model"""
     def __init__(
         self,
@@ -1034,7 +1034,7 @@ class Wav2VecTriton(google.protobuf.message.Message):
         triton_model_version: builtins.str = ...,
         check_status_timeout: builtins.int = ...,
         triton_server_host: builtins.str = ...,
-        triton_server_port: builtins.str = ...,
+        triton_server_port: builtins.int = ...,
     ) -> None: ...
     def ClearField(self, field_name: typing_extensions.Literal["check_status_timeout", b"check_status_timeout", "processor_path", b"processor_path", "triton_model_name", b"triton_model_name", "triton_model_version", b"triton_model_version", "triton_server_host", b"triton_server_host", "triton_server_port", b"triton_server_port"]) -> None: ...
 
@@ -1238,7 +1238,7 @@ class Pyannote(google.protobuf.message.Message):
     """Minimum duration for an on segment."""
     triton_server_host: builtins.str
     """Host name of triton inference server that serves the Pyannote model"""
-    triton_server_port: builtins.str
+    triton_server_port: builtins.int
     """Port number of triton inference server that serves the Pyannote model"""
     def __init__(
         self,
@@ -1248,7 +1248,7 @@ class Pyannote(google.protobuf.message.Message):
         min_duration_off: builtins.float = ...,
         min_duration_on: builtins.float = ...,
         triton_server_host: builtins.str = ...,
-        triton_server_port: builtins.str = ...,
+        triton_server_port: builtins.int = ...,
     ) -> None: ...
     def ClearField(self, field_name: typing_extensions.Literal["min_audio_size", b"min_audio_size", "min_duration_off", b"min_duration_off", "min_duration_on", b"min_duration_on", "model_name", b"model_name", "triton_server_host", b"triton_server_host", "triton_server_port", b"triton_server_port"]) -> None: ...
 
