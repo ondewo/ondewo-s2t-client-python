@@ -22,9 +22,8 @@ from ondewo.s2t import speech_to_text_pb2
 from ondewo.s2t.client.client import Client
 from ondewo.s2t.client.client_config import ClientConfig
 from ondewo.s2t.client.services.speech_to_text import Speech2Text
-from ondewo.s2t.speech_to_text_pb2 import ListS2tPipelinesRequest, Speech2TextConfig, TranscribeFileResponse
 
-AUDIO_FILE: str = "examples/audiofiles/sample_1.wav"
+AUDIO_FILE: str = "examples/audiofiles/sample_1.wav"  # noqa
 
 
 def main() -> None:
@@ -51,9 +50,10 @@ def main() -> None:
 
     # List all speech-2-text pipelines (model setups) present on the server
     # We are going to pick the first pipeline (model setup)
-    pipelines: List[Speech2TextConfig] = s2t_service.list_s2t_pipelines(  # type: ignore
-        request=ListS2tPipelinesRequest()).pipeline_configs
-    pipeline: Speech2TextConfig = pipelines[0]  # type: ignore
+    pipelines: List[speech_to_text_pb2.Speech2TextConfig] = s2t_service.list_s2t_pipelines(  # type: ignore
+        request=speech_to_text_pb2.ListS2tPipelinesRequest()
+    ).pipeline_configs
+    pipeline: speech_to_text_pb2.Speech2TextConfig = pipelines[0]  # type: ignore
 
     # Read file which we want to transcribe
     with wave.open(AUDIO_FILE) as w:
@@ -68,7 +68,9 @@ def main() -> None:
         )
     )
     # Send transcription request and get response
-    transcribe_response: TranscribeFileResponse = s2t_service.transcribe_file(request=request)  # type: ignore
+    transcribe_response: speech_to_text_pb2.TranscribeFileResponse = s2t_service.transcribe_file(
+        request=request
+    )  # type: ignore
     for transcribe_message in transcribe_response.transcriptions:  # type: ignore
         print(f"File transcript: {transcribe_message.transcription}")
 
