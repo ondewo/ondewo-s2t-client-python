@@ -16,15 +16,19 @@
 
 import argparse
 import wave
-from typing import Iterator
-
-from google.protobuf.empty_pb2 import Empty
+from typing import (
+    Iterator,
+    List,
+)
 
 from ondewo.s2t import speech_to_text_pb2
 from ondewo.s2t.client.client import Client
 from ondewo.s2t.client.client_config import ClientConfig
 from ondewo.s2t.client.services.speech_to_text import Speech2Text
-from ondewo.s2t.speech_to_text_pb2 import Speech2TextConfig
+from ondewo.s2t.speech_to_text_pb2 import (
+    ListS2tPipelinesRequest,
+    Speech2TextConfig,
+)
 
 AUDIO_FILE: str = "examples/audiofiles/sample_2.wav"
 CHUNK_SIZE: int = 8000
@@ -40,9 +44,9 @@ def get_streaming_audio(audio_path: str) -> Iterator[bytes]:
 
 
 def create_streaming_request(
-        audio_stream: Iterator[bytes],
-        pipeline_id: str,
-        transcribe_not_final: bool = False,
+    audio_stream: Iterator[bytes],
+    pipeline_id: str,
+    transcribe_not_final: bool = False,
 ) -> Iterator[speech_to_text_pb2.TranscribeStreamRequest]:
     for i, chunk in enumerate(audio_stream):
         yield speech_to_text_pb2.TranscribeStreamRequest(
@@ -73,22 +77,29 @@ def create_streaming_request(
     )
 
 
-def main():
+def main() -> None:
     parser = argparse.ArgumentParser(description="Streaming example.")
     parser.add_argument("--config", type=str)
     parser.add_argument("--secure", default=False, action="store_true")
     args = parser.parse_args()
 
+    config: ClientConfig
     with open(args.config) as f:
-        config: ClientConfig = ClientConfig.from_json(f.read())
+        config = ClientConfig.from_json(f.read())  # type:ignore
+    assert config
 
     client: Client = Client(config=config, use_secure_channel=args.secure)
-    s2t_service: Speech2Text = client.services.speech_to_text
+    s2t_service: Speech2Text = client.services.speech_to_text  # type:ignore
 
     # List all speech-2-text pipelines (model setups) present on the server
     # We are going to pick the first pipeline (model setup)
-    pipelines = s2t_service.list_s2t_pipelines(request=Empty()).pipeline_configs
+    list_s2t_pipeline_request: ListS2tPipelinesRequest = ListS2tPipelinesRequest()
+    pipelines: List[Speech2TextConfig] = [
+        t for t in s2t_service.list_s2t_pipelines(list_s2t_pipeline_request).pipeline_configs
+    ]
+    assert pipelines
     pipeline: Speech2TextConfig = pipelines[0]
+    assert pipeline
 
     # Get audio stream (iterator of audio chunks)
     audio_stream: Iterator[bytes] = get_streaming_audio(AUDIO_FILE)

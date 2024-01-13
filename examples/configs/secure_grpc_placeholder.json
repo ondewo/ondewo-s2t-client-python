@@ -1,5 +1,5 @@
 {
-    "grpc_cert": "YOUR_GRPC_CERTIFICATE",
-    "host": "grpc-s2t.ondewo.com",
-    "port": "443"
+  "grpc_cert": "YOUR_GRPC_CERTIFICATE",
+  "host": "grpc-s2t.ondewo.com",
+  "port": "443"
 }
