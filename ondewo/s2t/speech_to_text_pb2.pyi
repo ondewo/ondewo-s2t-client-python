@@ -112,14 +112,19 @@ class TranscribeRequestConfig(google.protobuf.message.Message):
     decoding: global___Decoding.ValueType
     """Optional. decoding type"""
     language_model_name: builtins.str
+    """Name of the language model"""
     @property
-    def post_processing(self) -> global___PostProcessingOptions: ...
+    def post_processing(self) -> global___PostProcessingOptions:
+        """The postprocessing options"""
     @property
-    def utterance_detection(self) -> global___UtteranceDetectionOptions: ...
+    def utterance_detection(self) -> global___UtteranceDetectionOptions:
+        """The utterance detection options"""
     @property
-    def pyannote(self) -> global___Pyannote: ...
+    def pyannote(self) -> global___Pyannote:
+        """Voice activity detection with pyannote"""
     @property
-    def return_options(self) -> global___TranscriptionReturnOptions: ...
+    def return_options(self) -> global___TranscriptionReturnOptions:
+        """The transcribe return options"""
     language: builtins.str
     """Optional. Specify language of transcription to return"""
     task: builtins.str
@@ -213,6 +218,7 @@ class UtteranceDetectionOptions(google.protobuf.message.Message):
     END_OF_UTTERANCE_THRESHOLD_FIELD_NUMBER: builtins.int
     NEXT_CHUNK_TIMEOUT_FIELD_NUMBER: builtins.int
     transcribe_not_final: builtins.bool
+    """Return also immediate transcription results"""
     start_of_utterance_threshold: builtins.float
     """Specifies the minimal duration of voice signal to indicate the start of an utterance"""
     end_of_utterance_threshold: builtins.float
@@ -457,7 +463,8 @@ class TranscribeStreamResponse(google.protobuf.message.Message):
     audio_uuid: builtins.str
     """id of the transcribed audio file"""
     @property
-    def config(self) -> global___TranscribeRequestConfig: ...
+    def config(self) -> global___TranscribeRequestConfig:
+        """The configuration for the transcription"""
     def __init__(
         self,
         *,
@@ -917,15 +924,10 @@ class Whisper(google.protobuf.message.Message):
         *,
         model_path: builtins.str = ...,
         use_gpu: builtins.bool = ...,
-        language: builtins.str | None = ...,
-        task: builtins.str | None = ...,
+        language: builtins.str = ...,
+        task: builtins.str = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["_language", b"_language", "_task", b"_task", "language", b"language", "task", b"task"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["_language", b"_language", "_task", b"_task", "language", b"language", "model_path", b"model_path", "task", b"task", "use_gpu", b"use_gpu"]) -> None: ...
-    @typing.overload
-    def WhichOneof(self, oneof_group: typing_extensions.Literal["_language", b"_language"]) -> typing_extensions.Literal["language"] | None: ...
-    @typing.overload
-    def WhichOneof(self, oneof_group: typing_extensions.Literal["_task", b"_task"]) -> typing_extensions.Literal["task"] | None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["language", b"language", "model_path", b"model_path", "task", b"task", "use_gpu", b"use_gpu"]) -> None: ...
 
 global___Whisper = Whisper
 
@@ -966,17 +968,12 @@ class WhisperTriton(google.protobuf.message.Message):
         triton_model_name: builtins.str = ...,
         triton_model_version: builtins.str = ...,
         check_status_timeout: builtins.int = ...,
-        language: builtins.str | None = ...,
-        task: builtins.str | None = ...,
+        language: builtins.str = ...,
+        task: builtins.str = ...,
         triton_server_host: builtins.str = ...,
         triton_server_port: builtins.int = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["_language", b"_language", "_task", b"_task", "language", b"language", "task", b"task"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["_language", b"_language", "_task", b"_task", "check_status_timeout", b"check_status_timeout", "language", b"language", "processor_path", b"processor_path", "task", b"task", "triton_model_name", b"triton_model_name", "triton_model_version", b"triton_model_version", "triton_server_host", b"triton_server_host", "triton_server_port", b"triton_server_port"]) -> None: ...
-    @typing.overload
-    def WhichOneof(self, oneof_group: typing_extensions.Literal["_language", b"_language"]) -> typing_extensions.Literal["language"] | None: ...
-    @typing.overload
-    def WhichOneof(self, oneof_group: typing_extensions.Literal["_task", b"_task"]) -> typing_extensions.Literal["task"] | None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["check_status_timeout", b"check_status_timeout", "language", b"language", "processor_path", b"processor_path", "task", b"task", "triton_model_name", b"triton_model_name", "triton_model_version", b"triton_model_version", "triton_server_host", b"triton_server_host", "triton_server_port", b"triton_server_port"]) -> None: ...
 
 global___WhisperTriton = WhisperTriton
 
