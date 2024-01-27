@@ -214,27 +214,19 @@ class UtteranceDetectionOptions(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
     TRANSCRIBE_NOT_FINAL_FIELD_NUMBER: builtins.int
-    START_OF_UTTERANCE_THRESHOLD_FIELD_NUMBER: builtins.int
-    END_OF_UTTERANCE_THRESHOLD_FIELD_NUMBER: builtins.int
     NEXT_CHUNK_TIMEOUT_FIELD_NUMBER: builtins.int
     transcribe_not_final: builtins.bool
     """Return also immediate transcription results"""
-    start_of_utterance_threshold: builtins.float
-    """Specifies the minimal duration of voice signal to indicate the start of an utterance"""
-    end_of_utterance_threshold: builtins.float
-    """Specifies the minimal duration of a non-voice signal to indicate the end of an utterance"""
     next_chunk_timeout: builtins.float
     """if time between audio chunks exceeds next_chunk_timeout, stream will be stopped"""
     def __init__(
         self,
         *,
         transcribe_not_final: builtins.bool = ...,
-        start_of_utterance_threshold: builtins.float = ...,
-        end_of_utterance_threshold: builtins.float = ...,
         next_chunk_timeout: builtins.float = ...,
     ) -> None: ...
     def HasField(self, field_name: typing_extensions.Literal["oneof_transcribe_not_final", b"oneof_transcribe_not_final", "transcribe_not_final", b"transcribe_not_final"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["end_of_utterance_threshold", b"end_of_utterance_threshold", "next_chunk_timeout", b"next_chunk_timeout", "oneof_transcribe_not_final", b"oneof_transcribe_not_final", "start_of_utterance_threshold", b"start_of_utterance_threshold", "transcribe_not_final", b"transcribe_not_final"]) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["next_chunk_timeout", b"next_chunk_timeout", "oneof_transcribe_not_final", b"oneof_transcribe_not_final", "transcribe_not_final", b"transcribe_not_final"]) -> None: ...
     def WhichOneof(self, oneof_group: typing_extensions.Literal["oneof_transcribe_not_final", b"oneof_transcribe_not_final"]) -> typing_extensions.Literal["transcribe_not_final"] | None: ...
 
 global___UtteranceDetectionOptions = UtteranceDetectionOptions
@@ -1153,8 +1145,6 @@ class StreamingSpeechRecognition(google.protobuf.message.Message):
     DECODING_METHOD_FIELD_NUMBER: builtins.int
     SAMPLING_RATE_FIELD_NUMBER: builtins.int
     MIN_AUDIO_CHUNK_SIZE_FIELD_NUMBER: builtins.int
-    START_OF_UTTERANCE_THRESHOLD_FIELD_NUMBER: builtins.int
-    END_OF_UTTERANCE_THRESHOLD_FIELD_NUMBER: builtins.int
     NEXT_CHUNK_TIMEOUT_FIELD_NUMBER: builtins.int
     transcribe_not_final: builtins.bool
     """Indicates whether to transcribe non-final results."""
@@ -1164,10 +1154,6 @@ class StreamingSpeechRecognition(google.protobuf.message.Message):
     """Sampling rate for audio input."""
     min_audio_chunk_size: builtins.int
     """Minimum audio chunk size for processing."""
-    start_of_utterance_threshold: builtins.float
-    """Threshold for detecting the start of an utterance."""
-    end_of_utterance_threshold: builtins.float
-    """Threshold for detecting the end of an utterance."""
     next_chunk_timeout: builtins.float
     """Timeout between audio chunks; if exceeded, the stream will be stopped."""
     def __init__(
@@ -1177,11 +1163,9 @@ class StreamingSpeechRecognition(google.protobuf.message.Message):
         decoding_method: builtins.str = ...,
         sampling_rate: builtins.int = ...,
         min_audio_chunk_size: builtins.int = ...,
-        start_of_utterance_threshold: builtins.float = ...,
-        end_of_utterance_threshold: builtins.float = ...,
         next_chunk_timeout: builtins.float = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["decoding_method", b"decoding_method", "end_of_utterance_threshold", b"end_of_utterance_threshold", "min_audio_chunk_size", b"min_audio_chunk_size", "next_chunk_timeout", b"next_chunk_timeout", "sampling_rate", b"sampling_rate", "start_of_utterance_threshold", b"start_of_utterance_threshold", "transcribe_not_final", b"transcribe_not_final"]) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["decoding_method", b"decoding_method", "min_audio_chunk_size", b"min_audio_chunk_size", "next_chunk_timeout", b"next_chunk_timeout", "sampling_rate", b"sampling_rate", "transcribe_not_final", b"transcribe_not_final"]) -> None: ...
 
 global___StreamingSpeechRecognition = StreamingSpeechRecognition
 
@@ -1215,7 +1199,9 @@ global___VoiceActivityDetection = VoiceActivityDetection
 
 @typing_extensions.final
 class Pyannote(google.protobuf.message.Message):
-    """Pyannote contains configuration for the Pyannote voice activity detection model."""
+    """Pyannote contains configuration for the Pyannote voice activity detection model.
+    Library: [pyannote-audio](https://github.com/pyannote/pyannote-audio/blob/develop/tutorials/voice_activity_detection.ipynb)
+    """
 
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
@@ -1230,9 +1216,13 @@ class Pyannote(google.protobuf.message.Message):
     min_audio_size: builtins.int
     """Minimum audio size for processing."""
     min_duration_off: builtins.float
-    """Minimum duration for an off segment."""
+    """Fill inactive regions shorter than that many seconds.
+    Example [notebook](https://github.com/pyannote/pyannote-audio/blob/develop/tutorials/voice_activity_detection.ipynb)
+    """
     min_duration_on: builtins.float
-    """Minimum duration for an on segment."""
+    """Remove active regions shorter than that many seconds
+    Example [notebook](https://github.com/pyannote/pyannote-audio/blob/develop/tutorials/voice_activity_detection.ipynb)
+    """
     triton_server_host: builtins.str
     """Host name of triton inference server that serves the Pyannote model"""
     triton_server_port: builtins.int
