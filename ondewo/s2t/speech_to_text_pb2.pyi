@@ -1326,14 +1326,19 @@ class S2TNormalization(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
     LANGUAGE_FIELD_NUMBER: builtins.int
+    PIPELINE_FIELD_NUMBER: builtins.int
     language: builtins.str
     """Language for normalization of transcriptions."""
+    @property
+    def pipeline(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
+        """List of names of active normalizations."""
     def __init__(
         self,
         *,
         language: builtins.str = ...,
+        pipeline: collections.abc.Iterable[builtins.str] | None = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["language", b"language"]) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["language", b"language", "pipeline", b"pipeline"]) -> None: ...
 
 global___S2TNormalization = S2TNormalization
 
