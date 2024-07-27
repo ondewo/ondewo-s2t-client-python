@@ -158,7 +158,7 @@ release: ## Automate the entire release process
 	git add ${ONDEWO_PROTO_COMPILER_DIR}
 	git add ${ONDEWO_S2T_API_DIR}
 	git status
-	git commit -m "PREPARING FOR RELEASE ${ONDEWO_S2T_VERSION}"
+	-git commit -m "PREPARING FOR RELEASE ${ONDEWO_S2T_VERSION}"
 	git push
 	make create_release_branch
 	make create_release_tag
@@ -207,7 +207,9 @@ upload_package: ## Uploads PYPI Package
 	twine upload --verbose -r pypi dist/* -u${PYPI_USERNAME} -p${PYPI_PASSWORD}
 
 clear_package_data: ## Clears PYPI Package
-	rm -rf build dist/* ondewo_s2t_client.egg-info
+	echo "Waiting 5s so directory for removal is not busy anymore"
+	sleep 5s
+	-rm -rf build dist/* ondewo_s2t_client.egg-info
 
 
 push_to_pypi_via_docker_image:  ## Push source code to pypi via docker
