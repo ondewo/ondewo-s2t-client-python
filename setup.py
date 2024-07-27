@@ -1,4 +1,7 @@
-from setuptools import setup, find_packages
+from setuptools import (
+    find_packages,
+    setup,
+)
 
 with open('README.md', 'r') as f:
     long_description = f.read()
@@ -8,10 +11,10 @@ with open('requirements.txt') as f:
 
 setup(
     name="ondewo-s2t-client",
-    version='5.7.0',
-    author="ONDEWO GbmH",
-    author_email="info@ondewo.com",
-    description="exposes the ondewo-s2t-grpc-server endpoints in a user-friendly way",
+    version='5.7.1',
+    author="ONDEWO GmbH",
+    author_email="office@ondewo.com",
+    description="ONDEWO Speech 2 Text (S2T) Client library for Python",
     long_description=long_description,
     long_description_content_type='text/markdown',
     url='https://github.com/ondewo/ondewo-s2t-client-python',
@@ -27,11 +30,17 @@ setup(
         'ondewo.s2t': ['py.typed', '*.pyi'],
     },
     classifiers=[
-        'Programming Language :: Python :: 3',
+        'Development Status :: 5 - Production/Stable',
+        'Intended Audience :: Developers',
+        'License :: OSI Approved :: Apache Software License',
         'Operating System :: OS Independent',
-        'Development Status :: 3 - Alpha',
+        'Programming Language :: Python :: 3.8',
+        'Programming Language :: Python :: 3.9',
+        'Programming Language :: Python :: 3.10',
+        'Programming Language :: Python :: 3.11',
+        'Programming Language :: Python :: 3.12',
         'Topic :: Software Development :: Libraries',
     ],
-    python_requires=">=2.7, !=3.0.1",
+    python_requires='>=3',
     install_requires=requires,
 )

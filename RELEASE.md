@@ -1,6 +1,12 @@
 # Release History
 
 *****************
+## Release ONDEWO S2T Python Client 5.7.1
+
+### Improvements
+ * Added functionality to pass grpc options to grpc clients based on [ONDEWO CLIENT UTILS PYTHON 2.0.0](https://github.com/ondewo/ondewo-client-utils-python/releases/tag/2.0.0)
+
+*****************
 ## Release ONDEWO S2T Python Client 5.7.0
 
 ### Improvements
