@@ -1176,10 +1176,15 @@ class S2tCloudServiceAmazonAws(google.protobuf.message.Message):
 
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
+    LANGUAGE_FIELD_NUMBER: builtins.int
     ENABLE_PARTIAL_RESULTS_STABILIZATION_FIELD_NUMBER: builtins.int
     PARTIAL_RESULTS_STABILITY_FIELD_NUMBER: builtins.int
     LANGUAGE_MODEL_NAME_FIELD_NUMBER: builtins.int
     VOCABULARY_NAME_FIELD_NUMBER: builtins.int
+    language: builtins.str
+    """Language of the audio to transcribe by Amazon AWS s2t cloud service. It should be 4-letter language code
+    (BCP-47) e.g. 'en-US' or 'de-DE'.
+    """
     enable_partial_results_stabilization: builtins.bool
     """Enables or disables partial_results_stabilization feature. More details at:
     https://docs.aws.amazon.com/transcribe/latest/dg/streaming-partial-results.html#streaming-partial-result-stabilization
@@ -1201,12 +1206,13 @@ class S2tCloudServiceAmazonAws(google.protobuf.message.Message):
     def __init__(
         self,
         *,
+        language: builtins.str = ...,
         enable_partial_results_stabilization: builtins.bool = ...,
         partial_results_stability: builtins.str = ...,
         language_model_name: builtins.str = ...,
         vocabulary_name: builtins.str = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing.Literal["enable_partial_results_stabilization", b"enable_partial_results_stabilization", "language_model_name", b"language_model_name", "partial_results_stability", b"partial_results_stability", "vocabulary_name", b"vocabulary_name"]) -> None: ...
+    def ClearField(self, field_name: typing.Literal["enable_partial_results_stabilization", b"enable_partial_results_stabilization", "language", b"language", "language_model_name", b"language_model_name", "partial_results_stability", b"partial_results_stability", "vocabulary_name", b"vocabulary_name"]) -> None: ...
 
 global___S2tCloudServiceAmazonAws = S2tCloudServiceAmazonAws
 
@@ -1217,6 +1223,7 @@ class S2tCloudServiceDeepgram(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
     MODEL_NAME_FIELD_NUMBER: builtins.int
+    LANGUAGE_FIELD_NUMBER: builtins.int
     PUNCTUATE_FIELD_NUMBER: builtins.int
     SMART_FORMAT_FIELD_NUMBER: builtins.int
     NUMERALS_FIELD_NUMBER: builtins.int
@@ -1225,6 +1232,10 @@ class S2tCloudServiceDeepgram(google.protobuf.message.Message):
     model_name: builtins.str
     """Model name from one of the speech-to-text models provided by Deepgram for the desired use-case.
     Provided model names and details at: https://developers.deepgram.com/docs/model
+    """
+    language: builtins.str
+    """Language of the audio to transcribe by Deepgram s2t cloud service. It should be 4-letter language code
+    (BCP-47) e.g. 'en-US' or 'de-DE'.
     """
     punctuate: builtins.bool
     """Enables or disables punctuate feature of Deepgram to add punctuations to the resulted transcript.
@@ -1251,13 +1262,14 @@ class S2tCloudServiceDeepgram(google.protobuf.message.Message):
         self,
         *,
         model_name: builtins.str = ...,
+        language: builtins.str = ...,
         punctuate: builtins.bool = ...,
         smart_format: builtins.bool = ...,
         numerals: builtins.bool = ...,
         measurements: builtins.bool = ...,
         dictation: builtins.bool = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing.Literal["dictation", b"dictation", "measurements", b"measurements", "model_name", b"model_name", "numerals", b"numerals", "punctuate", b"punctuate", "smart_format", b"smart_format"]) -> None: ...
+    def ClearField(self, field_name: typing.Literal["dictation", b"dictation", "language", b"language", "measurements", b"measurements", "model_name", b"model_name", "numerals", b"numerals", "punctuate", b"punctuate", "smart_format", b"smart_format"]) -> None: ...
 
 global___S2tCloudServiceDeepgram = S2tCloudServiceDeepgram
 
@@ -1268,6 +1280,7 @@ class S2tCloudServiceGoogle(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
     MODEL_NAME_FIELD_NUMBER: builtins.int
+    LANGUAGE_FIELD_NUMBER: builtins.int
     ENABLE_AUTOMATIC_PUNCTUATION_FIELD_NUMBER: builtins.int
     ENABLE_WORD_TIME_OFFSETS_FIELD_NUMBER: builtins.int
     ENABLE_WORD_CONFIDENCE_FIELD_NUMBER: builtins.int
@@ -1276,6 +1289,10 @@ class S2tCloudServiceGoogle(google.protobuf.message.Message):
     model_name: builtins.str
     """Model name from one of the speech-to-text models provided by Google for the desired use-case.
     Provided model names and details at: https://cloud.google.com/speech-to-text/docs/transcription-model
+    """
+    language: builtins.str
+    """Language of the audio to transcribe by Google s2t cloud service. It should be 4-letter language code
+    (BCP-47) e.g. 'en-US' or 'de-DE'.
     """
     enable_automatic_punctuation: builtins.bool
     """Enables or disables automatic_punctuation feature of Google s2t to add punctuations to the resulted transcript.
@@ -1302,13 +1319,14 @@ class S2tCloudServiceGoogle(google.protobuf.message.Message):
         self,
         *,
         model_name: builtins.str = ...,
+        language: builtins.str = ...,
         enable_automatic_punctuation: builtins.bool = ...,
         enable_word_time_offsets: builtins.bool = ...,
         enable_word_confidence: builtins.bool = ...,
         transcript_normalization: builtins.bool = ...,
         max_alternatives: builtins.int = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing.Literal["enable_automatic_punctuation", b"enable_automatic_punctuation", "enable_word_confidence", b"enable_word_confidence", "enable_word_time_offsets", b"enable_word_time_offsets", "max_alternatives", b"max_alternatives", "model_name", b"model_name", "transcript_normalization", b"transcript_normalization"]) -> None: ...
+    def ClearField(self, field_name: typing.Literal["enable_automatic_punctuation", b"enable_automatic_punctuation", "enable_word_confidence", b"enable_word_confidence", "enable_word_time_offsets", b"enable_word_time_offsets", "language", b"language", "max_alternatives", b"max_alternatives", "model_name", b"model_name", "transcript_normalization", b"transcript_normalization"]) -> None: ...
 
 global___S2tCloudServiceGoogle = S2tCloudServiceGoogle
 
@@ -1318,8 +1336,13 @@ class S2tCloudServiceMicrosoftAzure(google.protobuf.message.Message):
 
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
+    LANGUAGE_FIELD_NUMBER: builtins.int
     USE_FAST_TRANSCRIPTION_API_FIELD_NUMBER: builtins.int
     USE_DETAILED_OUTPUT_FORMAT_FIELD_NUMBER: builtins.int
+    language: builtins.str
+    """Language of the audio to transcribe by Microsoft Azure s2t cloud service. It should be 4-letter language code
+    (BCP-47) e.g. 'en-US' or 'de-DE'.
+    """
     use_fast_transcription_api: builtins.bool
     """Enables or disables the Microsoft Azure fast transcription API. It is faster than SDK but is in preview version.
     More details at: https://learn.microsoft.com/en-us/azure/ai-services/speech-service/fast-transcription-create
@@ -1331,10 +1354,11 @@ class S2tCloudServiceMicrosoftAzure(google.protobuf.message.Message):
     def __init__(
         self,
         *,
+        language: builtins.str = ...,
         use_fast_transcription_api: builtins.bool = ...,
         use_detailed_output_format: builtins.bool = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing.Literal["use_detailed_output_format", b"use_detailed_output_format", "use_fast_transcription_api", b"use_fast_transcription_api"]) -> None: ...
+    def ClearField(self, field_name: typing.Literal["language", b"language", "use_detailed_output_format", b"use_detailed_output_format", "use_fast_transcription_api", b"use_fast_transcription_api"]) -> None: ...
 
 global___S2tCloudServiceMicrosoftAzure = S2tCloudServiceMicrosoftAzure
 
