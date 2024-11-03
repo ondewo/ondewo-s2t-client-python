@@ -1,4 +1,7 @@
-grpcio-reflection>=1.46.3
-grpcio-tools>=1.46.3
-grpcio>=1.46.3
-ondewo-client-utils>=0.1.1
+grpcio
+grpcio-reflection
+grpcio-tools
+ondewo-client-utils
+protobuf
+regex
+setuptools
