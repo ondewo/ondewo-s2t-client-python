@@ -1,4 +1,4 @@
-FROM python:3.8-slim
+FROM python:3.10-slim
 
 ENV LANG=C.UTF-8
 ENV DEBIAN_FRONTEND=noninteractive
@@ -28,6 +28,20 @@ RUN curl -fsSL https://cli.github.com/packages/githubcli-archive-keyring.gpg | s
 WORKDIR /home/ondewo/
 
 COPY Makefile .
+
+COPY .flake8 .
+
+COPY .pre-commit-config.yaml .
+
+COPY CONTRIBUTING.md .
+
+COPY LICENSE .
+
+COPY MANIFEST.in .
+
+COPY mypy.ini .
+
+COPY examples .
 
 COPY requirements.txt .
 

@@ -141,8 +141,6 @@ def main() -> None:
     }
 
     client: Client = Client(config=config, use_secure_channel=args.secure, options=options)
-
-    client: Client = Client(config=config, use_secure_channel=args.secure)
     s2t_service: Speech2Text = client.services.speech_to_text  # type:ignore
 
     # List all speech-2-text pipelines (model setups) present on the server
