@@ -196,7 +196,7 @@ class S2tCloudProviderConfig(google.protobuf.message.Message):
     S2T_CLOUD_PROVIDER_CONFIG_AMAZON_FIELD_NUMBER: builtins.int
     S2T_CLOUD_PROVIDER_CONFIG_DEEPGRAM_FIELD_NUMBER: builtins.int
     S2T_CLOUD_PROVIDER_CONFIG_GOOGLE_FIELD_NUMBER: builtins.int
-    S2T_CLOUD_PROVIDER_CONFIG_MICROSOFT_AZURE_FIELD_NUMBER: builtins.int
+    S2T_CLOUD_PROVIDER_CONFIG_MICROSOFT_FIELD_NUMBER: builtins.int
     @property
     def s2t_cloud_provider_config_amazon(self) -> global___S2tCloudProviderConfigAmazon:
         """Configuration for Amazon web service speech-to-text provider."""
@@ -210,7 +210,7 @@ class S2tCloudProviderConfig(google.protobuf.message.Message):
         """Configuration for Google speech-to-text provider."""
 
     @property
-    def s2t_cloud_provider_config_microsoft_azure(self) -> global___S2tCloudProviderConfigMicrosoftAzure:
+    def s2t_cloud_provider_config_microsoft(self) -> global___S2tCloudProviderConfigMicrosoft:
         """Configuration for Microsoft Azure speech-to-text provider."""
 
     def __init__(
@@ -219,10 +219,10 @@ class S2tCloudProviderConfig(google.protobuf.message.Message):
         s2t_cloud_provider_config_amazon: global___S2tCloudProviderConfigAmazon | None = ...,
         s2t_cloud_provider_config_deepgram: global___S2tCloudProviderConfigDeepgram | None = ...,
         s2t_cloud_provider_config_google: global___S2tCloudProviderConfigGoogle | None = ...,
-        s2t_cloud_provider_config_microsoft_azure: global___S2tCloudProviderConfigMicrosoftAzure | None = ...,
+        s2t_cloud_provider_config_microsoft: global___S2tCloudProviderConfigMicrosoft | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["s2t_cloud_provider_config_amazon", b"s2t_cloud_provider_config_amazon", "s2t_cloud_provider_config_deepgram", b"s2t_cloud_provider_config_deepgram", "s2t_cloud_provider_config_google", b"s2t_cloud_provider_config_google", "s2t_cloud_provider_config_microsoft_azure", b"s2t_cloud_provider_config_microsoft_azure"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["s2t_cloud_provider_config_amazon", b"s2t_cloud_provider_config_amazon", "s2t_cloud_provider_config_deepgram", b"s2t_cloud_provider_config_deepgram", "s2t_cloud_provider_config_google", b"s2t_cloud_provider_config_google", "s2t_cloud_provider_config_microsoft_azure", b"s2t_cloud_provider_config_microsoft_azure"]) -> None: ...
+    def HasField(self, field_name: typing.Literal["s2t_cloud_provider_config_amazon", b"s2t_cloud_provider_config_amazon", "s2t_cloud_provider_config_deepgram", b"s2t_cloud_provider_config_deepgram", "s2t_cloud_provider_config_google", b"s2t_cloud_provider_config_google", "s2t_cloud_provider_config_microsoft", b"s2t_cloud_provider_config_microsoft"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["s2t_cloud_provider_config_amazon", b"s2t_cloud_provider_config_amazon", "s2t_cloud_provider_config_deepgram", b"s2t_cloud_provider_config_deepgram", "s2t_cloud_provider_config_google", b"s2t_cloud_provider_config_google", "s2t_cloud_provider_config_microsoft", b"s2t_cloud_provider_config_microsoft"]) -> None: ...
 
 global___S2tCloudProviderConfig = S2tCloudProviderConfig
 
@@ -357,7 +357,7 @@ class S2tCloudProviderConfigGoogle(google.protobuf.message.Message):
 global___S2tCloudProviderConfigGoogle = S2tCloudProviderConfigGoogle
 
 @typing.final
-class S2tCloudProviderConfigMicrosoftAzure(google.protobuf.message.Message):
+class S2tCloudProviderConfigMicrosoft(google.protobuf.message.Message):
     """Configuration details specific to the Microsoft Azure speech-to-text provider."""
 
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
@@ -380,7 +380,7 @@ class S2tCloudProviderConfigMicrosoftAzure(google.protobuf.message.Message):
     ) -> None: ...
     def ClearField(self, field_name: typing.Literal["use_detailed_output_format", b"use_detailed_output_format", "use_fast_transcription_api", b"use_fast_transcription_api"]) -> None: ...
 
-global___S2tCloudProviderConfigMicrosoftAzure = S2tCloudProviderConfigMicrosoftAzure
+global___S2tCloudProviderConfigMicrosoft = S2tCloudProviderConfigMicrosoft
 
 @typing.final
 class TranscriptionReturnOptions(google.protobuf.message.Message):
@@ -1117,7 +1117,7 @@ class AcousticModels(google.protobuf.message.Message):
     S2T_CLOUD_SERVICE_AMAZON_FIELD_NUMBER: builtins.int
     S2T_CLOUD_SERVICE_DEEPGRAM_FIELD_NUMBER: builtins.int
     S2T_CLOUD_SERVICE_GOOGLE_FIELD_NUMBER: builtins.int
-    S2T_CLOUD_SERVICE_MICROSOFT_AZURE_FIELD_NUMBER: builtins.int
+    S2T_CLOUD_SERVICE_MICROSOFT_FIELD_NUMBER: builtins.int
     type: builtins.str
     """Type of the acoustic model."""
     @property
@@ -1149,7 +1149,7 @@ class AcousticModels(google.protobuf.message.Message):
         """Google cloud service inference settings."""
 
     @property
-    def s2t_cloud_service_microsoft_azure(self) -> global___S2tCloudServiceMicrosoftAzure:
+    def s2t_cloud_service_microsoft(self) -> global___S2tCloudServiceMicrosoft:
         """Microsoft Azure cloud service inference settings."""
 
     def __init__(
@@ -1163,10 +1163,10 @@ class AcousticModels(google.protobuf.message.Message):
         s2t_cloud_service_amazon: global___S2tCloudServiceAmazon | None = ...,
         s2t_cloud_service_deepgram: global___S2tCloudServiceDeepgram | None = ...,
         s2t_cloud_service_google: global___S2tCloudServiceGoogle | None = ...,
-        s2t_cloud_service_microsoft_azure: global___S2tCloudServiceMicrosoftAzure | None = ...,
+        s2t_cloud_service_microsoft: global___S2tCloudServiceMicrosoft | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["s2t_cloud_service_amazon", b"s2t_cloud_service_amazon", "s2t_cloud_service_deepgram", b"s2t_cloud_service_deepgram", "s2t_cloud_service_google", b"s2t_cloud_service_google", "s2t_cloud_service_microsoft_azure", b"s2t_cloud_service_microsoft_azure", "wav2vec", b"wav2vec", "wav2vec_triton", b"wav2vec_triton", "whisper", b"whisper", "whisper_triton", b"whisper_triton"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["s2t_cloud_service_amazon", b"s2t_cloud_service_amazon", "s2t_cloud_service_deepgram", b"s2t_cloud_service_deepgram", "s2t_cloud_service_google", b"s2t_cloud_service_google", "s2t_cloud_service_microsoft_azure", b"s2t_cloud_service_microsoft_azure", "type", b"type", "wav2vec", b"wav2vec", "wav2vec_triton", b"wav2vec_triton", "whisper", b"whisper", "whisper_triton", b"whisper_triton"]) -> None: ...
+    def HasField(self, field_name: typing.Literal["s2t_cloud_service_amazon", b"s2t_cloud_service_amazon", "s2t_cloud_service_deepgram", b"s2t_cloud_service_deepgram", "s2t_cloud_service_google", b"s2t_cloud_service_google", "s2t_cloud_service_microsoft", b"s2t_cloud_service_microsoft", "wav2vec", b"wav2vec", "wav2vec_triton", b"wav2vec_triton", "whisper", b"whisper", "whisper_triton", b"whisper_triton"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["s2t_cloud_service_amazon", b"s2t_cloud_service_amazon", "s2t_cloud_service_deepgram", b"s2t_cloud_service_deepgram", "s2t_cloud_service_google", b"s2t_cloud_service_google", "s2t_cloud_service_microsoft", b"s2t_cloud_service_microsoft", "type", b"type", "wav2vec", b"wav2vec", "wav2vec_triton", b"wav2vec_triton", "whisper", b"whisper", "whisper_triton", b"whisper_triton"]) -> None: ...
 
 global___AcousticModels = AcousticModels
 
@@ -1338,8 +1338,8 @@ class S2tCloudServiceGoogle(google.protobuf.message.Message):
 global___S2tCloudServiceGoogle = S2tCloudServiceGoogle
 
 @typing.final
-class S2tCloudServiceMicrosoftAzure(google.protobuf.message.Message):
-    """S2tCloudServiceMicrosoftAzure message contains settings for the Microsoft Azure Cloud service inference."""
+class S2tCloudServiceMicrosoft(google.protobuf.message.Message):
+    """S2tCloudServiceMicrosoft message contains settings for the Microsoft Azure Cloud service inference."""
 
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
@@ -1367,7 +1367,7 @@ class S2tCloudServiceMicrosoftAzure(google.protobuf.message.Message):
     ) -> None: ...
     def ClearField(self, field_name: typing.Literal["language", b"language", "use_detailed_output_format", b"use_detailed_output_format", "use_fast_transcription_api", b"use_fast_transcription_api"]) -> None: ...
 
-global___S2tCloudServiceMicrosoftAzure = S2tCloudServiceMicrosoftAzure
+global___S2tCloudServiceMicrosoft = S2tCloudServiceMicrosoft
 
 @typing.final
 class Whisper(google.protobuf.message.Message):
