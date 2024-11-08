@@ -139,7 +139,7 @@ class TranscribeRequestConfig(google.protobuf.message.Message):
 
     @property
     def s2t_service_config(self) -> google.protobuf.struct_pb2.Struct:
-        """s2t_service_config provides the configuration of the service such as API key, bearer tokens, JWT,
+        """Optional. s2t_service_config provides the configuration of the service such as API key, bearer tokens, JWT,
         and other header information as key value pairs, e.g., <pre><code>MY_API_KEY='LKJDIFe244LKJOI'</code></pre>
         """
 
@@ -164,10 +164,12 @@ class TranscribeRequestConfig(google.protobuf.message.Message):
         s2t_service_config: google.protobuf.struct_pb2.Struct | None = ...,
         s2t_cloud_provider_config: global___S2tCloudProviderConfig | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["_language", b"_language", "_s2t_service_config", b"_s2t_service_config", "_task", b"_task", "language", b"language", "language_model_name", b"language_model_name", "oneof_language_model_name", b"oneof_language_model_name", "oneof_post_processing", b"oneof_post_processing", "oneof_return_options", b"oneof_return_options", "oneof_s2t_cloud_provider_config", b"oneof_s2t_cloud_provider_config", "oneof_utterance_detection", b"oneof_utterance_detection", "post_processing", b"post_processing", "pyannote", b"pyannote", "return_options", b"return_options", "s2t_cloud_provider_config", b"s2t_cloud_provider_config", "s2t_service_config", b"s2t_service_config", "task", b"task", "utterance_detection", b"utterance_detection", "voice_activity_detection", b"voice_activity_detection"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["_language", b"_language", "_s2t_service_config", b"_s2t_service_config", "_task", b"_task", "decoding", b"decoding", "language", b"language", "language_model_name", b"language_model_name", "oneof_language_model_name", b"oneof_language_model_name", "oneof_post_processing", b"oneof_post_processing", "oneof_return_options", b"oneof_return_options", "oneof_s2t_cloud_provider_config", b"oneof_s2t_cloud_provider_config", "oneof_utterance_detection", b"oneof_utterance_detection", "post_processing", b"post_processing", "pyannote", b"pyannote", "return_options", b"return_options", "s2t_cloud_provider_config", b"s2t_cloud_provider_config", "s2t_pipeline_id", b"s2t_pipeline_id", "s2t_service_config", b"s2t_service_config", "task", b"task", "utterance_detection", b"utterance_detection", "voice_activity_detection", b"voice_activity_detection"]) -> None: ...
+    def HasField(self, field_name: typing.Literal["_language", b"_language", "_s2t_cloud_provider_config", b"_s2t_cloud_provider_config", "_s2t_service_config", b"_s2t_service_config", "_task", b"_task", "language", b"language", "language_model_name", b"language_model_name", "oneof_language_model_name", b"oneof_language_model_name", "oneof_post_processing", b"oneof_post_processing", "oneof_return_options", b"oneof_return_options", "oneof_utterance_detection", b"oneof_utterance_detection", "post_processing", b"post_processing", "pyannote", b"pyannote", "return_options", b"return_options", "s2t_cloud_provider_config", b"s2t_cloud_provider_config", "s2t_service_config", b"s2t_service_config", "task", b"task", "utterance_detection", b"utterance_detection", "voice_activity_detection", b"voice_activity_detection"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["_language", b"_language", "_s2t_cloud_provider_config", b"_s2t_cloud_provider_config", "_s2t_service_config", b"_s2t_service_config", "_task", b"_task", "decoding", b"decoding", "language", b"language", "language_model_name", b"language_model_name", "oneof_language_model_name", b"oneof_language_model_name", "oneof_post_processing", b"oneof_post_processing", "oneof_return_options", b"oneof_return_options", "oneof_utterance_detection", b"oneof_utterance_detection", "post_processing", b"post_processing", "pyannote", b"pyannote", "return_options", b"return_options", "s2t_cloud_provider_config", b"s2t_cloud_provider_config", "s2t_pipeline_id", b"s2t_pipeline_id", "s2t_service_config", b"s2t_service_config", "task", b"task", "utterance_detection", b"utterance_detection", "voice_activity_detection", b"voice_activity_detection"]) -> None: ...
     @typing.overload
     def WhichOneof(self, oneof_group: typing.Literal["_language", b"_language"]) -> typing.Literal["language"] | None: ...
+    @typing.overload
+    def WhichOneof(self, oneof_group: typing.Literal["_s2t_cloud_provider_config", b"_s2t_cloud_provider_config"]) -> typing.Literal["s2t_cloud_provider_config"] | None: ...
     @typing.overload
     def WhichOneof(self, oneof_group: typing.Literal["_s2t_service_config", b"_s2t_service_config"]) -> typing.Literal["s2t_service_config"] | None: ...
     @typing.overload
@@ -178,8 +180,6 @@ class TranscribeRequestConfig(google.protobuf.message.Message):
     def WhichOneof(self, oneof_group: typing.Literal["oneof_post_processing", b"oneof_post_processing"]) -> typing.Literal["post_processing"] | None: ...
     @typing.overload
     def WhichOneof(self, oneof_group: typing.Literal["oneof_return_options", b"oneof_return_options"]) -> typing.Literal["return_options"] | None: ...
-    @typing.overload
-    def WhichOneof(self, oneof_group: typing.Literal["oneof_s2t_cloud_provider_config", b"oneof_s2t_cloud_provider_config"]) -> typing.Literal["s2t_cloud_provider_config"] | None: ...
     @typing.overload
     def WhichOneof(self, oneof_group: typing.Literal["oneof_utterance_detection", b"oneof_utterance_detection"]) -> typing.Literal["utterance_detection"] | None: ...
     @typing.overload
@@ -199,19 +199,19 @@ class S2tCloudProviderConfig(google.protobuf.message.Message):
     S2T_CLOUD_PROVIDER_CONFIG_MICROSOFT_FIELD_NUMBER: builtins.int
     @property
     def s2t_cloud_provider_config_amazon(self) -> global___S2tCloudProviderConfigAmazon:
-        """Configuration for Amazon web service speech-to-text provider."""
+        """Optional. Configuration for Amazon web service speech-to-text provider."""
 
     @property
     def s2t_cloud_provider_config_deepgram(self) -> global___S2tCloudProviderConfigDeepgram:
-        """Configuration for DeepGram speech-to-text provider."""
+        """Optional. Configuration for DeepGram speech-to-text provider."""
 
     @property
     def s2t_cloud_provider_config_google(self) -> global___S2tCloudProviderConfigGoogle:
-        """Configuration for Google speech-to-text provider."""
+        """Optional. Configuration for Google speech-to-text provider."""
 
     @property
     def s2t_cloud_provider_config_microsoft(self) -> global___S2tCloudProviderConfigMicrosoft:
-        """Configuration for Microsoft Azure speech-to-text provider."""
+        """Optional. Configuration for Microsoft Azure speech-to-text provider."""
 
     def __init__(
         self,
@@ -221,8 +221,16 @@ class S2tCloudProviderConfig(google.protobuf.message.Message):
         s2t_cloud_provider_config_google: global___S2tCloudProviderConfigGoogle | None = ...,
         s2t_cloud_provider_config_microsoft: global___S2tCloudProviderConfigMicrosoft | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["s2t_cloud_provider_config_amazon", b"s2t_cloud_provider_config_amazon", "s2t_cloud_provider_config_deepgram", b"s2t_cloud_provider_config_deepgram", "s2t_cloud_provider_config_google", b"s2t_cloud_provider_config_google", "s2t_cloud_provider_config_microsoft", b"s2t_cloud_provider_config_microsoft"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["s2t_cloud_provider_config_amazon", b"s2t_cloud_provider_config_amazon", "s2t_cloud_provider_config_deepgram", b"s2t_cloud_provider_config_deepgram", "s2t_cloud_provider_config_google", b"s2t_cloud_provider_config_google", "s2t_cloud_provider_config_microsoft", b"s2t_cloud_provider_config_microsoft"]) -> None: ...
+    def HasField(self, field_name: typing.Literal["_s2t_cloud_provider_config_amazon", b"_s2t_cloud_provider_config_amazon", "_s2t_cloud_provider_config_deepgram", b"_s2t_cloud_provider_config_deepgram", "_s2t_cloud_provider_config_google", b"_s2t_cloud_provider_config_google", "_s2t_cloud_provider_config_microsoft", b"_s2t_cloud_provider_config_microsoft", "s2t_cloud_provider_config_amazon", b"s2t_cloud_provider_config_amazon", "s2t_cloud_provider_config_deepgram", b"s2t_cloud_provider_config_deepgram", "s2t_cloud_provider_config_google", b"s2t_cloud_provider_config_google", "s2t_cloud_provider_config_microsoft", b"s2t_cloud_provider_config_microsoft"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["_s2t_cloud_provider_config_amazon", b"_s2t_cloud_provider_config_amazon", "_s2t_cloud_provider_config_deepgram", b"_s2t_cloud_provider_config_deepgram", "_s2t_cloud_provider_config_google", b"_s2t_cloud_provider_config_google", "_s2t_cloud_provider_config_microsoft", b"_s2t_cloud_provider_config_microsoft", "s2t_cloud_provider_config_amazon", b"s2t_cloud_provider_config_amazon", "s2t_cloud_provider_config_deepgram", b"s2t_cloud_provider_config_deepgram", "s2t_cloud_provider_config_google", b"s2t_cloud_provider_config_google", "s2t_cloud_provider_config_microsoft", b"s2t_cloud_provider_config_microsoft"]) -> None: ...
+    @typing.overload
+    def WhichOneof(self, oneof_group: typing.Literal["_s2t_cloud_provider_config_amazon", b"_s2t_cloud_provider_config_amazon"]) -> typing.Literal["s2t_cloud_provider_config_amazon"] | None: ...
+    @typing.overload
+    def WhichOneof(self, oneof_group: typing.Literal["_s2t_cloud_provider_config_deepgram", b"_s2t_cloud_provider_config_deepgram"]) -> typing.Literal["s2t_cloud_provider_config_deepgram"] | None: ...
+    @typing.overload
+    def WhichOneof(self, oneof_group: typing.Literal["_s2t_cloud_provider_config_google", b"_s2t_cloud_provider_config_google"]) -> typing.Literal["s2t_cloud_provider_config_google"] | None: ...
+    @typing.overload
+    def WhichOneof(self, oneof_group: typing.Literal["_s2t_cloud_provider_config_microsoft", b"_s2t_cloud_provider_config_microsoft"]) -> typing.Literal["s2t_cloud_provider_config_microsoft"] | None: ...
 
 global___S2tCloudProviderConfig = S2tCloudProviderConfig
 
@@ -237,32 +245,41 @@ class S2tCloudProviderConfigAmazon(google.protobuf.message.Message):
     LANGUAGE_MODEL_NAME_FIELD_NUMBER: builtins.int
     VOCABULARY_NAME_FIELD_NUMBER: builtins.int
     enable_partial_results_stabilization: builtins.bool
-    """Enables or disables partial_results_stabilization feature. More details at:
+    """Optional. Enables or disables partial_results_stabilization feature. More details at:
     https://docs.aws.amazon.com/transcribe/latest/dg/streaming-partial-results.html#streaming-partial-result-stabilization
     """
     partial_results_stability: builtins.str
-    """You can use this field to set the stability level of the transcription results.
+    """Optional. You can use this field to set the stability level of the transcription results.
     A higher stability level means that the transcription results are less likely to change.
     Higher stability levels can come with lower overall transcription accuracy.
     Defaults to "high" if not set explicitly.
     """
     language_model_name: builtins.str
-    """The name of your customize language model you want to use.
+    """Optional. The name of your customize language model you want to use.
     More details at: https://docs.aws.amazon.com/transcribe/latest/dg/custom-language-models.html
     """
     vocabulary_name: builtins.str
-    """The name of your customize language model you want to use.
+    """Optional. The name of your customize language model you want to use.
     More details at: https://docs.aws.amazon.com/transcribe/latest/dg/custom-vocabulary.html
     """
     def __init__(
         self,
         *,
-        enable_partial_results_stabilization: builtins.bool = ...,
-        partial_results_stability: builtins.str = ...,
-        language_model_name: builtins.str = ...,
-        vocabulary_name: builtins.str = ...,
+        enable_partial_results_stabilization: builtins.bool | None = ...,
+        partial_results_stability: builtins.str | None = ...,
+        language_model_name: builtins.str | None = ...,
+        vocabulary_name: builtins.str | None = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing.Literal["enable_partial_results_stabilization", b"enable_partial_results_stabilization", "language_model_name", b"language_model_name", "partial_results_stability", b"partial_results_stability", "vocabulary_name", b"vocabulary_name"]) -> None: ...
+    def HasField(self, field_name: typing.Literal["_enable_partial_results_stabilization", b"_enable_partial_results_stabilization", "_language_model_name", b"_language_model_name", "_partial_results_stability", b"_partial_results_stability", "_vocabulary_name", b"_vocabulary_name", "enable_partial_results_stabilization", b"enable_partial_results_stabilization", "language_model_name", b"language_model_name", "partial_results_stability", b"partial_results_stability", "vocabulary_name", b"vocabulary_name"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["_enable_partial_results_stabilization", b"_enable_partial_results_stabilization", "_language_model_name", b"_language_model_name", "_partial_results_stability", b"_partial_results_stability", "_vocabulary_name", b"_vocabulary_name", "enable_partial_results_stabilization", b"enable_partial_results_stabilization", "language_model_name", b"language_model_name", "partial_results_stability", b"partial_results_stability", "vocabulary_name", b"vocabulary_name"]) -> None: ...
+    @typing.overload
+    def WhichOneof(self, oneof_group: typing.Literal["_enable_partial_results_stabilization", b"_enable_partial_results_stabilization"]) -> typing.Literal["enable_partial_results_stabilization"] | None: ...
+    @typing.overload
+    def WhichOneof(self, oneof_group: typing.Literal["_language_model_name", b"_language_model_name"]) -> typing.Literal["language_model_name"] | None: ...
+    @typing.overload
+    def WhichOneof(self, oneof_group: typing.Literal["_partial_results_stability", b"_partial_results_stability"]) -> typing.Literal["partial_results_stability"] | None: ...
+    @typing.overload
+    def WhichOneof(self, oneof_group: typing.Literal["_vocabulary_name", b"_vocabulary_name"]) -> typing.Literal["vocabulary_name"] | None: ...
 
 global___S2tCloudProviderConfigAmazon = S2tCloudProviderConfigAmazon
 
@@ -278,36 +295,47 @@ class S2tCloudProviderConfigDeepgram(google.protobuf.message.Message):
     MEASUREMENTS_FIELD_NUMBER: builtins.int
     DICTATION_FIELD_NUMBER: builtins.int
     punctuate: builtins.bool
-    """Enables or disables punctuate feature of Deepgram to add punctuations to the resulted transcript.
+    """Optional. Enables or disables punctuate feature of Deepgram to add punctuations to the resulted transcript.
     More details at: https://developers.deepgram.com/docs/punctuation
     """
     smart_format: builtins.bool
-    """Enables or disables smart_format feature of Deepgram transcription result to improve readability.
+    """Optional. Enables or disables smart_format feature of Deepgram transcription result to improve readability.
     More details at: https://developers.deepgram.com/docs/smart-format
     """
     numerals: builtins.bool
-    """Enables or disables numerals feature of Deepgram to convert numbers to numeric form in the resulted transcript.
-       // More details at: https://developers.deepgram.com/docs/numerals
+    """Optional. Enables or disables numerals feature of Deepgram to convert numbers to numeric form in the resulted
+    transcript. More details at: https://developers.deepgram.com/docs/numerals
     """
     measurements: builtins.bool
-    """Enables or disables measurements feature of Deepgram to convert measurement units (i.e. Kilogram)
-       // to abbreviated form (i.e. Kg) in the resulted transcript.
-       // More details at: https://developers.deepgram.com/docs/measurements
+    """Optional. Enables or disables measurements feature of Deepgram to convert measurement units (i.e. Kilogram)
+    to abbreviated form (i.e. Kg) in the resulted transcript.
+    More details at: https://developers.deepgram.com/docs/measurements
     """
     dictation: builtins.bool
-    """Enables or disables dictation feature of Deepgram to convert spoken dictation commands into their corresponding
-       // punctuation marks. More details at: https://developers.deepgram.com/docs/dictation
+    """Optional. Enables or disables dictation feature of Deepgram to convert spoken dictation commands into their
+    corresponding punctuation marks. More details at: https://developers.deepgram.com/docs/dictation
     """
     def __init__(
         self,
         *,
-        punctuate: builtins.bool = ...,
-        smart_format: builtins.bool = ...,
-        numerals: builtins.bool = ...,
-        measurements: builtins.bool = ...,
-        dictation: builtins.bool = ...,
+        punctuate: builtins.bool | None = ...,
+        smart_format: builtins.bool | None = ...,
+        numerals: builtins.bool | None = ...,
+        measurements: builtins.bool | None = ...,
+        dictation: builtins.bool | None = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing.Literal["dictation", b"dictation", "measurements", b"measurements", "numerals", b"numerals", "punctuate", b"punctuate", "smart_format", b"smart_format"]) -> None: ...
+    def HasField(self, field_name: typing.Literal["_dictation", b"_dictation", "_measurements", b"_measurements", "_numerals", b"_numerals", "_punctuate", b"_punctuate", "_smart_format", b"_smart_format", "dictation", b"dictation", "measurements", b"measurements", "numerals", b"numerals", "punctuate", b"punctuate", "smart_format", b"smart_format"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["_dictation", b"_dictation", "_measurements", b"_measurements", "_numerals", b"_numerals", "_punctuate", b"_punctuate", "_smart_format", b"_smart_format", "dictation", b"dictation", "measurements", b"measurements", "numerals", b"numerals", "punctuate", b"punctuate", "smart_format", b"smart_format"]) -> None: ...
+    @typing.overload
+    def WhichOneof(self, oneof_group: typing.Literal["_dictation", b"_dictation"]) -> typing.Literal["dictation"] | None: ...
+    @typing.overload
+    def WhichOneof(self, oneof_group: typing.Literal["_measurements", b"_measurements"]) -> typing.Literal["measurements"] | None: ...
+    @typing.overload
+    def WhichOneof(self, oneof_group: typing.Literal["_numerals", b"_numerals"]) -> typing.Literal["numerals"] | None: ...
+    @typing.overload
+    def WhichOneof(self, oneof_group: typing.Literal["_punctuate", b"_punctuate"]) -> typing.Literal["punctuate"] | None: ...
+    @typing.overload
+    def WhichOneof(self, oneof_group: typing.Literal["_smart_format", b"_smart_format"]) -> typing.Literal["smart_format"] | None: ...
 
 global___S2tCloudProviderConfigDeepgram = S2tCloudProviderConfigDeepgram
 
@@ -323,36 +351,47 @@ class S2tCloudProviderConfigGoogle(google.protobuf.message.Message):
     TRANSCRIPT_NORMALIZATION_FIELD_NUMBER: builtins.int
     MAX_ALTERNATIVES_FIELD_NUMBER: builtins.int
     enable_automatic_punctuation: builtins.bool
-    """Enables or disables automatic_punctuation feature of Google s2t to add punctuations to the resulted transcript.
-    More details at: https://cloud.google.com/speech-to-text/docs/automatic-punctuation
+    """Optional. Enables or disables automatic_punctuation feature of Google s2t to add punctuations to the resulted
+    transcript. More details at: https://cloud.google.com/speech-to-text/docs/automatic-punctuation
     """
     enable_word_time_offsets: builtins.bool
-    """Enables or disables word_time_offsets feature of Google s2t to add word-level timestamps (time-offsets)
+    """Optional. Enables or disables word_time_offsets feature of Google s2t to add word-level timestamps (time-offset)
     to the resulted transcript. More details at: https://cloud.google.com/speech-to-text/docs/async-time-offsets
     """
     enable_word_confidence: builtins.bool
-    """Enables or disables word_confidence feature of Google s2t to add word-level confidence scores
+    """Optional. Enables or disables word_confidence feature of Google s2t to add word-level confidence scores
     to the resulted transcript. More details at: https://cloud.google.com/speech-to-text/docs/word-confidence
     """
     transcript_normalization: builtins.bool
-    """Enables or disables transcript_normalization feature of Google s2t to automatically
+    """Optional. Enables or disables transcript_normalization feature of Google s2t to automatically
     replace parts of the transcript with phrases of your choosing. More details at:
     https://cloud.google.com/speech-to-text/v2/docs/reference/rpc/google.cloud.speech.v2#transcriptnormalization
     """
     max_alternatives: builtins.int
-    """Maximum number of recognition hypotheses to be returned. The server may return fewer than max_alternatives.
+    """Optional. Maximum number of recognition hypotheses to be returned, may be returned fewer than max_alternatives.
     Valid values are 0-30. A value of 0 or 1 will return a maximum of one. If omitted, will return a maximum of one.
     """
     def __init__(
         self,
         *,
-        enable_automatic_punctuation: builtins.bool = ...,
-        enable_word_time_offsets: builtins.bool = ...,
-        enable_word_confidence: builtins.bool = ...,
-        transcript_normalization: builtins.bool = ...,
-        max_alternatives: builtins.int = ...,
+        enable_automatic_punctuation: builtins.bool | None = ...,
+        enable_word_time_offsets: builtins.bool | None = ...,
+        enable_word_confidence: builtins.bool | None = ...,
+        transcript_normalization: builtins.bool | None = ...,
+        max_alternatives: builtins.int | None = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing.Literal["enable_automatic_punctuation", b"enable_automatic_punctuation", "enable_word_confidence", b"enable_word_confidence", "enable_word_time_offsets", b"enable_word_time_offsets", "max_alternatives", b"max_alternatives", "transcript_normalization", b"transcript_normalization"]) -> None: ...
+    def HasField(self, field_name: typing.Literal["_enable_automatic_punctuation", b"_enable_automatic_punctuation", "_enable_word_confidence", b"_enable_word_confidence", "_enable_word_time_offsets", b"_enable_word_time_offsets", "_max_alternatives", b"_max_alternatives", "_transcript_normalization", b"_transcript_normalization", "enable_automatic_punctuation", b"enable_automatic_punctuation", "enable_word_confidence", b"enable_word_confidence", "enable_word_time_offsets", b"enable_word_time_offsets", "max_alternatives", b"max_alternatives", "transcript_normalization", b"transcript_normalization"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["_enable_automatic_punctuation", b"_enable_automatic_punctuation", "_enable_word_confidence", b"_enable_word_confidence", "_enable_word_time_offsets", b"_enable_word_time_offsets", "_max_alternatives", b"_max_alternatives", "_transcript_normalization", b"_transcript_normalization", "enable_automatic_punctuation", b"enable_automatic_punctuation", "enable_word_confidence", b"enable_word_confidence", "enable_word_time_offsets", b"enable_word_time_offsets", "max_alternatives", b"max_alternatives", "transcript_normalization", b"transcript_normalization"]) -> None: ...
+    @typing.overload
+    def WhichOneof(self, oneof_group: typing.Literal["_enable_automatic_punctuation", b"_enable_automatic_punctuation"]) -> typing.Literal["enable_automatic_punctuation"] | None: ...
+    @typing.overload
+    def WhichOneof(self, oneof_group: typing.Literal["_enable_word_confidence", b"_enable_word_confidence"]) -> typing.Literal["enable_word_confidence"] | None: ...
+    @typing.overload
+    def WhichOneof(self, oneof_group: typing.Literal["_enable_word_time_offsets", b"_enable_word_time_offsets"]) -> typing.Literal["enable_word_time_offsets"] | None: ...
+    @typing.overload
+    def WhichOneof(self, oneof_group: typing.Literal["_max_alternatives", b"_max_alternatives"]) -> typing.Literal["max_alternatives"] | None: ...
+    @typing.overload
+    def WhichOneof(self, oneof_group: typing.Literal["_transcript_normalization", b"_transcript_normalization"]) -> typing.Literal["transcript_normalization"] | None: ...
 
 global___S2tCloudProviderConfigGoogle = S2tCloudProviderConfigGoogle
 
@@ -365,20 +404,26 @@ class S2tCloudProviderConfigMicrosoft(google.protobuf.message.Message):
     USE_FAST_TRANSCRIPTION_API_FIELD_NUMBER: builtins.int
     USE_DETAILED_OUTPUT_FORMAT_FIELD_NUMBER: builtins.int
     use_fast_transcription_api: builtins.bool
-    """Enables or disables the Microsoft Azure fast transcription API. It is faster than SDK but is in preview version.
+    """Optional. Enables or disables the Microsoft Azure fast transcription API. It is faster than SDK but is in
+    preview version.
     More details at: https://learn.microsoft.com/en-us/azure/ai-services/speech-service/fast-transcription-create
     """
     use_detailed_output_format: builtins.bool
-    """Enables or disables the `detailed` format for the result of Microsoft Azure s2t service
+    """Optional. Enables or disables the `detailed` format for the result of Microsoft Azure s2t service
     to add timestamps and confidences to the resulted transcript.
     """
     def __init__(
         self,
         *,
-        use_fast_transcription_api: builtins.bool = ...,
-        use_detailed_output_format: builtins.bool = ...,
+        use_fast_transcription_api: builtins.bool | None = ...,
+        use_detailed_output_format: builtins.bool | None = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing.Literal["use_detailed_output_format", b"use_detailed_output_format", "use_fast_transcription_api", b"use_fast_transcription_api"]) -> None: ...
+    def HasField(self, field_name: typing.Literal["_use_detailed_output_format", b"_use_detailed_output_format", "_use_fast_transcription_api", b"_use_fast_transcription_api", "use_detailed_output_format", b"use_detailed_output_format", "use_fast_transcription_api", b"use_fast_transcription_api"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["_use_detailed_output_format", b"_use_detailed_output_format", "_use_fast_transcription_api", b"_use_fast_transcription_api", "use_detailed_output_format", b"use_detailed_output_format", "use_fast_transcription_api", b"use_fast_transcription_api"]) -> None: ...
+    @typing.overload
+    def WhichOneof(self, oneof_group: typing.Literal["_use_detailed_output_format", b"_use_detailed_output_format"]) -> typing.Literal["use_detailed_output_format"] | None: ...
+    @typing.overload
+    def WhichOneof(self, oneof_group: typing.Literal["_use_fast_transcription_api", b"_use_fast_transcription_api"]) -> typing.Literal["use_fast_transcription_api"] | None: ...
 
 global___S2tCloudProviderConfigMicrosoft = S2tCloudProviderConfigMicrosoft
 
