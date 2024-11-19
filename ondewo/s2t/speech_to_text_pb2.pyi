@@ -141,6 +141,30 @@ class TranscribeRequestConfig(google.protobuf.message.Message):
     def s2t_service_config(self) -> google.protobuf.struct_pb2.Struct:
         """Optional. s2t_service_config provides the configuration of the service such as API key, bearer tokens, JWT,
         and other header information as key value pairs, e.g., <pre><code>MY_API_KEY='LKJDIFe244LKJOI'</code></pre>
+        A. For Amazon S2T service, the following arguments should be passed in form of a dict:
+         A.1 aws_access_key_id (required) Access key id to access Amazon WEb Service.
+         A.2 aws_secret_access_key (required) Secret access key to access Amazon WEb Service.
+         A.3 region (required) Region name of Amazon Server.
+         Example:
+         s2t_config_service={'aws_access_key_id': 'YOUR_AWS_ACCESS_KEY_ID', 'aws_secret_access_key':
+         'YOUR_AWS_SECRET_ACCESS_KEY', 'region': 'YOUR_AMAZON_SERVER_REGION_NAME'}
+        B. For Deepgram S2T service, the following argument should be passed in form of a dict:
+         B.1 api_key (required) API key of Deepgram account to access Deepgram S2T service.
+         Example:
+         s2t_config_service={'api_key': 'YOUR_DEEPGRAM_API_KEY'}
+        C. For Google cloud S2T service, the following arguments should be passed in form of a dict:
+         C.1- api_key (required) API key of Google cloud to access its S2T service.
+         C.2- api_endpoint (optional) Regional API endpoint of Google cloud S2T service. (Defaults to
+         'eu-speech.googleapis.com')
+         Example:
+         s2t_config_service={'api_key': 'YOUR_GOOGLE_CLOUD_API_KEY', 'api_endpoint': 'YOUR_GOOGLE_CLOUD_API_ENDPOINT'}
+        D. For Microsoft Azure S2T service, the following arguments should be passed in form of a dict:
+         D.1 subscription_key (required) Subscription key to access Microsoft Azure Service.
+         D.2 region (required) Region name of Microsoft Azure Server.
+         Example:
+         s2t_config_service={'subscription_key': 'YOUR_MICROSOFT_AZURE_SUBSCRIPTION_KEY', 'region':
+         'YOUR_MICROSOFT_AZURE_SERVER_REGION_NAME'}
+        Note: ondewo-s2t will raise an error if you don't pass any of the required arguments above.
         """
 
     @property
