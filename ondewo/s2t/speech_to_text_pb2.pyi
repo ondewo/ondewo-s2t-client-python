@@ -78,6 +78,14 @@ class _InferenceBackendEnumTypeWrapper(google.protobuf.internal.enum_type_wrappe
     """Run pytorch model"""
     INFERENCE_BACKEND_FLAX: _InferenceBackend.ValueType  # 2
     """Run flax model"""
+    INFERENCE_BACKEND_CLOUD_SERVICE_AMAZON: _InferenceBackend.ValueType  # 3
+    """Run Amazon S2T cloud service"""
+    INFERENCE_BACKEND_CLOUD_SERVICE_DEEPGRAM: _InferenceBackend.ValueType  # 4
+    """Run Deepgram S2T cloud service"""
+    INFERENCE_BACKEND_CLOUD_SERVICE_GOOGLE: _InferenceBackend.ValueType  # 5
+    """Run Google S2T cloud service"""
+    INFERENCE_BACKEND_CLOUD_SERVICE_MICROSOFT: _InferenceBackend.ValueType  # 6
+    """Run Microsoft Azure S2T cloud service"""
 
 class InferenceBackend(_InferenceBackend, metaclass=_InferenceBackendEnumTypeWrapper): ...
 
@@ -87,6 +95,14 @@ INFERENCE_BACKEND_PYTORCH: InferenceBackend.ValueType  # 1
 """Run pytorch model"""
 INFERENCE_BACKEND_FLAX: InferenceBackend.ValueType  # 2
 """Run flax model"""
+INFERENCE_BACKEND_CLOUD_SERVICE_AMAZON: InferenceBackend.ValueType  # 3
+"""Run Amazon S2T cloud service"""
+INFERENCE_BACKEND_CLOUD_SERVICE_DEEPGRAM: InferenceBackend.ValueType  # 4
+"""Run Deepgram S2T cloud service"""
+INFERENCE_BACKEND_CLOUD_SERVICE_GOOGLE: InferenceBackend.ValueType  # 5
+"""Run Google S2T cloud service"""
+INFERENCE_BACKEND_CLOUD_SERVICE_MICROSOFT: InferenceBackend.ValueType  # 6
+"""Run Microsoft Azure S2T cloud service"""
 global___InferenceBackend = InferenceBackend
 
 @typing.final
@@ -141,6 +157,30 @@ class TranscribeRequestConfig(google.protobuf.message.Message):
     def s2t_service_config(self) -> google.protobuf.struct_pb2.Struct:
         """Optional. s2t_service_config provides the configuration of the service such as API key, bearer tokens, JWT,
         and other header information as key value pairs, e.g., <pre><code>MY_API_KEY='LKJDIFe244LKJOI'</code></pre>
+        A. For Amazon S2T service, the following arguments should be passed in form of a dict:
+         A.1 aws_access_key_id (required) Access key id to access Amazon WEb Service.
+         A.2 aws_secret_access_key (required) Secret access key to access Amazon WEb Service.
+         A.3 region (required) Region name of Amazon Server.
+         Example:
+         s2t_config_service={'aws_access_key_id': 'YOUR_AWS_ACCESS_KEY_ID', 'aws_secret_access_key':
+         'YOUR_AWS_SECRET_ACCESS_KEY', 'region': 'YOUR_AMAZON_SERVER_REGION_NAME'}
+        B. For Deepgram S2T service, the following argument should be passed in form of a dict:
+         B.1 api_key (required) API key of Deepgram account to access Deepgram S2T service.
+         Example:
+         s2t_config_service={'api_key': 'YOUR_DEEPGRAM_API_KEY'}
+        C. For Google cloud S2T service, the following arguments should be passed in form of a dict:
+         C.1- api_key (required) API key of Google cloud to access its S2T service.
+         C.2- api_endpoint (optional) Regional API endpoint of Google cloud S2T service. (Defaults to
+         'eu-speech.googleapis.com')
+         Example:
+         s2t_config_service={'api_key': 'YOUR_GOOGLE_CLOUD_API_KEY', 'api_endpoint': 'YOUR_GOOGLE_CLOUD_API_ENDPOINT'}
+        D. For Microsoft Azure S2T service, the following arguments should be passed in form of a dict:
+         D.1 subscription_key (required) Subscription key to access Microsoft Azure Service.
+         D.2 region (required) Region name of Microsoft Azure Server.
+         Example:
+         s2t_config_service={'subscription_key': 'YOUR_MICROSOFT_AZURE_SUBSCRIPTION_KEY', 'region':
+         'YOUR_MICROSOFT_AZURE_SERVER_REGION_NAME'}
+        Note: ondewo-s2t will raise an error if you don't pass any of the required arguments above.
         """
 
     @property
@@ -252,7 +292,8 @@ class S2tCloudProviderConfigAmazon(google.protobuf.message.Message):
     """Optional. You can use this field to set the stability level of the transcription results.
     A higher stability level means that the transcription results are less likely to change.
     Higher stability levels can come with lower overall transcription accuracy.
-    Defaults to "high" if not set explicitly.
+    Acceptable values: ["low", "medium", "high"]. Defaults to "high" if not set explicitly. More details at:
+    https://aws.amazon.com/blogs/machine-learning/amazon-transcribe-now-supports-partial-results-stabilization-for-streaming-audio/
     """
     language_model_name: builtins.str
     """Optional. The name of your customize language model you want to use.

@@ -11,7 +11,7 @@ with open('requirements.txt') as f:
 
 setup(
     name="ondewo-s2t-client",
-    version='6.0.0',
+    version='6.1.0',
     author="ONDEWO GmbH",
     author_email="office@ondewo.com",
     description="ONDEWO Speech 2 Text (S2T) Client library for Python",
