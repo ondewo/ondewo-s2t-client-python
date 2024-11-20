@@ -78,6 +78,14 @@ class _InferenceBackendEnumTypeWrapper(google.protobuf.internal.enum_type_wrappe
     """Run pytorch model"""
     INFERENCE_BACKEND_FLAX: _InferenceBackend.ValueType  # 2
     """Run flax model"""
+    INFERENCE_BACKEND_CLOUD_SERVICE_AMAZON: _InferenceBackend.ValueType  # 3
+    """Run Amazon S2T cloud service"""
+    INFERENCE_BACKEND_CLOUD_SERVICE_DEEPGRAM: _InferenceBackend.ValueType  # 4
+    """Run Deepgram S2T cloud service"""
+    INFERENCE_BACKEND_CLOUD_SERVICE_GOOGLE: _InferenceBackend.ValueType  # 5
+    """Run Google S2T cloud service"""
+    INFERENCE_BACKEND_CLOUD_SERVICE_MICROSOFT: _InferenceBackend.ValueType  # 6
+    """Run Microsoft Azure S2T cloud service"""
 
 class InferenceBackend(_InferenceBackend, metaclass=_InferenceBackendEnumTypeWrapper): ...
 
@@ -87,6 +95,14 @@ INFERENCE_BACKEND_PYTORCH: InferenceBackend.ValueType  # 1
 """Run pytorch model"""
 INFERENCE_BACKEND_FLAX: InferenceBackend.ValueType  # 2
 """Run flax model"""
+INFERENCE_BACKEND_CLOUD_SERVICE_AMAZON: InferenceBackend.ValueType  # 3
+"""Run Amazon S2T cloud service"""
+INFERENCE_BACKEND_CLOUD_SERVICE_DEEPGRAM: InferenceBackend.ValueType  # 4
+"""Run Deepgram S2T cloud service"""
+INFERENCE_BACKEND_CLOUD_SERVICE_GOOGLE: InferenceBackend.ValueType  # 5
+"""Run Google S2T cloud service"""
+INFERENCE_BACKEND_CLOUD_SERVICE_MICROSOFT: InferenceBackend.ValueType  # 6
+"""Run Microsoft Azure S2T cloud service"""
 global___InferenceBackend = InferenceBackend
 
 @typing.final
