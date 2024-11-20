@@ -292,7 +292,8 @@ class S2tCloudProviderConfigAmazon(google.protobuf.message.Message):
     """Optional. You can use this field to set the stability level of the transcription results.
     A higher stability level means that the transcription results are less likely to change.
     Higher stability levels can come with lower overall transcription accuracy.
-    Defaults to "high" if not set explicitly.
+    Acceptable values: ["low", "medium", "high"]. Defaults to "high" if not set explicitly. More details at:
+    https://aws.amazon.com/blogs/machine-learning/amazon-transcribe-now-supports-partial-results-stabilization-for-streaming-audio/
     """
     language_model_name: builtins.str
     """Optional. The name of your customize language model you want to use.
