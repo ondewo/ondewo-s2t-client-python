@@ -522,21 +522,80 @@ class UtteranceDetectionOptions(google.protobuf.message.Message):
 
     TRANSCRIBE_NOT_FINAL_FIELD_NUMBER: builtins.int
     NEXT_CHUNK_TIMEOUT_FIELD_NUMBER: builtins.int
+    TURN_DETECTION_FIELD_NUMBER: builtins.int
     transcribe_not_final: builtins.bool
     """Return also immediate transcription results"""
     next_chunk_timeout: builtins.float
     """if time between audio chunks exceeds next_chunk_timeout, stream will be stopped"""
+    @property
+    def turn_detection(self) -> global___TurnDetectionOptions:
+        """The turn detection options"""
+
     def __init__(
         self,
         *,
         transcribe_not_final: builtins.bool = ...,
         next_chunk_timeout: builtins.float = ...,
+        turn_detection: global___TurnDetectionOptions | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["oneof_transcribe_not_final", b"oneof_transcribe_not_final", "transcribe_not_final", b"transcribe_not_final"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["next_chunk_timeout", b"next_chunk_timeout", "oneof_transcribe_not_final", b"oneof_transcribe_not_final", "transcribe_not_final", b"transcribe_not_final"]) -> None: ...
+    def HasField(self, field_name: typing.Literal["oneof_transcribe_not_final", b"oneof_transcribe_not_final", "oneof_turn_detection", b"oneof_turn_detection", "transcribe_not_final", b"transcribe_not_final", "turn_detection", b"turn_detection"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["next_chunk_timeout", b"next_chunk_timeout", "oneof_transcribe_not_final", b"oneof_transcribe_not_final", "oneof_turn_detection", b"oneof_turn_detection", "transcribe_not_final", b"transcribe_not_final", "turn_detection", b"turn_detection"]) -> None: ...
+    @typing.overload
     def WhichOneof(self, oneof_group: typing.Literal["oneof_transcribe_not_final", b"oneof_transcribe_not_final"]) -> typing.Literal["transcribe_not_final"] | None: ...
+    @typing.overload
+    def WhichOneof(self, oneof_group: typing.Literal["oneof_turn_detection", b"oneof_turn_detection"]) -> typing.Literal["turn_detection"] | None: ...
 
 global___UtteranceDetectionOptions = UtteranceDetectionOptions
+
+@typing.final
+class TurnDetectionOptions(google.protobuf.message.Message):
+    """Configuration of the options to turn-detection in utterances"""
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    ACTIVE_FIELD_NUMBER: builtins.int
+    FULL_UTTERANCE_DEPLOYMENT_FIELD_NUMBER: builtins.int
+    LLM_GRPC_HOST_FIELD_NUMBER: builtins.int
+    LLM_GRPC_PORT_FIELD_NUMBER: builtins.int
+    LLM_REQUEST_TIMEOUT_FIELD_NUMBER: builtins.int
+    active: builtins.bool
+    """Optional. Indicates if the turn-detection feature is active."""
+    full_utterance_deployment: builtins.bool
+    """Optional. Whether to transcribe the whole utterance when turn moment is detected. It is helpful to increase
+    accuracy of transcriptions in cost of drop in speed. If deactivated, it just transcribe from last short silence
+    period and concatenates the transcriptions of small audio chunks between tiny silences.
+    """
+    llm_grpc_host: builtins.str
+    """Optional. Host name or IP address of the server that serves the LLM for turn-detection purpose."""
+    llm_grpc_port: builtins.int
+    """Optional. Port number of the server that serves the LLM for turn-detection purpose."""
+    llm_request_timeout: builtins.float
+    """Optional. Duration of request timeout in seconds to get result of request to LLM for turn-detection purpose.
+    If the timeout occurs, result of turn-detection considered as False.
+    """
+    def __init__(
+        self,
+        *,
+        active: builtins.bool | None = ...,
+        full_utterance_deployment: builtins.bool | None = ...,
+        llm_grpc_host: builtins.str | None = ...,
+        llm_grpc_port: builtins.int | None = ...,
+        llm_request_timeout: builtins.float | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing.Literal["_active", b"_active", "_full_utterance_deployment", b"_full_utterance_deployment", "_llm_grpc_host", b"_llm_grpc_host", "_llm_grpc_port", b"_llm_grpc_port", "_llm_request_timeout", b"_llm_request_timeout", "active", b"active", "full_utterance_deployment", b"full_utterance_deployment", "llm_grpc_host", b"llm_grpc_host", "llm_grpc_port", b"llm_grpc_port", "llm_request_timeout", b"llm_request_timeout"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["_active", b"_active", "_full_utterance_deployment", b"_full_utterance_deployment", "_llm_grpc_host", b"_llm_grpc_host", "_llm_grpc_port", b"_llm_grpc_port", "_llm_request_timeout", b"_llm_request_timeout", "active", b"active", "full_utterance_deployment", b"full_utterance_deployment", "llm_grpc_host", b"llm_grpc_host", "llm_grpc_port", b"llm_grpc_port", "llm_request_timeout", b"llm_request_timeout"]) -> None: ...
+    @typing.overload
+    def WhichOneof(self, oneof_group: typing.Literal["_active", b"_active"]) -> typing.Literal["active"] | None: ...
+    @typing.overload
+    def WhichOneof(self, oneof_group: typing.Literal["_full_utterance_deployment", b"_full_utterance_deployment"]) -> typing.Literal["full_utterance_deployment"] | None: ...
+    @typing.overload
+    def WhichOneof(self, oneof_group: typing.Literal["_llm_grpc_host", b"_llm_grpc_host"]) -> typing.Literal["llm_grpc_host"] | None: ...
+    @typing.overload
+    def WhichOneof(self, oneof_group: typing.Literal["_llm_grpc_port", b"_llm_grpc_port"]) -> typing.Literal["llm_grpc_port"] | None: ...
+    @typing.overload
+    def WhichOneof(self, oneof_group: typing.Literal["_llm_request_timeout", b"_llm_request_timeout"]) -> typing.Literal["llm_request_timeout"] | None: ...
+
+global___TurnDetectionOptions = TurnDetectionOptions
 
 @typing.final
 class PostProcessingOptions(google.protobuf.message.Message):
