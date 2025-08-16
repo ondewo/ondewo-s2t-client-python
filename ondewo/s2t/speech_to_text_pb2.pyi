@@ -555,11 +555,14 @@ class PostProcessingOptions(google.protobuf.message.Message):
 
     SPELLING_CORRECTION_FIELD_NUMBER: builtins.int
     NORMALIZE_FIELD_NUMBER: builtins.int
+    LLM_FIELD_NUMBER: builtins.int
     CONFIG_FIELD_NUMBER: builtins.int
     spelling_correction: builtins.bool
     """Whether to use spelling correction"""
     normalize: builtins.bool
     """Whether to disable normalization"""
+    llm: builtins.bool
+    """Whether to disable LLM post-processing"""
     @property
     def config(self) -> global___PostProcessing:
         """Post-processing configuration specifying the active post-processors in the pipeline, as well as their individual
@@ -571,10 +574,11 @@ class PostProcessingOptions(google.protobuf.message.Message):
         *,
         spelling_correction: builtins.bool = ...,
         normalize: builtins.bool = ...,
+        llm: builtins.bool = ...,
         config: global___PostProcessing | None = ...,
     ) -> None: ...
     def HasField(self, field_name: typing.Literal["config", b"config"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["config", b"config", "normalize", b"normalize", "spelling_correction", b"spelling_correction"]) -> None: ...
+    def ClearField(self, field_name: typing.Literal["config", b"config", "llm", b"llm", "normalize", b"normalize", "spelling_correction", b"spelling_correction"]) -> None: ...
 
 global___PostProcessingOptions = PostProcessingOptions
 
