@@ -2318,29 +2318,29 @@ class S2tLlmPostProcessingSummarizationOptions(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
     ACTIVE_FIELD_NUMBER: builtins.int
-    MIN_CHAR_FIELD_NUMBER: builtins.int
-    MAX_CHAR_FIELD_NUMBER: builtins.int
+    MIN_CHARS_FIELD_NUMBER: builtins.int
+    MAX_CHARS_FIELD_NUMBER: builtins.int
     active: builtins.bool
     """Optional. Indicates if the summarization task of LLM post-processing is active."""
-    min_char: builtins.int
+    min_chars: builtins.int
     """Optional. Minimum number of characters of the summary generated in summarization task of LLM post-processing."""
-    max_char: builtins.int
+    max_chars: builtins.int
     """Optional. Maximum number of characters of the summary generated in summarization task of LLM post-processing."""
     def __init__(
         self,
         *,
         active: builtins.bool | None = ...,
-        min_char: builtins.int | None = ...,
-        max_char: builtins.int | None = ...,
+        min_chars: builtins.int | None = ...,
+        max_chars: builtins.int | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["_active", b"_active", "_max_char", b"_max_char", "_min_char", b"_min_char", "active", b"active", "max_char", b"max_char", "min_char", b"min_char"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["_active", b"_active", "_max_char", b"_max_char", "_min_char", b"_min_char", "active", b"active", "max_char", b"max_char", "min_char", b"min_char"]) -> None: ...
+    def HasField(self, field_name: typing.Literal["_active", b"_active", "_max_chars", b"_max_chars", "_min_chars", b"_min_chars", "active", b"active", "max_chars", b"max_chars", "min_chars", b"min_chars"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["_active", b"_active", "_max_chars", b"_max_chars", "_min_chars", b"_min_chars", "active", b"active", "max_chars", b"max_chars", "min_chars", b"min_chars"]) -> None: ...
     @typing.overload
     def WhichOneof(self, oneof_group: typing.Literal["_active", b"_active"]) -> typing.Literal["active"] | None: ...
     @typing.overload
-    def WhichOneof(self, oneof_group: typing.Literal["_max_char", b"_max_char"]) -> typing.Literal["max_char"] | None: ...
+    def WhichOneof(self, oneof_group: typing.Literal["_max_chars", b"_max_chars"]) -> typing.Literal["max_chars"] | None: ...
     @typing.overload
-    def WhichOneof(self, oneof_group: typing.Literal["_min_char", b"_min_char"]) -> typing.Literal["min_char"] | None: ...
+    def WhichOneof(self, oneof_group: typing.Literal["_min_chars", b"_min_chars"]) -> typing.Literal["min_chars"] | None: ...
 
 global___S2tLlmPostProcessingSummarizationOptions = S2tLlmPostProcessingSummarizationOptions
 
