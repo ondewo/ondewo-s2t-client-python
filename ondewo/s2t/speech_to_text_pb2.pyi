@@ -1916,7 +1916,7 @@ class PostProcessors(google.protobuf.message.Message):
         """Configuration of the normalization object."""
 
     @property
-    def llm(self) -> global___S2TLlmPostprocessing:
+    def llm(self) -> global___S2TLlmPostProcessing:
         """Configuration of the LLM post-processing."""
 
     def __init__(
@@ -1924,7 +1924,7 @@ class PostProcessors(google.protobuf.message.Message):
         *,
         sym_spell: global___SymSpell | None = ...,
         normalization: global___S2TNormalization | None = ...,
-        llm: global___S2TLlmPostprocessing | None = ...,
+        llm: global___S2TLlmPostProcessing | None = ...,
     ) -> None: ...
     def HasField(self, field_name: typing.Literal["llm", b"llm", "normalization", b"normalization", "sym_spell", b"sym_spell"]) -> builtins.bool: ...
     def ClearField(self, field_name: typing.Literal["llm", b"llm", "normalization", b"normalization", "sym_spell", b"sym_spell"]) -> None: ...
@@ -1984,8 +1984,8 @@ class S2TNormalization(google.protobuf.message.Message):
 global___S2TNormalization = S2TNormalization
 
 @typing.final
-class S2TLlmPostprocessing(google.protobuf.message.Message):
-    """S2TLlmPostprocessing contains configuration for the speech-to-text postprocessing with LLM."""
+class S2TLlmPostProcessing(google.protobuf.message.Message):
+    """S2TLlmPostProcessing contains configuration for the speech-to-text postprocessing with LLM."""
 
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
@@ -2010,39 +2010,39 @@ class S2TLlmPostprocessing(google.protobuf.message.Message):
     If the timeout occurs, result of post-processing returns the input text with no change.
     """
     @property
-    def casing(self) -> global___LlmPostProcessingCasingOptions:
+    def casing(self) -> global___S2tLlmPostProcessingCasingOptions:
         """Optional. Configuration of the options to casing task in LLM post-processing."""
 
     @property
-    def punctuation(self) -> global___LlmPostProcessingPunctuationOptions:
+    def punctuation(self) -> global___S2tLlmPostProcessingPunctuationOptions:
         """Optional. Configuration of the options to punctuation task in LLM post-processing."""
 
     @property
-    def spelling_correction(self) -> global___LlmPostProcessingSpellCorrectionOptions:
+    def spelling_correction(self) -> global___S2tLlmPostProcessingSpellCorrectionOptions:
         """Optional. Configuration of the options to spelling-correction task in LLM post-processing."""
 
     @property
-    def semantic_correction(self) -> global___LlmPostProcessingSemanticCorrectionOptions:
+    def semantic_correction(self) -> global___S2tLlmPostProcessingSemanticCorrectionOptions:
         """Optional. Configuration of the options to semantic-correction task in LLM post-processing."""
 
     @property
-    def translation(self) -> global___LlmPostProcessingTranslationOptions:
+    def translation(self) -> global___S2tLlmPostProcessingTranslationOptions:
         """Optional. Configuration of the options to translation task in LLM post-processing."""
 
     @property
-    def inverse_normalization(self) -> global___LlmPostProcessingInverseNormalizationOptions:
+    def inverse_normalization(self) -> global___S2tLlmPostProcessingInverseNormalizationOptions:
         """Optional. Configuration of the options to inverse-normalization task in LLM post-processing."""
 
     @property
-    def normalization(self) -> global___LlmPostProcessingNormalizationOptions:
+    def normalization(self) -> global___S2tLlmPostProcessingNormalizationOptions:
         """Optional. Configuration of the options to normalization task in LLM post-processing."""
 
     @property
-    def summarization(self) -> global___LlmPostProcessingSummarizationOptions:
+    def summarization(self) -> global___S2tLlmPostProcessingSummarizationOptions:
         """Optional. Configuration of the options to summarization task in LLM post-processing."""
 
     @property
-    def user_prompt(self) -> global___LlmPostProcessingUserPromptOptions:
+    def user_prompt(self) -> global___S2tLlmPostProcessingUserPromptOptions:
         """Optional. Configuration of the options to user-prompt task in LLM post-processing."""
 
     def __init__(
@@ -2051,15 +2051,15 @@ class S2TLlmPostprocessing(google.protobuf.message.Message):
         llm_host: builtins.str | None = ...,
         llm_port: builtins.int | None = ...,
         llm_request_timeout: builtins.float | None = ...,
-        casing: global___LlmPostProcessingCasingOptions | None = ...,
-        punctuation: global___LlmPostProcessingPunctuationOptions | None = ...,
-        spelling_correction: global___LlmPostProcessingSpellCorrectionOptions | None = ...,
-        semantic_correction: global___LlmPostProcessingSemanticCorrectionOptions | None = ...,
-        translation: global___LlmPostProcessingTranslationOptions | None = ...,
-        inverse_normalization: global___LlmPostProcessingInverseNormalizationOptions | None = ...,
-        normalization: global___LlmPostProcessingNormalizationOptions | None = ...,
-        summarization: global___LlmPostProcessingSummarizationOptions | None = ...,
-        user_prompt: global___LlmPostProcessingUserPromptOptions | None = ...,
+        casing: global___S2tLlmPostProcessingCasingOptions | None = ...,
+        punctuation: global___S2tLlmPostProcessingPunctuationOptions | None = ...,
+        spelling_correction: global___S2tLlmPostProcessingSpellCorrectionOptions | None = ...,
+        semantic_correction: global___S2tLlmPostProcessingSemanticCorrectionOptions | None = ...,
+        translation: global___S2tLlmPostProcessingTranslationOptions | None = ...,
+        inverse_normalization: global___S2tLlmPostProcessingInverseNormalizationOptions | None = ...,
+        normalization: global___S2tLlmPostProcessingNormalizationOptions | None = ...,
+        summarization: global___S2tLlmPostProcessingSummarizationOptions | None = ...,
+        user_prompt: global___S2tLlmPostProcessingUserPromptOptions | None = ...,
     ) -> None: ...
     def HasField(self, field_name: typing.Literal["_casing", b"_casing", "_inverse_normalization", b"_inverse_normalization", "_llm_host", b"_llm_host", "_llm_port", b"_llm_port", "_llm_request_timeout", b"_llm_request_timeout", "_normalization", b"_normalization", "_punctuation", b"_punctuation", "_semantic_correction", b"_semantic_correction", "_spelling_correction", b"_spelling_correction", "_summarization", b"_summarization", "_translation", b"_translation", "_user_prompt", b"_user_prompt", "casing", b"casing", "inverse_normalization", b"inverse_normalization", "llm_host", b"llm_host", "llm_port", b"llm_port", "llm_request_timeout", b"llm_request_timeout", "normalization", b"normalization", "punctuation", b"punctuation", "semantic_correction", b"semantic_correction", "spelling_correction", b"spelling_correction", "summarization", b"summarization", "translation", b"translation", "user_prompt", b"user_prompt"]) -> builtins.bool: ...
     def ClearField(self, field_name: typing.Literal["_casing", b"_casing", "_inverse_normalization", b"_inverse_normalization", "_llm_host", b"_llm_host", "_llm_port", b"_llm_port", "_llm_request_timeout", b"_llm_request_timeout", "_normalization", b"_normalization", "_punctuation", b"_punctuation", "_semantic_correction", b"_semantic_correction", "_spelling_correction", b"_spelling_correction", "_summarization", b"_summarization", "_translation", b"_translation", "_user_prompt", b"_user_prompt", "casing", b"casing", "inverse_normalization", b"inverse_normalization", "llm_host", b"llm_host", "llm_port", b"llm_port", "llm_request_timeout", b"llm_request_timeout", "normalization", b"normalization", "punctuation", b"punctuation", "semantic_correction", b"semantic_correction", "spelling_correction", b"spelling_correction", "summarization", b"summarization", "translation", b"translation", "user_prompt", b"user_prompt"]) -> None: ...
@@ -2088,10 +2088,10 @@ class S2TLlmPostprocessing(google.protobuf.message.Message):
     @typing.overload
     def WhichOneof(self, oneof_group: typing.Literal["_user_prompt", b"_user_prompt"]) -> typing.Literal["user_prompt"] | None: ...
 
-global___S2TLlmPostprocessing = S2TLlmPostprocessing
+global___S2TLlmPostProcessing = S2TLlmPostProcessing
 
 @typing.final
-class LlmPostProcessingCasingOptions(google.protobuf.message.Message):
+class S2tLlmPostProcessingCasingOptions(google.protobuf.message.Message):
     """Configuration of the options to casing task in LLM post-processing."""
 
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
@@ -2108,10 +2108,10 @@ class LlmPostProcessingCasingOptions(google.protobuf.message.Message):
     def ClearField(self, field_name: typing.Literal["_active", b"_active", "active", b"active"]) -> None: ...
     def WhichOneof(self, oneof_group: typing.Literal["_active", b"_active"]) -> typing.Literal["active"] | None: ...
 
-global___LlmPostProcessingCasingOptions = LlmPostProcessingCasingOptions
+global___S2tLlmPostProcessingCasingOptions = S2tLlmPostProcessingCasingOptions
 
 @typing.final
-class LlmPostProcessingPunctuationOptions(google.protobuf.message.Message):
+class S2tLlmPostProcessingPunctuationOptions(google.protobuf.message.Message):
     """Configuration of the options to punctuation task in LLM post-processing."""
 
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
@@ -2128,10 +2128,10 @@ class LlmPostProcessingPunctuationOptions(google.protobuf.message.Message):
     def ClearField(self, field_name: typing.Literal["_active", b"_active", "active", b"active"]) -> None: ...
     def WhichOneof(self, oneof_group: typing.Literal["_active", b"_active"]) -> typing.Literal["active"] | None: ...
 
-global___LlmPostProcessingPunctuationOptions = LlmPostProcessingPunctuationOptions
+global___S2tLlmPostProcessingPunctuationOptions = S2tLlmPostProcessingPunctuationOptions
 
 @typing.final
-class LlmPostProcessingSpellCorrectionOptions(google.protobuf.message.Message):
+class S2tLlmPostProcessingSpellCorrectionOptions(google.protobuf.message.Message):
     """Configuration of the options to spelling-correctionsing task in LLM post-processing."""
 
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
@@ -2148,10 +2148,10 @@ class LlmPostProcessingSpellCorrectionOptions(google.protobuf.message.Message):
     def ClearField(self, field_name: typing.Literal["_active", b"_active", "active", b"active"]) -> None: ...
     def WhichOneof(self, oneof_group: typing.Literal["_active", b"_active"]) -> typing.Literal["active"] | None: ...
 
-global___LlmPostProcessingSpellCorrectionOptions = LlmPostProcessingSpellCorrectionOptions
+global___S2tLlmPostProcessingSpellCorrectionOptions = S2tLlmPostProcessingSpellCorrectionOptions
 
 @typing.final
-class LlmPostProcessingSemanticCorrectionOptions(google.protobuf.message.Message):
+class S2tLlmPostProcessingSemanticCorrectionOptions(google.protobuf.message.Message):
     """Configuration of the options to semantic-correctionsing task in LLM post-processing."""
 
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
@@ -2168,10 +2168,10 @@ class LlmPostProcessingSemanticCorrectionOptions(google.protobuf.message.Message
     def ClearField(self, field_name: typing.Literal["_active", b"_active", "active", b"active"]) -> None: ...
     def WhichOneof(self, oneof_group: typing.Literal["_active", b"_active"]) -> typing.Literal["active"] | None: ...
 
-global___LlmPostProcessingSemanticCorrectionOptions = LlmPostProcessingSemanticCorrectionOptions
+global___S2tLlmPostProcessingSemanticCorrectionOptions = S2tLlmPostProcessingSemanticCorrectionOptions
 
 @typing.final
-class LlmPostProcessingTranslationOptions(google.protobuf.message.Message):
+class S2tLlmPostProcessingTranslationOptions(google.protobuf.message.Message):
     """Configuration of the options to translation task in LLM post-processing."""
 
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
@@ -2195,10 +2195,10 @@ class LlmPostProcessingTranslationOptions(google.protobuf.message.Message):
     @typing.overload
     def WhichOneof(self, oneof_group: typing.Literal["_language", b"_language"]) -> typing.Literal["language"] | None: ...
 
-global___LlmPostProcessingTranslationOptions = LlmPostProcessingTranslationOptions
+global___S2tLlmPostProcessingTranslationOptions = S2tLlmPostProcessingTranslationOptions
 
 @typing.final
-class LlmPostProcessingInverseNormalizationOptions(google.protobuf.message.Message):
+class S2tLlmPostProcessingInverseNormalizationOptions(google.protobuf.message.Message):
     """Configuration of the options to inverse-normalization task in LLM post-processing."""
 
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
@@ -2252,10 +2252,10 @@ class LlmPostProcessingInverseNormalizationOptions(google.protobuf.message.Messa
     @typing.overload
     def WhichOneof(self, oneof_group: typing.Literal["_time_zone", b"_time_zone"]) -> typing.Literal["time_zone"] | None: ...
 
-global___LlmPostProcessingInverseNormalizationOptions = LlmPostProcessingInverseNormalizationOptions
+global___S2tLlmPostProcessingInverseNormalizationOptions = S2tLlmPostProcessingInverseNormalizationOptions
 
 @typing.final
-class LlmPostProcessingNormalizationOptions(google.protobuf.message.Message):
+class S2tLlmPostProcessingNormalizationOptions(google.protobuf.message.Message):
     """Configuration of the options to normalization task in LLM post-processing."""
 
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
@@ -2309,10 +2309,10 @@ class LlmPostProcessingNormalizationOptions(google.protobuf.message.Message):
     @typing.overload
     def WhichOneof(self, oneof_group: typing.Literal["_time_zone", b"_time_zone"]) -> typing.Literal["time_zone"] | None: ...
 
-global___LlmPostProcessingNormalizationOptions = LlmPostProcessingNormalizationOptions
+global___S2tLlmPostProcessingNormalizationOptions = S2tLlmPostProcessingNormalizationOptions
 
 @typing.final
-class LlmPostProcessingSummarizationOptions(google.protobuf.message.Message):
+class S2tLlmPostProcessingSummarizationOptions(google.protobuf.message.Message):
     """Configuration of the options to summarization task in LLM post-processing."""
 
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
@@ -2342,10 +2342,10 @@ class LlmPostProcessingSummarizationOptions(google.protobuf.message.Message):
     @typing.overload
     def WhichOneof(self, oneof_group: typing.Literal["_min_char", b"_min_char"]) -> typing.Literal["min_char"] | None: ...
 
-global___LlmPostProcessingSummarizationOptions = LlmPostProcessingSummarizationOptions
+global___S2tLlmPostProcessingSummarizationOptions = S2tLlmPostProcessingSummarizationOptions
 
 @typing.final
-class LlmPostProcessingUserPromptOptions(google.protobuf.message.Message):
+class S2tLlmPostProcessingUserPromptOptions(google.protobuf.message.Message):
     """Configuration of the options to user-prompt task in LLM post-processing."""
 
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
@@ -2369,7 +2369,7 @@ class LlmPostProcessingUserPromptOptions(google.protobuf.message.Message):
     @typing.overload
     def WhichOneof(self, oneof_group: typing.Literal["_prompt", b"_prompt"]) -> typing.Literal["prompt"] | None: ...
 
-global___LlmPostProcessingUserPromptOptions = LlmPostProcessingUserPromptOptions
+global___S2tLlmPostProcessingUserPromptOptions = S2tLlmPostProcessingUserPromptOptions
 
 @typing.final
 class Logging(google.protobuf.message.Message):
