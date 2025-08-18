@@ -84,7 +84,7 @@ class Speech2TextStub(object):
         self.GetServiceInfo = channel.unary_unary(
                 '/ondewo.s2t.Speech2Text/GetServiceInfo',
                 request_serializer=google_dot_protobuf_dot_empty__pb2.Empty.SerializeToString,
-                response_deserializer=ondewo_dot_s2t_dot_speech__to__text__pb2.S2TGetServiceInfoResponse.FromString,
+                response_deserializer=ondewo_dot_s2t_dot_speech__to__text__pb2.S2tGetServiceInfoResponse.FromString,
                 _registered_method=True)
         self.ListS2tLanguageModels = channel.unary_unary(
                 '/ondewo.s2t.Speech2Text/ListS2tLanguageModels',
@@ -152,7 +152,7 @@ class Speech2TextServicer(object):
         raise NotImplementedError('Method not implemented!')
 
     def DeleteS2tPipeline(self, request, context):
-        """Deletes a pipeline corresponding to the id parsed in S2TPipelineId. If no corresponding id is
+        """Deletes a pipeline corresponding to the id parsed in S2tPipelineId. If no corresponding id is
         found, raises ModuleNotFoundError in server.
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
@@ -289,7 +289,7 @@ def add_Speech2TextServicer_to_server(servicer, server):
             'GetServiceInfo': grpc.unary_unary_rpc_method_handler(
                     servicer.GetServiceInfo,
                     request_deserializer=google_dot_protobuf_dot_empty__pb2.Empty.FromString,
-                    response_serializer=ondewo_dot_s2t_dot_speech__to__text__pb2.S2TGetServiceInfoResponse.SerializeToString,
+                    response_serializer=ondewo_dot_s2t_dot_speech__to__text__pb2.S2tGetServiceInfoResponse.SerializeToString,
             ),
             'ListS2tLanguageModels': grpc.unary_unary_rpc_method_handler(
                     servicer.ListS2tLanguageModels,
@@ -592,7 +592,7 @@ class Speech2Text(object):
             target,
             '/ondewo.s2t.Speech2Text/GetServiceInfo',
             google_dot_protobuf_dot_empty__pb2.Empty.SerializeToString,
-            ondewo_dot_s2t_dot_speech__to__text__pb2.S2TGetServiceInfoResponse.FromString,
+            ondewo_dot_s2t_dot_speech__to__text__pb2.S2tGetServiceInfoResponse.FromString,
             options,
             channel_credentials,
             insecure,

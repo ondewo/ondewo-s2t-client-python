@@ -555,13 +555,13 @@ class PostProcessingOptions(google.protobuf.message.Message):
 
     SPELLING_CORRECTION_FIELD_NUMBER: builtins.int
     NORMALIZE_FIELD_NUMBER: builtins.int
-    LLM_FIELD_NUMBER: builtins.int
+    LLM_POST_PROCESSING_FIELD_NUMBER: builtins.int
     CONFIG_FIELD_NUMBER: builtins.int
     spelling_correction: builtins.bool
     """Whether to use spelling correction"""
     normalize: builtins.bool
     """Whether to disable normalization"""
-    llm: builtins.bool
+    llm_post_processing: builtins.bool
     """Whether to disable LLM post-processing"""
     @property
     def config(self) -> global___PostProcessing:
@@ -574,11 +574,11 @@ class PostProcessingOptions(google.protobuf.message.Message):
         *,
         spelling_correction: builtins.bool = ...,
         normalize: builtins.bool = ...,
-        llm: builtins.bool = ...,
+        llm_post_processing: builtins.bool = ...,
         config: global___PostProcessing | None = ...,
     ) -> None: ...
     def HasField(self, field_name: typing.Literal["config", b"config"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["config", b"config", "llm", b"llm", "normalize", b"normalize", "spelling_correction", b"spelling_correction"]) -> None: ...
+    def ClearField(self, field_name: typing.Literal["config", b"config", "llm_post_processing", b"llm_post_processing", "normalize", b"normalize", "spelling_correction", b"spelling_correction"]) -> None: ...
 
 global___PostProcessingOptions = PostProcessingOptions
 
@@ -1055,12 +1055,12 @@ class ListS2tDomainsResponse(google.protobuf.message.Message):
 global___ListS2tDomainsResponse = ListS2tDomainsResponse
 
 @typing.final
-class S2TGetServiceInfoResponse(google.protobuf.message.Message):
+class S2tGetServiceInfoResponse(google.protobuf.message.Message):
     """////////////////////
     GET SERVICE INFO //
     ////////////////////
 
-    S2TGetServiceInfoResponse is used to return version information about the speech-to-text service.
+    S2tGetServiceInfoResponse is used to return version information about the speech-to-text service.
     """
 
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
@@ -1075,7 +1075,7 @@ class S2TGetServiceInfoResponse(google.protobuf.message.Message):
     ) -> None: ...
     def ClearField(self, field_name: typing.Literal["version", b"version"]) -> None: ...
 
-global___S2TGetServiceInfoResponse = S2TGetServiceInfoResponse
+global___S2tGetServiceInfoResponse = S2tGetServiceInfoResponse
 
 @typing.final
 class Speech2TextConfig(google.protobuf.message.Message):
@@ -1101,11 +1101,11 @@ class Speech2TextConfig(google.protobuf.message.Message):
     active: builtins.bool
     """Indicates if the configuration is active."""
     @property
-    def description(self) -> global___S2TDescription:
+    def description(self) -> global___S2tDescription:
         """Description of the speech-to-text system."""
 
     @property
-    def inference(self) -> global___S2TInference:
+    def inference(self) -> global___S2tInference:
         """Configuration for inference models."""
 
     @property
@@ -1128,9 +1128,9 @@ class Speech2TextConfig(google.protobuf.message.Message):
         self,
         *,
         id: builtins.str = ...,
-        description: global___S2TDescription | None = ...,
+        description: global___S2tDescription | None = ...,
         active: builtins.bool = ...,
-        inference: global___S2TInference | None = ...,
+        inference: global___S2tInference | None = ...,
         streaming_server: global___StreamingServer | None = ...,
         voice_activity_detection: global___VoiceActivityDetection | None = ...,
         post_processing: global___PostProcessing | None = ...,
@@ -1142,8 +1142,8 @@ class Speech2TextConfig(google.protobuf.message.Message):
 global___Speech2TextConfig = Speech2TextConfig
 
 @typing.final
-class S2TDescription(google.protobuf.message.Message):
-    """S2TDescription contains descriptive information about the speech-to-text pipeline."""
+class S2tDescription(google.protobuf.message.Message):
+    """S2tDescription contains descriptive information about the speech-to-text pipeline."""
 
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
@@ -1169,11 +1169,11 @@ class S2TDescription(google.protobuf.message.Message):
     ) -> None: ...
     def ClearField(self, field_name: typing.Literal["comments", b"comments", "domain", b"domain", "language", b"language", "pipeline_owner", b"pipeline_owner"]) -> None: ...
 
-global___S2TDescription = S2TDescription
+global___S2tDescription = S2tDescription
 
 @typing.final
-class S2TInference(google.protobuf.message.Message):
-    """S2TInference contains information about inference models used in the speech-to-text pipeline."""
+class S2tInference(google.protobuf.message.Message):
+    """S2tInference contains information about inference models used in the speech-to-text pipeline."""
 
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
@@ -1200,7 +1200,7 @@ class S2TInference(google.protobuf.message.Message):
     def HasField(self, field_name: typing.Literal["acoustic_models", b"acoustic_models", "language_models", b"language_models"]) -> builtins.bool: ...
     def ClearField(self, field_name: typing.Literal["acoustic_models", b"acoustic_models", "inference_backend", b"inference_backend", "language_models", b"language_models"]) -> None: ...
 
-global___S2TInference = S2TInference
+global___S2tInference = S2tInference
 
 @typing.final
 class AcousticModels(google.protobuf.message.Message):
@@ -1910,28 +1910,28 @@ class PostProcessors(google.protobuf.message.Message):
 
     SYM_SPELL_FIELD_NUMBER: builtins.int
     NORMALIZATION_FIELD_NUMBER: builtins.int
-    LLM_FIELD_NUMBER: builtins.int
+    LLM_POST_PROCESSING_FIELD_NUMBER: builtins.int
     @property
     def sym_spell(self) -> global___SymSpell:
         """Configuration of the SymSpell spelling correction."""
 
     @property
-    def normalization(self) -> global___S2TNormalization:
+    def normalization(self) -> global___S2tNormalization:
         """Configuration of the normalization object."""
 
     @property
-    def llm(self) -> global___S2TLlmPostProcessing:
+    def llm_post_processing(self) -> global___S2tLlmPostProcessing:
         """Configuration of the LLM post-processing."""
 
     def __init__(
         self,
         *,
         sym_spell: global___SymSpell | None = ...,
-        normalization: global___S2TNormalization | None = ...,
-        llm: global___S2TLlmPostProcessing | None = ...,
+        normalization: global___S2tNormalization | None = ...,
+        llm_post_processing: global___S2tLlmPostProcessing | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["llm", b"llm", "normalization", b"normalization", "sym_spell", b"sym_spell"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["llm", b"llm", "normalization", b"normalization", "sym_spell", b"sym_spell"]) -> None: ...
+    def HasField(self, field_name: typing.Literal["llm_post_processing", b"llm_post_processing", "normalization", b"normalization", "sym_spell", b"sym_spell"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["llm_post_processing", b"llm_post_processing", "normalization", b"normalization", "sym_spell", b"sym_spell"]) -> None: ...
 
 global___PostProcessors = PostProcessors
 
@@ -1964,8 +1964,8 @@ class SymSpell(google.protobuf.message.Message):
 global___SymSpell = SymSpell
 
 @typing.final
-class S2TNormalization(google.protobuf.message.Message):
-    """S2TNormalization contains configuration for the speech-to-text normalization."""
+class S2tNormalization(google.protobuf.message.Message):
+    """S2tNormalization contains configuration for the speech-to-text normalization."""
 
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
@@ -1985,26 +1985,26 @@ class S2TNormalization(google.protobuf.message.Message):
     ) -> None: ...
     def ClearField(self, field_name: typing.Literal["language", b"language", "pipeline", b"pipeline"]) -> None: ...
 
-global___S2TNormalization = S2TNormalization
+global___S2tNormalization = S2tNormalization
 
 @typing.final
-class S2TLlmPostProcessing(google.protobuf.message.Message):
-    """S2TLlmPostProcessing contains configuration for the speech-to-text postprocessing with LLM."""
+class S2tLlmPostProcessing(google.protobuf.message.Message):
+    """S2tLlmPostProcessing contains configuration for the speech-to-text postprocessing with LLM."""
 
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
     LLM_HOST_FIELD_NUMBER: builtins.int
     LLM_PORT_FIELD_NUMBER: builtins.int
     LLM_REQUEST_TIMEOUT_FIELD_NUMBER: builtins.int
-    CASING_FIELD_NUMBER: builtins.int
-    PUNCTUATION_FIELD_NUMBER: builtins.int
-    SPELLING_CORRECTION_FIELD_NUMBER: builtins.int
-    SEMANTIC_CORRECTION_FIELD_NUMBER: builtins.int
-    TRANSLATION_FIELD_NUMBER: builtins.int
-    INVERSE_NORMALIZATION_FIELD_NUMBER: builtins.int
-    NORMALIZATION_FIELD_NUMBER: builtins.int
-    SUMMARIZATION_FIELD_NUMBER: builtins.int
-    USER_PROMPT_FIELD_NUMBER: builtins.int
+    LLM_POST_PROCESSING_CASING_OPTIONS_FIELD_NUMBER: builtins.int
+    LLM_POST_PROCESSING_PUNCTUATION_OPTIONS_FIELD_NUMBER: builtins.int
+    LLM_POST_PROCESSING_SPELLING_CORRECTION_OPTIONS_FIELD_NUMBER: builtins.int
+    LLM_POST_PROCESSING_SEMANTIC_CORRECTION_OPTIONS_FIELD_NUMBER: builtins.int
+    LLM_POST_PROCESSING_TRANSLATION_OPTIONS_FIELD_NUMBER: builtins.int
+    LLM_POST_PROCESSING_INVERSE_NORMALIZATION_OPTIONS_FIELD_NUMBER: builtins.int
+    LLM_POST_PROCESSING_NORMALIZATION_OPTIONS_FIELD_NUMBER: builtins.int
+    LLM_POST_PROCESSING_SUMMARIZATION_OPTIONS_FIELD_NUMBER: builtins.int
+    LLM_POST_PROCESSING_USER_PROMPT_OPTIONS_FIELD_NUMBER: builtins.int
     llm_host: builtins.str
     """Optional. Host name or IP address of the server that serves the LLM for post-processing purpose."""
     llm_port: builtins.int
@@ -2014,39 +2014,39 @@ class S2TLlmPostProcessing(google.protobuf.message.Message):
     If the timeout occurs, result of post-processing returns the input text with no change.
     """
     @property
-    def casing(self) -> global___S2tLlmPostProcessingCasingOptions:
+    def llm_post_processing_casing_options(self) -> global___S2tLlmPostProcessingCasingOptions:
         """Optional. Configuration of the options to casing task in LLM post-processing."""
 
     @property
-    def punctuation(self) -> global___S2tLlmPostProcessingPunctuationOptions:
+    def llm_post_processing_punctuation_options(self) -> global___S2tLlmPostProcessingPunctuationOptions:
         """Optional. Configuration of the options to punctuation task in LLM post-processing."""
 
     @property
-    def spelling_correction(self) -> global___S2tLlmPostProcessingSpellCorrectionOptions:
+    def llm_post_processing_spelling_correction_options(self) -> global___S2tLlmPostProcessingSpellCorrectionOptions:
         """Optional. Configuration of the options to spelling-correction task in LLM post-processing."""
 
     @property
-    def semantic_correction(self) -> global___S2tLlmPostProcessingSemanticCorrectionOptions:
+    def llm_post_processing_semantic_correction_options(self) -> global___S2tLlmPostProcessingSemanticCorrectionOptions:
         """Optional. Configuration of the options to semantic-correction task in LLM post-processing."""
 
     @property
-    def translation(self) -> global___S2tLlmPostProcessingTranslationOptions:
+    def llm_post_processing_translation_options(self) -> global___S2tLlmPostProcessingTranslationOptions:
         """Optional. Configuration of the options to translation task in LLM post-processing."""
 
     @property
-    def inverse_normalization(self) -> global___S2tLlmPostProcessingInverseNormalizationOptions:
+    def llm_post_processing_inverse_normalization_options(self) -> global___S2tLlmPostProcessingInverseNormalizationOptions:
         """Optional. Configuration of the options to inverse-normalization task in LLM post-processing."""
 
     @property
-    def normalization(self) -> global___S2tLlmPostProcessingNormalizationOptions:
+    def llm_post_processing_normalization_options(self) -> global___S2tLlmPostProcessingNormalizationOptions:
         """Optional. Configuration of the options to normalization task in LLM post-processing."""
 
     @property
-    def summarization(self) -> global___S2tLlmPostProcessingSummarizationOptions:
+    def llm_post_processing_summarization_options(self) -> global___S2tLlmPostProcessingSummarizationOptions:
         """Optional. Configuration of the options to summarization task in LLM post-processing."""
 
     @property
-    def user_prompt(self) -> global___S2tLlmPostProcessingUserPromptOptions:
+    def llm_post_processing_user_prompt_options(self) -> global___S2tLlmPostProcessingUserPromptOptions:
         """Optional. Configuration of the options to user-prompt task in LLM post-processing."""
 
     def __init__(
@@ -2055,44 +2055,44 @@ class S2TLlmPostProcessing(google.protobuf.message.Message):
         llm_host: builtins.str | None = ...,
         llm_port: builtins.int | None = ...,
         llm_request_timeout: builtins.float | None = ...,
-        casing: global___S2tLlmPostProcessingCasingOptions | None = ...,
-        punctuation: global___S2tLlmPostProcessingPunctuationOptions | None = ...,
-        spelling_correction: global___S2tLlmPostProcessingSpellCorrectionOptions | None = ...,
-        semantic_correction: global___S2tLlmPostProcessingSemanticCorrectionOptions | None = ...,
-        translation: global___S2tLlmPostProcessingTranslationOptions | None = ...,
-        inverse_normalization: global___S2tLlmPostProcessingInverseNormalizationOptions | None = ...,
-        normalization: global___S2tLlmPostProcessingNormalizationOptions | None = ...,
-        summarization: global___S2tLlmPostProcessingSummarizationOptions | None = ...,
-        user_prompt: global___S2tLlmPostProcessingUserPromptOptions | None = ...,
+        llm_post_processing_casing_options: global___S2tLlmPostProcessingCasingOptions | None = ...,
+        llm_post_processing_punctuation_options: global___S2tLlmPostProcessingPunctuationOptions | None = ...,
+        llm_post_processing_spelling_correction_options: global___S2tLlmPostProcessingSpellCorrectionOptions | None = ...,
+        llm_post_processing_semantic_correction_options: global___S2tLlmPostProcessingSemanticCorrectionOptions | None = ...,
+        llm_post_processing_translation_options: global___S2tLlmPostProcessingTranslationOptions | None = ...,
+        llm_post_processing_inverse_normalization_options: global___S2tLlmPostProcessingInverseNormalizationOptions | None = ...,
+        llm_post_processing_normalization_options: global___S2tLlmPostProcessingNormalizationOptions | None = ...,
+        llm_post_processing_summarization_options: global___S2tLlmPostProcessingSummarizationOptions | None = ...,
+        llm_post_processing_user_prompt_options: global___S2tLlmPostProcessingUserPromptOptions | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["_casing", b"_casing", "_inverse_normalization", b"_inverse_normalization", "_llm_host", b"_llm_host", "_llm_port", b"_llm_port", "_llm_request_timeout", b"_llm_request_timeout", "_normalization", b"_normalization", "_punctuation", b"_punctuation", "_semantic_correction", b"_semantic_correction", "_spelling_correction", b"_spelling_correction", "_summarization", b"_summarization", "_translation", b"_translation", "_user_prompt", b"_user_prompt", "casing", b"casing", "inverse_normalization", b"inverse_normalization", "llm_host", b"llm_host", "llm_port", b"llm_port", "llm_request_timeout", b"llm_request_timeout", "normalization", b"normalization", "punctuation", b"punctuation", "semantic_correction", b"semantic_correction", "spelling_correction", b"spelling_correction", "summarization", b"summarization", "translation", b"translation", "user_prompt", b"user_prompt"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["_casing", b"_casing", "_inverse_normalization", b"_inverse_normalization", "_llm_host", b"_llm_host", "_llm_port", b"_llm_port", "_llm_request_timeout", b"_llm_request_timeout", "_normalization", b"_normalization", "_punctuation", b"_punctuation", "_semantic_correction", b"_semantic_correction", "_spelling_correction", b"_spelling_correction", "_summarization", b"_summarization", "_translation", b"_translation", "_user_prompt", b"_user_prompt", "casing", b"casing", "inverse_normalization", b"inverse_normalization", "llm_host", b"llm_host", "llm_port", b"llm_port", "llm_request_timeout", b"llm_request_timeout", "normalization", b"normalization", "punctuation", b"punctuation", "semantic_correction", b"semantic_correction", "spelling_correction", b"spelling_correction", "summarization", b"summarization", "translation", b"translation", "user_prompt", b"user_prompt"]) -> None: ...
-    @typing.overload
-    def WhichOneof(self, oneof_group: typing.Literal["_casing", b"_casing"]) -> typing.Literal["casing"] | None: ...
-    @typing.overload
-    def WhichOneof(self, oneof_group: typing.Literal["_inverse_normalization", b"_inverse_normalization"]) -> typing.Literal["inverse_normalization"] | None: ...
+    def HasField(self, field_name: typing.Literal["_llm_host", b"_llm_host", "_llm_port", b"_llm_port", "_llm_post_processing_casing_options", b"_llm_post_processing_casing_options", "_llm_post_processing_inverse_normalization_options", b"_llm_post_processing_inverse_normalization_options", "_llm_post_processing_normalization_options", b"_llm_post_processing_normalization_options", "_llm_post_processing_punctuation_options", b"_llm_post_processing_punctuation_options", "_llm_post_processing_semantic_correction_options", b"_llm_post_processing_semantic_correction_options", "_llm_post_processing_spelling_correction_options", b"_llm_post_processing_spelling_correction_options", "_llm_post_processing_summarization_options", b"_llm_post_processing_summarization_options", "_llm_post_processing_translation_options", b"_llm_post_processing_translation_options", "_llm_post_processing_user_prompt_options", b"_llm_post_processing_user_prompt_options", "_llm_request_timeout", b"_llm_request_timeout", "llm_host", b"llm_host", "llm_port", b"llm_port", "llm_post_processing_casing_options", b"llm_post_processing_casing_options", "llm_post_processing_inverse_normalization_options", b"llm_post_processing_inverse_normalization_options", "llm_post_processing_normalization_options", b"llm_post_processing_normalization_options", "llm_post_processing_punctuation_options", b"llm_post_processing_punctuation_options", "llm_post_processing_semantic_correction_options", b"llm_post_processing_semantic_correction_options", "llm_post_processing_spelling_correction_options", b"llm_post_processing_spelling_correction_options", "llm_post_processing_summarization_options", b"llm_post_processing_summarization_options", "llm_post_processing_translation_options", b"llm_post_processing_translation_options", "llm_post_processing_user_prompt_options", b"llm_post_processing_user_prompt_options", "llm_request_timeout", b"llm_request_timeout"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["_llm_host", b"_llm_host", "_llm_port", b"_llm_port", "_llm_post_processing_casing_options", b"_llm_post_processing_casing_options", "_llm_post_processing_inverse_normalization_options", b"_llm_post_processing_inverse_normalization_options", "_llm_post_processing_normalization_options", b"_llm_post_processing_normalization_options", "_llm_post_processing_punctuation_options", b"_llm_post_processing_punctuation_options", "_llm_post_processing_semantic_correction_options", b"_llm_post_processing_semantic_correction_options", "_llm_post_processing_spelling_correction_options", b"_llm_post_processing_spelling_correction_options", "_llm_post_processing_summarization_options", b"_llm_post_processing_summarization_options", "_llm_post_processing_translation_options", b"_llm_post_processing_translation_options", "_llm_post_processing_user_prompt_options", b"_llm_post_processing_user_prompt_options", "_llm_request_timeout", b"_llm_request_timeout", "llm_host", b"llm_host", "llm_port", b"llm_port", "llm_post_processing_casing_options", b"llm_post_processing_casing_options", "llm_post_processing_inverse_normalization_options", b"llm_post_processing_inverse_normalization_options", "llm_post_processing_normalization_options", b"llm_post_processing_normalization_options", "llm_post_processing_punctuation_options", b"llm_post_processing_punctuation_options", "llm_post_processing_semantic_correction_options", b"llm_post_processing_semantic_correction_options", "llm_post_processing_spelling_correction_options", b"llm_post_processing_spelling_correction_options", "llm_post_processing_summarization_options", b"llm_post_processing_summarization_options", "llm_post_processing_translation_options", b"llm_post_processing_translation_options", "llm_post_processing_user_prompt_options", b"llm_post_processing_user_prompt_options", "llm_request_timeout", b"llm_request_timeout"]) -> None: ...
     @typing.overload
     def WhichOneof(self, oneof_group: typing.Literal["_llm_host", b"_llm_host"]) -> typing.Literal["llm_host"] | None: ...
     @typing.overload
     def WhichOneof(self, oneof_group: typing.Literal["_llm_port", b"_llm_port"]) -> typing.Literal["llm_port"] | None: ...
     @typing.overload
+    def WhichOneof(self, oneof_group: typing.Literal["_llm_post_processing_casing_options", b"_llm_post_processing_casing_options"]) -> typing.Literal["llm_post_processing_casing_options"] | None: ...
+    @typing.overload
+    def WhichOneof(self, oneof_group: typing.Literal["_llm_post_processing_inverse_normalization_options", b"_llm_post_processing_inverse_normalization_options"]) -> typing.Literal["llm_post_processing_inverse_normalization_options"] | None: ...
+    @typing.overload
+    def WhichOneof(self, oneof_group: typing.Literal["_llm_post_processing_normalization_options", b"_llm_post_processing_normalization_options"]) -> typing.Literal["llm_post_processing_normalization_options"] | None: ...
+    @typing.overload
+    def WhichOneof(self, oneof_group: typing.Literal["_llm_post_processing_punctuation_options", b"_llm_post_processing_punctuation_options"]) -> typing.Literal["llm_post_processing_punctuation_options"] | None: ...
+    @typing.overload
+    def WhichOneof(self, oneof_group: typing.Literal["_llm_post_processing_semantic_correction_options", b"_llm_post_processing_semantic_correction_options"]) -> typing.Literal["llm_post_processing_semantic_correction_options"] | None: ...
+    @typing.overload
+    def WhichOneof(self, oneof_group: typing.Literal["_llm_post_processing_spelling_correction_options", b"_llm_post_processing_spelling_correction_options"]) -> typing.Literal["llm_post_processing_spelling_correction_options"] | None: ...
+    @typing.overload
+    def WhichOneof(self, oneof_group: typing.Literal["_llm_post_processing_summarization_options", b"_llm_post_processing_summarization_options"]) -> typing.Literal["llm_post_processing_summarization_options"] | None: ...
+    @typing.overload
+    def WhichOneof(self, oneof_group: typing.Literal["_llm_post_processing_translation_options", b"_llm_post_processing_translation_options"]) -> typing.Literal["llm_post_processing_translation_options"] | None: ...
+    @typing.overload
+    def WhichOneof(self, oneof_group: typing.Literal["_llm_post_processing_user_prompt_options", b"_llm_post_processing_user_prompt_options"]) -> typing.Literal["llm_post_processing_user_prompt_options"] | None: ...
+    @typing.overload
     def WhichOneof(self, oneof_group: typing.Literal["_llm_request_timeout", b"_llm_request_timeout"]) -> typing.Literal["llm_request_timeout"] | None: ...
-    @typing.overload
-    def WhichOneof(self, oneof_group: typing.Literal["_normalization", b"_normalization"]) -> typing.Literal["normalization"] | None: ...
-    @typing.overload
-    def WhichOneof(self, oneof_group: typing.Literal["_punctuation", b"_punctuation"]) -> typing.Literal["punctuation"] | None: ...
-    @typing.overload
-    def WhichOneof(self, oneof_group: typing.Literal["_semantic_correction", b"_semantic_correction"]) -> typing.Literal["semantic_correction"] | None: ...
-    @typing.overload
-    def WhichOneof(self, oneof_group: typing.Literal["_spelling_correction", b"_spelling_correction"]) -> typing.Literal["spelling_correction"] | None: ...
-    @typing.overload
-    def WhichOneof(self, oneof_group: typing.Literal["_summarization", b"_summarization"]) -> typing.Literal["summarization"] | None: ...
-    @typing.overload
-    def WhichOneof(self, oneof_group: typing.Literal["_translation", b"_translation"]) -> typing.Literal["translation"] | None: ...
-    @typing.overload
-    def WhichOneof(self, oneof_group: typing.Literal["_user_prompt", b"_user_prompt"]) -> typing.Literal["user_prompt"] | None: ...
 
-global___S2TLlmPostProcessing = S2TLlmPostProcessing
+global___S2tLlmPostProcessing = S2tLlmPostProcessing
 
 @typing.final
 class S2tLlmPostProcessingCasingOptions(google.protobuf.message.Message):
