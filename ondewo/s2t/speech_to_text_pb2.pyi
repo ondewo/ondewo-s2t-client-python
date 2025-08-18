@@ -2558,3 +2558,52 @@ class TrainUserLanguageModelRequest(google.protobuf.message.Message):
     def ClearField(self, field_name: typing.Literal["language_model_name", b"language_model_name", "order", b"order"]) -> None: ...
 
 global___TrainUserLanguageModelRequest = TrainUserLanguageModelRequest
+
+@typing.final
+class ListS2tNormalizationPipelinesRequest(google.protobuf.message.Message):
+    """//////////////////////
+    LIST OF S2T NORMALIZATION PIPELINES //
+    //////////////////////
+
+    The request message for ListS2tNormalizationPipelines.
+    Filter pipelines by attributed in request.
+    """
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    LANGUAGE_FIELD_NUMBER: builtins.int
+    language: builtins.str
+    """Optional. Define the language."""
+    def __init__(
+        self,
+        *,
+        language: builtins.str = ...,
+    ) -> None: ...
+    def ClearField(self, field_name: typing.Literal["language", b"language"]) -> None: ...
+
+global___ListS2tNormalizationPipelinesRequest = ListS2tNormalizationPipelinesRequest
+
+@typing.final
+class ListS2tNormalizationPipelinesResponse(google.protobuf.message.Message):
+    """Pipeline Response representation.
+    The response message for ListS2tNormalizationPipelines.
+    """
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    S2T_NORMALIZATION_PIPELINES_FIELD_NUMBER: builtins.int
+    @property
+    def s2t_normalization_pipelines(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
+        """Required. Representation of a list of normalization pipelines configurations.
+        Retrieved by ListS2tNormalizationPipelines, containing the configurations of
+        normalization pipelines with the specifications received in the ListS2tNormalizationPipelinesRequest.
+        """
+
+    def __init__(
+        self,
+        *,
+        s2t_normalization_pipelines: collections.abc.Iterable[builtins.str] | None = ...,
+    ) -> None: ...
+    def ClearField(self, field_name: typing.Literal["s2t_normalization_pipelines", b"s2t_normalization_pipelines"]) -> None: ...
+
+global___ListS2tNormalizationPipelinesResponse = ListS2tNormalizationPipelinesResponse

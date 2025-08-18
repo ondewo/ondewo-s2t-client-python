@@ -111,6 +111,11 @@ class Speech2TextStub(object):
                 request_serializer=ondewo_dot_s2t_dot_speech__to__text__pb2.TrainUserLanguageModelRequest.SerializeToString,
                 response_deserializer=google_dot_protobuf_dot_empty__pb2.Empty.FromString,
                 _registered_method=True)
+        self.ListS2tNormalizationPipelines = channel.unary_unary(
+                '/ondewo.s2t.Speech2Text/ListS2tNormalizationPipelines',
+                request_serializer=ondewo_dot_s2t_dot_speech__to__text__pb2.ListS2tNormalizationPipelinesRequest.SerializeToString,
+                response_deserializer=ondewo_dot_s2t_dot_speech__to__text__pb2.ListS2tNormalizationPipelinesResponse.FromString,
+                _registered_method=True)
 
 
 class Speech2TextServicer(object):
@@ -226,6 +231,13 @@ class Speech2TextServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
+    def ListS2tNormalizationPipelines(self, request, context):
+        """Retrieves a list of normalization pipelines based on specific requirements.
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
 
 def add_Speech2TextServicer_to_server(servicer, server):
     rpc_method_handlers = {
@@ -303,6 +315,11 @@ def add_Speech2TextServicer_to_server(servicer, server):
                     servicer.TrainUserLanguageModel,
                     request_deserializer=ondewo_dot_s2t_dot_speech__to__text__pb2.TrainUserLanguageModelRequest.FromString,
                     response_serializer=google_dot_protobuf_dot_empty__pb2.Empty.SerializeToString,
+            ),
+            'ListS2tNormalizationPipelines': grpc.unary_unary_rpc_method_handler(
+                    servicer.ListS2tNormalizationPipelines,
+                    request_deserializer=ondewo_dot_s2t_dot_speech__to__text__pb2.ListS2tNormalizationPipelinesRequest.FromString,
+                    response_serializer=ondewo_dot_s2t_dot_speech__to__text__pb2.ListS2tNormalizationPipelinesResponse.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -711,6 +728,33 @@ class Speech2Text(object):
             '/ondewo.s2t.Speech2Text/TrainUserLanguageModel',
             ondewo_dot_s2t_dot_speech__to__text__pb2.TrainUserLanguageModelRequest.SerializeToString,
             google_dot_protobuf_dot_empty__pb2.Empty.FromString,
+            options,
+            channel_credentials,
+            insecure,
+            call_credentials,
+            compression,
+            wait_for_ready,
+            timeout,
+            metadata,
+            _registered_method=True)
+
+    @staticmethod
+    def ListS2tNormalizationPipelines(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(
+            request,
+            target,
+            '/ondewo.s2t.Speech2Text/ListS2tNormalizationPipelines',
+            ondewo_dot_s2t_dot_speech__to__text__pb2.ListS2tNormalizationPipelinesRequest.SerializeToString,
+            ondewo_dot_s2t_dot_speech__to__text__pb2.ListS2tNormalizationPipelinesResponse.FromString,
             options,
             channel_credentials,
             insecure,
