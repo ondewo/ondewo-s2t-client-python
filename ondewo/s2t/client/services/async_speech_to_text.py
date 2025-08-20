@@ -22,10 +22,15 @@ from ondewo.s2t.speech_to_text_pb2 import (
     DeleteUserLanguageModelRequest,
     ListS2tDomainsRequest,
     ListS2tDomainsResponse,
+    ListS2tLanguageModelsRequest,
+    ListS2tLanguageModelsResponse,
     ListS2tLanguagesRequest,
     ListS2tLanguagesResponse,
+    ListS2tNormalizationPipelinesRequest,
+    ListS2tNormalizationPipelinesResponse,
     ListS2tPipelinesRequest,
     ListS2tPipelinesResponse,
+    S2tGetServiceInfoResponse,
     S2tPipelineId,
     Speech2TextConfig,
     TrainUserLanguageModelRequest,
@@ -88,6 +93,14 @@ class Speech2Text(AsyncBaseServicesInterface):
         response: ListS2tDomainsResponse = await self.stub.ListS2tDomains(request)
         return response
 
+    async def get_service_info(self, request: Empty) -> S2tGetServiceInfoResponse:
+        response: S2tGetServiceInfoResponse = await self.stub.GetServiceInfo(request)
+        return response
+
+    async def list_s2t_language_models(self, request: ListS2tLanguageModelsRequest) -> ListS2tLanguageModelsResponse:
+        response: ListS2tLanguageModelsResponse = await self.stub.ListS2tLanguageModels(request)
+        return response
+
     async def create_user_language_model(self, request: CreateUserLanguageModelRequest) -> Empty:
         response: Empty = await self.stub.CreateUserLanguageModel(request)
         return response
@@ -102,4 +115,11 @@ class Speech2Text(AsyncBaseServicesInterface):
 
     async def train_user_language_model(self, request: TrainUserLanguageModelRequest) -> Empty:
         response: Empty = await self.stub.TrainUserLanguageModel(request)
+        return response
+
+    async def list_s2t_normalization_pipelines(
+        self,
+        request: ListS2tNormalizationPipelinesRequest,
+    ) -> ListS2tNormalizationPipelinesResponse:
+        response: ListS2tNormalizationPipelinesResponse = await self.stub.ListS2tNormalizationPipelines(request)
         return response
