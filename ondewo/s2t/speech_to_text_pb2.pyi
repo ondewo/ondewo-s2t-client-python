@@ -2136,7 +2136,7 @@ global___S2tLlmPostProcessingPunctuationOptions = S2tLlmPostProcessingPunctuatio
 
 @typing.final
 class S2tLlmPostProcessingSpellCorrectionOptions(google.protobuf.message.Message):
-    """Configuration of the options to spelling-correction task in LLM post-processing."""
+    """Configuration of the options to spelling-correctionsing task in LLM post-processing."""
 
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
@@ -2156,7 +2156,7 @@ global___S2tLlmPostProcessingSpellCorrectionOptions = S2tLlmPostProcessingSpellC
 
 @typing.final
 class S2tLlmPostProcessingSemanticCorrectionOptions(google.protobuf.message.Message):
-    """Configuration of the options to semantic-correction task in LLM post-processing."""
+    """Configuration of the options to semantic-correctionsing task in LLM post-processing."""
 
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
