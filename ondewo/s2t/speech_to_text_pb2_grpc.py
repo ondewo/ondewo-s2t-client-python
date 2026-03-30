@@ -27,7 +27,7 @@ if _version_not_supported:
 
 
 class Speech2TextStub(object):
-    """Speech-to-text service
+    """<p>Speech-to-text service</p>
     """
 
     def __init__(self, channel):
@@ -119,120 +119,120 @@ class Speech2TextStub(object):
 
 
 class Speech2TextServicer(object):
-    """Speech-to-text service
+    """<p>Speech-to-text service</p>
     """
 
     def TranscribeFile(self, request, context):
-        """Transcribes an audio file
+        """<p>Transcribes an audio file</p>
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
     def TranscribeStream(self, request_iterator, context):
-        """Transcribes an audio stream.
+        """<p>Transcribes an audio stream.</p>
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
     def GetS2tPipeline(self, request, context):
-        """Gets a speech to text pipeline corresponding to the id specified in S2tPipelineId. If no corresponding id is
-        found, raises ModuleNotFoundError in server.
+        """<p>Gets a speech to text pipeline corresponding to the id specified in <code>S2tPipelineId</code>. If no corresponding id is
+        found, raises <code>ModuleNotFoundError</code> in server.</p>
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
     def CreateS2tPipeline(self, request, context):
-        """Creates a new speech to text pipeline from a Speech2TextConfig and registers the new pipeline in the server.
+        """<p>Creates a new speech to text pipeline from a <code>Speech2TextConfig</code> and registers the new pipeline in the server.</p>
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
     def DeleteS2tPipeline(self, request, context):
-        """Deletes a pipeline corresponding to the id parsed in S2tPipelineId. If no corresponding id is
-        found, raises ModuleNotFoundError in server.
+        """<p>Deletes a pipeline corresponding to the id parsed in <code>S2tPipelineId</code>. If no corresponding id is
+        found, raises <code>ModuleNotFoundError</code> in server.</p>
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
     def UpdateS2tPipeline(self, request, context):
-        """Updates a pipeline with the id specified in Speech2TextConfig with the new config. If no corresponding id is
-        found, raises ModuleNotFoundError in server.
+        """<p>Updates a pipeline with the id specified in <code>Speech2TextConfig</code> with the new config. If no corresponding id is
+        found, raises <code>ModuleNotFoundError</code> in server.</p>
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
     def ListS2tPipelines(self, request, context):
-        """Lists all speech to text pipelines.
+        """<p>Lists all speech to text pipelines.</p>
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
     def ListS2tLanguages(self, request, context):
-        """Returns a message containing a list of all languages for which there exist pipelines.
+        """<p>Returns a message containing a list of all languages for which there exist pipelines.</p>
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
     def ListS2tDomains(self, request, context):
-        """Returns a message containing a list of all domains for which there exist pipelines.
+        """<p>Returns a message containing a list of all domains for which there exist pipelines.</p>
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
     def GetServiceInfo(self, request, context):
-        """Returns a message containing the version of the running speech to text server.
+        """<p>Returns a message containing the version of the running speech to text server.</p>
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
     def ListS2tLanguageModels(self, request, context):
-        """Given a list of pipeline ids, returns a list of LanguageModelPipelineId messages containing the pipeline
-        id and a list of the language models loaded in the pipeline.
+        """<p>Given a list of pipeline ids, returns a list of <code>LanguageModelPipelineId</code> messages containing the pipeline
+        id and a list of the language models loaded in the pipeline.</p>
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
     def CreateUserLanguageModel(self, request, context):
-        """Create a user language model.
+        """<p>Create a user language model.</p>
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
     def DeleteUserLanguageModel(self, request, context):
-        """Delete a user language model.
+        """<p>Delete a user language model.</p>
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
     def AddDataToUserLanguageModel(self, request, context):
-        """Add data to a user language model.
+        """<p>Add data to a user language model.</p>
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
     def TrainUserLanguageModel(self, request, context):
-        """Train a user language model.
+        """<p>Train a user language model.</p>
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
     def ListS2tNormalizationPipelines(self, request, context):
-        """Retrieves a list of normalization pipelines based on specific requirements.
+        """<p>Retrieves a list of normalization pipelines based on specific requirements.</p>
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -330,7 +330,7 @@ def add_Speech2TextServicer_to_server(servicer, server):
 
  # This class is part of an EXPERIMENTAL API.
 class Speech2Text(object):
-    """Speech-to-text service
+    """<p>Speech-to-text service</p>
     """
 
     @staticmethod
