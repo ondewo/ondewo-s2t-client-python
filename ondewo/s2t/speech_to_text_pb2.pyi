@@ -87,7 +87,8 @@ class _InferenceBackendEnumTypeWrapper(google.protobuf.internal.enum_type_wrappe
     INFERENCE_BACKEND_CLOUD_SERVICE_MICROSOFT: _InferenceBackend.ValueType  # 6
     """Run Microsoft Azure S2T cloud service"""
 
-class InferenceBackend(_InferenceBackend, metaclass=_InferenceBackendEnumTypeWrapper): ...
+class InferenceBackend(_InferenceBackend, metaclass=_InferenceBackendEnumTypeWrapper):
+    """The inference backend configuration"""
 
 INFERENCE_BACKEND_UNKNOWN: InferenceBackend.ValueType  # 0
 """Not set"""
@@ -111,7 +112,7 @@ class TranscribeRequestConfig(google.protobuf.message.Message):
     Configuration Message //
     /////////////////////////
 
-    Configuration for a request to transcribe audio
+    <p>Configuration for a request to transcribe audio</p>
     """
 
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
@@ -136,7 +137,7 @@ class TranscribeRequestConfig(google.protobuf.message.Message):
     language: builtins.str
     """Optional. Specify language of transcription to return"""
     task: builtins.str
-    """Optional. Specify task of s2t model, e.g. 'transcribe' and 'translate'"""
+    """Optional. Specify task of s2t model, e.g. &apos;transcribe&apos; and &apos;translate&apos;"""
     @property
     def post_processing(self) -> global___PostProcessingOptions:
         """The postprocessing options"""
@@ -155,37 +156,42 @@ class TranscribeRequestConfig(google.protobuf.message.Message):
 
     @property
     def s2t_service_config(self) -> google.protobuf.struct_pb2.Struct:
-        """Optional. s2t_service_config provides the configuration of the service such as API key, bearer tokens, JWT,
-        and other header information as key value pairs, e.g., <pre><code>MY_API_KEY='LKJDIFe244LKJOI'</code></pre>
-        A. For Amazon S2T service, the following arguments should be passed in form of a dict:
-         A.1 aws_access_key_id (required) Access key id to access Amazon WEb Service.
-         A.2 aws_secret_access_key (required) Secret access key to access Amazon WEb Service.
-         A.3 region (required) Region name of Amazon Server.
-         Example:
-         s2t_config_service={'aws_access_key_id': 'YOUR_AWS_ACCESS_KEY_ID', 'aws_secret_access_key':
-         'YOUR_AWS_SECRET_ACCESS_KEY', 'region': 'YOUR_AMAZON_SERVER_REGION_NAME'}
-        B. For Deepgram S2T service, the following argument should be passed in form of a dict:
-         B.1 api_key (required) API key of Deepgram account to access Deepgram S2T service.
-         Example:
-         s2t_config_service={'api_key': 'YOUR_DEEPGRAM_API_KEY'}
-        C. For Google cloud S2T service, the following arguments should be passed in form of a dict:
-         C.1- api_key (required) API key of Google cloud to access its S2T service.
-         C.2- api_endpoint (optional) Regional API endpoint of Google cloud S2T service. (Defaults to
-         'eu-speech.googleapis.com')
-         Example:
-         s2t_config_service={'api_key': 'YOUR_GOOGLE_CLOUD_API_KEY', 'api_endpoint': 'YOUR_GOOGLE_CLOUD_API_ENDPOINT'}
-        D. For Microsoft Azure S2T service, the following arguments should be passed in form of a dict:
-         D.1 subscription_key (required) Subscription key to access Microsoft Azure Service.
-         D.2 region (required) Region name of Microsoft Azure Server.
-         Example:
-         s2t_config_service={'subscription_key': 'YOUR_MICROSOFT_AZURE_SUBSCRIPTION_KEY', 'region':
-         'YOUR_MICROSOFT_AZURE_SERVER_REGION_NAME'}
-        Note: ondewo-s2t will raise an error if you don't pass any of the required arguments above.
+        """Optional. <code>s2t_service_config</code> provides the configuration of the service such as API key, bearer tokens, JWT,
+        and other header information as key value pairs, e.g., <pre><code>MY_API_KEY=&apos;LKJDIFe244LKJOI&apos;</code></pre>
+        For Amazon S2T service, the following arguments should be passed in form of a dict:
+        <ul>
+          <li><code>aws_access_key_id</code> (required) Access key id to access Amazon Web Service.</li>
+          <li><code>aws_secret_access_key</code> (required) Secret access key to access Amazon Web Service.</li>
+          <li><code>region</code> (required) Region name of Amazon Server.</li>
+        </ul>
+        Example: <code>s2t_config_service={&apos;aws_access_key_id&apos;: &apos;YOUR_AWS_ACCESS_KEY_ID&apos;, &apos;aws_secret_access_key&apos;:
+        &apos;YOUR_AWS_SECRET_ACCESS_KEY&apos;, &apos;region&apos;: &apos;YOUR_AMAZON_SERVER_REGION_NAME&apos;}</code>
+        For Deepgram S2T service, the following argument should be passed in form of a dict:
+        <ul>
+          <li><code>api_key</code> (required) API key of Deepgram account to access Deepgram S2T service.</li>
+        </ul>
+        Example: <code>s2t_config_service={&apos;api_key&apos;: &apos;YOUR_DEEPGRAM_API_KEY&apos;}</code>
+        <br>
+        For Google cloud S2T service, the following arguments should be passed in form of a dict:
+        <ul>
+          <li><code>api_key</code> (required) API key of Google cloud to access its S2T service.</li>
+          <li><code>api_endpoint</code> (optional) Regional API endpoint of Google cloud S2T service. (Defaults to
+        &apos;eu-speech.googleapis.com&apos;)</li>
+        </ul>
+        Example: <code>s2t_config_service={&apos;api_key&apos;: &apos;YOUR_GOOGLE_CLOUD_API_KEY&apos;, &apos;api_endpoint&apos;: &apos;YOUR_GOOGLE_CLOUD_API_ENDPOINT&apos;}</code>
+        For Microsoft Azure S2T service, the following arguments should be passed in form of a dict:
+        <ul>
+          <li><code>subscription_key</code> (required) Subscription key to access Microsoft Azure Service.</li>
+          <li><code>region</code> (required) Region name of Microsoft Azure Server.</li>
+        </ul>
+        Example: <code>s2t_config_service={&apos;subscription_key&apos;: &apos;YOUR_MICROSOFT_AZURE_SUBSCRIPTION_KEY&apos;, &apos;region&apos;:
+        &apos;YOUR_MICROSOFT_AZURE_SERVER_REGION_NAME&apos;}</code>
+        Note: ondewo-s2t will raise an error if you don&apos;t pass any of the required arguments above.
         """
 
     @property
     def s2t_cloud_provider_config(self) -> global___S2tCloudProviderConfig:
-        """Optional. Defines the cloud provider's specific configuration for using speech to text cloud services
+        """Optional. Defines the cloud provider&apos;s specific configuration for using speech to text cloud services.
         The default value is None.
         """
 
@@ -229,7 +235,7 @@ global___TranscribeRequestConfig = TranscribeRequestConfig
 
 @typing.final
 class S2tCloudProviderConfig(google.protobuf.message.Message):
-    """Configuration for cloud provider settings for Speech-to-Text (S2T)."""
+    """<p>Configuration for cloud provider settings for Speech-to-Text (S2T).</p>"""
 
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
@@ -276,7 +282,7 @@ global___S2tCloudProviderConfig = S2tCloudProviderConfig
 
 @typing.final
 class S2tCloudProviderConfigAmazon(google.protobuf.message.Message):
-    """Configuration details specific to the Amazon web service speech-to-text provider."""
+    """<p>Configuration details specific to the Amazon web service speech-to-text provider.</p>"""
 
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
@@ -285,23 +291,23 @@ class S2tCloudProviderConfigAmazon(google.protobuf.message.Message):
     LANGUAGE_MODEL_NAME_FIELD_NUMBER: builtins.int
     VOCABULARY_NAME_FIELD_NUMBER: builtins.int
     enable_partial_results_stabilization: builtins.bool
-    """Optional. Enables or disables partial_results_stabilization feature. More details at:
-    https://docs.aws.amazon.com/transcribe/latest/dg/streaming-partial-results.html#streaming-partial-result-stabilization
+    """Optional. Enables or disables <code>partial_results_stabilization</code> feature. More details at:
+    <a href="https://docs.aws.amazon.com/transcribe/latest/dg/streaming-partial-results.html#streaming-partial-result-stabilization">https://docs.aws.amazon.com/transcribe/latest/dg/streaming-partial-results.html#streaming-partial-result-stabilization</a>
     """
     partial_results_stability: builtins.str
     """Optional. You can use this field to set the stability level of the transcription results.
     A higher stability level means that the transcription results are less likely to change.
     Higher stability levels can come with lower overall transcription accuracy.
-    Acceptable values: ["low", "medium", "high"]. Defaults to "high" if not set explicitly. More details at:
-    https://aws.amazon.com/blogs/machine-learning/amazon-transcribe-now-supports-partial-results-stabilization-for-streaming-audio/
+    Acceptable values: [&quot;low&quot;, &quot;medium&quot;, &quot;high&quot;]. Defaults to &quot;high&quot; if not set explicitly. More details at:
+    <a href="https://aws.amazon.com/blogs/machine-learning/amazon-transcribe-now-supports-partial-results-stabilization-for-streaming-audio/">https://aws.amazon.com/blogs/machine-learning/amazon-transcribe-now-supports-partial-results-stabilization-for-streaming-audio/</a>
     """
     language_model_name: builtins.str
     """Optional. The name of your customize language model you want to use.
-    More details at: https://docs.aws.amazon.com/transcribe/latest/dg/custom-language-models.html
+    More details at: <a href="https://docs.aws.amazon.com/transcribe/latest/dg/custom-language-models.html">https://docs.aws.amazon.com/transcribe/latest/dg/custom-language-models.html</a>
     """
     vocabulary_name: builtins.str
-    """Optional. The name of your customize language model you want to use.
-    More details at: https://docs.aws.amazon.com/transcribe/latest/dg/custom-vocabulary.html
+    """Optional. The name of your customize vocabulary you want to use.
+    More details at: <a href="https://docs.aws.amazon.com/transcribe/latest/dg/custom-vocabulary.html">https://docs.aws.amazon.com/transcribe/latest/dg/custom-vocabulary.html</a>
     """
     def __init__(
         self,
@@ -326,7 +332,7 @@ global___S2tCloudProviderConfigAmazon = S2tCloudProviderConfigAmazon
 
 @typing.final
 class S2tCloudProviderConfigDeepgram(google.protobuf.message.Message):
-    """Configuration details specific to the Deepgram speech-to-text provider."""
+    """<p>Configuration details specific to the Deepgram speech-to-text provider.</p>"""
 
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
@@ -336,25 +342,25 @@ class S2tCloudProviderConfigDeepgram(google.protobuf.message.Message):
     MEASUREMENTS_FIELD_NUMBER: builtins.int
     DICTATION_FIELD_NUMBER: builtins.int
     punctuate: builtins.bool
-    """Optional. Enables or disables punctuate feature of Deepgram to add punctuations to the resulted transcript.
-    More details at: https://developers.deepgram.com/docs/punctuation
+    """Optional. Enables or disables <code>punctuate</code> feature of Deepgram to add punctuations to the resulted transcript.
+    More details at: <a href="https://developers.deepgram.com/docs/punctuation">https://developers.deepgram.com/docs/punctuation</a>
     """
     smart_format: builtins.bool
-    """Optional. Enables or disables smart_format feature of Deepgram transcription result to improve readability.
-    More details at: https://developers.deepgram.com/docs/smart-format
+    """Optional. Enables or disables <code>smart_format</code> feature of Deepgram transcription result to improve readability.
+    More details at: <a href="https://developers.deepgram.com/docs/smart-format">https://developers.deepgram.com/docs/smart-format</a>
     """
     numerals: builtins.bool
-    """Optional. Enables or disables numerals feature of Deepgram to convert numbers to numeric form in the resulted
-    transcript. More details at: https://developers.deepgram.com/docs/numerals
+    """Optional. Enables or disables <code>numerals</code> feature of Deepgram to convert numbers to numeric form in the resulted
+    transcript. More details at: <a href="https://developers.deepgram.com/docs/numerals">https://developers.deepgram.com/docs/numerals</a>
     """
     measurements: builtins.bool
-    """Optional. Enables or disables measurements feature of Deepgram to convert measurement units (i.e. Kilogram)
+    """Optional. Enables or disables <code>measurements</code> feature of Deepgram to convert measurement units (i.e. Kilogram)
     to abbreviated form (i.e. Kg) in the resulted transcript.
-    More details at: https://developers.deepgram.com/docs/measurements
+    More details at: <a href="https://developers.deepgram.com/docs/measurements">https://developers.deepgram.com/docs/measurements</a>
     """
     dictation: builtins.bool
-    """Optional. Enables or disables dictation feature of Deepgram to convert spoken dictation commands into their
-    corresponding punctuation marks. More details at: https://developers.deepgram.com/docs/dictation
+    """Optional. Enables or disables <code>dictation</code> feature of Deepgram to convert spoken dictation commands into their
+    corresponding punctuation marks. More details at: <a href="https://developers.deepgram.com/docs/dictation">https://developers.deepgram.com/docs/dictation</a>
     """
     def __init__(
         self,
@@ -382,7 +388,7 @@ global___S2tCloudProviderConfigDeepgram = S2tCloudProviderConfigDeepgram
 
 @typing.final
 class S2tCloudProviderConfigGoogle(google.protobuf.message.Message):
-    """Configuration details specific to the Google speech-to-text provider."""
+    """<p>Configuration details specific to the Google speech-to-text provider.</p>"""
 
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
@@ -392,24 +398,24 @@ class S2tCloudProviderConfigGoogle(google.protobuf.message.Message):
     TRANSCRIPT_NORMALIZATION_FIELD_NUMBER: builtins.int
     MAX_ALTERNATIVES_FIELD_NUMBER: builtins.int
     enable_automatic_punctuation: builtins.bool
-    """Optional. Enables or disables automatic_punctuation feature of Google s2t to add punctuations to the resulted
-    transcript. More details at: https://cloud.google.com/speech-to-text/docs/automatic-punctuation
+    """Optional. Enables or disables <code>automatic_punctuation</code> feature of Google s2t to add punctuations to the resulted
+    transcript. More details at: <a href="https://cloud.google.com/speech-to-text/docs/automatic-punctuation">https://cloud.google.com/speech-to-text/docs/automatic-punctuation</a>
     """
     enable_word_time_offsets: builtins.bool
-    """Optional. Enables or disables word_time_offsets feature of Google s2t to add word-level timestamps (time-offset)
-    to the resulted transcript. More details at: https://cloud.google.com/speech-to-text/docs/async-time-offsets
+    """Optional. Enables or disables <code>word_time_offsets</code> feature of Google s2t to add word-level timestamps (time-offset)
+    to the resulted transcript. More details at: <a href="https://cloud.google.com/speech-to-text/docs/async-time-offsets">https://cloud.google.com/speech-to-text/docs/async-time-offsets</a>
     """
     enable_word_confidence: builtins.bool
-    """Optional. Enables or disables word_confidence feature of Google s2t to add word-level confidence scores
-    to the resulted transcript. More details at: https://cloud.google.com/speech-to-text/docs/word-confidence
+    """Optional. Enables or disables <code>word_confidence</code> feature of Google s2t to add word-level confidence scores
+    to the resulted transcript. More details at: <a href="https://cloud.google.com/speech-to-text/docs/word-confidence">https://cloud.google.com/speech-to-text/docs/word-confidence</a>
     """
     transcript_normalization: builtins.bool
-    """Optional. Enables or disables transcript_normalization feature of Google s2t to automatically
+    """Optional. Enables or disables <code>transcript_normalization</code> feature of Google s2t to automatically
     replace parts of the transcript with phrases of your choosing. More details at:
-    https://cloud.google.com/speech-to-text/v2/docs/reference/rpc/google.cloud.speech.v2#transcriptnormalization
+    <a href="https://cloud.google.com/speech-to-text/v2/docs/reference/rpc/google.cloud.speech.v2#transcriptnormalization">https://cloud.google.com/speech-to-text/v2/docs/reference/rpc/google.cloud.speech.v2#transcriptnormalization</a>
     """
     max_alternatives: builtins.int
-    """Optional. Maximum number of recognition hypotheses to be returned, may be returned fewer than max_alternatives.
+    """Optional. Maximum number of recognition hypotheses to be returned, may be returned fewer than <code>max_alternatives</code>.
     Valid values are 0-30. A value of 0 or 1 will return a maximum of one. If omitted, will return a maximum of one.
     """
     def __init__(
@@ -438,7 +444,7 @@ global___S2tCloudProviderConfigGoogle = S2tCloudProviderConfigGoogle
 
 @typing.final
 class S2tCloudProviderConfigMicrosoft(google.protobuf.message.Message):
-    """Configuration details specific to the Microsoft Azure speech-to-text provider."""
+    """<p>Configuration details specific to the Microsoft Azure speech-to-text provider.</p>"""
 
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
@@ -447,10 +453,10 @@ class S2tCloudProviderConfigMicrosoft(google.protobuf.message.Message):
     use_fast_transcription_api: builtins.bool
     """Optional. Enables or disables the Microsoft Azure fast transcription API. It is faster than SDK but is in
     preview version.
-    More details at: https://learn.microsoft.com/en-us/azure/ai-services/speech-service/fast-transcription-create
+    More details at: <a href="https://learn.microsoft.com/en-us/azure/ai-services/speech-service/fast-transcription-create">https://learn.microsoft.com/en-us/azure/ai-services/speech-service/fast-transcription-create</a>
     """
     use_detailed_output_format: builtins.bool
-    """Optional. Enables or disables the `detailed` format for the result of Microsoft Azure s2t service
+    """Optional. Enables or disables the <code>detailed</code> format for the result of Microsoft Azure s2t service
     to add timestamps and confidences to the resulted transcript.
     """
     def __init__(
@@ -470,7 +476,7 @@ global___S2tCloudProviderConfigMicrosoft = S2tCloudProviderConfigMicrosoft
 
 @typing.final
 class TranscriptionReturnOptions(google.protobuf.message.Message):
-    """Configuration of the return values of a transcribe request"""
+    """<p>Configuration of the return values of a transcribe request</p>"""
 
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
@@ -516,7 +522,7 @@ global___TranscriptionReturnOptions = TranscriptionReturnOptions
 
 @typing.final
 class UtteranceDetectionOptions(google.protobuf.message.Message):
-    """Configuration of the options to detect utterances"""
+    """<p>Configuration of the options to detect utterances</p>"""
 
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
@@ -549,7 +555,7 @@ global___UtteranceDetectionOptions = UtteranceDetectionOptions
 
 @typing.final
 class PostProcessingOptions(google.protobuf.message.Message):
-    """Configuration of the post-processing options"""
+    """<p>Configuration of the post-processing options</p>"""
 
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
@@ -588,7 +594,7 @@ class Transcription(google.protobuf.message.Message):
      TRANSCRIPTION TYPE  //
     /////////////////////////
 
-    The transcription message
+    <p>The transcription message</p>
     """
 
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
@@ -625,6 +631,8 @@ global___Transcription = Transcription
 
 @typing.final
 class TranscriptionAlternative(google.protobuf.message.Message):
+    """<p>The alternative transcription message</p>"""
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
     TRANSCRIPT_FIELD_NUMBER: builtins.int
@@ -653,7 +661,7 @@ global___TranscriptionAlternative = TranscriptionAlternative
 
 @typing.final
 class WordDetail(google.protobuf.message.Message):
-    """WordDetail provides word-specific information for recognized words."""
+    """<p>WordDetail provides word-specific information for recognized words.</p>"""
 
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
@@ -693,6 +701,8 @@ global___WordDetail = WordDetail
 
 @typing.final
 class WordAlternative(google.protobuf.message.Message):
+    """<p>The word alternative message</p>"""
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
     WORD_FIELD_NUMBER: builtins.int
@@ -717,7 +727,7 @@ class TranscribeStreamRequest(google.protobuf.message.Message):
     TRANSCRIBE STREAM //
     /////////////////////
 
-    Request to transcribe an audio stream
+    <p>Request to transcribe an audio stream</p>
     """
 
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
@@ -751,7 +761,7 @@ global___TranscribeStreamRequest = TranscribeStreamRequest
 
 @typing.final
 class TranscribeStreamResponse(google.protobuf.message.Message):
-    """The response message of a stream transcription"""
+    """<p>The response message of a stream transcription</p>"""
 
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
@@ -809,7 +819,7 @@ class TranscribeFileRequest(google.protobuf.message.Message):
     TRANSCRIBE FILE //
     ///////////////////
 
-    A request to transcribe an audio file
+    <p>A request to transcribe an audio file</p>
     """
 
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
@@ -835,7 +845,7 @@ global___TranscribeFileRequest = TranscribeFileRequest
 
 @typing.final
 class TranscribeFileResponse(google.protobuf.message.Message):
-    """The response message for a transcribe file request"""
+    """<p>The response message for a transcribe file request</p>"""
 
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
@@ -867,7 +877,7 @@ class S2tPipelineId(google.protobuf.message.Message):
     GET S2T PIPELINE //
     ////////////////////
 
-    The pipeline id for a specific pipeline configuration
+    <p>The pipeline id for a specific pipeline configuration</p>
     """
 
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
@@ -890,7 +900,7 @@ class ListS2tPipelinesRequest(google.protobuf.message.Message):
     LIST S2T PIPELINES //
     //////////////////////
 
-    Request to list all speech-to-text pipelines. Optionally also filter criteria can be set
+    <p>Request to list all speech-to-text pipelines. Optionally also filter criteria can be set</p>
     """
 
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
@@ -929,16 +939,16 @@ global___ListS2tPipelinesRequest = ListS2tPipelinesRequest
 
 @typing.final
 class ListS2tPipelinesResponse(google.protobuf.message.Message):
-    """ListS2tPipelinesResponse is used to return a list of all speech-to-text pipelines."""
+    """<p>ListS2tPipelinesResponse is used to return a list of all speech-to-text pipelines.</p>"""
 
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
     PIPELINE_CONFIGS_FIELD_NUMBER: builtins.int
     @property
     def pipeline_configs(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___Speech2TextConfig]:
-        """A list of Speech2TextConfig message instances containing the configuration of each pipeline.
-        Example: [{id: "pipeline_1", description: {language: "en"}, active: true, ...}, {id: "pipeline_2",
-        description: {language: "fr"}, active: true, ...}]
+        """A list of <code>Speech2TextConfig</code> message instances containing the configuration of each pipeline.
+        Example: [{id: &quot;pipeline_1&quot;, description: {language: &quot;en&quot;}, active: true, ...}, {id: &quot;pipeline_2&quot;,
+        description: {language: &quot;fr&quot;}, active: true, ...}]
         """
 
     def __init__(
@@ -956,7 +966,7 @@ class ListS2tLanguagesRequest(google.protobuf.message.Message):
     LIST S2T LANGUAGES //
     //////////////////////
 
-    ListS2tLanguagesRequest is used to request a list of available languages. Optionally, filters can be set.
+    <p>ListS2tLanguagesRequest is used to request a list of available languages. Optionally, filters can be set.</p>
     """
 
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
@@ -965,12 +975,12 @@ class ListS2tLanguagesRequest(google.protobuf.message.Message):
     PIPELINE_OWNERS_FIELD_NUMBER: builtins.int
     @property
     def domains(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
-        """Filter for domains.  Example: ["medical", "finance"]"""
+        """Filter for domains.  Example: [&quot;medical&quot;, &quot;finance&quot;]"""
 
     @property
     def pipeline_owners(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
         """Filter for pipeline owners.
-        Example: ["ondewo", "partner_company"]
+        Example: [&quot;ondewo&quot;, &quot;partner_company&quot;]
         """
 
     def __init__(
@@ -985,7 +995,7 @@ global___ListS2tLanguagesRequest = ListS2tLanguagesRequest
 
 @typing.final
 class ListS2tLanguagesResponse(google.protobuf.message.Message):
-    """Response message to list available languages"""
+    """<p>Response message to list available languages</p>"""
 
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
@@ -1009,7 +1019,7 @@ class ListS2tDomainsRequest(google.protobuf.message.Message):
     LIST S2T DOMAINS //
     ////////////////////
 
-    Request message to list available domains. Optionally also filters can be set.
+    <p>Request message to list available domains. Optionally also filters can be set.</p>
     """
 
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
@@ -1036,14 +1046,14 @@ global___ListS2tDomainsRequest = ListS2tDomainsRequest
 
 @typing.final
 class ListS2tDomainsResponse(google.protobuf.message.Message):
-    """Response message to list available domains"""
+    """<p>Response message to list available domains</p>"""
 
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
     DOMAINS_FIELD_NUMBER: builtins.int
     @property
     def domains(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
-        """domains available. Example: ["medical", "finance"]"""
+        """domains available. Example: [&quot;medical&quot;, &quot;finance&quot;]"""
 
     def __init__(
         self,
@@ -1060,14 +1070,14 @@ class S2tGetServiceInfoResponse(google.protobuf.message.Message):
     GET SERVICE INFO //
     ////////////////////
 
-    S2tGetServiceInfoResponse is used to return version information about the speech-to-text service.
+    <p>S2tGetServiceInfoResponse is used to return version information about the speech-to-text service.</p>
     """
 
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
     VERSION_FIELD_NUMBER: builtins.int
     version: builtins.str
-    """Version number based on semantic versioning, e.g. "4.2.0"."""
+    """Version number based on semantic versioning, e.g. &quot;4.2.0&quot;."""
     def __init__(
         self,
         *,
@@ -1083,7 +1093,7 @@ class Speech2TextConfig(google.protobuf.message.Message):
     SPEECH-2-TEXT PIPELINE CONFIG //
     /////////////////////////////////
 
-    Speech2TextConfig is a configuration message for the speech-to-text pipeline
+    <p>Speech2TextConfig is a configuration message for the speech-to-text pipeline</p>
     """
 
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
@@ -1143,7 +1153,7 @@ global___Speech2TextConfig = Speech2TextConfig
 
 @typing.final
 class S2tDescription(google.protobuf.message.Message):
-    """S2tDescription contains descriptive information about the speech-to-text pipeline."""
+    """<p>S2tDescription contains descriptive information about the speech-to-text pipeline.</p>"""
 
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
@@ -1173,7 +1183,7 @@ global___S2tDescription = S2tDescription
 
 @typing.final
 class S2tInference(google.protobuf.message.Message):
-    """S2tInference contains information about inference models used in the speech-to-text pipeline."""
+    """<p>S2tInference contains information about inference models used in the speech-to-text pipeline.</p>"""
 
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
@@ -1204,7 +1214,7 @@ global___S2tInference = S2tInference
 
 @typing.final
 class AcousticModels(google.protobuf.message.Message):
-    """AcousticModels contains information about different types of acoustic models."""
+    """<p>AcousticModels contains information about different types of acoustic models.</p>"""
 
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
@@ -1271,7 +1281,7 @@ global___AcousticModels = AcousticModels
 
 @typing.final
 class S2tCloudServiceAmazon(google.protobuf.message.Message):
-    """S2tCloudServiceAmazon message contains settings for the Amazon web service Cloud service inference."""
+    """<p>S2tCloudServiceAmazon message contains settings for the Amazon web service Cloud service inference.</p>"""
 
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
@@ -1283,30 +1293,30 @@ class S2tCloudServiceAmazon(google.protobuf.message.Message):
     VOCABULARY_NAME_FIELD_NUMBER: builtins.int
     language: builtins.str
     """Language of the audio to transcribe by Amazon web service s2t cloud service. It should be 4-letter language code
-    (BCP-47) e.g. 'en-US' or 'de-DE'.
+    (BCP-47) e.g. &apos;en-US&apos; or &apos;de-DE&apos;.
     """
     streaming_available: builtins.bool
     """Specifies if streaming mode of Amazon web service speech to text is available for the selected language,
     otherwise batch mode transcription is used. See the list of languages and available transcription modes at:
-    https://docs.aws.amazon.com/transcribe/latest/dg/supported-languages.html
+    <a href="https://docs.aws.amazon.com/transcribe/latest/dg/supported-languages.html">https://docs.aws.amazon.com/transcribe/latest/dg/supported-languages.html</a>
     """
     enable_partial_results_stabilization: builtins.bool
-    """Enables or disables partial_results_stabilization feature. More details at:
-    https://docs.aws.amazon.com/transcribe/latest/dg/streaming-partial-results.html#streaming-partial-result-stabilization
+    """Enables or disables <code>partial_results_stabilization</code> feature. More details at:
+    <a href="https://docs.aws.amazon.com/transcribe/latest/dg/streaming-partial-results.html#streaming-partial-result-stabilization">https://docs.aws.amazon.com/transcribe/latest/dg/streaming-partial-results.html#streaming-partial-result-stabilization</a>
     """
     partial_results_stability: builtins.str
     """You can use this field to set the stability level of the transcription results.
     A higher stability level means that the transcription results are less likely to change.
     Higher stability levels can come with lower overall transcription accuracy.
-    Defaults to "high" if not set explicitly.
+    Defaults to &quot;high&quot; if not set explicitly.
     """
     language_model_name: builtins.str
     """The name of your customize language model you want to use.
-    More details at: https://docs.aws.amazon.com/transcribe/latest/dg/custom-language-models.html
+    More details at: <a href="https://docs.aws.amazon.com/transcribe/latest/dg/custom-language-models.html">https://docs.aws.amazon.com/transcribe/latest/dg/custom-language-models.html</a>
     """
     vocabulary_name: builtins.str
-    """The name of your customize language model you want to use.
-    More details at: https://docs.aws.amazon.com/transcribe/latest/dg/custom-vocabulary.html
+    """The name of your customize vocabulary you want to use.
+    More details at: <a href="https://docs.aws.amazon.com/transcribe/latest/dg/custom-vocabulary.html">https://docs.aws.amazon.com/transcribe/latest/dg/custom-vocabulary.html</a>
     """
     def __init__(
         self,
@@ -1324,7 +1334,7 @@ global___S2tCloudServiceAmazon = S2tCloudServiceAmazon
 
 @typing.final
 class S2tCloudServiceDeepgram(google.protobuf.message.Message):
-    """S2tCloudServiceDeepgram message contains settings for the Deepgram Cloud service inference."""
+    """<p>S2tCloudServiceDeepgram message contains settings for the Deepgram Cloud service inference.</p>"""
 
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
@@ -1337,32 +1347,32 @@ class S2tCloudServiceDeepgram(google.protobuf.message.Message):
     DICTATION_FIELD_NUMBER: builtins.int
     model_name: builtins.str
     """Model name from one of the speech-to-text models provided by Deepgram for the desired use-case.
-    Provided model names and details at: https://developers.deepgram.com/docs/model
+    Provided model names and details at: <a href="https://developers.deepgram.com/docs/model">https://developers.deepgram.com/docs/model</a>
     """
     language: builtins.str
     """Language of the audio to transcribe by Deepgram s2t cloud service. It should be 4-letter language code
-    (BCP-47) e.g. 'en-US' or 'de-DE'.
+    (BCP-47) e.g. &apos;en-US&apos; or &apos;de-DE&apos;.
     """
     punctuate: builtins.bool
-    """Enables or disables punctuate feature of Deepgram to add punctuations to the resulted transcript.
-    More details at: https://developers.deepgram.com/docs/punctuation
+    """Enables or disables <code>punctuate</code> feature of Deepgram to add punctuations to the resulted transcript.
+    More details at: <a href="https://developers.deepgram.com/docs/punctuation">https://developers.deepgram.com/docs/punctuation</a>
     """
     smart_format: builtins.bool
-    """Enables or disables smart_format feature of Deepgram transcription result to improve readability.
-    More details at: https://developers.deepgram.com/docs/smart-format
+    """Enables or disables <code>smart_format</code> feature of Deepgram transcription result to improve readability.
+    More details at: <a href="https://developers.deepgram.com/docs/smart-format">https://developers.deepgram.com/docs/smart-format</a>
     """
     numerals: builtins.bool
-    """Enables or disables numerals feature of Deepgram to convert numbers to numeric form in the resulted transcript.
-    More details at: https://developers.deepgram.com/docs/numerals
+    """Enables or disables <code>numerals</code> feature of Deepgram to convert numbers to numeric form in the resulted transcript.
+    More details at: <a href="https://developers.deepgram.com/docs/numerals">https://developers.deepgram.com/docs/numerals</a>
     """
     measurements: builtins.bool
-    """Enables or disables measurements feature of Deepgram to convert measurement units (i.e. Kilogram)
+    """Enables or disables <code>measurements</code> feature of Deepgram to convert measurement units (i.e. Kilogram)
     to abbreviated form (i.e. Kg) in the resulted transcript.
-    More details at: https://developers.deepgram.com/docs/measurements
+    More details at: <a href="https://developers.deepgram.com/docs/measurements">https://developers.deepgram.com/docs/measurements</a>
     """
     dictation: builtins.bool
-    """Enables or disables dictation feature of Deepgram to convert spoken dictation commands into their corresponding
-    punctuation marks. More details at: https://developers.deepgram.com/docs/dictation
+    """Enables or disables <code>dictation</code> feature of Deepgram to convert spoken dictation commands into their corresponding
+    punctuation marks. More details at: <a href="https://developers.deepgram.com/docs/dictation">https://developers.deepgram.com/docs/dictation</a>
     """
     def __init__(
         self,
@@ -1381,7 +1391,7 @@ global___S2tCloudServiceDeepgram = S2tCloudServiceDeepgram
 
 @typing.final
 class S2tCloudServiceGoogle(google.protobuf.message.Message):
-    """S2tCloudServiceGoogle message contains settings for the Google Cloud service inference."""
+    """<p>S2tCloudServiceGoogle message contains settings for the Google Cloud service inference.</p>"""
 
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
@@ -1394,31 +1404,31 @@ class S2tCloudServiceGoogle(google.protobuf.message.Message):
     MAX_ALTERNATIVES_FIELD_NUMBER: builtins.int
     model_name: builtins.str
     """Model name from one of the speech-to-text models provided by Google for the desired use-case.
-    Provided model names and details at: https://cloud.google.com/speech-to-text/docs/transcription-model
+    Provided model names and details at: <a href="https://cloud.google.com/speech-to-text/docs/transcription-model">https://cloud.google.com/speech-to-text/docs/transcription-model</a>
     """
     language: builtins.str
     """Language of the audio to transcribe by Google s2t cloud service. It should be 4-letter language code
-    (BCP-47) e.g. 'en-US' or 'de-DE'.
+    (BCP-47) e.g. &apos;en-US&apos; or &apos;de-DE&apos;.
     """
     enable_automatic_punctuation: builtins.bool
-    """Enables or disables automatic_punctuation feature of Google s2t to add punctuations to the resulted transcript.
-    More details at: https://cloud.google.com/speech-to-text/docs/automatic-punctuation
+    """Enables or disables <code>automatic_punctuation</code> feature of Google s2t to add punctuations to the resulted transcript.
+    More details at: <a href="https://cloud.google.com/speech-to-text/docs/automatic-punctuation">https://cloud.google.com/speech-to-text/docs/automatic-punctuation</a>
     """
     enable_word_time_offsets: builtins.bool
-    """Enables or disables word_time_offsets feature of Google s2t to add word-level timestamps (time-offsets)
-    to the resulted transcript. More details at: https://cloud.google.com/speech-to-text/docs/async-time-offsets
+    """Enables or disables <code>word_time_offsets</code> feature of Google s2t to add word-level timestamps (time-offsets)
+    to the resulted transcript. More details at: <a href="https://cloud.google.com/speech-to-text/docs/async-time-offsets">https://cloud.google.com/speech-to-text/docs/async-time-offsets</a>
     """
     enable_word_confidence: builtins.bool
-    """Enables or disables word_confidence feature of Google s2t to add word-level confidence scores
-    to the resulted transcript. More details at: https://cloud.google.com/speech-to-text/docs/word-confidence
+    """Enables or disables <code>word_confidence</code> feature of Google s2t to add word-level confidence scores
+    to the resulted transcript. More details at: <a href="https://cloud.google.com/speech-to-text/docs/word-confidence">https://cloud.google.com/speech-to-text/docs/word-confidence</a>
     """
     transcript_normalization: builtins.bool
-    """Enables or disables transcript_normalization feature of Google s2t to automatically
+    """Enables or disables <code>transcript_normalization</code> feature of Google s2t to automatically
     replace parts of the transcript with phrases of your choosing. More details at:
-    https://cloud.google.com/speech-to-text/v2/docs/reference/rpc/google.cloud.speech.v2#transcriptnormalization
+    <a href="https://cloud.google.com/speech-to-text/v2/docs/reference/rpc/google.cloud.speech.v2#transcriptnormalization">https://cloud.google.com/speech-to-text/v2/docs/reference/rpc/google.cloud.speech.v2#transcriptnormalization</a>
     """
     max_alternatives: builtins.int
-    """Maximum number of recognition hypotheses to be returned. The server may return fewer than max_alternatives.
+    """Maximum number of recognition hypotheses to be returned. The server may return fewer than <code>max_alternatives</code>.
     Valid values are 0-30. A value of 0 or 1 will return a maximum of one. If omitted, will return a maximum of one.
     """
     def __init__(
@@ -1438,7 +1448,7 @@ global___S2tCloudServiceGoogle = S2tCloudServiceGoogle
 
 @typing.final
 class S2tCloudServiceMicrosoft(google.protobuf.message.Message):
-    """S2tCloudServiceMicrosoft message contains settings for the Microsoft Azure Cloud service inference."""
+    """<p>S2tCloudServiceMicrosoft message contains settings for the Microsoft Azure Cloud service inference.</p>"""
 
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
@@ -1447,14 +1457,14 @@ class S2tCloudServiceMicrosoft(google.protobuf.message.Message):
     USE_DETAILED_OUTPUT_FORMAT_FIELD_NUMBER: builtins.int
     language: builtins.str
     """Language of the audio to transcribe by Microsoft Azure s2t cloud service. It should be 4-letter language code
-    (BCP-47) e.g. 'en-US' or 'de-DE'.
+    (BCP-47) e.g. &apos;en-US&apos; or &apos;de-DE&apos;.
     """
     use_fast_transcription_api: builtins.bool
     """Enables or disables the Microsoft Azure fast transcription API. It is faster than SDK but is in preview version.
-    More details at: https://learn.microsoft.com/en-us/azure/ai-services/speech-service/fast-transcription-create
+    More details at: <a href="https://learn.microsoft.com/en-us/azure/ai-services/speech-service/fast-transcription-create">https://learn.microsoft.com/en-us/azure/ai-services/speech-service/fast-transcription-create</a>
     """
     use_detailed_output_format: builtins.bool
-    """Enables or disables the `detailed` format for the result of Microsoft Azure s2t service
+    """Enables or disables the <code>detailed</code> format for the result of Microsoft Azure s2t service
     to add timestamps and confidences to the resulted transcript.
     """
     def __init__(
@@ -1470,7 +1480,7 @@ global___S2tCloudServiceMicrosoft = S2tCloudServiceMicrosoft
 
 @typing.final
 class Whisper(google.protobuf.message.Message):
-    """Whisper contains information about the Whisper model."""
+    """<p>Whisper contains information about the Whisper model.</p>"""
 
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
@@ -1500,7 +1510,7 @@ global___Whisper = Whisper
 
 @typing.final
 class WhisperTriton(google.protobuf.message.Message):
-    """WhisperTriton contains information about the Whisper model using Triton."""
+    """<p>WhisperTriton contains information about the Whisper model using Triton.</p>"""
 
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
@@ -1546,7 +1556,7 @@ global___WhisperTriton = WhisperTriton
 
 @typing.final
 class Wav2Vec(google.protobuf.message.Message):
-    """Wav2Vec contains information about the Wav2Vec model."""
+    """<p>Wav2Vec contains information about the Wav2Vec model.</p>"""
 
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
@@ -1568,7 +1578,7 @@ global___Wav2Vec = Wav2Vec
 
 @typing.final
 class Wav2VecTriton(google.protobuf.message.Message):
-    """Wav2VecTriton contains information about the Wav2Vec model using Triton."""
+    """<p>Wav2VecTriton contains information about the Wav2Vec model using Triton.</p>"""
 
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
@@ -1606,7 +1616,7 @@ global___Wav2VecTriton = Wav2VecTriton
 
 @typing.final
 class PtFiles(google.protobuf.message.Message):
-    """PtFiles contains information about PT files."""
+    """<p>PtFiles contains information about PT files.</p>"""
 
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
@@ -1628,7 +1638,7 @@ global___PtFiles = PtFiles
 
 @typing.final
 class CkptFile(google.protobuf.message.Message):
-    """CkptFile contains information about checkpoint files."""
+    """<p>CkptFile contains information about checkpoint files.</p>"""
 
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
@@ -1646,7 +1656,7 @@ global___CkptFile = CkptFile
 
 @typing.final
 class LanguageModels(google.protobuf.message.Message):
-    """LanguageModels contains information about language models."""
+    """<p>LanguageModels contains information about language models.</p>"""
 
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
@@ -1680,7 +1690,7 @@ global___LanguageModels = LanguageModels
 
 @typing.final
 class StreamingServer(google.protobuf.message.Message):
-    """StreamingServer contains information about the streaming server."""
+    """<p>StreamingServer contains information about the streaming server.</p>"""
 
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
@@ -1713,7 +1723,7 @@ global___StreamingServer = StreamingServer
 
 @typing.final
 class StreamingSpeechRecognition(google.protobuf.message.Message):
-    """StreamingSpeechRecognition contains information about streaming speech recognition settings."""
+    """<p>StreamingSpeechRecognition contains information about streaming speech recognition settings.</p>"""
 
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
@@ -1754,7 +1764,7 @@ global___StreamingSpeechRecognition = StreamingSpeechRecognition
 
 @typing.final
 class TurnDetectionOptions(google.protobuf.message.Message):
-    """Configuration of the options to turn-detection in utterances"""
+    """<p>Configuration of the options to turn-detection in utterances</p>"""
 
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
@@ -1763,6 +1773,8 @@ class TurnDetectionOptions(google.protobuf.message.Message):
     LLM_HOST_FIELD_NUMBER: builtins.int
     LLM_PORT_FIELD_NUMBER: builtins.int
     LLM_REQUEST_TIMEOUT_FIELD_NUMBER: builtins.int
+    LLM_MODEL_NAME_FIELD_NUMBER: builtins.int
+    LLM_HEADERS_FIELD_NUMBER: builtins.int
     active: builtins.bool
     """Optional. Indicates if the turn-detection feature is active."""
     full_utterance_deployment: builtins.bool
@@ -1778,6 +1790,12 @@ class TurnDetectionOptions(google.protobuf.message.Message):
     """Optional. Duration of request timeout in seconds to get result of request to LLM for turn-detection purpose.
     If the timeout occurs, result of turn-detection considered as False.
     """
+    llm_model_name: builtins.str
+    """Optional. Model name of the LLM for turn-detection purpose."""
+    @property
+    def llm_headers(self) -> google.protobuf.struct_pb2.Struct:
+        """Optional. The headers of the request message to LLM for turn-detection purpose."""
+
     def __init__(
         self,
         *,
@@ -1786,15 +1804,21 @@ class TurnDetectionOptions(google.protobuf.message.Message):
         llm_host: builtins.str | None = ...,
         llm_port: builtins.int | None = ...,
         llm_request_timeout: builtins.float | None = ...,
+        llm_model_name: builtins.str | None = ...,
+        llm_headers: google.protobuf.struct_pb2.Struct | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["_active", b"_active", "_full_utterance_deployment", b"_full_utterance_deployment", "_llm_host", b"_llm_host", "_llm_port", b"_llm_port", "_llm_request_timeout", b"_llm_request_timeout", "active", b"active", "full_utterance_deployment", b"full_utterance_deployment", "llm_host", b"llm_host", "llm_port", b"llm_port", "llm_request_timeout", b"llm_request_timeout"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["_active", b"_active", "_full_utterance_deployment", b"_full_utterance_deployment", "_llm_host", b"_llm_host", "_llm_port", b"_llm_port", "_llm_request_timeout", b"_llm_request_timeout", "active", b"active", "full_utterance_deployment", b"full_utterance_deployment", "llm_host", b"llm_host", "llm_port", b"llm_port", "llm_request_timeout", b"llm_request_timeout"]) -> None: ...
+    def HasField(self, field_name: typing.Literal["_active", b"_active", "_full_utterance_deployment", b"_full_utterance_deployment", "_llm_headers", b"_llm_headers", "_llm_host", b"_llm_host", "_llm_model_name", b"_llm_model_name", "_llm_port", b"_llm_port", "_llm_request_timeout", b"_llm_request_timeout", "active", b"active", "full_utterance_deployment", b"full_utterance_deployment", "llm_headers", b"llm_headers", "llm_host", b"llm_host", "llm_model_name", b"llm_model_name", "llm_port", b"llm_port", "llm_request_timeout", b"llm_request_timeout"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["_active", b"_active", "_full_utterance_deployment", b"_full_utterance_deployment", "_llm_headers", b"_llm_headers", "_llm_host", b"_llm_host", "_llm_model_name", b"_llm_model_name", "_llm_port", b"_llm_port", "_llm_request_timeout", b"_llm_request_timeout", "active", b"active", "full_utterance_deployment", b"full_utterance_deployment", "llm_headers", b"llm_headers", "llm_host", b"llm_host", "llm_model_name", b"llm_model_name", "llm_port", b"llm_port", "llm_request_timeout", b"llm_request_timeout"]) -> None: ...
     @typing.overload
     def WhichOneof(self, oneof_group: typing.Literal["_active", b"_active"]) -> typing.Literal["active"] | None: ...
     @typing.overload
     def WhichOneof(self, oneof_group: typing.Literal["_full_utterance_deployment", b"_full_utterance_deployment"]) -> typing.Literal["full_utterance_deployment"] | None: ...
     @typing.overload
+    def WhichOneof(self, oneof_group: typing.Literal["_llm_headers", b"_llm_headers"]) -> typing.Literal["llm_headers"] | None: ...
+    @typing.overload
     def WhichOneof(self, oneof_group: typing.Literal["_llm_host", b"_llm_host"]) -> typing.Literal["llm_host"] | None: ...
+    @typing.overload
+    def WhichOneof(self, oneof_group: typing.Literal["_llm_model_name", b"_llm_model_name"]) -> typing.Literal["llm_model_name"] | None: ...
     @typing.overload
     def WhichOneof(self, oneof_group: typing.Literal["_llm_port", b"_llm_port"]) -> typing.Literal["llm_port"] | None: ...
     @typing.overload
@@ -1804,7 +1828,7 @@ global___TurnDetectionOptions = TurnDetectionOptions
 
 @typing.final
 class VoiceActivityDetection(google.protobuf.message.Message):
-    """VoiceActivityDetection contains information about voice activity detection settings."""
+    """<p>VoiceActivityDetection contains information about voice activity detection settings.</p>"""
 
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
@@ -1833,8 +1857,8 @@ global___VoiceActivityDetection = VoiceActivityDetection
 
 @typing.final
 class Pyannote(google.protobuf.message.Message):
-    """Pyannote contains configuration for the Pyannote voice activity detection model.
-    Library: [pyannote-audio](https://github.com/pyannote/pyannote-audio/blob/develop/tutorials/voice_activity_detection.ipynb)
+    """<p>Pyannote contains configuration for the Pyannote voice activity detection model.</p>
+    <p>Library: <a href="https://github.com/pyannote/pyannote-audio/blob/develop/tutorials/voice_activity_detection.ipynb">pyannote-audio</a></p>
     """
 
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
@@ -1851,11 +1875,11 @@ class Pyannote(google.protobuf.message.Message):
     """Minimum audio size for processing."""
     min_duration_off: builtins.float
     """Fill inactive regions shorter than that many seconds.
-    Example [notebook](https://github.com/pyannote/pyannote-audio/blob/develop/tutorials/voice_activity_detection.ipynb)
+    Example <a href="https://github.com/pyannote/pyannote-audio/blob/develop/tutorials/voice_activity_detection.ipynb">notebook</a>
     """
     min_duration_on: builtins.float
-    """Remove active regions shorter than that many seconds
-    Example [notebook](https://github.com/pyannote/pyannote-audio/blob/develop/tutorials/voice_activity_detection.ipynb)
+    """Remove active regions shorter than that many seconds.
+    Example <a href="https://github.com/pyannote/pyannote-audio/blob/develop/tutorials/voice_activity_detection.ipynb">notebook</a>
     """
     triton_server_host: builtins.str
     """Host name of triton inference server that serves the Pyannote model"""
@@ -1877,7 +1901,7 @@ global___Pyannote = Pyannote
 
 @typing.final
 class PostProcessing(google.protobuf.message.Message):
-    """PostProcessing contains the configuration for post-processing."""
+    """<p>PostProcessing contains the configuration for post-processing.</p>"""
 
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
@@ -1904,7 +1928,7 @@ global___PostProcessing = PostProcessing
 
 @typing.final
 class PostProcessors(google.protobuf.message.Message):
-    """PostProcessors contains configurations for post-processors."""
+    """<p>PostProcessors contains configurations for post-processors.</p>"""
 
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
@@ -1937,7 +1961,7 @@ global___PostProcessors = PostProcessors
 
 @typing.final
 class SymSpell(google.protobuf.message.Message):
-    """SymSpell contains configuration for the SymSpell spelling correction."""
+    """<p>SymSpell contains configuration for the SymSpell spelling correction.</p>"""
 
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
@@ -1965,7 +1989,7 @@ global___SymSpell = SymSpell
 
 @typing.final
 class S2tNormalization(google.protobuf.message.Message):
-    """S2tNormalization contains configuration for the speech-to-text normalization."""
+    """<p>S2tNormalization contains configuration for the speech-to-text normalization.</p>"""
 
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
@@ -1989,7 +2013,7 @@ global___S2tNormalization = S2tNormalization
 
 @typing.final
 class S2tLlmPostProcessing(google.protobuf.message.Message):
-    """S2tLlmPostProcessing contains configuration for the speech-to-text postprocessing with LLM."""
+    """<p>S2tLlmPostProcessing contains configuration for the speech-to-text postprocessing with LLM.</p>"""
 
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
@@ -2005,6 +2029,8 @@ class S2tLlmPostProcessing(google.protobuf.message.Message):
     S2T_LLM_POST_PROCESSING_NORMALIZATION_OPTIONS_FIELD_NUMBER: builtins.int
     S2T_LLM_POST_PROCESSING_SUMMARIZATION_OPTIONS_FIELD_NUMBER: builtins.int
     S2T_LLM_POST_PROCESSING_USER_PROMPT_OPTIONS_FIELD_NUMBER: builtins.int
+    LLM_MODEL_NAME_FIELD_NUMBER: builtins.int
+    LLM_HEADERS_FIELD_NUMBER: builtins.int
     llm_host: builtins.str
     """Optional. Host name or IP address of the server that serves the LLM for post-processing purpose."""
     llm_port: builtins.int
@@ -2013,6 +2039,8 @@ class S2tLlmPostProcessing(google.protobuf.message.Message):
     """Optional. Duration of request timeout in seconds to get result of request to LLM for post-processing purpose.
     If the timeout occurs, result of post-processing returns the input text with no change.
     """
+    llm_model_name: builtins.str
+    """Optional. Model name of the LLM for post-processing purpose."""
     @property
     def s2t_llm_post_processing_casing_options(self) -> global___S2tLlmPostProcessingCasingOptions:
         """Optional. Configuration of the options to casing task in LLM post-processing."""
@@ -2049,6 +2077,10 @@ class S2tLlmPostProcessing(google.protobuf.message.Message):
     def s2t_llm_post_processing_user_prompt_options(self) -> global___S2tLlmPostProcessingUserPromptOptions:
         """Optional. Configuration of the options to user-prompt task in LLM post-processing."""
 
+    @property
+    def llm_headers(self) -> google.protobuf.struct_pb2.Struct:
+        """Optional. The headers of the request message to LLM for post-processing purpose."""
+
     def __init__(
         self,
         *,
@@ -2064,11 +2096,17 @@ class S2tLlmPostProcessing(google.protobuf.message.Message):
         s2t_llm_post_processing_normalization_options: global___S2tLlmPostProcessingNormalizationOptions | None = ...,
         s2t_llm_post_processing_summarization_options: global___S2tLlmPostProcessingSummarizationOptions | None = ...,
         s2t_llm_post_processing_user_prompt_options: global___S2tLlmPostProcessingUserPromptOptions | None = ...,
+        llm_model_name: builtins.str | None = ...,
+        llm_headers: google.protobuf.struct_pb2.Struct | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["_llm_host", b"_llm_host", "_llm_port", b"_llm_port", "_llm_request_timeout", b"_llm_request_timeout", "_s2t_llm_post_processing_casing_options", b"_s2t_llm_post_processing_casing_options", "_s2t_llm_post_processing_inverse_normalization_options", b"_s2t_llm_post_processing_inverse_normalization_options", "_s2t_llm_post_processing_normalization_options", b"_s2t_llm_post_processing_normalization_options", "_s2t_llm_post_processing_punctuation_options", b"_s2t_llm_post_processing_punctuation_options", "_s2t_llm_post_processing_semantic_correction_options", b"_s2t_llm_post_processing_semantic_correction_options", "_s2t_llm_post_processing_spelling_correction_options", b"_s2t_llm_post_processing_spelling_correction_options", "_s2t_llm_post_processing_summarization_options", b"_s2t_llm_post_processing_summarization_options", "_s2t_llm_post_processing_translation_options", b"_s2t_llm_post_processing_translation_options", "_s2t_llm_post_processing_user_prompt_options", b"_s2t_llm_post_processing_user_prompt_options", "llm_host", b"llm_host", "llm_port", b"llm_port", "llm_request_timeout", b"llm_request_timeout", "s2t_llm_post_processing_casing_options", b"s2t_llm_post_processing_casing_options", "s2t_llm_post_processing_inverse_normalization_options", b"s2t_llm_post_processing_inverse_normalization_options", "s2t_llm_post_processing_normalization_options", b"s2t_llm_post_processing_normalization_options", "s2t_llm_post_processing_punctuation_options", b"s2t_llm_post_processing_punctuation_options", "s2t_llm_post_processing_semantic_correction_options", b"s2t_llm_post_processing_semantic_correction_options", "s2t_llm_post_processing_spelling_correction_options", b"s2t_llm_post_processing_spelling_correction_options", "s2t_llm_post_processing_summarization_options", b"s2t_llm_post_processing_summarization_options", "s2t_llm_post_processing_translation_options", b"s2t_llm_post_processing_translation_options", "s2t_llm_post_processing_user_prompt_options", b"s2t_llm_post_processing_user_prompt_options"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["_llm_host", b"_llm_host", "_llm_port", b"_llm_port", "_llm_request_timeout", b"_llm_request_timeout", "_s2t_llm_post_processing_casing_options", b"_s2t_llm_post_processing_casing_options", "_s2t_llm_post_processing_inverse_normalization_options", b"_s2t_llm_post_processing_inverse_normalization_options", "_s2t_llm_post_processing_normalization_options", b"_s2t_llm_post_processing_normalization_options", "_s2t_llm_post_processing_punctuation_options", b"_s2t_llm_post_processing_punctuation_options", "_s2t_llm_post_processing_semantic_correction_options", b"_s2t_llm_post_processing_semantic_correction_options", "_s2t_llm_post_processing_spelling_correction_options", b"_s2t_llm_post_processing_spelling_correction_options", "_s2t_llm_post_processing_summarization_options", b"_s2t_llm_post_processing_summarization_options", "_s2t_llm_post_processing_translation_options", b"_s2t_llm_post_processing_translation_options", "_s2t_llm_post_processing_user_prompt_options", b"_s2t_llm_post_processing_user_prompt_options", "llm_host", b"llm_host", "llm_port", b"llm_port", "llm_request_timeout", b"llm_request_timeout", "s2t_llm_post_processing_casing_options", b"s2t_llm_post_processing_casing_options", "s2t_llm_post_processing_inverse_normalization_options", b"s2t_llm_post_processing_inverse_normalization_options", "s2t_llm_post_processing_normalization_options", b"s2t_llm_post_processing_normalization_options", "s2t_llm_post_processing_punctuation_options", b"s2t_llm_post_processing_punctuation_options", "s2t_llm_post_processing_semantic_correction_options", b"s2t_llm_post_processing_semantic_correction_options", "s2t_llm_post_processing_spelling_correction_options", b"s2t_llm_post_processing_spelling_correction_options", "s2t_llm_post_processing_summarization_options", b"s2t_llm_post_processing_summarization_options", "s2t_llm_post_processing_translation_options", b"s2t_llm_post_processing_translation_options", "s2t_llm_post_processing_user_prompt_options", b"s2t_llm_post_processing_user_prompt_options"]) -> None: ...
+    def HasField(self, field_name: typing.Literal["_llm_headers", b"_llm_headers", "_llm_host", b"_llm_host", "_llm_model_name", b"_llm_model_name", "_llm_port", b"_llm_port", "_llm_request_timeout", b"_llm_request_timeout", "_s2t_llm_post_processing_casing_options", b"_s2t_llm_post_processing_casing_options", "_s2t_llm_post_processing_inverse_normalization_options", b"_s2t_llm_post_processing_inverse_normalization_options", "_s2t_llm_post_processing_normalization_options", b"_s2t_llm_post_processing_normalization_options", "_s2t_llm_post_processing_punctuation_options", b"_s2t_llm_post_processing_punctuation_options", "_s2t_llm_post_processing_semantic_correction_options", b"_s2t_llm_post_processing_semantic_correction_options", "_s2t_llm_post_processing_spelling_correction_options", b"_s2t_llm_post_processing_spelling_correction_options", "_s2t_llm_post_processing_summarization_options", b"_s2t_llm_post_processing_summarization_options", "_s2t_llm_post_processing_translation_options", b"_s2t_llm_post_processing_translation_options", "_s2t_llm_post_processing_user_prompt_options", b"_s2t_llm_post_processing_user_prompt_options", "llm_headers", b"llm_headers", "llm_host", b"llm_host", "llm_model_name", b"llm_model_name", "llm_port", b"llm_port", "llm_request_timeout", b"llm_request_timeout", "s2t_llm_post_processing_casing_options", b"s2t_llm_post_processing_casing_options", "s2t_llm_post_processing_inverse_normalization_options", b"s2t_llm_post_processing_inverse_normalization_options", "s2t_llm_post_processing_normalization_options", b"s2t_llm_post_processing_normalization_options", "s2t_llm_post_processing_punctuation_options", b"s2t_llm_post_processing_punctuation_options", "s2t_llm_post_processing_semantic_correction_options", b"s2t_llm_post_processing_semantic_correction_options", "s2t_llm_post_processing_spelling_correction_options", b"s2t_llm_post_processing_spelling_correction_options", "s2t_llm_post_processing_summarization_options", b"s2t_llm_post_processing_summarization_options", "s2t_llm_post_processing_translation_options", b"s2t_llm_post_processing_translation_options", "s2t_llm_post_processing_user_prompt_options", b"s2t_llm_post_processing_user_prompt_options"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["_llm_headers", b"_llm_headers", "_llm_host", b"_llm_host", "_llm_model_name", b"_llm_model_name", "_llm_port", b"_llm_port", "_llm_request_timeout", b"_llm_request_timeout", "_s2t_llm_post_processing_casing_options", b"_s2t_llm_post_processing_casing_options", "_s2t_llm_post_processing_inverse_normalization_options", b"_s2t_llm_post_processing_inverse_normalization_options", "_s2t_llm_post_processing_normalization_options", b"_s2t_llm_post_processing_normalization_options", "_s2t_llm_post_processing_punctuation_options", b"_s2t_llm_post_processing_punctuation_options", "_s2t_llm_post_processing_semantic_correction_options", b"_s2t_llm_post_processing_semantic_correction_options", "_s2t_llm_post_processing_spelling_correction_options", b"_s2t_llm_post_processing_spelling_correction_options", "_s2t_llm_post_processing_summarization_options", b"_s2t_llm_post_processing_summarization_options", "_s2t_llm_post_processing_translation_options", b"_s2t_llm_post_processing_translation_options", "_s2t_llm_post_processing_user_prompt_options", b"_s2t_llm_post_processing_user_prompt_options", "llm_headers", b"llm_headers", "llm_host", b"llm_host", "llm_model_name", b"llm_model_name", "llm_port", b"llm_port", "llm_request_timeout", b"llm_request_timeout", "s2t_llm_post_processing_casing_options", b"s2t_llm_post_processing_casing_options", "s2t_llm_post_processing_inverse_normalization_options", b"s2t_llm_post_processing_inverse_normalization_options", "s2t_llm_post_processing_normalization_options", b"s2t_llm_post_processing_normalization_options", "s2t_llm_post_processing_punctuation_options", b"s2t_llm_post_processing_punctuation_options", "s2t_llm_post_processing_semantic_correction_options", b"s2t_llm_post_processing_semantic_correction_options", "s2t_llm_post_processing_spelling_correction_options", b"s2t_llm_post_processing_spelling_correction_options", "s2t_llm_post_processing_summarization_options", b"s2t_llm_post_processing_summarization_options", "s2t_llm_post_processing_translation_options", b"s2t_llm_post_processing_translation_options", "s2t_llm_post_processing_user_prompt_options", b"s2t_llm_post_processing_user_prompt_options"]) -> None: ...
+    @typing.overload
+    def WhichOneof(self, oneof_group: typing.Literal["_llm_headers", b"_llm_headers"]) -> typing.Literal["llm_headers"] | None: ...
     @typing.overload
     def WhichOneof(self, oneof_group: typing.Literal["_llm_host", b"_llm_host"]) -> typing.Literal["llm_host"] | None: ...
+    @typing.overload
+    def WhichOneof(self, oneof_group: typing.Literal["_llm_model_name", b"_llm_model_name"]) -> typing.Literal["llm_model_name"] | None: ...
     @typing.overload
     def WhichOneof(self, oneof_group: typing.Literal["_llm_port", b"_llm_port"]) -> typing.Literal["llm_port"] | None: ...
     @typing.overload
@@ -2096,7 +2134,7 @@ global___S2tLlmPostProcessing = S2tLlmPostProcessing
 
 @typing.final
 class S2tLlmPostProcessingCasingOptions(google.protobuf.message.Message):
-    """Configuration of the options to casing task in LLM post-processing."""
+    """<p>Configuration of the options to casing task in LLM post-processing.</p>"""
 
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
@@ -2116,7 +2154,7 @@ global___S2tLlmPostProcessingCasingOptions = S2tLlmPostProcessingCasingOptions
 
 @typing.final
 class S2tLlmPostProcessingPunctuationOptions(google.protobuf.message.Message):
-    """Configuration of the options to punctuation task in LLM post-processing."""
+    """<p>Configuration of the options to punctuation task in LLM post-processing.</p>"""
 
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
@@ -2136,7 +2174,7 @@ global___S2tLlmPostProcessingPunctuationOptions = S2tLlmPostProcessingPunctuatio
 
 @typing.final
 class S2tLlmPostProcessingSpellCorrectionOptions(google.protobuf.message.Message):
-    """Configuration of the options to spelling-correctionsing task in LLM post-processing."""
+    """<p>Configuration of the options to spelling-correction task in LLM post-processing.</p>"""
 
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
@@ -2156,7 +2194,7 @@ global___S2tLlmPostProcessingSpellCorrectionOptions = S2tLlmPostProcessingSpellC
 
 @typing.final
 class S2tLlmPostProcessingSemanticCorrectionOptions(google.protobuf.message.Message):
-    """Configuration of the options to semantic-correctionsing task in LLM post-processing."""
+    """<p>Configuration of the options to semantic-correction task in LLM post-processing.</p>"""
 
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
@@ -2176,7 +2214,7 @@ global___S2tLlmPostProcessingSemanticCorrectionOptions = S2tLlmPostProcessingSem
 
 @typing.final
 class S2tLlmPostProcessingTranslationOptions(google.protobuf.message.Message):
-    """Configuration of the options to translation task in LLM post-processing."""
+    """<p>Configuration of the options to translation task in LLM post-processing.</p>"""
 
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
@@ -2203,7 +2241,7 @@ global___S2tLlmPostProcessingTranslationOptions = S2tLlmPostProcessingTranslatio
 
 @typing.final
 class S2tLlmPostProcessingInverseNormalizationOptions(google.protobuf.message.Message):
-    """Configuration of the options to inverse-normalization task in LLM post-processing."""
+    """<p>Configuration of the options to inverse-normalization task in LLM post-processing.</p>"""
 
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
@@ -2260,7 +2298,7 @@ global___S2tLlmPostProcessingInverseNormalizationOptions = S2tLlmPostProcessingI
 
 @typing.final
 class S2tLlmPostProcessingNormalizationOptions(google.protobuf.message.Message):
-    """Configuration of the options to normalization task in LLM post-processing."""
+    """<p>Configuration of the options to normalization task in LLM post-processing.</p>"""
 
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
@@ -2317,7 +2355,7 @@ global___S2tLlmPostProcessingNormalizationOptions = S2tLlmPostProcessingNormaliz
 
 @typing.final
 class S2tLlmPostProcessingSummarizationOptions(google.protobuf.message.Message):
-    """Configuration of the options to summarization task in LLM post-processing."""
+    """<p>Configuration of the options to summarization task in LLM post-processing.</p>"""
 
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
@@ -2350,7 +2388,7 @@ global___S2tLlmPostProcessingSummarizationOptions = S2tLlmPostProcessingSummariz
 
 @typing.final
 class S2tLlmPostProcessingUserPromptOptions(google.protobuf.message.Message):
-    """Configuration of the options to user-prompt task in LLM post-processing."""
+    """<p>Configuration of the options to user-prompt task in LLM post-processing.</p>"""
 
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
@@ -2377,7 +2415,7 @@ global___S2tLlmPostProcessingUserPromptOptions = S2tLlmPostProcessingUserPromptO
 
 @typing.final
 class Logging(google.protobuf.message.Message):
-    """Logging contains configuration for logging."""
+    """<p>Logging contains configuration for logging.</p>"""
 
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
@@ -2403,7 +2441,7 @@ class ListS2tLanguageModelsRequest(google.protobuf.message.Message):
     GET LIST OF AVAILABLE LANGUAGE MODELS //
     /////////////////////////////////////////
 
-    ListS2tLanguageModelsRequest is used to request a list of available language models for specified pipelines.
+    <p>ListS2tLanguageModelsRequest is used to request a list of available language models for specified pipelines.</p>
     """
 
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
@@ -2412,7 +2450,7 @@ class ListS2tLanguageModelsRequest(google.protobuf.message.Message):
     @property
     def ids(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
         """List of pipeline IDs to retrieve their available language models.
-        Example: ["pipeline_1", "pipeline_2"]
+        Example: [&quot;pipeline_1&quot;, &quot;pipeline_2&quot;]
         """
 
     def __init__(
@@ -2426,17 +2464,17 @@ global___ListS2tLanguageModelsRequest = ListS2tLanguageModelsRequest
 
 @typing.final
 class LanguageModelPipelineId(google.protobuf.message.Message):
-    """LanguageModelPipelineId contains information about a pipeline and its available language models."""
+    """<p>LanguageModelPipelineId contains information about a pipeline and its available language models.</p>"""
 
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
     PIPELINE_ID_FIELD_NUMBER: builtins.int
     MODEL_NAMES_FIELD_NUMBER: builtins.int
     pipeline_id: builtins.str
-    """A pipeline ID. Example: "pipeline_1" """
+    """A pipeline ID. Example: &quot;pipeline_1&quot;"""
     @property
     def model_names(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
-        """A list of all available language models for the corresponding pipeline ID. Example: ["model_1", "model_2"]"""
+        """A list of all available language models for the corresponding pipeline ID. Example: [&quot;model_1&quot;, &quot;model_2&quot;]"""
 
     def __init__(
         self,
@@ -2450,17 +2488,17 @@ global___LanguageModelPipelineId = LanguageModelPipelineId
 
 @typing.final
 class ListS2tLanguageModelsResponse(google.protobuf.message.Message):
-    """ListS2tLanguageModelsResponse is used to return the available language models for specified pipelines."""
+    """<p>ListS2tLanguageModelsResponse is used to return the available language models for specified pipelines.</p>"""
 
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
     LM_PIPELINE_IDS_FIELD_NUMBER: builtins.int
     @property
     def lm_pipeline_ids(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___LanguageModelPipelineId]:
-        """Response is a list of LanguageModelPipelineId, where each element contains a pipeline ID and its associated
+        """Response is a list of <code>LanguageModelPipelineId</code>, where each element contains a pipeline ID and its associated
         language models.
-        Example: [{pipeline_id: "pipeline_1", model_names: ["model_1", "model_2"]}, {pipeline_id: "pipeline_2",
-        model_names: ["model_3"]}]
+        Example: [{pipeline_id: &quot;pipeline_1&quot;, model_names: [&quot;model_1&quot;, &quot;model_2&quot;]}, {pipeline_id: &quot;pipeline_2&quot;,
+        model_names: [&quot;model_3&quot;]}]
         """
 
     def __init__(
@@ -2478,14 +2516,14 @@ class CreateUserLanguageModelRequest(google.protobuf.message.Message):
     CUSTOM LANGUAGE MODEL FEATURES  //
     ///////////////////////////////////
 
-    CreateUserLanguageModelRequest is used to request the creation of a new user-specific language model.
+    <p>CreateUserLanguageModelRequest is used to request the creation of a new user-specific language model.</p>
     """
 
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
     LANGUAGE_MODEL_NAME_FIELD_NUMBER: builtins.int
     language_model_name: builtins.str
-    """Name of the language model to create. Example: "user_lm_1" """
+    """Name of the language model to create. Example: &quot;user_lm_1&quot;"""
     def __init__(
         self,
         *,
@@ -2497,13 +2535,13 @@ global___CreateUserLanguageModelRequest = CreateUserLanguageModelRequest
 
 @typing.final
 class DeleteUserLanguageModelRequest(google.protobuf.message.Message):
-    """DeleteUserLanguageModelRequest is used to request the deletion of a user-specific language model."""
+    """<p>DeleteUserLanguageModelRequest is used to request the deletion of a user-specific language model.</p>"""
 
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
     LANGUAGE_MODEL_NAME_FIELD_NUMBER: builtins.int
     language_model_name: builtins.str
-    """Name of the language model to delete. Example: "user_lm_1" """
+    """Name of the language model to delete. Example: &quot;user_lm_1&quot;"""
     def __init__(
         self,
         *,
@@ -2515,14 +2553,14 @@ global___DeleteUserLanguageModelRequest = DeleteUserLanguageModelRequest
 
 @typing.final
 class AddDataToUserLanguageModelRequest(google.protobuf.message.Message):
-    """AddDataToUserLanguageModelRequest is used to request the addition of data to a user-specific language model."""
+    """<p>AddDataToUserLanguageModelRequest is used to request the addition of data to a user-specific language model.</p>"""
 
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
     LANGUAGE_MODEL_NAME_FIELD_NUMBER: builtins.int
     ZIPPED_DATA_FIELD_NUMBER: builtins.int
     language_model_name: builtins.str
-    """Name of the language model to which to add data. Example: "user_lm_1" """
+    """Name of the language model to which to add data. Example: &quot;user_lm_1&quot;"""
     zipped_data: builtins.bytes
     """Zip file containing data in the form of text files.
     Example: A zip file with text files containing sentences or phrases in the target language.
@@ -2539,14 +2577,14 @@ global___AddDataToUserLanguageModelRequest = AddDataToUserLanguageModelRequest
 
 @typing.final
 class TrainUserLanguageModelRequest(google.protobuf.message.Message):
-    """TrainUserLanguageModelRequest is used to request the training of a user-specific language model."""
+    """<p>TrainUserLanguageModelRequest is used to request the training of a user-specific language model.</p>"""
 
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
     LANGUAGE_MODEL_NAME_FIELD_NUMBER: builtins.int
     ORDER_FIELD_NUMBER: builtins.int
     language_model_name: builtins.str
-    """Name of the language model to train. Example: "user_lm_1" """
+    """Name of the language model to train. Example: &quot;user_lm_1&quot;"""
     order: builtins.int
     """Order n of the ngram. Example: 3 (for trigram model)"""
     def __init__(
@@ -2565,8 +2603,8 @@ class ListS2tNormalizationPipelinesRequest(google.protobuf.message.Message):
     LIST OF S2T NORMALIZATION PIPELINES //
     //////////////////////
 
-    The request message for ListS2tNormalizationPipelines.
-    Filter pipelines by attributed in request.
+    <p>The request message for <code>ListS2tNormalizationPipelines</code>.</p>
+    <p>Filter pipelines by attributes in request.</p>
     """
 
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
@@ -2585,9 +2623,7 @@ global___ListS2tNormalizationPipelinesRequest = ListS2tNormalizationPipelinesReq
 
 @typing.final
 class ListS2tNormalizationPipelinesResponse(google.protobuf.message.Message):
-    """Pipeline Response representation.
-    The response message for ListS2tNormalizationPipelines.
-    """
+    """<p>The response message for <code>ListS2tNormalizationPipelines</code>.</p>"""
 
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
@@ -2595,8 +2631,8 @@ class ListS2tNormalizationPipelinesResponse(google.protobuf.message.Message):
     @property
     def s2t_normalization_pipelines(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
         """Required. Representation of a list of normalization pipelines configurations.
-        Retrieved by ListS2tNormalizationPipelines, containing the configurations of
-        normalization pipelines with the specifications received in the ListS2tNormalizationPipelinesRequest.
+        Retrieved by <code>ListS2tNormalizationPipelines</code>, containing the configurations of
+        normalization pipelines with the specifications received in the <code>ListS2tNormalizationPipelinesRequest</code>.
         """
 
     def __init__(
