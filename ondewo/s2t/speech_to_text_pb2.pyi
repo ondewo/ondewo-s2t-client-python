@@ -1775,6 +1775,8 @@ class TurnDetectionOptions(google.protobuf.message.Message):
     LLM_REQUEST_TIMEOUT_FIELD_NUMBER: builtins.int
     LLM_MODEL_NAME_FIELD_NUMBER: builtins.int
     LLM_HEADERS_FIELD_NUMBER: builtins.int
+    LLM_BASE_URL_FIELD_NUMBER: builtins.int
+    LLM_API_KEY_FIELD_NUMBER: builtins.int
     active: builtins.bool
     """Optional. Indicates if the turn-detection feature is active."""
     full_utterance_deployment: builtins.bool
@@ -1792,6 +1794,12 @@ class TurnDetectionOptions(google.protobuf.message.Message):
     """
     llm_model_name: builtins.str
     """Optional. Model name of the LLM for turn-detection purpose."""
+    llm_base_url: builtins.str
+    """Optional. Base URL to access cloud LLM for turn-detection purpose. Cloud LLM will be used if `llm_host` or
+    `llm_port` are not set.
+    """
+    llm_api_key: builtins.str
+    """Optional. The api-key to access cloud LLM for turn-detection purpose."""
     @property
     def llm_headers(self) -> google.protobuf.struct_pb2.Struct:
         """Optional. The headers of the request message to LLM for turn-detection purpose."""
@@ -1806,13 +1814,19 @@ class TurnDetectionOptions(google.protobuf.message.Message):
         llm_request_timeout: builtins.float | None = ...,
         llm_model_name: builtins.str | None = ...,
         llm_headers: google.protobuf.struct_pb2.Struct | None = ...,
+        llm_base_url: builtins.str | None = ...,
+        llm_api_key: builtins.str | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["_active", b"_active", "_full_utterance_deployment", b"_full_utterance_deployment", "_llm_headers", b"_llm_headers", "_llm_host", b"_llm_host", "_llm_model_name", b"_llm_model_name", "_llm_port", b"_llm_port", "_llm_request_timeout", b"_llm_request_timeout", "active", b"active", "full_utterance_deployment", b"full_utterance_deployment", "llm_headers", b"llm_headers", "llm_host", b"llm_host", "llm_model_name", b"llm_model_name", "llm_port", b"llm_port", "llm_request_timeout", b"llm_request_timeout"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["_active", b"_active", "_full_utterance_deployment", b"_full_utterance_deployment", "_llm_headers", b"_llm_headers", "_llm_host", b"_llm_host", "_llm_model_name", b"_llm_model_name", "_llm_port", b"_llm_port", "_llm_request_timeout", b"_llm_request_timeout", "active", b"active", "full_utterance_deployment", b"full_utterance_deployment", "llm_headers", b"llm_headers", "llm_host", b"llm_host", "llm_model_name", b"llm_model_name", "llm_port", b"llm_port", "llm_request_timeout", b"llm_request_timeout"]) -> None: ...
+    def HasField(self, field_name: typing.Literal["_active", b"_active", "_full_utterance_deployment", b"_full_utterance_deployment", "_llm_api_key", b"_llm_api_key", "_llm_base_url", b"_llm_base_url", "_llm_headers", b"_llm_headers", "_llm_host", b"_llm_host", "_llm_model_name", b"_llm_model_name", "_llm_port", b"_llm_port", "_llm_request_timeout", b"_llm_request_timeout", "active", b"active", "full_utterance_deployment", b"full_utterance_deployment", "llm_api_key", b"llm_api_key", "llm_base_url", b"llm_base_url", "llm_headers", b"llm_headers", "llm_host", b"llm_host", "llm_model_name", b"llm_model_name", "llm_port", b"llm_port", "llm_request_timeout", b"llm_request_timeout"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["_active", b"_active", "_full_utterance_deployment", b"_full_utterance_deployment", "_llm_api_key", b"_llm_api_key", "_llm_base_url", b"_llm_base_url", "_llm_headers", b"_llm_headers", "_llm_host", b"_llm_host", "_llm_model_name", b"_llm_model_name", "_llm_port", b"_llm_port", "_llm_request_timeout", b"_llm_request_timeout", "active", b"active", "full_utterance_deployment", b"full_utterance_deployment", "llm_api_key", b"llm_api_key", "llm_base_url", b"llm_base_url", "llm_headers", b"llm_headers", "llm_host", b"llm_host", "llm_model_name", b"llm_model_name", "llm_port", b"llm_port", "llm_request_timeout", b"llm_request_timeout"]) -> None: ...
     @typing.overload
     def WhichOneof(self, oneof_group: typing.Literal["_active", b"_active"]) -> typing.Literal["active"] | None: ...
     @typing.overload
     def WhichOneof(self, oneof_group: typing.Literal["_full_utterance_deployment", b"_full_utterance_deployment"]) -> typing.Literal["full_utterance_deployment"] | None: ...
+    @typing.overload
+    def WhichOneof(self, oneof_group: typing.Literal["_llm_api_key", b"_llm_api_key"]) -> typing.Literal["llm_api_key"] | None: ...
+    @typing.overload
+    def WhichOneof(self, oneof_group: typing.Literal["_llm_base_url", b"_llm_base_url"]) -> typing.Literal["llm_base_url"] | None: ...
     @typing.overload
     def WhichOneof(self, oneof_group: typing.Literal["_llm_headers", b"_llm_headers"]) -> typing.Literal["llm_headers"] | None: ...
     @typing.overload
@@ -2031,6 +2045,8 @@ class S2tLlmPostProcessing(google.protobuf.message.Message):
     S2T_LLM_POST_PROCESSING_USER_PROMPT_OPTIONS_FIELD_NUMBER: builtins.int
     LLM_MODEL_NAME_FIELD_NUMBER: builtins.int
     LLM_HEADERS_FIELD_NUMBER: builtins.int
+    LLM_BASE_URL_FIELD_NUMBER: builtins.int
+    LLM_API_KEY_FIELD_NUMBER: builtins.int
     llm_host: builtins.str
     """Optional. Host name or IP address of the server that serves the LLM for post-processing purpose."""
     llm_port: builtins.int
@@ -2041,6 +2057,12 @@ class S2tLlmPostProcessing(google.protobuf.message.Message):
     """
     llm_model_name: builtins.str
     """Optional. Model name of the LLM for post-processing purpose."""
+    llm_base_url: builtins.str
+    """Optional. Base URL to access cloud LLM for turn-detection purpose. Cloud LLM will be used if `llm_host` or
+    `llm_port` are not set.
+    """
+    llm_api_key: builtins.str
+    """Optional. The api-key to access cloud LLM for turn-detection purpose."""
     @property
     def s2t_llm_post_processing_casing_options(self) -> global___S2tLlmPostProcessingCasingOptions:
         """Optional. Configuration of the options to casing task in LLM post-processing."""
@@ -2098,9 +2120,15 @@ class S2tLlmPostProcessing(google.protobuf.message.Message):
         s2t_llm_post_processing_user_prompt_options: global___S2tLlmPostProcessingUserPromptOptions | None = ...,
         llm_model_name: builtins.str | None = ...,
         llm_headers: google.protobuf.struct_pb2.Struct | None = ...,
+        llm_base_url: builtins.str | None = ...,
+        llm_api_key: builtins.str | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["_llm_headers", b"_llm_headers", "_llm_host", b"_llm_host", "_llm_model_name", b"_llm_model_name", "_llm_port", b"_llm_port", "_llm_request_timeout", b"_llm_request_timeout", "_s2t_llm_post_processing_casing_options", b"_s2t_llm_post_processing_casing_options", "_s2t_llm_post_processing_inverse_normalization_options", b"_s2t_llm_post_processing_inverse_normalization_options", "_s2t_llm_post_processing_normalization_options", b"_s2t_llm_post_processing_normalization_options", "_s2t_llm_post_processing_punctuation_options", b"_s2t_llm_post_processing_punctuation_options", "_s2t_llm_post_processing_semantic_correction_options", b"_s2t_llm_post_processing_semantic_correction_options", "_s2t_llm_post_processing_spelling_correction_options", b"_s2t_llm_post_processing_spelling_correction_options", "_s2t_llm_post_processing_summarization_options", b"_s2t_llm_post_processing_summarization_options", "_s2t_llm_post_processing_translation_options", b"_s2t_llm_post_processing_translation_options", "_s2t_llm_post_processing_user_prompt_options", b"_s2t_llm_post_processing_user_prompt_options", "llm_headers", b"llm_headers", "llm_host", b"llm_host", "llm_model_name", b"llm_model_name", "llm_port", b"llm_port", "llm_request_timeout", b"llm_request_timeout", "s2t_llm_post_processing_casing_options", b"s2t_llm_post_processing_casing_options", "s2t_llm_post_processing_inverse_normalization_options", b"s2t_llm_post_processing_inverse_normalization_options", "s2t_llm_post_processing_normalization_options", b"s2t_llm_post_processing_normalization_options", "s2t_llm_post_processing_punctuation_options", b"s2t_llm_post_processing_punctuation_options", "s2t_llm_post_processing_semantic_correction_options", b"s2t_llm_post_processing_semantic_correction_options", "s2t_llm_post_processing_spelling_correction_options", b"s2t_llm_post_processing_spelling_correction_options", "s2t_llm_post_processing_summarization_options", b"s2t_llm_post_processing_summarization_options", "s2t_llm_post_processing_translation_options", b"s2t_llm_post_processing_translation_options", "s2t_llm_post_processing_user_prompt_options", b"s2t_llm_post_processing_user_prompt_options"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["_llm_headers", b"_llm_headers", "_llm_host", b"_llm_host", "_llm_model_name", b"_llm_model_name", "_llm_port", b"_llm_port", "_llm_request_timeout", b"_llm_request_timeout", "_s2t_llm_post_processing_casing_options", b"_s2t_llm_post_processing_casing_options", "_s2t_llm_post_processing_inverse_normalization_options", b"_s2t_llm_post_processing_inverse_normalization_options", "_s2t_llm_post_processing_normalization_options", b"_s2t_llm_post_processing_normalization_options", "_s2t_llm_post_processing_punctuation_options", b"_s2t_llm_post_processing_punctuation_options", "_s2t_llm_post_processing_semantic_correction_options", b"_s2t_llm_post_processing_semantic_correction_options", "_s2t_llm_post_processing_spelling_correction_options", b"_s2t_llm_post_processing_spelling_correction_options", "_s2t_llm_post_processing_summarization_options", b"_s2t_llm_post_processing_summarization_options", "_s2t_llm_post_processing_translation_options", b"_s2t_llm_post_processing_translation_options", "_s2t_llm_post_processing_user_prompt_options", b"_s2t_llm_post_processing_user_prompt_options", "llm_headers", b"llm_headers", "llm_host", b"llm_host", "llm_model_name", b"llm_model_name", "llm_port", b"llm_port", "llm_request_timeout", b"llm_request_timeout", "s2t_llm_post_processing_casing_options", b"s2t_llm_post_processing_casing_options", "s2t_llm_post_processing_inverse_normalization_options", b"s2t_llm_post_processing_inverse_normalization_options", "s2t_llm_post_processing_normalization_options", b"s2t_llm_post_processing_normalization_options", "s2t_llm_post_processing_punctuation_options", b"s2t_llm_post_processing_punctuation_options", "s2t_llm_post_processing_semantic_correction_options", b"s2t_llm_post_processing_semantic_correction_options", "s2t_llm_post_processing_spelling_correction_options", b"s2t_llm_post_processing_spelling_correction_options", "s2t_llm_post_processing_summarization_options", b"s2t_llm_post_processing_summarization_options", "s2t_llm_post_processing_translation_options", b"s2t_llm_post_processing_translation_options", "s2t_llm_post_processing_user_prompt_options", b"s2t_llm_post_processing_user_prompt_options"]) -> None: ...
+    def HasField(self, field_name: typing.Literal["_llm_api_key", b"_llm_api_key", "_llm_base_url", b"_llm_base_url", "_llm_headers", b"_llm_headers", "_llm_host", b"_llm_host", "_llm_model_name", b"_llm_model_name", "_llm_port", b"_llm_port", "_llm_request_timeout", b"_llm_request_timeout", "_s2t_llm_post_processing_casing_options", b"_s2t_llm_post_processing_casing_options", "_s2t_llm_post_processing_inverse_normalization_options", b"_s2t_llm_post_processing_inverse_normalization_options", "_s2t_llm_post_processing_normalization_options", b"_s2t_llm_post_processing_normalization_options", "_s2t_llm_post_processing_punctuation_options", b"_s2t_llm_post_processing_punctuation_options", "_s2t_llm_post_processing_semantic_correction_options", b"_s2t_llm_post_processing_semantic_correction_options", "_s2t_llm_post_processing_spelling_correction_options", b"_s2t_llm_post_processing_spelling_correction_options", "_s2t_llm_post_processing_summarization_options", b"_s2t_llm_post_processing_summarization_options", "_s2t_llm_post_processing_translation_options", b"_s2t_llm_post_processing_translation_options", "_s2t_llm_post_processing_user_prompt_options", b"_s2t_llm_post_processing_user_prompt_options", "llm_api_key", b"llm_api_key", "llm_base_url", b"llm_base_url", "llm_headers", b"llm_headers", "llm_host", b"llm_host", "llm_model_name", b"llm_model_name", "llm_port", b"llm_port", "llm_request_timeout", b"llm_request_timeout", "s2t_llm_post_processing_casing_options", b"s2t_llm_post_processing_casing_options", "s2t_llm_post_processing_inverse_normalization_options", b"s2t_llm_post_processing_inverse_normalization_options", "s2t_llm_post_processing_normalization_options", b"s2t_llm_post_processing_normalization_options", "s2t_llm_post_processing_punctuation_options", b"s2t_llm_post_processing_punctuation_options", "s2t_llm_post_processing_semantic_correction_options", b"s2t_llm_post_processing_semantic_correction_options", "s2t_llm_post_processing_spelling_correction_options", b"s2t_llm_post_processing_spelling_correction_options", "s2t_llm_post_processing_summarization_options", b"s2t_llm_post_processing_summarization_options", "s2t_llm_post_processing_translation_options", b"s2t_llm_post_processing_translation_options", "s2t_llm_post_processing_user_prompt_options", b"s2t_llm_post_processing_user_prompt_options"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["_llm_api_key", b"_llm_api_key", "_llm_base_url", b"_llm_base_url", "_llm_headers", b"_llm_headers", "_llm_host", b"_llm_host", "_llm_model_name", b"_llm_model_name", "_llm_port", b"_llm_port", "_llm_request_timeout", b"_llm_request_timeout", "_s2t_llm_post_processing_casing_options", b"_s2t_llm_post_processing_casing_options", "_s2t_llm_post_processing_inverse_normalization_options", b"_s2t_llm_post_processing_inverse_normalization_options", "_s2t_llm_post_processing_normalization_options", b"_s2t_llm_post_processing_normalization_options", "_s2t_llm_post_processing_punctuation_options", b"_s2t_llm_post_processing_punctuation_options", "_s2t_llm_post_processing_semantic_correction_options", b"_s2t_llm_post_processing_semantic_correction_options", "_s2t_llm_post_processing_spelling_correction_options", b"_s2t_llm_post_processing_spelling_correction_options", "_s2t_llm_post_processing_summarization_options", b"_s2t_llm_post_processing_summarization_options", "_s2t_llm_post_processing_translation_options", b"_s2t_llm_post_processing_translation_options", "_s2t_llm_post_processing_user_prompt_options", b"_s2t_llm_post_processing_user_prompt_options", "llm_api_key", b"llm_api_key", "llm_base_url", b"llm_base_url", "llm_headers", b"llm_headers", "llm_host", b"llm_host", "llm_model_name", b"llm_model_name", "llm_port", b"llm_port", "llm_request_timeout", b"llm_request_timeout", "s2t_llm_post_processing_casing_options", b"s2t_llm_post_processing_casing_options", "s2t_llm_post_processing_inverse_normalization_options", b"s2t_llm_post_processing_inverse_normalization_options", "s2t_llm_post_processing_normalization_options", b"s2t_llm_post_processing_normalization_options", "s2t_llm_post_processing_punctuation_options", b"s2t_llm_post_processing_punctuation_options", "s2t_llm_post_processing_semantic_correction_options", b"s2t_llm_post_processing_semantic_correction_options", "s2t_llm_post_processing_spelling_correction_options", b"s2t_llm_post_processing_spelling_correction_options", "s2t_llm_post_processing_summarization_options", b"s2t_llm_post_processing_summarization_options", "s2t_llm_post_processing_translation_options", b"s2t_llm_post_processing_translation_options", "s2t_llm_post_processing_user_prompt_options", b"s2t_llm_post_processing_user_prompt_options"]) -> None: ...
+    @typing.overload
+    def WhichOneof(self, oneof_group: typing.Literal["_llm_api_key", b"_llm_api_key"]) -> typing.Literal["llm_api_key"] | None: ...
+    @typing.overload
+    def WhichOneof(self, oneof_group: typing.Literal["_llm_base_url", b"_llm_base_url"]) -> typing.Literal["llm_base_url"] | None: ...
     @typing.overload
     def WhichOneof(self, oneof_group: typing.Literal["_llm_headers", b"_llm_headers"]) -> typing.Literal["llm_headers"] | None: ...
     @typing.overload
