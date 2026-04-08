@@ -106,6 +106,102 @@ INFERENCE_BACKEND_CLOUD_SERVICE_MICROSOFT: InferenceBackend.ValueType  # 6
 """Run Microsoft Azure S2T cloud service"""
 global___InferenceBackend = InferenceBackend
 
+class _ServiceTier:
+    ValueType = typing.NewType("ValueType", builtins.int)
+    V: typing_extensions.TypeAlias = ValueType
+
+class _ServiceTierEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_ServiceTier.ValueType], builtins.type):
+    DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
+    SERVICE_TIER_UNSPECIFIED: _ServiceTier.ValueType  # 0
+    """Unspecified service tier."""
+    SERVICE_TIER_AUTO: _ServiceTier.ValueType  # 1
+    """Auto service tier."""
+    SERVICE_TIER_DEFAULT: _ServiceTier.ValueType  # 2
+    """Default service tier."""
+    SERVICE_TIER_FLEX: _ServiceTier.ValueType  # 3
+    """Flex service tier."""
+    SERVICE_TIER_SCALE: _ServiceTier.ValueType  # 4
+    """Scale service tier."""
+    SERVICE_TIER_PRIORITY: _ServiceTier.ValueType  # 5
+    """Priority service tier."""
+
+class ServiceTier(_ServiceTier, metaclass=_ServiceTierEnumTypeWrapper):
+    """<p>Latency tier to use for processing an OpenAI request. Affects cost and throughput.</p>"""
+
+SERVICE_TIER_UNSPECIFIED: ServiceTier.ValueType  # 0
+"""Unspecified service tier."""
+SERVICE_TIER_AUTO: ServiceTier.ValueType  # 1
+"""Auto service tier."""
+SERVICE_TIER_DEFAULT: ServiceTier.ValueType  # 2
+"""Default service tier."""
+SERVICE_TIER_FLEX: ServiceTier.ValueType  # 3
+"""Flex service tier."""
+SERVICE_TIER_SCALE: ServiceTier.ValueType  # 4
+"""Scale service tier."""
+SERVICE_TIER_PRIORITY: ServiceTier.ValueType  # 5
+"""Priority service tier."""
+global___ServiceTier = ServiceTier
+
+class _Verbosity:
+    ValueType = typing.NewType("ValueType", builtins.int)
+    V: typing_extensions.TypeAlias = ValueType
+
+class _VerbosityEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_Verbosity.ValueType], builtins.type):
+    DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
+    VERBOSITY_UNSPECIFIED: _Verbosity.ValueType  # 0
+    """Unspecified verbosity."""
+    VERBOSITY_LOW: _Verbosity.ValueType  # 1
+    """Low verbosity."""
+    VERBOSITY_MEDIUM: _Verbosity.ValueType  # 2
+    """Medium verbosity."""
+    VERBOSITY_HIGH: _Verbosity.ValueType  # 3
+    """High verbosity."""
+
+class Verbosity(_Verbosity, metaclass=_VerbosityEnumTypeWrapper):
+    """<p>Verbosity level for the response output.</p>"""
+
+VERBOSITY_UNSPECIFIED: Verbosity.ValueType  # 0
+"""Unspecified verbosity."""
+VERBOSITY_LOW: Verbosity.ValueType  # 1
+"""Low verbosity."""
+VERBOSITY_MEDIUM: Verbosity.ValueType  # 2
+"""Medium verbosity."""
+VERBOSITY_HIGH: Verbosity.ValueType  # 3
+"""High verbosity."""
+global___Verbosity = Verbosity
+
+class _ReasoningEffort:
+    ValueType = typing.NewType("ValueType", builtins.int)
+    V: typing_extensions.TypeAlias = ValueType
+
+class _ReasoningEffortEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_ReasoningEffort.ValueType], builtins.type):
+    DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
+    REASONING_EFFORT_UNSPECIFIED: _ReasoningEffort.ValueType  # 0
+    """Unspecified reasoning effort."""
+    REASONING_EFFORT_MINIMAL: _ReasoningEffort.ValueType  # 1
+    """Minimal reasoning effort."""
+    REASONING_EFFORT_LOW: _ReasoningEffort.ValueType  # 2
+    """Low reasoning effort."""
+    REASONING_EFFORT_MEDIUM: _ReasoningEffort.ValueType  # 3
+    """Medium reasoning effort."""
+    REASONING_EFFORT_HIGH: _ReasoningEffort.ValueType  # 4
+    """High reasoning effort."""
+
+class ReasoningEffort(_ReasoningEffort, metaclass=_ReasoningEffortEnumTypeWrapper):
+    """<p>Effort level for reasoning models (e.g., o1, o3). Controls the trade-off between speed and quality.</p>"""
+
+REASONING_EFFORT_UNSPECIFIED: ReasoningEffort.ValueType  # 0
+"""Unspecified reasoning effort."""
+REASONING_EFFORT_MINIMAL: ReasoningEffort.ValueType  # 1
+"""Minimal reasoning effort."""
+REASONING_EFFORT_LOW: ReasoningEffort.ValueType  # 2
+"""Low reasoning effort."""
+REASONING_EFFORT_MEDIUM: ReasoningEffort.ValueType  # 3
+"""Medium reasoning effort."""
+REASONING_EFFORT_HIGH: ReasoningEffort.ValueType  # 4
+"""High reasoning effort."""
+global___ReasoningEffort = ReasoningEffort
+
 @typing.final
 class TranscribeRequestConfig(google.protobuf.message.Message):
     """/////////////////////////
@@ -1941,17 +2037,17 @@ class OpenaiLlmOptions(google.protobuf.message.Message):
     """Optional. A stable key used to enable prompt caching for identical prompt prefixes, reducing
     latency and cost on repeated requests.
     """
-    reasoning_effort: builtins.str
+    reasoning_effort: global___ReasoningEffort.ValueType
     """Optional. Constrains the effort level for reasoning models (e.g., o1, o3). Controls the trade-off
-    between speed and quality. Accepted values: "low", "medium", "high".
+    between speed and quality.
     """
     seed: builtins.int
     """Optional. If specified, the system will make a best effort to sample deterministically given the
     same seed and parameters, enabling reproducible outputs.
     """
-    service_tier: builtins.str
+    service_tier: global___ServiceTier.ValueType
     """Optional. Specifies the latency tier to use for processing the request. Affects cost and
-    throughput. Accepted values: "auto", "default", "flex", "scale", "priority".
+    throughput.
     """
     store: builtins.bool
     """Optional. Whether to store the output of this chat completion request for use in model
@@ -1973,8 +2069,8 @@ class OpenaiLlmOptions(google.protobuf.message.Message):
     """Optional. A unique identifier representing the end-user, which helps OpenAI monitor and detect
     abuse.
     """
-    verbosity: builtins.str
-    """Optional. The verbosity level for the response output. Accepted values: "low", "medium", "high"."""
+    verbosity: global___Verbosity.ValueType
+    """Optional. The verbosity level for the response output."""
     @property
     def default_headers(self) -> google.protobuf.internal.containers.ScalarMap[builtins.str, builtins.str]:
         """Optional. Default HTTP headers to include with every request to the OpenAI API."""
@@ -2043,16 +2139,16 @@ class OpenaiLlmOptions(google.protobuf.message.Message):
         n: builtins.int | None = ...,
         presence_penalty: builtins.float | None = ...,
         prompt_cache_key: builtins.str | None = ...,
-        reasoning_effort: builtins.str | None = ...,
+        reasoning_effort: global___ReasoningEffort.ValueType | None = ...,
         seed: builtins.int | None = ...,
-        service_tier: builtins.str | None = ...,
+        service_tier: global___ServiceTier.ValueType | None = ...,
         stop: collections.abc.Iterable[builtins.str] | None = ...,
         store: builtins.bool | None = ...,
         temperature: builtins.float | None = ...,
         top_logprobs: builtins.int | None = ...,
         top_p: builtins.float | None = ...,
         user: builtins.str | None = ...,
-        verbosity: builtins.str | None = ...,
+        verbosity: global___Verbosity.ValueType | None = ...,
         extra_headers: google.protobuf.struct_pb2.Struct | None = ...,
         extra_query: google.protobuf.struct_pb2.Struct | None = ...,
         extra_body: google.protobuf.struct_pb2.Struct | None = ...,
