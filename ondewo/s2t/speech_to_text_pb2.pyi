@@ -1785,7 +1785,7 @@ class TurnDetectionOptions(google.protobuf.message.Message):
     turn_detection_user_prompt: builtins.str
     """Optional. User prompt used as input to the turn-detection model."""
     @property
-    def turn_detection_llm_openai_options(self) -> global___OpenaiLLMOptions:
+    def turn_detection_llm_openai_options(self) -> global___OpenaiLlmOptions:
         """Optional. Configuration options for the OpenAI client used for turn detection."""
 
     def __init__(
@@ -1795,7 +1795,7 @@ class TurnDetectionOptions(google.protobuf.message.Message):
         full_utterance_deployment: builtins.bool | None = ...,
         turn_detection_system_prompt: builtins.str | None = ...,
         turn_detection_user_prompt: builtins.str | None = ...,
-        turn_detection_llm_openai_options: global___OpenaiLLMOptions | None = ...,
+        turn_detection_llm_openai_options: global___OpenaiLlmOptions | None = ...,
     ) -> None: ...
     def HasField(self, field_name: typing.Literal["_active", b"_active", "_full_utterance_deployment", b"_full_utterance_deployment", "_turn_detection_llm_openai_options", b"_turn_detection_llm_openai_options", "_turn_detection_system_prompt", b"_turn_detection_system_prompt", "_turn_detection_user_prompt", b"_turn_detection_user_prompt", "active", b"active", "full_utterance_deployment", b"full_utterance_deployment", "turn_detection_llm_openai_options", b"turn_detection_llm_openai_options", "turn_detection_system_prompt", b"turn_detection_system_prompt", "turn_detection_user_prompt", b"turn_detection_user_prompt"]) -> builtins.bool: ...
     def ClearField(self, field_name: typing.Literal["_active", b"_active", "_full_utterance_deployment", b"_full_utterance_deployment", "_turn_detection_llm_openai_options", b"_turn_detection_llm_openai_options", "_turn_detection_system_prompt", b"_turn_detection_system_prompt", "_turn_detection_user_prompt", b"_turn_detection_user_prompt", "active", b"active", "full_utterance_deployment", b"full_utterance_deployment", "turn_detection_llm_openai_options", b"turn_detection_llm_openai_options", "turn_detection_system_prompt", b"turn_detection_system_prompt", "turn_detection_user_prompt", b"turn_detection_user_prompt"]) -> None: ...
@@ -1813,7 +1813,7 @@ class TurnDetectionOptions(google.protobuf.message.Message):
 global___TurnDetectionOptions = TurnDetectionOptions
 
 @typing.final
-class OpenaiLLMOptions(google.protobuf.message.Message):
+class OpenaiLlmOptions(google.protobuf.message.Message):
     """<p>Configuration options for OpenAI client chat completion requests used in turn detection and LLM post-processing.</p>"""
 
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
@@ -2122,7 +2122,7 @@ class OpenaiLLMOptions(google.protobuf.message.Message):
     @typing.overload
     def WhichOneof(self, oneof_group: typing.Literal["_websocket_base_url", b"_websocket_base_url"]) -> typing.Literal["websocket_base_url"] | None: ...
 
-global___OpenaiLLMOptions = OpenaiLLMOptions
+global___OpenaiLlmOptions = OpenaiLlmOptions
 
 @typing.final
 class VoiceActivityDetection(google.protobuf.message.Message):
@@ -2332,7 +2332,7 @@ class S2tLlmPostProcessing(google.protobuf.message.Message):
     s2t_llm_post_processing_ending_prompt: builtins.str
     """Optional. Ending prompt appended to the accumulated prompts of the active post-processing tasks."""
     @property
-    def s2t_llm_post_processing_openai_options(self) -> global___OpenaiLLMOptions:
+    def s2t_llm_post_processing_openai_options(self) -> global___OpenaiLlmOptions:
         """Optional. Configuration options for the OpenAI client used for post-processing."""
 
     @property
@@ -2374,7 +2374,7 @@ class S2tLlmPostProcessing(google.protobuf.message.Message):
     def __init__(
         self,
         *,
-        s2t_llm_post_processing_openai_options: global___OpenaiLLMOptions | None = ...,
+        s2t_llm_post_processing_openai_options: global___OpenaiLlmOptions | None = ...,
         s2t_llm_post_processing_system_prompt: builtins.str | None = ...,
         s2t_llm_post_processing_ending_prompt: builtins.str | None = ...,
         s2t_llm_post_processing_casing_options: global___S2tLlmPostProcessingSubTaskOptions | None = ...,
