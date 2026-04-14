@@ -111,7 +111,7 @@ update_setup: ## Update Version in setup.py
 	@sed -i "s/version='[0-9]*.[0-9]*.[0-9]*'/version='${ONDEWO_S2T_VERSION}'/g" setup.py
 	@sed -i "s/version=\"[0-9]*.[0-9]*.[0-9]*\"/version='${ONDEWO_S2T_VERSION}'/g" setup.py
 
-build: clear_package_data init_submodules checkout_defined_submodule_versions build_compiler generate_ondewo_protos create_async_services update_setup ## Build source code
+build: clear_package_data init_submodules checkout_defined_submodule_versions build_compiler generate_ondewo_protos generate_services update_setup ## Build source code
 
 clean_python_api:  ## Clear generated python files
 	find ./ondewo -name \*pb2.py -type f -exec rm -f {} \;
@@ -129,6 +129,14 @@ generate_ondewo_protos:  ## Generate python code from proto files
 		TARGET_DIR='ondewo' \
 		OUTPUT_DIR=${OUTPUT_DIR}
 	-make precommit_hooks_run_all_files
+	make precommit_hooks_run_all_files
+
+generate_services: ## Generate service wrapper files from proto definitions
+	python3 ondewo/s2t/scripts/generate_services.py \
+		${ONDEWO_S2T_API_DIR}/ondewo/s2t \
+		ondewo/s2t/client/services
+	-make precommit_hooks_run_all_files
+	make create_async_services
 	make precommit_hooks_run_all_files
 
 push_to_pypi_via_docker: push_to_pypi_via_docker_image  ## Release automation for building and pushing to pypi via a docker image
