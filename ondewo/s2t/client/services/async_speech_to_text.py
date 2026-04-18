@@ -21,7 +21,7 @@
 #       ondewo-s2t-api/ondewo/s2t ondewo/s2t/client/services
 # ---------------------------------------------------------------------------
 
-from typing import Iterator
+from typing import AsyncIterator
 
 from google.protobuf.empty_pb2 import Empty
 
@@ -70,9 +70,9 @@ class Speech2Text(AsyncBaseServicesInterface):
 
     async def transcribe_stream(
         self,
-        request_iterator: Iterator[TranscribeStreamRequest],
-    ) -> Iterator[TranscribeStreamResponse]:
-        response: Iterator[TranscribeStreamResponse] = await self.stub.TranscribeStream(request_iterator)
+        request_iterator: AsyncIterator[TranscribeStreamRequest],
+    ) -> AsyncIterator[TranscribeStreamResponse]:
+        response: AsyncIterator[TranscribeStreamResponse] = await self.stub.TranscribeStream(request_iterator)
         return response
 
     async def get_s2t_pipeline(self, request: S2tPipelineId) -> Speech2TextConfig:

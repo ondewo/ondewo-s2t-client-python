@@ -501,14 +501,15 @@ def _build_client_content(services: List[Tuple[str, str]], for_async: bool = Fal
         '',
     ]
     for field_name, class_name in services:
-        lines.append(f'from ondewo.s2t.client.services.{field_name} import {class_name}')
+        service_module = f'async_{field_name}' if for_async else field_name
+        lines.append(f'from ondewo.s2t.client.services.{service_module} import {class_name}')
     lines += [
         f'from ondewo.s2t.client.{async_prefix.lower()}services_container import {async_prefix[:-1]}ServicesContainer',
         '',
         '',
         f'class {async_prefix[:-1]}Client({async_prefix[:-1]}BaseClient):',
         '    """',
-        f'    The core {async_prefix[:-1].lower()} python client for interacting with ONDEWO S2T services.',
+        f'    The core {"async " if for_async else ""}python client for interacting with ONDEWO S2T services.',
         '    """',
         '',
         '    def _initialize_services(',
@@ -519,7 +520,7 @@ def _build_client_content(services: List[Tuple[str, str]], for_async: bool = Fal
         '    ) -> None:',
         '        """',
         '',
-        f'        Initialize the {async_prefix[:-1].lower()} service clients and login with the current config'
+        f'        Initialize the {"async " if for_async else ""}service clients and login with the current config'
         ' and set up the services in self.services',
         '',
         '        Args:',

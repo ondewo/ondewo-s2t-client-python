@@ -49,7 +49,7 @@ class Client(BaseClient):
     ) -> None:
         """
 
-        Initialize the service clients and lLogin with the current config and set up the services in self.services
+        Initialize the service clients and login with the current config and set up the services in self.services
 
         Args:
             config (BaseClientConfig):
