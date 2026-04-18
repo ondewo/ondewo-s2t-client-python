@@ -42,6 +42,14 @@ IMAGE_UTILS_NAME=ondewo-s2t-client-utils-python:${ONDEWO_S2T_VERSION}
 .DEFAULT_GOAL := help
 .PHONY: test test_unit
 
+# Cross-platform in-place sed: BSD sed (macOS) requires 'sed -i ""', GNU sed (Linux) uses 'sed -i'
+UNAME_S := $(shell uname -s)
+ifeq ($(UNAME_S),Darwin)
+SED_INPLACE = sed -i ''
+else
+SED_INPLACE = sed -i
+endif
+
 ########################################################
 #       ONDEWO Standard Make Targets
 ########################################################
@@ -95,11 +103,11 @@ check_build: ## Checks if all built proto-code is there
 		echo $${proto} | cut -d "/" -f 4 | cut -d "." -f 1 >> build_check.txt; \
 	done
 	@echo "`sort build_check.txt | uniq`" > build_check.txt
-	@sed -i "s/\-/\_/g" build_check.txt
+	@$(SED_INPLACE) "s/\-/\_/g" build_check.txt
 	@for file in `cat build_check.txt`;\
 	do \
 		find ondewo -iname "*pb*" | grep -q $${file}; \
-		if test $$? != 0; then  echo "No Proto-Code for $${file}" & exit 1;fi \
+		if test $$? != 0; then  echo "No Proto-Code for $${file}""; exit 1;fi \
 	done
 	@rm -rf build_check.txt
 
@@ -109,8 +117,8 @@ check_build: ## Checks if all built proto-code is there
 #		Build
 
 update_setup: ## Update Version in setup.py
-	@sed -i "" "s/version='[0-9]*\.[0-9]*\.[0-9]*'/version='${ONDEWO_S2T_VERSION}'/g" setup.py
-	@sed -i "" "s/version=\"[0-9]*\.[0-9]*\.[0-9]*\"/version='${ONDEWO_S2T_VERSION}'/g" setup.py
+	@$(SED_INPLACE) "s/version='[0-9]*\.[0-9]*\.[0-9]*'/version='${ONDEWO_S2T_VERSION}'/g" setup.py
+	@$(SED_INPLACE) "s/version=\"[0-9]*\.[0-9]*\.[0-9]*\"/version='${ONDEWO_S2T_VERSION}'/g" setup.py
 
 build: clear_package_data init_submodules checkout_defined_submodule_versions build_compiler generate_ondewo_protos generate_services update_setup ## Build source code
 
@@ -167,7 +175,7 @@ create_async_services: ## Create async services for all synchronous services
 	        cp "$$file" "$$dir/async_$$filename"; \
 	    done; \
 	    for file in "$$dir"/async_*.py; do \
-	        sed -i -E \
+	        $(SED_INPLACE) -E \
 	            -e '/def stub/b' -e 's/^([[:space:]]*)def /\1async def /g' \
 	            -e 's/self\.stub/await self.stub/g' \
 	            -e 's/\(BaseServicesInterface\)/\(AsyncBaseServicesInterface\)/g' \
@@ -238,14 +246,14 @@ checkout_defined_submodule_versions:  ## Update submodule versions
 
 build_package: ## Builds PYPI Package
 	python setup.py sdist bdist_wheel
-	chmod a+rw dist -R
+	chmod -R a+rw dist
 
 upload_package: ## Uploads PYPI Package
 	twine upload --verbose -r pypi dist/* -u${PYPI_USERNAME} -p${PYPI_PASSWORD}
 
 clear_package_data: ## Clears PYPI Package
 	echo "Waiting 5s so directory for removal is not busy anymore"
-	sleep 5s
+	sleep 5
 	-rm -rf build dist/* ondewo_s2t_client.egg-info
 
 push_to_pypi_via_docker_image:  ## Push source code to pypi via docker
@@ -303,9 +311,9 @@ spc: ## Checks if the Release Branch, Tag and Pypi version already exist
 	$(eval filtered_branches:= $(shell git branch --all | grep "release/${ONDEWO_S2T_VERSION}"))
 	$(eval filtered_tags:= $(shell git tag --list | grep "${ONDEWO_S2T_VERSION}"))
 	$(eval setuppy_version:= $(shell cat setup.py | grep "version"))
-	@if test "$(filtered_branches)" != ""; then echo "-- Test 1: Branch exists!!" & exit 1; else echo "-- Test 1: Branch is fine";fi
-	@if test "$(filtered_tags)" != ""; then echo "-- Test 2: Tag exists!!" & exit 1; else echo "-- Test 2: Tag is fine";fi
-	# @if test "$(setuppy_version)" != "version='${ONDEWO_S2T_VERSION}',"; then echo "-- Test 3: Setup.py not updated!!" & exit 1; else echo "-- Test 3: Setup.py is fine";fi
+	@if test "$(filtered_branches)" != ""; then echo "-- Test 1: Branch exists!!"; exit 1; else echo "-- Test 1: Branch is fine";fi
+	@if test "$(filtered_tags)" != ""; then echo "-- Test 2: Tag exists!!"; exit 1; else echo "-- Test 2: Tag is fine";fi
+	# @if test "$(setuppy_version)" != "version='${ONDEWO_S2T_VERSION}',"; then echo "-- Test 3: Setup.py not updated!!"; exit 1; else echo "-- Test 3: Setup.py is fine";fi
 
 ########################################################
 #       Test

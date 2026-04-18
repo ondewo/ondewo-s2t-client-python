@@ -169,3 +169,36 @@ make create_async_services
   `@pytest.mark.asyncio`.
 - The `.gitignore` tracks `.vscode/` explicitly — vscode config files use git `force-add` or the
   gitignore exemptions at the bottom of the file.
+
+---
+
+## Makefile Cross-Platform Rules (macOS + Ubuntu)
+
+The Makefile must work on both macOS (BSD tools) and Ubuntu (GNU tools). Follow these rules for any Makefile edits:
+
+### `sed` in-place editing
+
+Never use `sed -i "..."` or `sed -i'' "..."` directly — BSD sed and GNU sed handle `-i` differently.
+Always use the `$(SED_INPLACE)` variable defined at the top of the Makefile:
+
+```makefile
+# Defined near the top:
+UNAME_S := $(shell uname -s)
+ifeq ($(UNAME_S),Darwin)
+SED_INPLACE = sed -i ''
+else
+SED_INPLACE = sed -i
+endif
+
+# Usage:
+@$(SED_INPLACE) "s/foo/bar/g" file.txt
+@$(SED_INPLACE) -E "s/foo(bar)/\1/g" file.txt   # with extended regex
+```
+
+### Other BSD vs GNU pitfalls
+
+| Command | Wrong | Right |
+| ------- | ----- | ----- |
+| `chmod` recursive | `chmod a+rw dir -R` | `chmod -R a+rw dir` |
+| `sleep` | `sleep 5s` | `sleep 5` |
+| Shell exit in `if` | `echo "msg" & exit 1` | `echo "msg"; exit 1` |
