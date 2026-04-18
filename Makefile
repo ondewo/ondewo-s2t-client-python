@@ -109,8 +109,8 @@ check_build: ## Checks if all built proto-code is there
 #		Build
 
 update_setup: ## Update Version in setup.py
-	@sed -i "s/version='[0-9]*.[0-9]*.[0-9]*'/version='${ONDEWO_S2T_VERSION}'/g" setup.py
-	@sed -i "s/version=\"[0-9]*.[0-9]*.[0-9]*\"/version='${ONDEWO_S2T_VERSION}'/g" setup.py
+	@sed -i "" "s/version='[0-9]*\.[0-9]*\.[0-9]*'/version='${ONDEWO_S2T_VERSION}'/g" setup.py
+	@sed -i "" "s/version=\"[0-9]*\.[0-9]*\.[0-9]*\"/version='${ONDEWO_S2T_VERSION}'/g" setup.py
 
 build: clear_package_data init_submodules checkout_defined_submodule_versions build_compiler generate_ondewo_protos generate_services update_setup ## Build source code
 
