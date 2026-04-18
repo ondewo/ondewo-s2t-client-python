@@ -3,3 +3,5 @@ mypy
 mypy-protobuf
 pre-commit
 pytest
+pytest-asyncio
+pytest-cov

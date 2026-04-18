@@ -40,6 +40,7 @@ GOOGLE_PROTOS_DIR=${GOOGLE_APIS_DIR}/google/
 OUTPUT_DIR=.
 IMAGE_UTILS_NAME=ondewo-s2t-client-utils-python:${ONDEWO_S2T_VERSION}
 .DEFAULT_GOAL := help
+.PHONY: test test_unit
 
 ########################################################
 #       ONDEWO Standard Make Targets
@@ -61,7 +62,7 @@ install_dependencies_locally: ## Install dependencies locally
 	pip install -r requirements.txt
 
 flake8: ## Runs flake8
-	flake8 --config .flake8 .
+	python -m flake8 --config .flake8 .
 
 mypy: ## Run mypy static code checking
 	@echo "---------------------------------------------"
@@ -70,7 +71,7 @@ mypy: ## Run mypy static code checking
 	@echo "DONE: Run mypy in pre-commit hook."
 	@echo "---------------------------------------------"
 	@echo "START: Run mypy directly ..."
-	mypy --config-file=mypy.ini .
+	python -m mypy --config-file=mypy.ini ondewo/ test/
 	@echo "DONE: Run mypy directly"
 	@echo "---------------------------------------------"
 
@@ -302,6 +303,20 @@ spc: ## Checks if the Release Branch, Tag and Pypi version already exist
 	$(eval filtered_branches:= $(shell git branch --all | grep "release/${ONDEWO_S2T_VERSION}"))
 	$(eval filtered_tags:= $(shell git tag --list | grep "${ONDEWO_S2T_VERSION}"))
 	$(eval setuppy_version:= $(shell cat setup.py | grep "version"))
-	@if test "$(filtered_branches)" != ""; then echo "-- Test 1: Branch exists!!" & exit 1; else echo "-- Test 1: Branch is fine";fi
+	@if test "$(filtered_branches)" != establish""; then echo "-- Test 1: Branch exists!!" & exit 1; else echo "-- Test 1: Branch is fine";fi
 	@if test "$(filtered_tags)" != ""; then echo "-- Test 2: Tag exists!!" & exit 1; else echo "-- Test 2: Tag is fine";fi
 	# @if test "$(setuppy_version)" != "version='${ONDEWO_S2T_VERSION}',"; then echo "-- Test 3: Setup.py not updated!!" & exit 1; else echo "-- Test 3: Setup.py is fine";fi
+
+########################################################
+#       Test
+########################################################
+
+test: ## Run unit tests with terminal + HTML coverage report
+	python -m pytest test/unit \
+		--cov=ondewo/s2t/client \
+		--cov-report=term-missing \
+		--cov-report=html:htmlcov \
+		-v
+
+test_unit: ## Run unit tests without coverage
+	python -m pytest test/unit -v
