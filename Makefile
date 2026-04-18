@@ -136,7 +136,6 @@ generate_services: ## Generate service wrapper files from proto definitions
 		${ONDEWO_S2T_API_DIR}/ondewo/s2t \
 		ondewo/s2t/client/services
 	-make precommit_hooks_run_all_files
-	make create_async_services
 	make precommit_hooks_run_all_files
 
 push_to_pypi_via_docker: push_to_pypi_via_docker_image  ## Release automation for building and pushing to pypi via a docker image
