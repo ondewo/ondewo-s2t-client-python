@@ -172,27 +172,43 @@ make create_async_services
 
 ---
 
+## Python 3.9 Compatibility
+
+All generated and hand-written code **must be compatible with Python 3.9**. Enforce these rules:
+
+- **No `X | Y` union syntax** — use `Union[X, Y]` from `typing` instead.
+- **No `list[...]`, `dict[...`, `tuple[...]` as generic type hints** — use `List`, `Dict`, `Tuple`
+  from `typing` instead (built-in generics require Python 3.9+ only for runtime use; the `from
+  __future__ import annotations` trick avoids the issue but is not required here — just use `typing`).
+- **No `match`/`case` statements** — added in Python 3.10.
+- **No `TypeAlias` or `ParamSpec`** without a `typing_extensions` fallback.
+- **No `str.removeprefix` / `str.removesuffix`** — added in Python 3.9, so these are actually fine.
+- **`asyncio.get_event_loop()`** deprecation warnings start in 3.10; prefer
+  `asyncio.get_event_loop_policy().get_event_loop()` or passing loops explicitly when needed.
+- Always import `annotations` generics from `typing`, not from the built-in types, to stay safe
+  across the full 3.9–3.12 range.
+
+---
+
 ## Makefile Cross-Platform Rules (macOS + Ubuntu)
 
 The Makefile must work on both macOS (BSD tools) and Ubuntu (GNU tools). Follow these rules for any Makefile edits:
 
-### `sed` in-place editing
+### In-place file editing
 
-Never use `sed -i "..."` or `sed -i'' "..."` directly — BSD sed and GNU sed handle `-i` differently.
-Always use the `$(SED_INPLACE)` variable defined at the top of the Makefile:
+Never use `sed -i` for in-place edits — BSD sed (macOS) and GNU sed (Linux) handle `-i` differently, and `sed -i ''` breaks Make's recipe quoting when expanded via a variable.
+
+**Always use `perl -i -pe`** — available on both platforms, no quoting issues:
 
 ```makefile
-# Defined near the top:
-UNAME_S := $(shell uname -s)
-ifeq ($(UNAME_S),Darwin)
-SED_INPLACE = sed -i ''
-else
-SED_INPLACE = sed -i
-endif
+# Simple substitution
+@perl -i -pe 's/foo/bar/g' file.txt
 
-# Usage:
-@$(SED_INPLACE) "s/foo/bar/g" file.txt
-@$(SED_INPLACE) -E "s/foo(bar)/\1/g" file.txt   # with extended regex
+# With Make variable expansion (use double quotes so the shell expands the var)
+@perl -i -pe "s/version='[0-9]+\.[0-9]+\.[0-9]+'/version='${MY_VERSION}'/g" file.txt
+
+# Multiple substitutions, skip a line pattern
+perl -i -pe 'next if /skip this line/; s/^(\s*)def /\1async def /g; s/old/new/g' "$$file"
 ```
 
 ### Other BSD vs GNU pitfalls

@@ -42,14 +42,6 @@ IMAGE_UTILS_NAME=ondewo-s2t-client-utils-python:${ONDEWO_S2T_VERSION}
 .DEFAULT_GOAL := help
 .PHONY: test test_unit
 
-# Cross-platform in-place sed: BSD sed (macOS) requires 'sed -i ""', GNU sed (Linux) uses 'sed -i'
-UNAME_S := $(shell uname -s)
-ifeq ($(UNAME_S),Darwin)
-SED_INPLACE = sed -i ''
-else
-SED_INPLACE = sed -i
-endif
-
 ########################################################
 #       ONDEWO Standard Make Targets
 ########################################################
@@ -58,7 +50,7 @@ setup_developer_environment_locally: install_precommit_hooks install_dependencie
 
 install_precommit_hooks: ## Installs pre-commit hooks and sets them up for the ondewo-csi-client repo
 	-pip install pre-commit
-	-conda -y install pre-commit
+	-conda install -y pre-commit
 	pre-commit install
 	pre-commit install --hook-type commit-msg
 
@@ -103,11 +95,11 @@ check_build: ## Checks if all built proto-code is there
 		echo $${proto} | cut -d "/" -f 4 | cut -d "." -f 1 >> build_check.txt; \
 	done
 	@echo "`sort build_check.txt | uniq`" > build_check.txt
-	@$(SED_INPLACE) "s/\-/\_/g" build_check.txt
+	@perl -i -pe 's/-/_/g' build_check.txt
 	@for file in `cat build_check.txt`;\
 	do \
 		find ondewo -iname "*pb*" | grep -q $${file}; \
-		if test $$? != 0; then  echo "No Proto-Code for $${file}""; exit 1;fi \
+		if test $$? != 0; then echo "No Proto-Code for $${file}"; exit 1; fi \
 	done
 	@rm -rf build_check.txt
 
@@ -117,8 +109,8 @@ check_build: ## Checks if all built proto-code is there
 #		Build
 
 update_setup: ## Update Version in setup.py
-	@$(SED_INPLACE) "s/version='[0-9]*\.[0-9]*\.[0-9]*'/version='${ONDEWO_S2T_VERSION}'/g" setup.py
-	@$(SED_INPLACE) "s/version=\"[0-9]*\.[0-9]*\.[0-9]*\"/version='${ONDEWO_S2T_VERSION}'/g" setup.py
+	@perl -i -pe "s/version='[0-9]*\.[0-9]*\.[0-9]*'/version='${ONDEWO_S2T_VERSION}'/g" setup.py
+	@perl -i -pe "s/version=\"[0-9]*\.[0-9]*\.[0-9]*\"/version='${ONDEWO_S2T_VERSION}'/g" setup.py
 
 build: clear_package_data init_submodules checkout_defined_submodule_versions build_compiler generate_ondewo_protos generate_services update_setup ## Build source code
 
@@ -161,7 +153,7 @@ setup_conda_env: ## Checks for CONDA Environment
 	&& make create_conda_env)
 
 create_conda_env: ## Creates CONDA Environment
-	conda create -y --name ondewo-s2t-client-python python=3.9
+	conda create -y --name ondewo-s2t-client-python python=3.10
 	/bin/bash -c 'source `conda info --base`/bin/activate ondewo-s2t-client-python; make setup_developer_environment_locally && echo "\n PRECOMMIT INSTALLED \n"'
 	make release
 
@@ -175,12 +167,7 @@ create_async_services: ## Create async services for all synchronous services
 	        cp "$$file" "$$dir/async_$$filename"; \
 	    done; \
 	    for file in "$$dir"/async_*.py; do \
-	        $(SED_INPLACE) -E \
-	            -e '/def stub/b' -e 's/^([[:space:]]*)def /\1async def /g' \
-	            -e 's/self\.stub/await self.stub/g' \
-	            -e 's/\(BaseServicesInterface\)/\(AsyncBaseServicesInterface\)/g' \
-	            -e 's/base_services_interface/async_base_services_interface/g' \
-	            -e 's/import BaseServicesInterface/import AsyncBaseServicesInterface/g' \
+	        perl -i -pe 'next if /def stub/; s/^([ \t]*)def /\1async def /g; s/self\.stub/await self.stub/g; s/\(BaseServicesInterface\)/\(AsyncBaseServicesInterface\)/g; s/base_services_interface/async_base_services_interface/g; s/import BaseServicesInterface/import AsyncBaseServicesInterface/g' \
 	            "$$file"; \
 	    done; \
 	done
@@ -304,7 +291,7 @@ clone_devops_accounts: ## Clones devops-accounts repo
 	git clone git@bitbucket.org:ondewo/${DEVOPS_ACCOUNT_GIT}.git
 
 run_release_with_devops: ## Gets Credentials from devops-repo and run release command with them
-	$(eval info:= $(shell cat ${DEVOPS_ACCOUNT_DIR}/account_github.env | grep GITHUB_GH & cat ${DEVOPS_ACCOUNT_DIR}/account_pypi.env | grep PYPI_USERNAME & cat ${DEVOPS_ACCOUNT_DIR}/account_pypi.env | grep PYPI_PASSWORD))
+	$(eval info:= $(shell cat ${DEVOPS_ACCOUNT_DIR}/account_github.env | grep GITHUB_GH; cat ${DEVOPS_ACCOUNT_DIR}/account_pypi.env | grep PYPI_USERNAME; cat ${DEVOPS_ACCOUNT_DIR}/account_pypi.env | grep PYPI_PASSWORD))
 	@echo ${CONDA_PREFIX} | grep -q s2t-client-python && make release $(info) || (make setup_conda_env $(info))
 
 spc: ## Checks if the Release Branch, Tag and Pypi version already exist
