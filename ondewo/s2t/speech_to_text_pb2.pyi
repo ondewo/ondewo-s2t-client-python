@@ -1323,6 +1323,7 @@ class AcousticModels(google.protobuf.message.Message):
     S2T_CLOUD_SERVICE_DEEPGRAM_FIELD_NUMBER: builtins.int
     S2T_CLOUD_SERVICE_GOOGLE_FIELD_NUMBER: builtins.int
     S2T_CLOUD_SERVICE_MICROSOFT_FIELD_NUMBER: builtins.int
+    PARAKEET_FIELD_NUMBER: builtins.int
     type: builtins.str
     """Type of the acoustic model."""
     @property
@@ -1357,6 +1358,10 @@ class AcousticModels(google.protobuf.message.Message):
     def s2t_cloud_service_microsoft(self) -> global___S2tCloudServiceMicrosoft:
         """Microsoft Azure cloud service inference settings."""
 
+    @property
+    def parakeet(self) -> global___Parakeet:
+        """Configuration for the Parakeet model."""
+
     def __init__(
         self,
         *,
@@ -1369,9 +1374,10 @@ class AcousticModels(google.protobuf.message.Message):
         s2t_cloud_service_deepgram: global___S2tCloudServiceDeepgram | None = ...,
         s2t_cloud_service_google: global___S2tCloudServiceGoogle | None = ...,
         s2t_cloud_service_microsoft: global___S2tCloudServiceMicrosoft | None = ...,
+        parakeet: global___Parakeet | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["s2t_cloud_service_amazon", b"s2t_cloud_service_amazon", "s2t_cloud_service_deepgram", b"s2t_cloud_service_deepgram", "s2t_cloud_service_google", b"s2t_cloud_service_google", "s2t_cloud_service_microsoft", b"s2t_cloud_service_microsoft", "wav2vec", b"wav2vec", "wav2vec_triton", b"wav2vec_triton", "whisper", b"whisper", "whisper_triton", b"whisper_triton"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["s2t_cloud_service_amazon", b"s2t_cloud_service_amazon", "s2t_cloud_service_deepgram", b"s2t_cloud_service_deepgram", "s2t_cloud_service_google", b"s2t_cloud_service_google", "s2t_cloud_service_microsoft", b"s2t_cloud_service_microsoft", "type", b"type", "wav2vec", b"wav2vec", "wav2vec_triton", b"wav2vec_triton", "whisper", b"whisper", "whisper_triton", b"whisper_triton"]) -> None: ...
+    def HasField(self, field_name: typing.Literal["parakeet", b"parakeet", "s2t_cloud_service_amazon", b"s2t_cloud_service_amazon", "s2t_cloud_service_deepgram", b"s2t_cloud_service_deepgram", "s2t_cloud_service_google", b"s2t_cloud_service_google", "s2t_cloud_service_microsoft", b"s2t_cloud_service_microsoft", "wav2vec", b"wav2vec", "wav2vec_triton", b"wav2vec_triton", "whisper", b"whisper", "whisper_triton", b"whisper_triton"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["parakeet", b"parakeet", "s2t_cloud_service_amazon", b"s2t_cloud_service_amazon", "s2t_cloud_service_deepgram", b"s2t_cloud_service_deepgram", "s2t_cloud_service_google", b"s2t_cloud_service_google", "s2t_cloud_service_microsoft", b"s2t_cloud_service_microsoft", "type", b"type", "wav2vec", b"wav2vec", "wav2vec_triton", b"wav2vec_triton", "whisper", b"whisper", "whisper_triton", b"whisper_triton"]) -> None: ...
 
 global___AcousticModels = AcousticModels
 
@@ -1711,6 +1717,40 @@ class Wav2VecTriton(google.protobuf.message.Message):
 global___Wav2VecTriton = Wav2VecTriton
 
 @typing.final
+class Parakeet(google.protobuf.message.Message):
+    """<p>Parakeet contains information about the Parakeet model.</p>"""
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    TRITON_MODEL_NAME_FIELD_NUMBER: builtins.int
+    TRITON_MODEL_VERSION_FIELD_NUMBER: builtins.int
+    CHECK_STATUS_TIMEOUT_FIELD_NUMBER: builtins.int
+    TRITON_SERVER_HOST_FIELD_NUMBER: builtins.int
+    TRITON_SERVER_PORT_FIELD_NUMBER: builtins.int
+    triton_model_name: builtins.str
+    """Name of the Triton model."""
+    triton_model_version: builtins.str
+    """Version of the Triton model."""
+    check_status_timeout: builtins.int
+    """Timeout for checking model status."""
+    triton_server_host: builtins.str
+    """Host name of triton inference server that serves the Parakeet model"""
+    triton_server_port: builtins.int
+    """Port number of triton inference server that serves the Parakeet model"""
+    def __init__(
+        self,
+        *,
+        triton_model_name: builtins.str = ...,
+        triton_model_version: builtins.str = ...,
+        check_status_timeout: builtins.int = ...,
+        triton_server_host: builtins.str = ...,
+        triton_server_port: builtins.int = ...,
+    ) -> None: ...
+    def ClearField(self, field_name: typing.Literal["check_status_timeout", b"check_status_timeout", "triton_model_name", b"triton_model_name", "triton_model_version", b"triton_model_version", "triton_server_host", b"triton_server_host", "triton_server_port", b"triton_server_port"]) -> None: ...
+
+global___Parakeet = Parakeet
+
+@typing.final
 class PtFiles(google.protobuf.message.Message):
     """<p>PtFiles contains information about PT files.</p>"""
 
@@ -2034,20 +2074,32 @@ class OpenaiLlmOptions(google.protobuf.message.Message):
     they have already appeared in the text, increasing the likelihood of the model discussing new topics.
     """
     prompt_cache_key: builtins.str
-    """Optional. A stable key used to enable prompt caching for identical prompt prefixes, reducing
-    latency and cost on repeated requests.
+    """Optional. Used by OpenAI to cache responses for similar requests to optimize your cache hit rates. Replaces the
+    `user` field. [Learn more](https://platform.openai.com/docs/guides/prompt-caching).
     """
     reasoning_effort: global___ReasoningEffort.ValueType
-    """Optional. Constrains the effort level for reasoning models (e.g., o1, o3). Controls the trade-off
-    between speed and quality.
+    """Optional. Constrains effort on reasoning for
+    [reasoning models](https://platform.openai.com/docs/guides/reasoning). Currently supported values are `none`,
+    `minimal`, `low`, `medium`, `high`, and `xhigh`. Reducing reasoning effort can result in faster responses and
+    fewer tokens used on reasoning in a response.
     """
     seed: builtins.int
     """Optional. If specified, the system will make a best effort to sample deterministically given the
     same seed and parameters, enabling reproducible outputs.
     """
     service_tier: global___ServiceTier.ValueType
-    """Optional. Specifies the latency tier to use for processing the request. Affects cost and
-    throughput.
+    """Optional. Specifies the processing type used for serving the request.
+    - If set to 'auto', then the request will be processed with the service tier configured in the Project settings.
+      Unless otherwise configured, the Project will use 'default'.
+    - If set to 'default', then the request will be processed with the standard pricing and performance for the
+      selected model.
+    - If set to '[flex](https://platform.openai.com/docs/guides/flex-processing)' or
+      '[priority](https://openai.com/api-priority-processing/)', then the request will be processed with the
+       corresponding service tier.
+    - When not set, the default behavior is 'auto'.
+    When the `service_tier` parameter is set, the response body will include the `service_tier` value based on the
+    processing mode actually used to serve the request. This response value may be different from the value set in
+    the parameter.
     """
     store: builtins.bool
     """Optional. Whether to store the output of this chat completion request for use in model
@@ -2066,11 +2118,16 @@ class OpenaiLlmOptions(google.protobuf.message.Message):
     considers only the tokens with top_p probability mass. Ranges from 0 to 1.
     """
     user: builtins.str
-    """Optional. A unique identifier representing the end-user, which helps OpenAI monitor and detect
-    abuse.
+    """Optional. This field is being replaced by `safety_identifier` and `prompt_cache_key`. Use `prompt_cache_key`
+    instead to maintain caching optimizations. A stable identifier for your end-users. Used to boost cache hit rates
+     by better bucketing similar requests and to help OpenAI detect and prevent abuse.
+    [Learn more](https://platform.openai.com/docs/guides/safety-best-practices#safety-identifiers).
     """
     verbosity: global___Verbosity.ValueType
-    """Optional. The verbosity level for the response output."""
+    """Optional. Constrains the verbosity of the model's response. Lower values will result in more concise responses,
+    while higher values will result in more verbose responses.
+    Currently supported values are `low`, `medium`, and `high`.
+    """
     @property
     def default_headers(self) -> google.protobuf.internal.containers.ScalarMap[builtins.str, builtins.str]:
         """Optional. Default HTTP headers to include with every request to the OpenAI API."""
@@ -2089,12 +2146,14 @@ class OpenaiLlmOptions(google.protobuf.message.Message):
 
     @property
     def metadata(self) -> google.protobuf.struct_pb2.Struct:
-        """Optional. Developer-defined tags and values used for filtering completions in the OpenAI dashboard."""
+        """Optional. Set of 16 key-value pairs that can be attached to an object. This can be useful for storing additional
+        information about the object in a structured format, and querying for objects via API or the dashboard.
+        """
 
     @property
     def stop(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
-        """Optional. Up to 4 sequences where the API will stop generating further tokens. The returned text
-        will not contain the stop sequence.
+        """Optional. Not supported with latest reasoning models `o3` and `o4-mini`. Up to 4 sequences where the API will
+        stop generating further tokens. The returned text will not contain the stop sequence.
         """
 
     @property
@@ -2129,7 +2188,7 @@ class OpenaiLlmOptions(google.protobuf.message.Message):
         default_headers: collections.abc.Mapping[builtins.str, builtins.str] | None = ...,
         default_query: google.protobuf.struct_pb2.Struct | None = ...,
         strict_response_validation: builtins.bool | None = ...,
-        model: builtins.str | None = ...,
+        model: builtins.str = ...,
         frequency_penalty: builtins.float | None = ...,
         logit_bias: collections.abc.Mapping[builtins.str, builtins.int] | None = ...,
         logprobs: builtins.bool | None = ...,
@@ -2153,8 +2212,8 @@ class OpenaiLlmOptions(google.protobuf.message.Message):
         extra_query: google.protobuf.struct_pb2.Struct | None = ...,
         extra_body: google.protobuf.struct_pb2.Struct | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["_api_key", b"_api_key", "_base_url", b"_base_url", "_default_query", b"_default_query", "_extra_body", b"_extra_body", "_extra_headers", b"_extra_headers", "_extra_query", b"_extra_query", "_frequency_penalty", b"_frequency_penalty", "_logprobs", b"_logprobs", "_max_completion_tokens", b"_max_completion_tokens", "_max_retries", b"_max_retries", "_max_tokens", b"_max_tokens", "_metadata", b"_metadata", "_model", b"_model", "_n", b"_n", "_organization", b"_organization", "_presence_penalty", b"_presence_penalty", "_project", b"_project", "_prompt_cache_key", b"_prompt_cache_key", "_reasoning_effort", b"_reasoning_effort", "_seed", b"_seed", "_service_tier", b"_service_tier", "_store", b"_store", "_strict_response_validation", b"_strict_response_validation", "_temperature", b"_temperature", "_timeout", b"_timeout", "_top_logprobs", b"_top_logprobs", "_top_p", b"_top_p", "_user", b"_user", "_verbosity", b"_verbosity", "_webhook_secret", b"_webhook_secret", "_websocket_base_url", b"_websocket_base_url", "api_key", b"api_key", "base_url", b"base_url", "default_query", b"default_query", "extra_body", b"extra_body", "extra_headers", b"extra_headers", "extra_query", b"extra_query", "frequency_penalty", b"frequency_penalty", "logprobs", b"logprobs", "max_completion_tokens", b"max_completion_tokens", "max_retries", b"max_retries", "max_tokens", b"max_tokens", "metadata", b"metadata", "model", b"model", "n", b"n", "organization", b"organization", "presence_penalty", b"presence_penalty", "project", b"project", "prompt_cache_key", b"prompt_cache_key", "reasoning_effort", b"reasoning_effort", "seed", b"seed", "service_tier", b"service_tier", "store", b"store", "strict_response_validation", b"strict_response_validation", "temperature", b"temperature", "timeout", b"timeout", "top_logprobs", b"top_logprobs", "top_p", b"top_p", "user", b"user", "verbosity", b"verbosity", "webhook_secret", b"webhook_secret", "websocket_base_url", b"websocket_base_url"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["_api_key", b"_api_key", "_base_url", b"_base_url", "_default_query", b"_default_query", "_extra_body", b"_extra_body", "_extra_headers", b"_extra_headers", "_extra_query", b"_extra_query", "_frequency_penalty", b"_frequency_penalty", "_logprobs", b"_logprobs", "_max_completion_tokens", b"_max_completion_tokens", "_max_retries", b"_max_retries", "_max_tokens", b"_max_tokens", "_metadata", b"_metadata", "_model", b"_model", "_n", b"_n", "_organization", b"_organization", "_presence_penalty", b"_presence_penalty", "_project", b"_project", "_prompt_cache_key", b"_prompt_cache_key", "_reasoning_effort", b"_reasoning_effort", "_seed", b"_seed", "_service_tier", b"_service_tier", "_store", b"_store", "_strict_response_validation", b"_strict_response_validation", "_temperature", b"_temperature", "_timeout", b"_timeout", "_top_logprobs", b"_top_logprobs", "_top_p", b"_top_p", "_user", b"_user", "_verbosity", b"_verbosity", "_webhook_secret", b"_webhook_secret", "_websocket_base_url", b"_websocket_base_url", "api_key", b"api_key", "base_url", b"base_url", "default_headers", b"default_headers", "default_query", b"default_query", "extra_body", b"extra_body", "extra_headers", b"extra_headers", "extra_query", b"extra_query", "frequency_penalty", b"frequency_penalty", "logit_bias", b"logit_bias", "logprobs", b"logprobs", "max_completion_tokens", b"max_completion_tokens", "max_retries", b"max_retries", "max_tokens", b"max_tokens", "metadata", b"metadata", "model", b"model", "n", b"n", "organization", b"organization", "presence_penalty", b"presence_penalty", "project", b"project", "prompt_cache_key", b"prompt_cache_key", "reasoning_effort", b"reasoning_effort", "seed", b"seed", "service_tier", b"service_tier", "stop", b"stop", "store", b"store", "strict_response_validation", b"strict_response_validation", "temperature", b"temperature", "timeout", b"timeout", "top_logprobs", b"top_logprobs", "top_p", b"top_p", "user", b"user", "verbosity", b"verbosity", "webhook_secret", b"webhook_secret", "websocket_base_url", b"websocket_base_url"]) -> None: ...
+    def HasField(self, field_name: typing.Literal["_api_key", b"_api_key", "_base_url", b"_base_url", "_default_query", b"_default_query", "_extra_body", b"_extra_body", "_extra_headers", b"_extra_headers", "_extra_query", b"_extra_query", "_frequency_penalty", b"_frequency_penalty", "_logprobs", b"_logprobs", "_max_completion_tokens", b"_max_completion_tokens", "_max_retries", b"_max_retries", "_max_tokens", b"_max_tokens", "_metadata", b"_metadata", "_n", b"_n", "_organization", b"_organization", "_presence_penalty", b"_presence_penalty", "_project", b"_project", "_prompt_cache_key", b"_prompt_cache_key", "_reasoning_effort", b"_reasoning_effort", "_seed", b"_seed", "_service_tier", b"_service_tier", "_store", b"_store", "_strict_response_validation", b"_strict_response_validation", "_temperature", b"_temperature", "_timeout", b"_timeout", "_top_logprobs", b"_top_logprobs", "_top_p", b"_top_p", "_user", b"_user", "_verbosity", b"_verbosity", "_webhook_secret", b"_webhook_secret", "_websocket_base_url", b"_websocket_base_url", "api_key", b"api_key", "base_url", b"base_url", "default_query", b"default_query", "extra_body", b"extra_body", "extra_headers", b"extra_headers", "extra_query", b"extra_query", "frequency_penalty", b"frequency_penalty", "logprobs", b"logprobs", "max_completion_tokens", b"max_completion_tokens", "max_retries", b"max_retries", "max_tokens", b"max_tokens", "metadata", b"metadata", "n", b"n", "organization", b"organization", "presence_penalty", b"presence_penalty", "project", b"project", "prompt_cache_key", b"prompt_cache_key", "reasoning_effort", b"reasoning_effort", "seed", b"seed", "service_tier", b"service_tier", "store", b"store", "strict_response_validation", b"strict_response_validation", "temperature", b"temperature", "timeout", b"timeout", "top_logprobs", b"top_logprobs", "top_p", b"top_p", "user", b"user", "verbosity", b"verbosity", "webhook_secret", b"webhook_secret", "websocket_base_url", b"websocket_base_url"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["_api_key", b"_api_key", "_base_url", b"_base_url", "_default_query", b"_default_query", "_extra_body", b"_extra_body", "_extra_headers", b"_extra_headers", "_extra_query", b"_extra_query", "_frequency_penalty", b"_frequency_penalty", "_logprobs", b"_logprobs", "_max_completion_tokens", b"_max_completion_tokens", "_max_retries", b"_max_retries", "_max_tokens", b"_max_tokens", "_metadata", b"_metadata", "_n", b"_n", "_organization", b"_organization", "_presence_penalty", b"_presence_penalty", "_project", b"_project", "_prompt_cache_key", b"_prompt_cache_key", "_reasoning_effort", b"_reasoning_effort", "_seed", b"_seed", "_service_tier", b"_service_tier", "_store", b"_store", "_strict_response_validation", b"_strict_response_validation", "_temperature", b"_temperature", "_timeout", b"_timeout", "_top_logprobs", b"_top_logprobs", "_top_p", b"_top_p", "_user", b"_user", "_verbosity", b"_verbosity", "_webhook_secret", b"_webhook_secret", "_websocket_base_url", b"_websocket_base_url", "api_key", b"api_key", "base_url", b"base_url", "default_headers", b"default_headers", "default_query", b"default_query", "extra_body", b"extra_body", "extra_headers", b"extra_headers", "extra_query", b"extra_query", "frequency_penalty", b"frequency_penalty", "logit_bias", b"logit_bias", "logprobs", b"logprobs", "max_completion_tokens", b"max_completion_tokens", "max_retries", b"max_retries", "max_tokens", b"max_tokens", "metadata", b"metadata", "model", b"model", "n", b"n", "organization", b"organization", "presence_penalty", b"presence_penalty", "project", b"project", "prompt_cache_key", b"prompt_cache_key", "reasoning_effort", b"reasoning_effort", "seed", b"seed", "service_tier", b"service_tier", "stop", b"stop", "store", b"store", "strict_response_validation", b"strict_response_validation", "temperature", b"temperature", "timeout", b"timeout", "top_logprobs", b"top_logprobs", "top_p", b"top_p", "user", b"user", "verbosity", b"verbosity", "webhook_secret", b"webhook_secret", "websocket_base_url", b"websocket_base_url"]) -> None: ...
     @typing.overload
     def WhichOneof(self, oneof_group: typing.Literal["_api_key", b"_api_key"]) -> typing.Literal["api_key"] | None: ...
     @typing.overload
@@ -2179,8 +2238,6 @@ class OpenaiLlmOptions(google.protobuf.message.Message):
     def WhichOneof(self, oneof_group: typing.Literal["_max_tokens", b"_max_tokens"]) -> typing.Literal["max_tokens"] | None: ...
     @typing.overload
     def WhichOneof(self, oneof_group: typing.Literal["_metadata", b"_metadata"]) -> typing.Literal["metadata"] | None: ...
-    @typing.overload
-    def WhichOneof(self, oneof_group: typing.Literal["_model", b"_model"]) -> typing.Literal["model"] | None: ...
     @typing.overload
     def WhichOneof(self, oneof_group: typing.Literal["_n", b"_n"]) -> typing.Literal["n"] | None: ...
     @typing.overload
