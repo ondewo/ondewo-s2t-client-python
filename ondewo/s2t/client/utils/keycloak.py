@@ -313,7 +313,10 @@ class KeycloakTokenManager:
                 )
             if self._needs_refresh(now):
                 self._refresh()
-            if self._access_token is None:
+            # Unreachable defensive guard: _needs_refresh() returns True whenever the token is None, so a
+            # refresh is always attempted, and a successful _refresh()/_apply_token_response() sets a truthy
+            # access_token (otherwise it raises first); kept as a belt-and-braces invariant check.
+            if self._access_token is None:  # pragma: no cover
                 raise KeycloakAuthenticationError('No access token available; call login() first.')
             return self._access_token
 
@@ -508,7 +511,10 @@ class AsyncKeycloakTokenManager:
                 )
             if self._needs_refresh(now):
                 await self._refresh()
-            if self._access_token is None:
+            # Unreachable defensive guard: _needs_refresh() returns True whenever the token is None, so a
+            # refresh is always attempted, and a successful _refresh()/_apply_token_response() sets a truthy
+            # access_token (otherwise it raises first); kept as a belt-and-braces invariant check.
+            if self._access_token is None:  # pragma: no cover
                 raise KeycloakAuthenticationError('No access token available; call login() first.')
             return self._access_token
 

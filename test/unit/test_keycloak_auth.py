@@ -400,6 +400,18 @@ class TestSyncTokenManager:
         with pytest.raises(ValueError):
             token_manager_from_config(config)
 
+    def test_needs_refresh_true_when_token_missing(self) -> None:
+        """``_needs_refresh`` must return True whenever no access token is cached.
+
+        This is the invariant that makes the post-refresh ``self._access_token is None`` guard in
+        ``get_access_token`` unreachable (a missing token always forces a refresh first); the test
+        locks it in so the ``# pragma: no cover`` on that defensive branch stays justified.
+        """
+        transport: FakeTransport = FakeTransport([])
+        clock: FakeClock = FakeClock()
+        manager: KeycloakTokenManager = self._manager(transport, clock)
+        assert manager._needs_refresh(clock.now) is True
+
 
 # ---------------------------------------------------------------------------
 # Asynchronous token manager (mirrors the sync suite)
@@ -563,6 +575,18 @@ class TestAsyncTokenManager:
         config: ClientConfig = ClientConfig(host="localhost", port="50051")
         with pytest.raises(ValueError):
             async_token_manager_from_config(config)
+
+    async def test_needs_refresh_true_when_token_missing(self) -> None:
+        """``_needs_refresh`` must return True whenever no access token is cached.
+
+        Mirrors the sync invariant: a missing token always forces a refresh first, which is why the
+        post-refresh ``self._access_token is None`` guard in ``get_access_token`` is unreachable and
+        carries a ``# pragma: no cover``.
+        """
+        transport: FakeTransport = FakeTransport([])
+        clock: FakeClock = FakeClock()
+        manager: AsyncKeycloakTokenManager = self._manager(transport, clock)
+        assert manager._needs_refresh(clock.now) is True
 
 
 # ---------------------------------------------------------------------------
