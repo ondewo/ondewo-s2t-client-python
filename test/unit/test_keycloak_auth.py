@@ -677,6 +677,14 @@ class TestDefaultTransport:
         captured: Dict[str, Any] = {}
 
         def fake_urlopen(req: Any) -> FakeHTTPResponse:
+            """Capture the outgoing request and return a scripted JSON body.
+
+            Args:
+                req: The ``urllib.request.Request`` built by ``_default_transport``.
+
+            Returns:
+                FakeHTTPResponse: A context-manager response with a 2xx JSON token body.
+            """
             captured["url"] = req.full_url
             captured["method"] = req.get_method()
             captured["data"] = req.data
@@ -703,6 +711,14 @@ class TestDefaultTransport:
         from urllib.error import HTTPError
 
         def fake_urlopen(req: Any) -> FakeHTTPResponse:
+            """Simulate a 401 token-endpoint response.
+
+            Args:
+                req: The request built by ``_default_transport`` (unused).
+
+            Raises:
+                HTTPError: Always, with status 401 and an ``invalid_grant`` body.
+            """
             raise HTTPError(
                 url=EXPECTED_TOKEN_URL,
                 code=401,
@@ -721,6 +737,14 @@ class TestDefaultTransport:
         """An ``OSError`` (e.g. connection refused) must raise :class:`KeycloakAuthenticationError`."""
 
         def fake_urlopen(req: Any) -> FakeHTTPResponse:
+            """Simulate a transport-level network failure.
+
+            Args:
+                req: The request built by ``_default_transport`` (unused).
+
+            Raises:
+                OSError: Always, mimicking a refused connection.
+            """
             raise OSError("connection refused")
 
         monkeypatch.setattr(keycloak_module.request, "urlopen", fake_urlopen)
@@ -732,6 +756,14 @@ class TestDefaultTransport:
         """A 2xx body that is not valid JSON must raise :class:`KeycloakAuthenticationError`."""
 
         def fake_urlopen(req: Any) -> FakeHTTPResponse:
+            """Return a 2xx response whose body is not valid JSON.
+
+            Args:
+                req: The request built by ``_default_transport`` (unused).
+
+            Returns:
+                FakeHTTPResponse: A response wrapping a non-JSON HTML body.
+            """
             return FakeHTTPResponse(b"<html>not json</html>")
 
         monkeypatch.setattr(keycloak_module.request, "urlopen", fake_urlopen)

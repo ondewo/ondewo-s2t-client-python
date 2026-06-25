@@ -11,6 +11,20 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
+
+"""Client configuration for the ONDEWO S2T SDK.
+
+Defines :class:`ClientConfig`, a frozen ``dataclass_json`` extension of
+``BaseClientConfig`` that carries the connection target (``host``/``port``/``grpc_cert``)
+plus the headless Keycloak authentication parameters used by the D18 offline-token flow
+(see :mod:`ondewo.s2t.client.utils.keycloak`).
+
+Authentication is optional: a bare ``ClientConfig(host=..., port=...)`` stays valid for
+unauthenticated or ingress-injected-auth usage, while supplying any Keycloak field switches
+on a completeness check that requires the full Resource Owner Password Credentials parameter
+set (``keycloak_url``, ``realm``, ``client_id``, a username, and ``password``).
+"""
+
 from dataclasses import dataclass
 from typing import Optional
 
@@ -84,7 +98,7 @@ class ClientConfig(BaseClientConfig):
         if not self.uses_keycloak_auth:
             return
 
-        missing: list = []
+        missing: list[str] = []
         if not self.keycloak_url:
             missing.append('keycloak_url')
         if not self.realm:
