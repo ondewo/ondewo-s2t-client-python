@@ -5,4 +5,5 @@ pre-commit
 pytest
 pytest-asyncio
 pytest-cov
+types-requests
 typing_extensions
