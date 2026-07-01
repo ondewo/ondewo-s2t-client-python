@@ -102,14 +102,18 @@ It will generate a `_pb2.py`, `_pb2.pyi` and `_pb2_grpc.py` file for every `.pro
 
 ## Examples
 
-The `/examples` folder provides a possible implementation of this library. To run an example, simple execute it like any other python file. To specify the server and credentials, you need to provide an environment file with the following variables:
+The `/examples` folder provides a possible implementation of this library. To run an example, simply execute it like any other python file and point it at a JSON config with `--config` (see `examples/configs/`). The config is parsed into `ondewo.s2t.client.client_config.ClientConfig` and supports the following fields:
 
-- host `// The hostname of the Server - e.g. 127.0.0.1`
-- port `// Port of the Server - e.g. 6600`
-- user_name `// Username - same as you would use in AIM`
-- password `// Password of the user`
-- http_token `// Token to allow access through`
-- grpc_cert `// gRPC Certificate of the server`
+- host `// The hostname of the server - e.g. 127.0.0.1`
+- port `// Port of the server - e.g. 6600`
+- grpc_cert `// gRPC certificate of the server (required for a secure channel)`
+- keycloak_url `// Base URL of the Keycloak server (optional headless-auth parameter)`
+- realm `// Keycloak realm (optional headless-auth parameter)`
+- client_id `// Public Keycloak client id, no secret (optional headless-auth parameter)`
+- user_name `// Technical-user email/username for the Keycloak ROPC grant (optional)`
+- password `// Technical-user password (optional)`
+
+A bare `{"host": ..., "port": ...}` config (as in `examples/configs/insecure_grpc.json`) stays valid for an unauthenticated / ingress-injected-auth server; the Keycloak fields are only required together when any one of them is set.
 
 ## Automatic Release Process
 
