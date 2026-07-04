@@ -47,7 +47,7 @@ USERNAME: str = 'tech-user@example.com'
 PASSWORD: str = 's3cr3t'
 
 # The canonical `Authorization: Bearer` metadata the provider would return.
-EXPECTED_BEARER_METADATA: List[Tuple[str, str]] = [('Authorization', 'Bearer test-access-token')]
+EXPECTED_BEARER_METADATA: List[Tuple[str, str]] = [('authorization', 'Bearer test-access-token')]
 
 # Patch targets for the shared-provider factory, resolved in each interface module's namespace.
 _SYNC_FACTORY: str = 'ondewo.s2t.client.services_interface.get_keycloak_token_provider'
