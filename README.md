@@ -63,11 +63,19 @@ make setup_developer_environment_locally
 │   │   ├── client
 │   │   │   ├── services
 │   │   │   │   ├── __init__.py
+│   │   │   │   ├── async_speech_to_text.py
 │   │   │   │   └── speech_to_text.py
-│   │   │   ├── client_config.py
-│   │   │   ├── client.py
+│   │   │   ├── utils
+│   │   │   │   ├── __init__.py
+│   │   │   │   └── keycloak.py           <----- D18 Keycloak headless offline-token provider
 │   │   │   ├── __init__.py
-│   │   │   └── services_container.py
+│   │   │   ├── async_client.py
+│   │   │   ├── async_services_container.py
+│   │   │   ├── async_services_interface.py
+│   │   │   ├── client.py
+│   │   │   ├── client_config.py
+│   │   │   ├── services_container.py
+│   │   │   └── services_interface.py
 │   │   ├── __init__.py
 │   │   ├── speech_to_text_pb2_grpc.py
 │   │   ├── speech_to_text_pb2.py
@@ -114,6 +122,12 @@ The `/examples` folder provides a possible implementation of this library. To ru
 - password `// Technical-user password (optional)`
 
 A bare `{"host": ..., "port": ...}` config (as in `examples/configs/insecure_grpc.json`) stays valid for an unauthenticated / ingress-injected-auth server; the Keycloak fields are only required together when any one of them is set.
+
+## Authentication (Keycloak bearer)
+
+When the config carries the Keycloak fields, the SDK authenticates headlessly against a **public** Keycloak client (no client secret — D18/Q1) using the offline-token flow: a one-time Resource Owner Password Credentials login (`grant_type=password` with `scope=offline_access`) yields a long-lived offline refresh token, and the client then auto-refreshes a short-lived access token in the background before it expires. The technical user is 2FA-exempt (D14), so ROPC bypasses the browser flow.
+
+`Client` and `AsyncClient` forward this token automatically: every RPC issued through the service wrappers travels with the canonical gRPC metadata `Authorization: Bearer <jwt>`, so application code never has to build or refresh the header itself. A config without the Keycloak fields sends no such header and calls travel unauthenticated (e.g. against a plaintext server or an Envoy ingress that injects auth).
 
 ## Automatic Release Process
 

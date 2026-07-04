@@ -519,7 +519,7 @@ def get_keycloak_token_provider(config: ClientConfig) -> KeycloakTokenProvider:
 
     Args:
         config (ClientConfig):
-            A config with the Keycloak headless-auth fields set (`config.use_keycloak`).
+            A config with the Keycloak headless-auth fields set (`config.uses_keycloak_auth`).
 
     Returns:
         KeycloakTokenProvider:

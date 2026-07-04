@@ -25,7 +25,7 @@ from typing import AsyncIterator
 
 from google.protobuf.empty_pb2 import Empty
 
-from ondewo.utils.async_base_services_interface import AsyncBaseServicesInterface
+from ondewo.s2t.client.async_services_interface import AsyncServicesInterface
 from ondewo.s2t.speech_to_text_pb2 import (
     AddDataToUserLanguageModelRequest,
     CreateUserLanguageModelRequest,
@@ -52,7 +52,7 @@ from ondewo.s2t.speech_to_text_pb2 import (
 from ondewo.s2t.speech_to_text_pb2_grpc import Speech2TextStub
 
 
-class Speech2Text(AsyncBaseServicesInterface):
+class Speech2Text(AsyncServicesInterface):
     """
     Exposes the Speech2Text-related endpoints of ONDEWO S2T services in a user-friendly way.
 
@@ -65,71 +65,73 @@ class Speech2Text(AsyncBaseServicesInterface):
         return stub
 
     async def transcribe_file(self, request: TranscribeFileRequest) -> TranscribeFileResponse:
-        response: TranscribeFileResponse = await self.stub.TranscribeFile(request)
+        response: TranscribeFileResponse = await self.stub.TranscribeFile(request, metadata=self.metadata)
         return response
 
     async def transcribe_stream(
         self,
         request_iterator: AsyncIterator[TranscribeStreamRequest],
     ) -> AsyncIterator[TranscribeStreamResponse]:
-        response: AsyncIterator[TranscribeStreamResponse] = await self.stub.TranscribeStream(request_iterator)
+        response: AsyncIterator[TranscribeStreamResponse] = \
+            await self.stub.TranscribeStream(request_iterator, metadata=self.metadata)
         return response
 
     async def get_s2t_pipeline(self, request: S2tPipelineId) -> Speech2TextConfig:
-        response: Speech2TextConfig = await self.stub.GetS2tPipeline(request)
+        response: Speech2TextConfig = await self.stub.GetS2tPipeline(request, metadata=self.metadata)
         return response
 
     async def create_s2t_pipeline(self, request: Speech2TextConfig) -> S2tPipelineId:
-        response: S2tPipelineId = await self.stub.CreateS2tPipeline(request)
+        response: S2tPipelineId = await self.stub.CreateS2tPipeline(request, metadata=self.metadata)
         return response
 
     async def delete_s2t_pipeline(self, request: S2tPipelineId) -> Empty:
-        response: Empty = await self.stub.DeleteS2tPipeline(request)
+        response: Empty = await self.stub.DeleteS2tPipeline(request, metadata=self.metadata)
         return response
 
     async def update_s2t_pipeline(self, request: Speech2TextConfig) -> Empty:
-        response: Empty = await self.stub.UpdateS2tPipeline(request)
+        response: Empty = await self.stub.UpdateS2tPipeline(request, metadata=self.metadata)
         return response
 
     async def list_s2t_pipelines(self, request: ListS2tPipelinesRequest) -> ListS2tPipelinesResponse:
-        response: ListS2tPipelinesResponse = await self.stub.ListS2tPipelines(request)
+        response: ListS2tPipelinesResponse = await self.stub.ListS2tPipelines(request, metadata=self.metadata)
         return response
 
     async def list_s2t_languages(self, request: ListS2tLanguagesRequest) -> ListS2tLanguagesResponse:
-        response: ListS2tLanguagesResponse = await self.stub.ListS2tLanguages(request)
+        response: ListS2tLanguagesResponse = await self.stub.ListS2tLanguages(request, metadata=self.metadata)
         return response
 
     async def list_s2t_domains(self, request: ListS2tDomainsRequest) -> ListS2tDomainsResponse:
-        response: ListS2tDomainsResponse = await self.stub.ListS2tDomains(request)
+        response: ListS2tDomainsResponse = await self.stub.ListS2tDomains(request, metadata=self.metadata)
         return response
 
     async def get_service_info(self, request: Empty) -> S2tGetServiceInfoResponse:
-        response: S2tGetServiceInfoResponse = await self.stub.GetServiceInfo(request)
+        response: S2tGetServiceInfoResponse = await self.stub.GetServiceInfo(request, metadata=self.metadata)
         return response
 
     async def list_s2t_language_models(self, request: ListS2tLanguageModelsRequest) -> ListS2tLanguageModelsResponse:
-        response: ListS2tLanguageModelsResponse = await self.stub.ListS2tLanguageModels(request)
+        response: ListS2tLanguageModelsResponse = await self.stub.ListS2tLanguageModels(request, metadata=self.metadata)
         return response
 
     async def create_user_language_model(self, request: CreateUserLanguageModelRequest) -> Empty:
-        response: Empty = await self.stub.CreateUserLanguageModel(request)
+        response: Empty = await self.stub.CreateUserLanguageModel(request, metadata=self.metadata)
         return response
 
     async def delete_user_language_model(self, request: DeleteUserLanguageModelRequest) -> Empty:
-        response: Empty = await self.stub.DeleteUserLanguageModel(request)
+        response: Empty = await self.stub.DeleteUserLanguageModel(request, metadata=self.metadata)
         return response
 
     async def add_data_to_user_language_model(self, request: AddDataToUserLanguageModelRequest) -> Empty:
-        response: Empty = await self.stub.AddDataToUserLanguageModel(request)
+        response: Empty = await self.stub.AddDataToUserLanguageModel(request, metadata=self.metadata)
         return response
 
     async def train_user_language_model(self, request: TrainUserLanguageModelRequest) -> Empty:
-        response: Empty = await self.stub.TrainUserLanguageModel(request)
+        response: Empty = await self.stub.TrainUserLanguageModel(request, metadata=self.metadata)
         return response
 
     async def list_s2t_normalization_pipelines(
         self,
         request: ListS2tNormalizationPipelinesRequest,
     ) -> ListS2tNormalizationPipelinesResponse:
-        response: ListS2tNormalizationPipelinesResponse = await self.stub.ListS2tNormalizationPipelines(request)
+        response: ListS2tNormalizationPipelinesResponse = \
+            await self.stub.ListS2tNormalizationPipelines(request, metadata=self.metadata)
         return response
