@@ -533,7 +533,7 @@ def get_keycloak_token_provider(config: ClientConfig) -> KeycloakTokenProvider:
                 keycloak_url=config.keycloak_url,
                 realm=config.realm,
                 client_id=config.client_id,
-                username=config.user_name,
+                username=config.resolved_username,
                 password=config.password,
                 token_expiration_in_s=config.token_expiration_in_s,
             )
