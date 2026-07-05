@@ -137,9 +137,9 @@ class ClientConfig(BaseClientConfig):
                 on the ``__post_init__`` completeness check and the token manager.
         """
         return bool(
-            self.keycloak_url
-            or self.realm
-            or self.client_id
-            or self.resolved_username
-            or self.password
+            self.keycloak_url or
+            self.realm or
+            self.client_id or
+            self.resolved_username or
+            self.password
         )
