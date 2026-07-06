@@ -1,7 +1,9 @@
 -r requirements.txt
+loguru
 mypy
 mypy-protobuf
 pre-commit
+python-dotenv
 pytest
 pytest-asyncio
 pytest-cov
