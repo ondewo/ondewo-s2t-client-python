@@ -257,7 +257,7 @@ class TestSpeech2TextServiceDelegation:
         expected: TranscribeFileResponse = TranscribeFileResponse()
         mock_stub.TranscribeFile.return_value = expected
         assert service.transcribe_file(request) is expected
-        mock_stub.TranscribeFile.assert_called_once_with(request)
+        mock_stub.TranscribeFile.assert_called_once_with(request, metadata=[])
 
     def test_transcribe_stream(self, service: Speech2Text, mock_stub: MagicMock) -> None:
         """``transcribe_stream`` must pass the request iterator to ``stub.TranscribeStream``.
@@ -270,7 +270,7 @@ class TestSpeech2TextServiceDelegation:
         expected: Iterator[TranscribeStreamResponse] = iter([TranscribeStreamResponse()])
         mock_stub.TranscribeStream.return_value = expected
         assert service.transcribe_stream(request_iter) is expected
-        mock_stub.TranscribeStream.assert_called_once_with(request_iter)
+        mock_stub.TranscribeStream.assert_called_once_with(request_iter, metadata=[])
 
     def test_get_s2t_pipeline(self, service: Speech2Text, mock_stub: MagicMock) -> None:
         """``get_s2t_pipeline`` must call ``stub.GetS2tPipeline`` with the given request.
@@ -283,7 +283,7 @@ class TestSpeech2TextServiceDelegation:
         expected: Speech2TextConfig = Speech2TextConfig()
         mock_stub.GetS2tPipeline.return_value = expected
         assert service.get_s2t_pipeline(request) is expected
-        mock_stub.GetS2tPipeline.assert_called_once_with(request)
+        mock_stub.GetS2tPipeline.assert_called_once_with(request, metadata=[])
 
     def test_create_s2t_pipeline(self, service: Speech2Text, mock_stub: MagicMock) -> None:
         """``create_s2t_pipeline`` must call ``stub.CreateS2tPipeline`` with the given request.
@@ -296,7 +296,7 @@ class TestSpeech2TextServiceDelegation:
         expected: S2tPipelineId = S2tPipelineId()
         mock_stub.CreateS2tPipeline.return_value = expected
         assert service.create_s2t_pipeline(request) is expected
-        mock_stub.CreateS2tPipeline.assert_called_once_with(request)
+        mock_stub.CreateS2tPipeline.assert_called_once_with(request, metadata=[])
 
     def test_delete_s2t_pipeline(self, service: Speech2Text, mock_stub: MagicMock) -> None:
         """``delete_s2t_pipeline`` must call ``stub.DeleteS2tPipeline`` with the given request.
@@ -309,7 +309,7 @@ class TestSpeech2TextServiceDelegation:
         expected: Empty = Empty()
         mock_stub.DeleteS2tPipeline.return_value = expected
         assert service.delete_s2t_pipeline(request) is expected
-        mock_stub.DeleteS2tPipeline.assert_called_once_with(request)
+        mock_stub.DeleteS2tPipeline.assert_called_once_with(request, metadata=[])
 
     def test_update_s2t_pipeline(self, service: Speech2Text, mock_stub: MagicMock) -> None:
         """``update_s2t_pipeline`` must call ``stub.UpdateS2tPipeline`` with the given request.
@@ -322,7 +322,7 @@ class TestSpeech2TextServiceDelegation:
         expected: Empty = Empty()
         mock_stub.UpdateS2tPipeline.return_value = expected
         assert service.update_s2t_pipeline(request) is expected
-        mock_stub.UpdateS2tPipeline.assert_called_once_with(request)
+        mock_stub.UpdateS2tPipeline.assert_called_once_with(request, metadata=[])
 
     def test_list_s2t_pipelines(self, service: Speech2Text, mock_stub: MagicMock) -> None:
         """``list_s2t_pipelines`` must call ``stub.ListS2tPipelines`` with the given request.
@@ -335,7 +335,7 @@ class TestSpeech2TextServiceDelegation:
         expected: ListS2tPipelinesResponse = ListS2tPipelinesResponse()
         mock_stub.ListS2tPipelines.return_value = expected
         assert service.list_s2t_pipelines(request) is expected
-        mock_stub.ListS2tPipelines.assert_called_once_with(request)
+        mock_stub.ListS2tPipelines.assert_called_once_with(request, metadata=[])
 
     def test_list_s2t_languages(self, service: Speech2Text, mock_stub: MagicMock) -> None:
         """``list_s2t_languages`` must call ``stub.ListS2tLanguages`` with the given request.
@@ -348,7 +348,7 @@ class TestSpeech2TextServiceDelegation:
         expected: ListS2tLanguagesResponse = ListS2tLanguagesResponse()
         mock_stub.ListS2tLanguages.return_value = expected
         assert service.list_s2t_languages(request) is expected
-        mock_stub.ListS2tLanguages.assert_called_once_with(request)
+        mock_stub.ListS2tLanguages.assert_called_once_with(request, metadata=[])
 
     def test_list_s2t_domains(self, service: Speech2Text, mock_stub: MagicMock) -> None:
         """``list_s2t_domains`` must call ``stub.ListS2tDomains`` with the given request.
@@ -361,7 +361,7 @@ class TestSpeech2TextServiceDelegation:
         expected: ListS2tDomainsResponse = ListS2tDomainsResponse()
         mock_stub.ListS2tDomains.return_value = expected
         assert service.list_s2t_domains(request) is expected
-        mock_stub.ListS2tDomains.assert_called_once_with(request)
+        mock_stub.ListS2tDomains.assert_called_once_with(request, metadata=[])
 
     def test_get_service_info(self, service: Speech2Text, mock_stub: MagicMock) -> None:
         """``get_service_info`` must call ``stub.GetServiceInfo`` with the given request.
@@ -374,7 +374,7 @@ class TestSpeech2TextServiceDelegation:
         expected: S2tGetServiceInfoResponse = S2tGetServiceInfoResponse()
         mock_stub.GetServiceInfo.return_value = expected
         assert service.get_service_info(request) is expected
-        mock_stub.GetServiceInfo.assert_called_once_with(request)
+        mock_stub.GetServiceInfo.assert_called_once_with(request, metadata=[])
 
     def test_list_s2t_language_models(self, service: Speech2Text, mock_stub: MagicMock) -> None:
         """``list_s2t_language_models`` must call ``stub.ListS2tLanguageModels``.
@@ -387,7 +387,7 @@ class TestSpeech2TextServiceDelegation:
         expected: ListS2tLanguageModelsResponse = ListS2tLanguageModelsResponse()
         mock_stub.ListS2tLanguageModels.return_value = expected
         assert service.list_s2t_language_models(request) is expected
-        mock_stub.ListS2tLanguageModels.assert_called_once_with(request)
+        mock_stub.ListS2tLanguageModels.assert_called_once_with(request, metadata=[])
 
     def test_create_user_language_model(self, service: Speech2Text, mock_stub: MagicMock) -> None:
         """``create_user_language_model`` must call ``stub.CreateUserLanguageModel``.
@@ -400,7 +400,7 @@ class TestSpeech2TextServiceDelegation:
         expected: Empty = Empty()
         mock_stub.CreateUserLanguageModel.return_value = expected
         assert service.create_user_language_model(request) is expected
-        mock_stub.CreateUserLanguageModel.assert_called_once_with(request)
+        mock_stub.CreateUserLanguageModel.assert_called_once_with(request, metadata=[])
 
     def test_delete_user_language_model(self, service: Speech2Text, mock_stub: MagicMock) -> None:
         """``delete_user_language_model`` must call ``stub.DeleteUserLanguageModel``.
@@ -413,7 +413,7 @@ class TestSpeech2TextServiceDelegation:
         expected: Empty = Empty()
         mock_stub.DeleteUserLanguageModel.return_value = expected
         assert service.delete_user_language_model(request) is expected
-        mock_stub.DeleteUserLanguageModel.assert_called_once_with(request)
+        mock_stub.DeleteUserLanguageModel.assert_called_once_with(request, metadata=[])
 
     def test_add_data_to_user_language_model(self, service: Speech2Text, mock_stub: MagicMock) -> None:
         """``add_data_to_user_language_model`` must call ``stub.AddDataToUserLanguageModel``.
@@ -426,7 +426,7 @@ class TestSpeech2TextServiceDelegation:
         expected: Empty = Empty()
         mock_stub.AddDataToUserLanguageModel.return_value = expected
         assert service.add_data_to_user_language_model(request) is expected
-        mock_stub.AddDataToUserLanguageModel.assert_called_once_with(request)
+        mock_stub.AddDataToUserLanguageModel.assert_called_once_with(request, metadata=[])
 
     def test_train_user_language_model(self, service: Speech2Text, mock_stub: MagicMock) -> None:
         """``train_user_language_model`` must call ``stub.TrainUserLanguageModel``.
@@ -439,7 +439,7 @@ class TestSpeech2TextServiceDelegation:
         expected: Empty = Empty()
         mock_stub.TrainUserLanguageModel.return_value = expected
         assert service.train_user_language_model(request) is expected
-        mock_stub.TrainUserLanguageModel.assert_called_once_with(request)
+        mock_stub.TrainUserLanguageModel.assert_called_once_with(request, metadata=[])
 
     def test_list_s2t_normalization_pipelines(self, service: Speech2Text, mock_stub: MagicMock) -> None:
         """``list_s2t_normalization_pipelines`` must call ``stub.ListS2tNormalizationPipelines``.
@@ -452,7 +452,7 @@ class TestSpeech2TextServiceDelegation:
         expected: ListS2tNormalizationPipelinesResponse = ListS2tNormalizationPipelinesResponse()
         mock_stub.ListS2tNormalizationPipelines.return_value = expected
         assert service.list_s2t_normalization_pipelines(request) is expected
-        mock_stub.ListS2tNormalizationPipelines.assert_called_once_with(request)
+        mock_stub.ListS2tNormalizationPipelines.assert_called_once_with(request, metadata=[])
 
 
 # ---------------------------------------------------------------------------
@@ -536,7 +536,7 @@ class TestTranscribeFileScenarios:
 
         result: TranscribeFileResponse = service.transcribe_file(request)
 
-        mock_stub.TranscribeFile.assert_called_once_with(request)
+        mock_stub.TranscribeFile.assert_called_once_with(request, metadata=[])
         assert result is expected_response
 
     def test_transcribe_file_with_greedy_decoding(
@@ -563,7 +563,7 @@ class TestTranscribeFileScenarios:
         )
         mock_stub.TranscribeFile.return_value = TranscribeFileResponse()
         service.transcribe_file(request)
-        mock_stub.TranscribeFile.assert_called_once_with(request)
+        mock_stub.TranscribeFile.assert_called_once_with(request, metadata=[])
 
     def test_list_pipelines_then_use_first_pipeline(
         self,
@@ -599,7 +599,7 @@ class TestTranscribeFileScenarios:
         service.transcribe_file(transcribe_request)
 
         mock_stub.ListS2tPipelines.assert_called_once()
-        mock_stub.TranscribeFile.assert_called_once_with(transcribe_request)
+        mock_stub.TranscribeFile.assert_called_once_with(transcribe_request, metadata=[])
         assert pipeline.id == "pipeline-001"
 
     def test_transcribe_file_response_exposes_transcriptions(
@@ -701,7 +701,7 @@ class TestTranscribeStreamScenarios:
 
         result: Iterator[TranscribeStreamResponse] = service.transcribe_stream(streaming_requests)
 
-        mock_stub.TranscribeStream.assert_called_once_with(streaming_requests)
+        mock_stub.TranscribeStream.assert_called_once_with(streaming_requests, metadata=[])
         assert result is expected
 
     def test_transcribe_stream_with_end_of_stream_sentinel(

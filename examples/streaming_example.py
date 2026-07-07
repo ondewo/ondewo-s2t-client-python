@@ -11,18 +11,24 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-import argparse
 import json
+import os
+import sys
 import wave
+from pathlib import Path
+from time import perf_counter
 from typing import (
     Any,
     Iterator,
     List,
+    Optional,
     Set,
     Tuple,
 )
 
 import grpc
+from dotenv import load_dotenv
+from loguru import logger as log
 
 from ondewo.s2t import speech_to_text_pb2
 from ondewo.s2t.client.client import Client
@@ -33,11 +39,80 @@ from ondewo.s2t.speech_to_text_pb2 import (
     Speech2TextConfig,
 )
 
-AUDIO_FILE: str = "examples/audiofiles/sample_2.wav"
+# Load the canonical example configuration (path relative to this script so the
+# working directory does not matter).
+load_dotenv(Path(__file__).with_name("environment.env"))
+
 CHUNK_SIZE: int = 8000
 
 
-# We are going to make to send the file chunk-by-chunk to simulate a stream
+def _env_bool(name: str, default: bool = False) -> bool:
+    """ Read a boolean environment variable ("true"/"false", case-insensitive).
+
+    Args:
+        name (str):
+            Name of the environment variable to read.
+        default (bool):
+            Value returned when the variable is unset or empty.
+
+    Returns:
+        bool:
+            The parsed boolean value.
+    """
+    raw: str = os.getenv(name, "").strip().lower()
+    if not raw:
+        return default
+    return raw in {"1", "true", "yes", "on"}
+
+
+def _resolve_audio_file(default_name: str) -> str:
+    """ Resolve the audio file path from the canonical env var.
+
+    Reads ``ONDEWO_S2T_AUDIO_FILE``; relative paths are resolved against the
+    ``examples/`` directory so the example is runnable from any working directory.
+
+    Args:
+        default_name (str):
+            Path (relative to ``examples/``) used when the env var is unset.
+
+    Returns:
+        str:
+            Absolute path to the audio file to transcribe.
+    """
+    configured: str = os.getenv("ONDEWO_S2T_AUDIO_FILE", "").strip() or default_name
+    audio_path: Path = Path(configured)
+    if not audio_path.is_absolute():
+        audio_path = Path(__file__).parent / audio_path
+    return str(audio_path)
+
+
+def build_client_config() -> ClientConfig:
+    """ Build a :class:`ClientConfig` from the canonical ONDEWO_* / KEYCLOAK_* env vars.
+
+    Returns:
+        ClientConfig:
+            The connection and (optional) Keycloak authentication configuration.
+    """
+    grpc_cert: Optional[str] = None
+    cert_path: str = os.getenv("ONDEWO_GRPC_CERT", "").strip()
+    if cert_path:
+        log.info(f"Reading gRPC certificate from {cert_path}")
+        grpc_cert = Path(cert_path).read_text()
+
+    return ClientConfig(
+        host=os.environ["ONDEWO_HOST"],
+        port=os.environ["ONDEWO_PORT"],
+        grpc_cert=grpc_cert,
+        keycloak_url=os.getenv("KEYCLOAK_URL", ""),
+        realm=os.getenv("KEYCLOAK_REALM", ""),
+        client_id=os.getenv("KEYCLOAK_CLIENT_ID", ""),
+        user_name=os.getenv("KEYCLOAK_USER_NAME", ""),
+        password=os.getenv("KEYCLOAK_PASSWORD", ""),
+        keycloak_verify_ssl=_env_bool("KEYCLOAK_VERIFY_SSL", default=True),
+    )
+
+
+# We are going to send the file chunk-by-chunk to simulate a stream
 def get_streaming_audio(audio_path: str) -> Iterator[bytes]:
     with wave.open(audio_path) as w:
         chunk: bytes = w.readframes(CHUNK_SIZE)
@@ -81,15 +156,13 @@ def create_streaming_request(
 
 
 def main() -> None:
-    parser = argparse.ArgumentParser(description="Streaming example.")
-    parser.add_argument("--config", type=str)
-    parser.add_argument("--secure", default=False, action="store_true")
-    args = parser.parse_args()
+    log.info("START: streaming_example: main")
+    start_time: float = perf_counter()
 
-    config: ClientConfig
-    with open(args.config) as f:
-        config = ClientConfig.from_json(f.read())  # type:ignore
-    assert config
+    config: ClientConfig = build_client_config()
+    use_secure_channel: bool = _env_bool("ONDEWO_USE_SECURE_CHANNEL", default=False)
+    audio_file: str = _resolve_audio_file("audiofiles/sample_2.wav")
+    log.info(f"Connecting to ONDEWO S2T at {config.host_and_port} (secure={use_secure_channel})")
 
     # https://github.com/grpc/grpc-proto/blob/master/grpc/service_config/service_config.proto
     service_config_json: str = json.dumps(
@@ -140,37 +213,51 @@ def main() -> None:
         ("grpc.service_config", service_config_json)
     }
 
-    client: Client = Client(config=config, use_secure_channel=args.secure, options=options)
+    client: Client = Client(config=config, use_secure_channel=use_secure_channel, options=options)
     s2t_service: Speech2Text = client.services.speech_to_text  # type:ignore
 
-    # List all speech-2-text pipelines (model setups) present on the server
-    # We are going to pick the first pipeline (model setup)
-    list_s2t_pipeline_request: ListS2tPipelinesRequest = ListS2tPipelinesRequest()
-    pipelines: List[Speech2TextConfig] = [
-        t for t in s2t_service.list_s2t_pipelines(list_s2t_pipeline_request).pipeline_configs
-    ]
-    assert pipelines
-    pipeline: Speech2TextConfig = pipelines[0]
-    assert pipeline
+    try:
+        # List all speech-2-text pipelines (model setups) present on the server.
+        list_s2t_pipeline_request: ListS2tPipelinesRequest = ListS2tPipelinesRequest()
+        pipelines: List[Speech2TextConfig] = [
+            t for t in s2t_service.list_s2t_pipelines(list_s2t_pipeline_request).pipeline_configs
+        ]
+        if not pipelines:
+            raise RuntimeError("The S2T server returned no pipelines to transcribe with.")
 
-    # Get audio stream (iterator of audio chunks)
-    audio_stream: Iterator[bytes] = get_streaming_audio(AUDIO_FILE)
+        # Pick the pipeline id from the env var if provided, otherwise the first one.
+        pipeline_id: str = os.getenv("ONDEWO_S2T_PIPELINE_ID", "").strip() or pipelines[0].id
+        log.info(f"Using S2T pipeline id: {pipeline_id}")
 
-    # Create streaming request
-    streaming_request: Iterator[speech_to_text_pb2.TranscribeStreamRequest] = create_streaming_request(
-        audio_stream=audio_stream, pipeline_id=pipeline.id
-    )
+        # Get audio stream (iterator of audio chunks).
+        log.info(f"Streaming audio file: {audio_file}")
+        audio_stream: Iterator[bytes] = get_streaming_audio(audio_file)
 
-    # Transcribe the stream and get back responses
-    response_gen: Iterator[speech_to_text_pb2.TranscribeStreamResponse] = s2t_service.transcribe_stream(
-        request_iterator=streaming_request
-    )
+        # Create streaming request.
+        streaming_request: Iterator[speech_to_text_pb2.TranscribeStreamRequest] = create_streaming_request(
+            audio_stream=audio_stream, pipeline_id=pipeline_id
+        )
 
-    # Print transcribed utterances
-    for i, response_chunk in enumerate(response_gen):
-        for transcribe_message in response_chunk.transcriptions:
-            print(f"{i}. response_chunk: {transcribe_message.transcription}")
+        # Transcribe the stream and get back responses.
+        log.info("Sending TranscribeStream request")
+        response_gen: Iterator[speech_to_text_pb2.TranscribeStreamResponse] = s2t_service.transcribe_stream(
+            request_iterator=streaming_request
+        )
+
+        # Print transcribed utterances.
+        for i, response_chunk in enumerate(response_gen):
+            for transcribe_message in response_chunk.transcriptions:
+                print(f"{i}. response_chunk: {transcribe_message.transcription}")
+    except grpc.RpcError as rpc_error:
+        log.error(f"gRPC call failed: code={rpc_error.code()} details={rpc_error.details()}")
+        raise
+
+    log.info(f"DONE: streaming_example: main. Elapsed time: {perf_counter() - start_time:.5f}")
 
 
 if __name__ == "__main__":
-    main()
+    try:
+        main()
+    except Exception:
+        log.exception("streaming_example failed")
+        sys.exit(1)

@@ -11,45 +11,108 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-import argparse
 import json
+import os
+import sys
 import wave
+from pathlib import Path
+from time import perf_counter
 from typing import (
     Any,
     List,
+    Optional,
     Set,
     Tuple,
 )
 
 import grpc
+from dotenv import load_dotenv
+from loguru import logger as log
 
 from ondewo.s2t import speech_to_text_pb2
 from ondewo.s2t.client.client import Client
 from ondewo.s2t.client.client_config import ClientConfig
 from ondewo.s2t.client.services.speech_to_text import Speech2Text
 
-AUDIO_FILE: str = "examples/audiofiles/sample_1.wav"  # noqa
+# Load the canonical example configuration (path relative to this script so the
+# working directory does not matter).
+load_dotenv(Path(__file__).with_name("environment.env"))
+
+
+def _env_bool(name: str, default: bool = False) -> bool:
+    """ Read a boolean environment variable ("true"/"false", case-insensitive).
+
+    Args:
+        name (str):
+            Name of the environment variable to read.
+        default (bool):
+            Value returned when the variable is unset or empty.
+
+    Returns:
+        bool:
+            The parsed boolean value.
+    """
+    raw: str = os.getenv(name, "").strip().lower()
+    if not raw:
+        return default
+    return raw in {"1", "true", "yes", "on"}
+
+
+def _resolve_audio_file(default_name: str) -> str:
+    """ Resolve the audio file path from the canonical env var.
+
+    Reads ``ONDEWO_S2T_AUDIO_FILE``; relative paths are resolved against the
+    ``examples/`` directory so the example is runnable from any working directory.
+
+    Args:
+        default_name (str):
+            Path (relative to ``examples/``) used when the env var is unset.
+
+    Returns:
+        str:
+            Absolute path to the audio file to transcribe.
+    """
+    configured: str = os.getenv("ONDEWO_S2T_AUDIO_FILE", "").strip() or default_name
+    audio_path: Path = Path(configured)
+    if not audio_path.is_absolute():
+        audio_path = Path(__file__).parent / audio_path
+    return str(audio_path)
+
+
+def build_client_config() -> ClientConfig:
+    """ Build a :class:`ClientConfig` from the canonical ONDEWO_* / KEYCLOAK_* env vars.
+
+    Returns:
+        ClientConfig:
+            The connection and (optional) Keycloak authentication configuration.
+    """
+    grpc_cert: Optional[str] = None
+    cert_path: str = os.getenv("ONDEWO_GRPC_CERT", "").strip()
+    if cert_path:
+        log.info(f"Reading gRPC certificate from {cert_path}")
+        grpc_cert = Path(cert_path).read_text()
+
+    return ClientConfig(
+        host=os.environ["ONDEWO_HOST"],
+        port=os.environ["ONDEWO_PORT"],
+        grpc_cert=grpc_cert,
+        keycloak_url=os.getenv("KEYCLOAK_URL", ""),
+        realm=os.getenv("KEYCLOAK_REALM", ""),
+        client_id=os.getenv("KEYCLOAK_CLIENT_ID", ""),
+        user_name=os.getenv("KEYCLOAK_USER_NAME", ""),
+        password=os.getenv("KEYCLOAK_PASSWORD", ""),
+        keycloak_verify_ssl=_env_bool("KEYCLOAK_VERIFY_SSL", default=True),
+    )
 
 
 def main() -> None:
-    parser = argparse.ArgumentParser(description="File transcription example.")
-    parser.add_argument(
-        "--config",
-        type=str,
-        default="configs/insecure_grpc.json",
-        help="The GRPC configuration file path. "
-             "See examples/configs in the ondewo-s2t-client-python repository.",
-    )
-    parser.add_argument(
-        "--secure",
-        default=False,
-        action="store_true",
-        help="Use secure GRPC connection (default is insecure).",
-    )
-    args = parser.parse_args()
+    log.info("START: file_transcription_example: main")
+    start_time: float = perf_counter()
 
-    with open(args.config) as f:
-        config: ClientConfig = ClientConfig.from_json(f.read())
+    config: ClientConfig = build_client_config()
+    use_secure_channel: bool = _env_bool("ONDEWO_USE_SECURE_CHANNEL", default=False)
+    audio_file: str = _resolve_audio_file("audiofiles/sample_1.wav")
+    log.info(f"Connecting to ONDEWO S2T at {config.host_and_port} (secure={use_secure_channel})")
 
     # https://github.com/grpc/grpc-proto/blob/master/grpc/service_config/service_config.proto
     service_config_json: str = json.dumps(
@@ -100,35 +163,52 @@ def main() -> None:
         ("grpc.service_config", service_config_json)
     }
 
-    client: Client = Client(config=config, use_secure_channel=args.secure, options=options)
+    client: Client = Client(config=config, use_secure_channel=use_secure_channel, options=options)
     s2t_service: Speech2Text = client.services.speech_to_text
 
-    # List all speech-2-text pipelines (model setups) present on the server
-    # We are going to pick the first pipeline (model setup)
-    pipelines: List[speech_to_text_pb2.Speech2TextConfig] = s2t_service.list_s2t_pipelines(  # type: ignore
-        request=speech_to_text_pb2.ListS2tPipelinesRequest()
-    ).pipeline_configs
-    pipeline: speech_to_text_pb2.Speech2TextConfig = pipelines[0]  # type: ignore
+    try:
+        # List all speech-2-text pipelines (model setups) present on the server.
+        pipelines: List[speech_to_text_pb2.Speech2TextConfig] = s2t_service.list_s2t_pipelines(  # type: ignore
+            request=speech_to_text_pb2.ListS2tPipelinesRequest()
+        ).pipeline_configs
+        if not pipelines:
+            raise RuntimeError("The S2T server returned no pipelines to transcribe with.")
 
-    # Read file which we want to transcribe
-    with wave.open(AUDIO_FILE) as w:
-        audio: bytes = w.readframes(w.getnframes())
+        # Pick the pipeline id from the env var if provided, otherwise the first one.
+        pipeline_id: str = os.getenv("ONDEWO_S2T_PIPELINE_ID", "").strip() or pipelines[0].id  # type: ignore
+        log.info(f"Using S2T pipeline id: {pipeline_id}")
 
-    # Create transcription request
-    request = speech_to_text_pb2.TranscribeFileRequest(
-        audio_file=audio,
-        config=speech_to_text_pb2.TranscribeRequestConfig(
-            s2t_pipeline_id=pipeline.id,  # type: ignore
-            decoding=speech_to_text_pb2.Decoding.BEAM_SEARCH_WITH_LM,  # type: ignore
+        # Read file which we want to transcribe.
+        log.info(f"Reading audio file: {audio_file}")
+        with wave.open(audio_file) as w:
+            audio: bytes = w.readframes(w.getnframes())
+
+        # Create transcription request.
+        request = speech_to_text_pb2.TranscribeFileRequest(
+            audio_file=audio,
+            config=speech_to_text_pb2.TranscribeRequestConfig(
+                s2t_pipeline_id=pipeline_id,
+                decoding=speech_to_text_pb2.Decoding.BEAM_SEARCH_WITH_LM,  # type: ignore
+            )
         )
-    )
-    # Send transcription request and get response
-    transcribe_response: speech_to_text_pb2.TranscribeFileResponse = s2t_service.transcribe_file(
-        request=request
-    )  # type: ignore
+        # Send transcription request and get response.
+        log.info("Sending TranscribeFile request")
+        transcribe_response: speech_to_text_pb2.TranscribeFileResponse = s2t_service.transcribe_file(
+            request=request
+        )  # type: ignore
+    except grpc.RpcError as rpc_error:
+        log.error(f"gRPC call failed: code={rpc_error.code()} details={rpc_error.details()}")
+        raise
+
     for transcribe_message in transcribe_response.transcriptions:  # type: ignore
         print(f"File transcript: {transcribe_message.transcription}")
 
+    log.info(f"DONE: file_transcription_example: main. Elapsed time: {perf_counter() - start_time:.5f}")
+
 
 if __name__ == "__main__":
-    main()
+    try:
+        main()
+    except Exception:
+        log.exception("file_transcription_example failed")
+        sys.exit(1)

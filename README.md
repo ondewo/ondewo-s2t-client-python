@@ -63,11 +63,19 @@ make setup_developer_environment_locally
 │   │   ├── client
 │   │   │   ├── services
 │   │   │   │   ├── __init__.py
+│   │   │   │   ├── async_speech_to_text.py
 │   │   │   │   └── speech_to_text.py
-│   │   │   ├── client_config.py
-│   │   │   ├── client.py
+│   │   │   ├── utils
+│   │   │   │   ├── __init__.py
+│   │   │   │   └── keycloak.py           <----- D18 Keycloak headless offline-token provider
 │   │   │   ├── __init__.py
-│   │   │   └── services_container.py
+│   │   │   ├── async_client.py
+│   │   │   ├── async_services_container.py
+│   │   │   ├── async_services_interface.py
+│   │   │   ├── client.py
+│   │   │   ├── client_config.py
+│   │   │   ├── services_container.py
+│   │   │   └── services_interface.py
 │   │   ├── __init__.py
 │   │   ├── speech_to_text_pb2_grpc.py
 │   │   ├── speech_to_text_pb2.py
@@ -102,14 +110,24 @@ It will generate a `_pb2.py`, `_pb2.pyi` and `_pb2_grpc.py` file for every `.pro
 
 ## Examples
 
-The `/examples` folder provides a possible implementation of this library. To run an example, simple execute it like any other python file. To specify the server and credentials, you need to provide an environment file with the following variables:
+The `/examples` folder provides a possible implementation of this library. To run an example, simply execute it like any other python file and point it at a JSON config with `--config` (see `examples/configs/`). The config is parsed into `ondewo.s2t.client.client_config.ClientConfig` and supports the following fields:
 
-- host `// The hostname of the Server - e.g. 127.0.0.1`
-- port `// Port of the Server - e.g. 6600`
-- user_name `// Username - same as you would use in AIM`
-- password `// Password of the user`
-- http_token `// Token to allow access through`
-- grpc_cert `// gRPC Certificate of the server`
+- host `// The hostname of the server - e.g. 127.0.0.1`
+- port `// Port of the server - e.g. 6600`
+- grpc_cert `// gRPC certificate of the server (required for a secure channel)`
+- keycloak_url `// Base URL of the Keycloak server (optional headless-auth parameter)`
+- realm `// Keycloak realm (optional headless-auth parameter)`
+- client_id `// Public Keycloak client id, no secret (optional headless-auth parameter)`
+- user_name `// Technical-user email/username for the Keycloak ROPC grant (optional)`
+- password `// Technical-user password (optional)`
+
+A bare `{"host": ..., "port": ...}` config (as in `examples/configs/insecure_grpc.json`) stays valid for an unauthenticated / ingress-injected-auth server; the Keycloak fields are only required together when any one of them is set.
+
+## Authentication (Keycloak bearer)
+
+When the config carries the Keycloak fields, the SDK authenticates headlessly against a **public** Keycloak client (no client secret — D18/Q1) using the offline-token flow: a one-time Resource Owner Password Credentials login (`grant_type=password` with `scope=offline_access`) yields a long-lived offline refresh token, and the client then auto-refreshes a short-lived access token in the background before it expires. The technical user is 2FA-exempt (D14), so ROPC bypasses the browser flow.
+
+`Client` and `AsyncClient` forward this token automatically: every RPC issued through the service wrappers travels with the canonical gRPC metadata `Authorization: Bearer <jwt>`, so application code never has to build or refresh the header itself. A config without the Keycloak fields sends no such header and calls travel unauthenticated (e.g. against a plaintext server or an Envoy ingress that injects auth).
 
 ## Automatic Release Process
 

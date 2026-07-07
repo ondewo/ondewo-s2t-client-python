@@ -341,7 +341,7 @@ def _emit_method(
     req: str = f'{iterator_str}[{annot_req}]' if rpc.client_streaming else annot_req
     req_name: str = 'request_iterator' if rpc.client_streaming else 'request'
     sig_single = f'    {async_prefix}def {method}(self, {req_name}: {req}) -> {resp}:'
-    body_single = f'        response: {resp} = {await_prefix}self.stub.{rpc.name}({req_name})'
+    body_single = f'        response: {resp} = {await_prefix}self.stub.{rpc.name}({req_name}, metadata=self.metadata)'
 
     out: List[str] = ['']
 
@@ -375,7 +375,7 @@ def _emit_method(
         # else:
         out += [
             f'        response: {resp} = \\',
-            f'            {await_prefix}self.stub.{rpc.name}({req_name})'
+            f'            {await_prefix}self.stub.{rpc.name}({req_name}, metadata=self.metadata)'
         ]
 
     out.append('        return response')
@@ -418,8 +418,8 @@ def _build_file_content(svc: ServiceDef, type_to_stem: Dict[str, str], for_async
         lines.append('')
 
     lines.append(
-        f'from ondewo.utils.{async_prefix.lower()}base_services_interface '
-        f'import {async_prefix[:-1]}BaseServicesInterface'
+        f'from ondewo.s2t.client.{async_prefix.lower()}services_interface '
+        f'import {async_prefix[:-1]}ServicesInterface'
     )
     # Types from this service's own _pb2 module.
     if pb2_types:
@@ -437,7 +437,7 @@ def _build_file_content(svc: ServiceDef, type_to_stem: Dict[str, str], for_async
     lines += [
         '',
         '',
-        f'class {svc.name}({async_prefix[:-1]}BaseServicesInterface):',
+        f'class {svc.name}({async_prefix[:-1]}ServicesInterface):',
         '    """',
         f'    Exposes the {svc.name}-related endpoints of ONDEWO S2T services in a user-friendly way.',
         '',
