@@ -1,0 +1,133 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "ondewo-s2t-client"
+version = "7.4.0"
+description = "ONDEWO Speech 2 Text (S2T) Client library for Python"
+readme = "README.md"
+requires-python = ">=3.9"
+authors = [
+    { name = "ONDEWO GmbH", email = "office@ondewo.com" },
+]
+classifiers = [
+    "Development Status :: 5 - Production/Stable",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: Apache Software License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Software Development :: Libraries",
+]
+dependencies = [
+    "grpcio",
+    "grpcio-reflection",
+    "grpcio-tools",
+    "ondewo-client-utils>=3.2.0",
+    "protobuf",
+    "regex",
+    "requests",
+    "setuptools",
+]
+
+[project.optional-dependencies]
+dev = [
+    "loguru",
+    "mypy",
+    "mypy-protobuf",
+    "pre-commit",
+    "python-dotenv",
+    "pytest",
+    "pytest-asyncio",
+    "pytest-cov",
+    "ruff",
+    "types-requests",
+    "typing_extensions",
+]
+
+[project.urls]
+Homepage = "https://github.com/ondewo/ondewo-s2t-client-python"
+Repository = "https://github.com/ondewo/ondewo-s2t-client-python"
+
+# ---------------------------------------------------------------------------
+# setuptools: package discovery + package data
+# Equivalent to the old setup.py:
+#   packages = [n for n in find_packages() if n == 'ondewo' or n.startswith('ondewo.')]
+#   include_package_data=True + package_data for py.typed / *.pyi
+# ---------------------------------------------------------------------------
+[tool.setuptools.packages.find]
+include = ["ondewo", "ondewo.*"]
+
+[tool.setuptools.package-data]
+"ondewo.s2t" = ["py.typed", "*.pyi"]
+
+# ---------------------------------------------------------------------------
+# Ruff  (replaces flake8: ignore C901,W504; max-line-length 120; exclude *_pb2*)
+# ---------------------------------------------------------------------------
+[tool.ruff]
+line-length = 120
+target-version = "py39"
+# Never lint/format the generated protobuf/gRPC stubs (the old .flake8 excluded
+# ondewo/s2t/speech_to_text_pb2*.py / .pyi individually).
+extend-exclude = [
+    "*_pb2.py",
+    "*_pb2.pyi",
+    "*_pb2_grpc.py",
+    "ondewo-s2t-api",
+    "ondewo-proto-compiler",
+    # flake8 (the tool being replaced) never linted Jupyter notebooks; ruff does
+    # by default. Keep the example notebooks out of scope to preserve behaviour.
+    "*.ipynb",
+]
+
+[tool.ruff.lint]
+# pycodestyle (E/W) + pyflakes (F) == the flake8 default rule set.
+# C901 (mccabe complexity) is intentionally NOT enabled -> old "ignore = C901".
+# W503/W504 (line break around binary operator) are not implemented by ruff,
+# so the old "ignore = W504" is a no-op here.
+select = ["E", "F", "W"]
+ignore = []
+
+[tool.ruff.format]
+# Supersedes the old black + autopep8 hooks.
+quote-style = "double"
+
+# ---------------------------------------------------------------------------
+# Mypy  (translated faithfully from mypy.ini)
+# ---------------------------------------------------------------------------
+# python_version tracks the oldest mypy-supported interpreter (3.10); runtime
+# support still spans 3.9-3.12 via requires-python / classifiers. mypy.ini said
+# 3.9, but mypy >= 2.x rejects it ("must be 3.10 or higher").
+[tool.mypy]
+python_version = "3.10"
+ignore_errors = false
+ignore_missing_imports = false
+disallow_untyped_defs = true
+no_implicit_optional = true
+strict_optional = true
+show_traceback = true
+warn_no_return = true
+warn_return_any = true
+warn_unused_configs = true
+
+# Generated protobuf / gRPC stubs: never type-check them.
+[[tool.mypy.overrides]]
+module = [
+    "ondewo.s2t.speech_to_text_pb2",
+    "ondewo.s2t.speech_to_text_pb2_grpc",
+]
+ignore_errors = true
+ignore_missing_imports = true
+
+# Third-party packages without (complete) type stubs.
+[[tool.mypy.overrides]]
+module = [
+    "dataclasses_json.*",
+    "google.protobuf.*",
+    "grpc.*",
+    "ondewo.utils.*",
+]
+ignore_missing_imports = true

@@ -108,9 +108,8 @@ check_build: ## Checks if all built proto-code is there
 ########################################################
 #		Build
 
-update_setup: ## Update Version in setup.py
-	@perl -i -pe "s/version='[0-9]*\.[0-9]*\.[0-9]*'/version='${ONDEWO_S2T_VERSION}'/g" setup.py
-	@perl -i -pe "s/version=\"[0-9]*\.[0-9]*\.[0-9]*\"/version='${ONDEWO_S2T_VERSION}'/g" setup.py
+update_setup: ## Update Version in pyproject.toml
+	@perl -i -pe 's/^version = "[0-9]+\.[0-9]+\.[0-9]+"/version = "${ONDEWO_S2T_VERSION}"/' pyproject.toml
 
 build: clear_package_data init_submodules checkout_defined_submodule_versions build_compiler generate_ondewo_protos generate_services update_setup ## Build source code
 
@@ -186,7 +185,7 @@ release: ## Automate the entire release process
 	git add ondewo
 	git add Makefile
 	git add RELEASE.md
-	git add setup.py
+	git add pyproject.toml uv.lock
 	git add ${ONDEWO_PROTO_COMPILER_DIR}
 	git add ${ONDEWO_S2T_API_DIR}
 	git status
@@ -232,7 +231,7 @@ checkout_defined_submodule_versions:  ## Update submodule versions
 #		PYPI
 
 build_package: ## Builds PYPI Package
-	python setup.py sdist bdist_wheel
+	python -m build --no-isolation
 	chmod -R a+rw dist
 
 upload_package: ## Uploads PYPI Package
@@ -256,9 +255,9 @@ push_to_pypi: build_package upload_package clear_package_data ## Builds -> Uploa
 	@echo 'YAY - Pushed to pypi : )'
 
 show_pypi: build_package ## Shows PYPI Package in Dockerimage
-	tar xvfz dist/ondewo-s2t-client-${ONDEWO_S2T_VERSION}.tar.gz
-	tree ondewo-s2t-client-${ONDEWO_S2T_VERSION}
-	cat ondewo-s2t-client-${ONDEWO_S2T_VERSION}/ondewo_s2t_client.egg-info/requires.txt
+	tar xvfz dist/ondewo_s2t_client-${ONDEWO_S2T_VERSION}.tar.gz
+	tree ondewo_s2t_client-${ONDEWO_S2T_VERSION}
+	cat ondewo_s2t_client-${ONDEWO_S2T_VERSION}/ondewo_s2t_client.egg-info/requires.txt
 
 show_pypi_via_docker_image: build_utils_docker_image ## Push source code to pypi via docker
 	[ -d $(OUTPUT_DIR) ] || mkdir -p $(OUTPUT_DIR)
