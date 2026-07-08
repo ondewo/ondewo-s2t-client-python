@@ -72,8 +72,9 @@ class Speech2Text(ServicesInterface):
         self,
         request_iterator: Iterator[TranscribeStreamRequest],
     ) -> Iterator[TranscribeStreamResponse]:
-        response: Iterator[TranscribeStreamResponse] = \
-            self.stub.TranscribeStream(request_iterator, metadata=self.metadata)
+        response: Iterator[TranscribeStreamResponse] = self.stub.TranscribeStream(
+            request_iterator, metadata=self.metadata
+        )
         return response
 
     def get_s2t_pipeline(self, request: S2tPipelineId) -> Speech2TextConfig:
@@ -132,6 +133,7 @@ class Speech2Text(ServicesInterface):
         self,
         request: ListS2tNormalizationPipelinesRequest,
     ) -> ListS2tNormalizationPipelinesResponse:
-        response: ListS2tNormalizationPipelinesResponse = \
-            self.stub.ListS2tNormalizationPipelines(request, metadata=self.metadata)
+        response: ListS2tNormalizationPipelinesResponse = self.stub.ListS2tNormalizationPipelines(
+            request, metadata=self.metadata
+        )
         return response

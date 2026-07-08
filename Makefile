@@ -46,34 +46,32 @@ IMAGE_UTILS_NAME=ondewo-s2t-client-utils-python:${ONDEWO_S2T_VERSION}
 #       ONDEWO Standard Make Targets
 ########################################################
 
-setup_developer_environment_locally: install_precommit_hooks install_dependencies_locally
+setup_developer_environment_locally: install_uv install_dependencies_locally install_precommit_hooks ## Ready a fresh laptop: install uv, sync runtime+dev deps into .venv, install pre-commit hooks
 
-install_precommit_hooks: ## Installs pre-commit hooks and sets them up for the ondewo-csi-client repo
-	-pip install pre-commit
-	-conda install -y pre-commit
-	pre-commit install
-	pre-commit install --hook-type commit-msg
+install_uv: ## Install the uv package manager if it is not already available
+	@command -v uv >/dev/null 2>&1 || curl -LsSf https://astral.sh/uv/install.sh | sh
+
+install_precommit_hooks: ## Installs pre-commit hooks and sets them up for the ondewo-s2t-client-python repo
+	uv run pre-commit install
+	uv run pre-commit install --hook-type commit-msg
 
 precommit_hooks_run_all_files: ## Runs all pre-commit hooks on all files and not just the changed ones
-	pre-commit run --all-file
+	uv run pre-commit run --all-files
 
-install_dependencies_locally: ## Install dependencies locally
-	pip install -r requirements-dev.txt
-	pip install -r requirements.txt
+install_dependencies_locally: ## Install runtime + dev dependencies locally into the uv-managed .venv
+	uv sync --extra dev
 
-flake8: ## Runs flake8
-	python -m flake8 --config .flake8 .
+ruff: ## Lint with ruff (replaces flake8)
+	uv run ruff check .
+
+ruff_fix: ## Lint with ruff and auto-fix fixable issues
+	uv run ruff check --fix .
+
+ruff_format: ## Format the codebase with ruff (replaces black + autopep8)
+	uv run ruff format .
 
 mypy: ## Run mypy static code checking
-	@echo "---------------------------------------------"
-	@echo "START: Run mypy in pre-commit hook ..."
-	pre-commit run mypy --all-files
-	@echo "DONE: Run mypy in pre-commit hook."
-	@echo "---------------------------------------------"
-	@echo "START: Run mypy directly ..."
-	python -m mypy --config-file=mypy.ini ondewo/ test/
-	@echo "DONE: Run mypy directly"
-	@echo "---------------------------------------------"
+	uv run mypy ondewo/ test/
 
 help: ## Print usage info about help targets
 	# (first comment after target starting with double hashes ##)
@@ -132,7 +130,7 @@ generate_ondewo_protos:  ## Generate python code from proto files
 	make precommit_hooks_run_all_files
 
 generate_services: ## Generate service wrapper files from proto definitions
-	python3 ondewo/s2t/scripts/generate_services.py \
+	uv run python ondewo/s2t/scripts/generate_services.py \
 		${ONDEWO_S2T_API_DIR}/ondewo/s2t \
 		ondewo/s2t/client/services
 	-make precommit_hooks_run_all_files
@@ -144,17 +142,6 @@ release_to_github_via_docker: build_utils_docker_image release_to_github_via_doc
 
 build_utils_docker_image:  ## Build utils docker image
 	docker build -f Dockerfile.utils -t ${IMAGE_UTILS_NAME} .
-
-setup_conda_env: ## Checks for CONDA Environment
-	@echo "\n START SETTING UP CONDA ENV \n"
-	@conda env list | grep -q ondewo-s2t-client-python \
-	&& make release || ( echo "\n CONDA ENV FOR REPO DOESNT EXIST \n" \
-	&& make create_conda_env)
-
-create_conda_env: ## Creates CONDA Environment
-	conda create -y --name ondewo-s2t-client-python python=3.10
-	/bin/bash -c 'source `conda info --base`/bin/activate ondewo-s2t-client-python; make setup_developer_environment_locally && echo "\n PRECOMMIT INSTALLED \n"'
-	make release
 
 create_async_services: ## Create async services for all synchronous services
 	@find ondewo -type d -name "services" ! -path "*/.*/*" | while read -r dir; do \
@@ -179,7 +166,7 @@ create_async_services: ## Create async services for all synchronous services
 release: ## Automate the entire release process
 	@echo "Start Release"
 	make build
-	/bin/bash -c 'source `conda info --base`/bin/activate ondewo-s2t-client-python; make precommit_hooks_run_all_files || echo "PRECOMMIT FOUND SOMETHING"'
+	-make precommit_hooks_run_all_files
 	git status
 	make check_build
 	git add ondewo
@@ -231,7 +218,7 @@ checkout_defined_submodule_versions:  ## Update submodule versions
 #		PYPI
 
 build_package: ## Builds PYPI Package
-	python -m build --no-isolation
+	uv build
 	chmod -R a+rw dist
 
 upload_package: ## Uploads PYPI Package
@@ -291,26 +278,26 @@ clone_devops_accounts: ## Clones devops-accounts repo
 
 run_release_with_devops: ## Gets Credentials from devops-repo and run release command with them
 	$(eval info:= $(shell cat ${DEVOPS_ACCOUNT_DIR}/account_github.env | grep GITHUB_GH; cat ${DEVOPS_ACCOUNT_DIR}/account_pypi.env | grep PYPI_USERNAME; cat ${DEVOPS_ACCOUNT_DIR}/account_pypi.env | grep PYPI_PASSWORD))
-	@echo ${CONDA_PREFIX} | grep -q s2t-client-python && make release $(info) || (make setup_conda_env $(info))
+	make release $(info)
 
 spc: ## Checks if the Release Branch, Tag and Pypi version already exist
 	$(eval filtered_branches:= $(shell git branch --all | grep "release/${ONDEWO_S2T_VERSION}"))
 	$(eval filtered_tags:= $(shell git tag --list | grep "${ONDEWO_S2T_VERSION}"))
-	$(eval setuppy_version:= $(shell cat setup.py | grep "version"))
+	$(eval pyproject_version:= $(shell grep '^version = ' pyproject.toml))
 	@if test "$(filtered_branches)" != ""; then echo "-- Test 1: Branch exists!!"; exit 1; else echo "-- Test 1: Branch is fine";fi
 	@if test "$(filtered_tags)" != ""; then echo "-- Test 2: Tag exists!!"; exit 1; else echo "-- Test 2: Tag is fine";fi
-	# @if test "$(setuppy_version)" != "version='${ONDEWO_S2T_VERSION}',"; then echo "-- Test 3: Setup.py not updated!!"; exit 1; else echo "-- Test 3: Setup.py is fine";fi
+	# @if test "$(pyproject_version)" != "version = \"${ONDEWO_S2T_VERSION}\""; then echo "-- Test 3: pyproject.toml not updated!!"; exit 1; else echo "-- Test 3: pyproject.toml is fine";fi
 
 ########################################################
 #       Test
 ########################################################
 
 test: ## Run unit tests with terminal + HTML coverage report
-	python -m pytest test/unit \
+	uv run pytest test/unit \
 		--cov=ondewo/s2t/client \
 		--cov-report=term-missing \
 		--cov-report=html:htmlcov \
 		-v
 
 test_unit: ## Run unit tests without coverage
-	python -m pytest test/unit -v
+	uv run pytest test/unit -v

@@ -35,7 +35,7 @@ from ondewo.utils.base_client_config import BaseClientConfig
 @dataclass_json
 @dataclass(frozen=True)
 class ClientConfig(BaseClientConfig):
-    """ Config for ONDEWO S2T client.
+    """Config for ONDEWO S2T client.
 
     Extends ``BaseClientConfig`` (``host``/``port``/``grpc_cert``) with the headless
     Keycloak authentication parameters used by the D18 offline-token flow.
@@ -76,17 +76,18 @@ class ClientConfig(BaseClientConfig):
             call. Defaults to ``True`` (secure). Set ``False`` only for a self-signed/local
             Envoy at ``https://localhost:12001/auth``.
     """
-    keycloak_url: str = ''
-    realm: str = ''
-    client_id: str = ''
-    username: str = ''
-    user_name: str = ''
-    password: str = ''
+
+    keycloak_url: str = ""
+    realm: str = ""
+    client_id: str = ""
+    username: str = ""
+    user_name: str = ""
+    password: str = ""
     token_expiration_in_s: Optional[int] = None
     keycloak_verify_ssl: bool = True
 
     def __post_init__(self) -> None:
-        """ Validate the Keycloak authentication field set.
+        """Validate the Keycloak authentication field set.
 
         Calls ``BaseClientConfig.__post_init__`` (which encodes ``grpc_cert``), then -
         only if the config opts into Keycloak auth (any Keycloak/credential field set) -
@@ -105,26 +106,26 @@ class ClientConfig(BaseClientConfig):
 
         missing: list[str] = []
         if not self.keycloak_url:
-            missing.append('keycloak_url')
+            missing.append("keycloak_url")
         if not self.realm:
-            missing.append('realm')
+            missing.append("realm")
         if not self.client_id:
-            missing.append('client_id')
+            missing.append("client_id")
         if not self.resolved_username:
-            missing.append('username')
+            missing.append("username")
         if not self.password:
-            missing.append('password')
+            missing.append("password")
         if missing:
             raise ValueError(
-                'Incomplete Keycloak authentication config in '
-                f'{self.__class__.__name__}: missing {missing}. '
-                'Provide keycloak_url, realm, client_id, username and password together, '
-                'or none of them for an unauthenticated client.'
+                "Incomplete Keycloak authentication config in "
+                f"{self.__class__.__name__}: missing {missing}. "
+                "Provide keycloak_url, realm, client_id, username and password together, "
+                "or none of them for an unauthenticated client."
             )
 
     @property
     def resolved_username(self) -> str:
-        """ Return the effective username, preferring ``username`` over ``user_name``.
+        """Return the effective username, preferring ``username`` over ``user_name``.
 
         Returns:
             str:
@@ -134,17 +135,11 @@ class ClientConfig(BaseClientConfig):
 
     @property
     def uses_keycloak_auth(self) -> bool:
-        """ Whether this config opts into the Keycloak ROPC offline-token flow.
+        """Whether this config opts into the Keycloak ROPC offline-token flow.
 
         Returns:
             bool:
                 ``True`` if any Keycloak/credential field is non-empty, which switches
                 on the ``__post_init__`` completeness check and the token manager.
         """
-        return bool(
-            self.keycloak_url or
-            self.realm or
-            self.client_id or
-            self.resolved_username or
-            self.password
-        )
+        return bool(self.keycloak_url or self.realm or self.client_id or self.resolved_username or self.password)

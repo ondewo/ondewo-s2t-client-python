@@ -170,7 +170,7 @@ class TestClientWithGrpcOptions:
         options: Set[Tuple[str, Any]] = {
             ("grpc.max_send_message_length", 1024 * 1024),
             ("grpc.max_receive_message_length", 1024 * 1024),
-            ("grpc.keepalive_time_ms", 2 ** 31 - 1),
+            ("grpc.keepalive_time_ms", 2**31 - 1),
             ("grpc.enable_retries", 1),
         }
         with patch(_CLIENT_SPEECH2TEXT):
@@ -582,13 +582,9 @@ class TestTranscribeFileScenarios:
             fake_audio_bytes: Synthetic PCM payload for the transcription request.
         """
         first_pipeline: Speech2TextConfig = Speech2TextConfig(id="pipeline-001")
-        mock_stub.ListS2tPipelines.return_value = ListS2tPipelinesResponse(
-            pipeline_configs=[first_pipeline]
-        )
+        mock_stub.ListS2tPipelines.return_value = ListS2tPipelinesResponse(pipeline_configs=[first_pipeline])
 
-        pipelines_result: ListS2tPipelinesResponse = service.list_s2t_pipelines(
-            ListS2tPipelinesRequest()
-        )
+        pipelines_result: ListS2tPipelinesResponse = service.list_s2t_pipelines(ListS2tPipelinesRequest())
         pipeline: Speech2TextConfig = pipelines_result.pipeline_configs[0]
 
         transcribe_request: TranscribeFileRequest = TranscribeFileRequest(
@@ -754,12 +750,8 @@ class TestTranscribeStreamScenarios:
         mock_chunk.transcriptions = [mock_transcription]
         mock_stub.TranscribeStream.return_value = iter([mock_chunk])
 
-        response_gen: Iterator[TranscribeStreamResponse] = service.transcribe_stream(
-            streaming_requests
-        )
-        texts: List[str] = [
-            t.transcription for chunk in response_gen for t in chunk.transcriptions
-        ]
+        response_gen: Iterator[TranscribeStreamResponse] = service.transcribe_stream(streaming_requests)
+        texts: List[str] = [t.transcription for chunk in response_gen for t in chunk.transcriptions]
 
         assert texts == ["streaming result"]
 

@@ -47,7 +47,7 @@ CHUNK_SIZE: int = 8000
 
 
 def _env_bool(name: str, default: bool = False) -> bool:
-    """ Read a boolean environment variable ("true"/"false", case-insensitive).
+    """Read a boolean environment variable ("true"/"false", case-insensitive).
 
     Args:
         name (str):
@@ -66,7 +66,7 @@ def _env_bool(name: str, default: bool = False) -> bool:
 
 
 def _resolve_audio_file(default_name: str) -> str:
-    """ Resolve the audio file path from the canonical env var.
+    """Resolve the audio file path from the canonical env var.
 
     Reads ``ONDEWO_S2T_AUDIO_FILE``; relative paths are resolved against the
     ``examples/`` directory so the example is runnable from any working directory.
@@ -87,7 +87,7 @@ def _resolve_audio_file(default_name: str) -> str:
 
 
 def build_client_config() -> ClientConfig:
-    """ Build a :class:`ClientConfig` from the canonical ONDEWO_* / KEYCLOAK_* env vars.
+    """Build a :class:`ClientConfig` from the canonical ONDEWO_* / KEYCLOAK_* env vars.
 
     Returns:
         ClientConfig:
@@ -138,8 +138,8 @@ def create_streaming_request(
                 decoding=speech_to_text_pb2.Decoding.GREEDY,
                 utterance_detection=speech_to_text_pb2.UtteranceDetectionOptions(
                     transcribe_not_final=transcribe_not_final,
-                )
-            )
+                ),
+            ),
         )
     # End the stream
     yield speech_to_text_pb2.TranscribeStreamRequest(
@@ -151,7 +151,7 @@ def create_streaming_request(
                 spelling_correction=False,
             ),
             decoding=speech_to_text_pb2.Decoding.GREEDY,
-        )
+        ),
     )
 
 
@@ -203,14 +203,14 @@ def main() -> None:
         ("grpc.max_send_message_length", 1024 * 1024),
         ("grpc.max_receive_message_length", 1024 * 1024),
         # Example of setting KeepAlive options through generic channel_args
-        ("grpc.keepalive_time_ms", 2 ** 31 - 1),
+        ("grpc.keepalive_time_ms", 2**31 - 1),
         ("grpc.keepalive_timeout_ms", 20000),
         ("grpc.keepalive_permit_without_calls", False),
         ("grpc.http2.max_pings_without_data", 2),
         # Example arg requested for the feature
         ("grpc.dns_enable_srv_queries", 1),
         ("grpc.enable_retries", 1),
-        ("grpc.service_config", service_config_json)
+        ("grpc.service_config", service_config_json),
     }
 
     client: Client = Client(config=config, use_secure_channel=use_secure_channel, options=options)

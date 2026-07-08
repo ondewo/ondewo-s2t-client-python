@@ -20,6 +20,7 @@ headless offline-token flow, that metadata carries a freshly auto-refreshed
 ``Authorization: Bearer`` header; otherwise it is empty and calls travel unauthenticated
 (e.g. against a plaintext server or an Envoy ingress that injects auth).
 """
+
 from abc import ABC
 from typing import (
     Any,

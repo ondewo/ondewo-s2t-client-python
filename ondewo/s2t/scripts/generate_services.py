@@ -71,7 +71,7 @@ _MAX_LINE_LENGTH = 120
 @dataclass
 class RpcMethod:
     name: str
-    request_type: str   # full qualified proto name, e.g. "google.protobuf.Empty" or "RagAskRequest"
+    request_type: str  # full qualified proto name, e.g. "google.protobuf.Empty" or "RagAskRequest"
     response_type: str  # full qualified proto name
     client_streaming: bool
     server_streaming: bool
@@ -79,7 +79,7 @@ class RpcMethod:
 
 @dataclass
 class ServiceDef:
-    name: str        # as written in proto, e.g. "Rags"
+    name: str  # as written in proto, e.g. "Rags"
     rpcs: List[RpcMethod]
     proto_stem: str  # proto filename without extension, e.g. "rag"
 
@@ -87,7 +87,7 @@ class ServiceDef:
 @dataclass
 class ProtoFile:
     stem: str
-    messages: Set[str] = field(default_factory=set)   # top-level + nested ('Parent.Child')
+    messages: Set[str] = field(default_factory=set)  # top-level + nested ('Parent.Child')
     top_messages: Set[str] = field(default_factory=set)  # top-level only
     services: List[ServiceDef] = field(default_factory=list)
 
@@ -102,7 +102,7 @@ def camel_to_snake(name: str) -> str:
       AiServices    -> ai_services  (i before S triggers insertion)
       AIServices    -> aiservices   (no lowercase before any uppercase run)
     """
-    return re.sub(r'([a-z\d])([A-Z])', r'\1_\2', name).lower()
+    return re.sub(r"([a-z\d])([A-Z])", r"\1_\2", name).lower()
 
 
 def proto_stem_to_file_name(stem: str) -> str:
@@ -115,11 +115,11 @@ def proto_stem_to_file_name(stem: str) -> str:
       aiservices       -> aiservices  (already ends in s)
     """
     return stem
-    if stem.endswith('y'):
-        return stem[:-1] + 'ies'
-    if stem.endswith('s'):
+    if stem.endswith("y"):
+        return stem[:-1] + "ies"
+    if stem.endswith("s"):
         return stem
-    return stem + 's'
+    return stem + "s"
 
 
 def _strip_proto_comments(content: str) -> str:
@@ -140,8 +140,8 @@ def _strip_proto_comments(content: str) -> str:
     content = re.sub(r'"(?:[^"\\]|\\.)*"', _save_string, content)
 
     # 2. Strip block comments, then line comments.
-    content = re.sub(r'/\*.*?\*/', '', content, flags=re.DOTALL)
-    content = re.sub(r'//[^\n]*', '', content)
+    content = re.sub(r"/\*.*?\*/", "", content, flags=re.DOTALL)
+    content = re.sub(r"//[^\n]*", "", content)
 
     # 3. Restore the original string literals.
     for i, s in enumerate(strings):
@@ -160,11 +160,11 @@ def _extract_messages(content: str) -> Tuple[Set[str], Set[str]]:
     top_level: Set[str] = set()
     msg_stack: List[Tuple[str, int]] = []  # (name, depth at which it was opened)
     cur_depth = 0
-    pattern = re.compile(r'message\s+(\w+)\s*\{|(\{)|(\})')
+    pattern = re.compile(r"message\s+(\w+)\s*\{|(\{)|(\})")
     for m in pattern.finditer(content):
         if m.group(1):
             name = m.group(1)
-            full = '.'.join([n for n, _ in msg_stack] + [name])
+            full = ".".join([n for n, _ in msg_stack] + [name])
             all_messages.add(full)
             if not msg_stack:
                 top_level.add(name)
@@ -196,25 +196,24 @@ def resolve_type(
       other module (``google.protobuf`` or another ondewo proto), or ``None``.
     """
     # google.protobuf.* — derive the pb2 module name from the bare type via camel_to_snake.
-    if qualified.startswith('google.protobuf.'):
-        bare = qualified.split('.')[-1]
+    if qualified.startswith("google.protobuf."):
+        bare = qualified.split(".")[-1]
         module = camel_to_snake(bare)  # FieldMask -> field_mask, Empty -> empty
-        return bare, None, f'from google.protobuf.{module}_pb2 import {bare}'
+        return bare, None, f"from google.protobuf.{module}_pb2 import {bare}"
 
     # Strip the ondewo.s2t. prefix if present so we can treat the remainder uniformly.
-    if qualified.startswith('ondewo.s2t.'):
-        qualified = qualified[len('ondewo.s2t.'):]
+    if qualified.startswith("ondewo.s2t."):
+        qualified = qualified[len("ondewo.s2t.") :]
 
     # `qualified` is now either a bare name (`Foo`) or a nested-message form (`Parent.Child`).
-    root = qualified.split('.')[0]
+    root = qualified.split(".")[0]
 
     # Look up which proto defines `root`.
     stem = type_to_stem.get(root)
     if stem is None:
         # Unknown — best-effort fall back to local with a warning.
         print(
-            f'  WARNING: type "{qualified}" not found in any proto registry, '
-            f'treating as local to {current_stem}',
+            f'  WARNING: type "{qualified}" not found in any proto registry, treating as local to {current_stem}',
             file=sys.stderr,
         )
         return qualified, root, None
@@ -224,24 +223,24 @@ def resolve_type(
         return qualified, root, None
 
     # Defined elsewhere: emit a dedicated `from ondewo.s2t.<stem>_pb2 import <root>` line.
-    return qualified, None, f'from ondewo.s2t.{stem}_pb2 import {root}'
+    return qualified, None, f"from ondewo.s2t.{stem}_pb2 import {root}"
 
 
 def parse_proto_file(proto_path: Path) -> ProtoFile:
     """Parse a .proto file and return a ProtoFile with services and messages."""
     raw = proto_path.read_text()
     content = _strip_proto_comments(raw)
-    proto_stem = proto_path.stem.replace('-', '_')
+    proto_stem = proto_path.stem.replace("-", "_")
 
     all_messages, top_messages = _extract_messages(content)
 
     rpc_re = re.compile(
-        r'rpc\s+(\w+)\s*\(\s*(stream\s+)?([\w.]+)\s*\)\s*returns\s*\(\s*(stream\s+)?([\w.]+)\s*\)',
+        r"rpc\s+(\w+)\s*\(\s*(stream\s+)?([\w.]+)\s*\)\s*returns\s*\(\s*(stream\s+)?([\w.]+)\s*\)",
         re.DOTALL,
     )
 
     services: List[ServiceDef] = []
-    for svc_match in re.finditer(r'service\s+(\w+)\s*\{', content):
+    for svc_match in re.finditer(r"service\s+(\w+)\s*\{", content):
         service_name = svc_match.group(1)
 
         # Extract the service body by counting braces.
@@ -249,12 +248,12 @@ def parse_proto_file(proto_path: Path) -> ProtoFile:
         depth = 1
         pos = start
         while pos < len(content) and depth > 0:
-            if content[pos] == '{':
+            if content[pos] == "{":
                 depth += 1
-            elif content[pos] == '}':
+            elif content[pos] == "}":
                 depth -= 1
             pos += 1
-        body = content[start:pos - 1]
+        body = content[start : pos - 1]
 
         seen_rpc_names: Set[str] = set()
         rpcs: List[RpcMethod] = []
@@ -263,18 +262,20 @@ def parse_proto_file(proto_path: Path) -> ProtoFile:
             if rpc_name in seen_rpc_names:
                 print(
                     f'  WARNING: duplicate RPC "{rpc_name}" in service "{service_name}" '
-                    f'of {proto_path.name} — skipping duplicate',
+                    f"of {proto_path.name} — skipping duplicate",
                     file=sys.stderr,
                 )
                 continue
             seen_rpc_names.add(rpc_name)
-            rpcs.append(RpcMethod(
-                name=rpc_name,
-                request_type=r.group(3).strip(),
-                response_type=r.group(5).strip(),
-                client_streaming=bool(r.group(2)),
-                server_streaming=bool(r.group(4)),
-            ))
+            rpcs.append(
+                RpcMethod(
+                    name=rpc_name,
+                    request_type=r.group(3).strip(),
+                    response_type=r.group(5).strip(),
+                    client_streaming=bool(r.group(2)),
+                    server_streaming=bool(r.group(4)),
+                )
+            )
 
         if rpcs:
             services.append(ServiceDef(name=service_name, rpcs=rpcs, proto_stem=proto_stem))
@@ -295,18 +296,18 @@ def _emit_import_group(lines: List[str], import_lines: Set[str]) -> None:
     """
     module_to_names: Dict[str, List[str]] = {}
     for imp in import_lines:
-        m = re.match(r'from (\S+) import (\S+)', imp)
+        m = re.match(r"from (\S+) import (\S+)", imp)
         if m:
             module_to_names.setdefault(m.group(1), []).append(m.group(2))
     for module in sorted(module_to_names):
         names = sorted(module_to_names[module])
         if len(names) == 1:
-            lines.append(f'from {module} import {names[0]}')
+            lines.append(f"from {module} import {names[0]}")
         else:
-            lines.append(f'from {module} import (')
+            lines.append(f"from {module} import (")
             for name in names:
-                lines.append(f'    {name},')
-            lines.append(')')
+                lines.append(f"    {name},")
+            lines.append(")")
 
 
 def _emit_method(
@@ -321,15 +322,15 @@ def _emit_method(
     ``'Empty'``) the generated method takes **no parameters** and calls
     ``Empty()`` internally — hiding the protobuf artifact from callers.
     """
-    async_prefix: str = ''
-    await_prefix: str = ''
-    iterator_str = 'AsyncIterator' if for_async else 'Iterator'
+    async_prefix: str = ""
+    await_prefix: str = ""
+    iterator_str = "AsyncIterator" if for_async else "Iterator"
     if for_async:
-        async_prefix = 'async '
-        await_prefix = 'await '
+        async_prefix = "async "
+        await_prefix = "await "
 
     method = camel_to_snake(rpc.name)
-    resp = f'{iterator_str}[{annot_resp}]' if rpc.server_streaming else annot_resp
+    resp = f"{iterator_str}[{annot_resp}]" if rpc.server_streaming else annot_resp
 
     # Detect the Empty-request pattern (non-streaming only).
     # empty_request = (annot_req == 'Empty' and not rpc.client_streaming)
@@ -338,12 +339,12 @@ def _emit_method(
     #     sig_single = f'    {async_prefix}def {method}(self) -> {resp}:'
     #     body_single = f'        response: {resp} = {await_prefix}self.stub.{rpc.name}(Empty())'
     # else:
-    req: str = f'{iterator_str}[{annot_req}]' if rpc.client_streaming else annot_req
-    req_name: str = 'request_iterator' if rpc.client_streaming else 'request'
-    sig_single = f'    {async_prefix}def {method}(self, {req_name}: {req}) -> {resp}:'
-    body_single = f'        response: {resp} = {await_prefix}self.stub.{rpc.name}({req_name}, metadata=self.metadata)'
+    req: str = f"{iterator_str}[{annot_req}]" if rpc.client_streaming else annot_req
+    req_name: str = "request_iterator" if rpc.client_streaming else "request"
+    sig_single = f"    {async_prefix}def {method}(self, {req_name}: {req}) -> {resp}:"
+    body_single = f"        response: {resp} = {await_prefix}self.stub.{rpc.name}({req_name}, metadata=self.metadata)"
 
-    out: List[str] = ['']
+    out: List[str] = [""]
 
     if len(sig_single) <= _MAX_LINE_LENGTH:
         out.append(sig_single)
@@ -356,10 +357,10 @@ def _emit_method(
         #     ]
         # else:
         out += [
-            f'    {async_prefix}def {method}(',
-            '        self,',
-            f'        {req_name}: {req},',
-            f'    ) -> {resp}:',
+            f"    {async_prefix}def {method}(",
+            "        self,",
+            f"        {req_name}: {req},",
+            f"    ) -> {resp}:",
         ]
 
     if len(body_single) <= _MAX_LINE_LENGTH:
@@ -374,11 +375,11 @@ def _emit_method(
         #     ]
         # else:
         out += [
-            f'        response: {resp} = \\',
-            f'            {await_prefix}self.stub.{rpc.name}({req_name}, metadata=self.metadata)'
+            f"        response: {resp} = \\",
+            f"            {await_prefix}self.stub.{rpc.name}({req_name}, metadata=self.metadata)",
         ]
 
-    out.append('        return response')
+    out.append("        return response")
     return out
 
 
@@ -402,149 +403,148 @@ def _build_file_content(svc: ServiceDef, type_to_stem: Dict[str, str], for_async
                 external_imports.add(ext)
         resolved.append((annot_req, annot_resp))
 
-    async_prefix: str = ''
+    async_prefix: str = ""
     if for_async:
-        async_prefix = 'Async_'
+        async_prefix = "Async_"
 
-    lines: List[str] = [_COPYRIGHT, '', _AUTOGENERATED_WARNING, '']
+    lines: List[str] = [_COPYRIGHT, "", _AUTOGENERATED_WARNING, ""]
 
     if needs_iterator:
-        lines += [f'from typing import {async_prefix[:-1]}Iterator', '']
+        lines += [f"from typing import {async_prefix[:-1]}Iterator", ""]
 
     # google.protobuf imports first, grouped by module.
-    google_set = {i for i in external_imports if i.startswith('from google')}
+    google_set = {i for i in external_imports if i.startswith("from google")}
     if google_set:
         _emit_import_group(lines, google_set)
-        lines.append('')
+        lines.append("")
 
     lines.append(
-        f'from ondewo.s2t.client.{async_prefix.lower()}services_interface '
-        f'import {async_prefix[:-1]}ServicesInterface'
+        f"from ondewo.s2t.client.{async_prefix.lower()}services_interface import {async_prefix[:-1]}ServicesInterface"
     )
     # Types from this service's own _pb2 module.
     if pb2_types:
-        lines.append(f'from ondewo.s2t.{svc.proto_stem}_pb2 import (')
+        lines.append(f"from ondewo.s2t.{svc.proto_stem}_pb2 import (")
         for t in sorted(pb2_types):
-            lines.append(f'    {t},')
-        lines.append(')')
+            lines.append(f"    {t},")
+        lines.append(")")
 
-    lines.append(f'from ondewo.s2t.{svc.proto_stem}_pb2_grpc import {svc.name}Stub')
+    lines.append(f"from ondewo.s2t.{svc.proto_stem}_pb2_grpc import {svc.name}Stub")
 
     # Other ondewo.s2t external imports (e.g. operations_pb2, common_pb2), grouped by module.
-    other_set = {i for i in external_imports if not i.startswith('from google')}
+    other_set = {i for i in external_imports if not i.startswith("from google")}
     _emit_import_group(lines, other_set)
 
     lines += [
-        '',
-        '',
-        f'class {svc.name}({async_prefix[:-1]}ServicesInterface):',
+        "",
+        "",
+        f"class {svc.name}({async_prefix[:-1]}ServicesInterface):",
         '    """',
-        f'    Exposes the {svc.name}-related endpoints of ONDEWO S2T services in a user-friendly way.',
-        '',
-        f'    See {svc.proto_stem}.proto.',
+        f"    Exposes the {svc.name}-related endpoints of ONDEWO S2T services in a user-friendly way.",
+        "",
+        f"    See {svc.proto_stem}.proto.",
         '    """',
-        '',
-        '    @property',
-        f'    def stub(self) -> {svc.name}Stub:',
-        f'        stub: {svc.name}Stub = {svc.name}Stub(channel=self.grpc_channel)',
-        '        return stub',
+        "",
+        "    @property",
+        f"    def stub(self) -> {svc.name}Stub:",
+        f"        stub: {svc.name}Stub = {svc.name}Stub(channel=self.grpc_channel)",
+        "        return stub",
     ]
 
     for rpc, (annot_req, annot_resp) in zip(svc.rpcs, resolved):
         lines += _emit_method(rpc, annot_req, annot_resp, for_async=for_async)
 
-    lines.append('')
-    return '\n'.join(lines)
+    lines.append("")
+    return "\n".join(lines)
 
 
 def _build_services_container_content(services: List[Tuple[str, str]], for_async: bool = False) -> str:
     """Generate the full content of services_container.py."""
-    lines: List[str] = [_COPYRIGHT, '', _AUTOGENERATED_WARNING, '']
-    async_prefix: str = ''
+    lines: List[str] = [_COPYRIGHT, "", _AUTOGENERATED_WARNING, ""]
+    async_prefix: str = ""
     if for_async:
-        async_prefix = 'Async_'
+        async_prefix = "Async_"
 
-    lines.append('from dataclasses import dataclass')
-    lines.append('')
-    lines.append('from ondewo.utils.base_service_container import BaseServicesContainer')
-    lines.append('')
+    lines.append("from dataclasses import dataclass")
+    lines.append("")
+    lines.append("from ondewo.utils.base_service_container import BaseServicesContainer")
+    lines.append("")
     for field_name, class_name in services:
-        lines.append(f'from ondewo.s2t.client.services.{async_prefix.lower()}{field_name} import {class_name}')
-    lines.append('')
-    lines.append('')
-    lines.append('@dataclass')
-    lines.append(f'class {async_prefix[:-1]}ServicesContainer(BaseServicesContainer):')
+        lines.append(f"from ondewo.s2t.client.services.{async_prefix.lower()}{field_name} import {class_name}")
+    lines.append("")
+    lines.append("")
+    lines.append("@dataclass")
+    lines.append(f"class {async_prefix[:-1]}ServicesContainer(BaseServicesContainer):")
     for field_name, class_name in services:
-        lines.append(f'    {field_name}: {class_name}')
-    lines.append('')
-    return '\n'.join(lines)
+        lines.append(f"    {field_name}: {class_name}")
+    lines.append("")
+    return "\n".join(lines)
 
 
 def _build_client_content(services: List[Tuple[str, str]], for_async: bool = False) -> str:
     """Generate the full content of client.py."""
-    async_prefix: str = ''
+    async_prefix: str = ""
     if for_async:
-        async_prefix = 'Async_'
+        async_prefix = "Async_"
 
-    lines: List[str] = [_COPYRIGHT, '', _AUTOGENERATED_WARNING, '']
+    lines: List[str] = [_COPYRIGHT, "", _AUTOGENERATED_WARNING, ""]
     lines += [
-        'from typing import (',
-        '    Any,',
-        '    Dict,',
-        '    Optional,',
-        '    Set,',
-        '    Tuple,',
-        ')',
-        '',
-        f'from ondewo.utils.{async_prefix.lower()}base_client import {async_prefix[:-1]}BaseClient',
-        'from ondewo.utils.base_client_config import BaseClientConfig',
-        '',
+        "from typing import (",
+        "    Any,",
+        "    Dict,",
+        "    Optional,",
+        "    Set,",
+        "    Tuple,",
+        ")",
+        "",
+        f"from ondewo.utils.{async_prefix.lower()}base_client import {async_prefix[:-1]}BaseClient",
+        "from ondewo.utils.base_client_config import BaseClientConfig",
+        "",
     ]
     for field_name, class_name in services:
-        service_module = f'async_{field_name}' if for_async else field_name
-        lines.append(f'from ondewo.s2t.client.services.{service_module} import {class_name}')
+        service_module = f"async_{field_name}" if for_async else field_name
+        lines.append(f"from ondewo.s2t.client.services.{service_module} import {class_name}")
     lines += [
-        f'from ondewo.s2t.client.{async_prefix.lower()}services_container import {async_prefix[:-1]}ServicesContainer',
-        '',
-        '',
-        f'class {async_prefix[:-1]}Client({async_prefix[:-1]}BaseClient):',
+        f"from ondewo.s2t.client.{async_prefix.lower()}services_container import {async_prefix[:-1]}ServicesContainer",
+        "",
+        "",
+        f"class {async_prefix[:-1]}Client({async_prefix[:-1]}BaseClient):",
         '    """',
-        f'    The core {"async " if for_async else ""}python client for interacting with ONDEWO S2T services.',
+        f"    The core {'async ' if for_async else ''}python client for interacting with ONDEWO S2T services.",
         '    """',
-        '',
-        '    def _initialize_services(',
-        '        self,',
-        '        config: BaseClientConfig,',
-        '        use_secure_channel: bool,',
-        '        options: Optional[Set[Tuple[str, Any]]] = None,',
-        '    ) -> None:',
+        "",
+        "    def _initialize_services(",
+        "        self,",
+        "        config: BaseClientConfig,",
+        "        use_secure_channel: bool,",
+        "        options: Optional[Set[Tuple[str, Any]]] = None,",
+        "    ) -> None:",
         '        """',
-        '',
-        f'        Initialize the {"async " if for_async else ""}service clients and login with the current config'
-        ' and set up the services in self.services',
-        '',
-        '        Args:',
-        '            config (BaseClientConfig):',
-        '                Configuration for the client.',
-        '            use_secure_channel (bool):',
-        '                Whether to use a secure gRPC channel.',
-        '            options (Optional[Set[Tuple[str, Any]]]):',
-        '                Additional options for the gRPC channel.',
+        "",
+        f"        Initialize the {'async ' if for_async else ''}service clients and login with the current config"
+        " and set up the services in self.services",
+        "",
+        "        Args:",
+        "            config (BaseClientConfig):",
+        "                Configuration for the client.",
+        "            use_secure_channel (bool):",
+        "                Whether to use a secure gRPC channel.",
+        "            options (Optional[Set[Tuple[str, Any]]]):",
+        "                Additional options for the gRPC channel.",
         '        """',
-        '        if not isinstance(config, BaseClientConfig):',
+        "        if not isinstance(config, BaseClientConfig):",
         "            raise ValueError('The provided config must be of type `ondewo.s2t.client_config.BaseClientConfig`')",  # noqa: E501
-        '',
-        '        kwargs: Dict[str, Any] = {',
+        "",
+        "        kwargs: Dict[str, Any] = {",
         "            'config': config,",
         "            'use_secure_channel': use_secure_channel,",
         "            'options': options,",
-        '        }',
-        f'        self.services: {async_prefix[:-1]}ServicesContainer = {async_prefix[:-1]}ServicesContainer(',
+        "        }",
+        f"        self.services: {async_prefix[:-1]}ServicesContainer = {async_prefix[:-1]}ServicesContainer(",
     ]
     for field_name, class_name in services:
-        lines.append(f'            {field_name}={class_name}(**kwargs),')
-    lines += ['        )', '']
-    return '\n'.join(lines)
+        lines.append(f"            {field_name}={class_name}(**kwargs),")
+    lines += ["        )", ""]
+    return "\n".join(lines)
 
 
 def main(proto_dir: Path, output_dir: Path) -> None:
@@ -552,7 +552,7 @@ def main(proto_dir: Path, output_dir: Path) -> None:
 
     # Pass 1: parse every proto file once so we can build a global type registry.
     proto_files: List[ProtoFile] = []
-    for proto_path in sorted(proto_dir.glob('*.proto')):
+    for proto_path in sorted(proto_dir.glob("*.proto")):
         proto_files.append(parse_proto_file(proto_path))
 
     # Build the registry mapping each top-level message name to the proto stem that defines it.
@@ -564,7 +564,7 @@ def main(proto_dir: Path, output_dir: Path) -> None:
             if existing is not None and existing != pf.stem:
                 print(
                     f'  WARNING: message "{name}" defined in both {existing}.proto and {pf.stem}.proto; '
-                    f'using {pf.stem}.proto',
+                    f"using {pf.stem}.proto",
                     file=sys.stderr,
                 )
             type_to_stem[name] = pf.stem
@@ -575,44 +575,44 @@ def main(proto_dir: Path, output_dir: Path) -> None:
     for pf in proto_files:
         for svc in pf.services:
             file_name = proto_stem_to_file_name(svc.proto_stem)
-            out = output_dir / f'{file_name}.py'
-            out_async = output_dir / f'async_{file_name}.py'
+            out = output_dir / f"{file_name}.py"
+            out_async = output_dir / f"async_{file_name}.py"
             if out in written_by:
                 print(
-                    f'  WARNING: {out.name} already written by {written_by[out]}, '
+                    f"  WARNING: {out.name} already written by {written_by[out]}, "
                     f'overwriting with service "{svc.name}" from {pf.stem}.proto',
                     file=sys.stderr,
                 )
             if out_async in written_by:
                 print(
-                    f'  WARNING: {out_async.name} already written by {written_by[out_async]}, '
+                    f"  WARNING: {out_async.name} already written by {written_by[out_async]}, "
                     f'overwriting with service "{svc.name}" from {pf.stem}.proto',
                     file=sys.stderr,
                 )
-            written_by[out] = f'{pf.stem}.proto'
+            written_by[out] = f"{pf.stem}.proto"
             out.write_text(_build_file_content(svc, type_to_stem))
-            print(f'  generated {out}')
+            print(f"  generated {out}")
             out_async.write_text(_build_file_content(svc, type_to_stem, for_async=True))
-            print(f'  generated {out_async}')
+            print(f"  generated {out_async}")
             generated_services.append((file_name, svc.name))
     generated_services.sort(key=lambda t: t[0])
 
-    container_path = output_dir.parent / 'services_container.py'
-    container_path_async = output_dir.parent / 'async_services_container.py'
+    container_path = output_dir.parent / "services_container.py"
+    container_path_async = output_dir.parent / "async_services_container.py"
     container_path.write_text(_build_services_container_content(generated_services))
-    print(f'  generated {container_path}')
+    print(f"  generated {container_path}")
     container_path_async.write_text(_build_services_container_content(generated_services, for_async=True))
-    print(f'  generated {container_path_async}')
+    print(f"  generated {container_path_async}")
 
-    client_path = output_dir.parent / 'client.py'
+    client_path = output_dir.parent / "client.py"
     client_path.write_text(_build_client_content(generated_services))
-    print(f'  generated {client_path}')
-    client_async_path = output_dir.parent / 'async_client.py'
+    print(f"  generated {client_path}")
+    client_async_path = output_dir.parent / "async_client.py"
     client_async_path.write_text(_build_client_content(generated_services, for_async=True))
-    print(f'  generated {client_async_path}')
+    print(f"  generated {client_async_path}")
 
 
-if __name__ == '__main__':
-    _proto_dir = Path(sys.argv[1]) if len(sys.argv) > 1 else Path('ondewo-s2t-api/ondewo/s2t')
-    _output_dir = Path(sys.argv[2]) if len(sys.argv) > 2 else Path('ondewo/s2t/services')
+if __name__ == "__main__":
+    _proto_dir = Path(sys.argv[1]) if len(sys.argv) > 1 else Path("ondewo-s2t-api/ondewo/s2t")
+    _output_dir = Path(sys.argv[2]) if len(sys.argv) > 2 else Path("ondewo/s2t/services")
     main(_proto_dir, _output_dir)

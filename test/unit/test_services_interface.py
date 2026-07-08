@@ -22,6 +22,7 @@ sync :class:`ServicesInterface` and the async :class:`AsyncServicesInterface`:
   metadata from :meth:`KeycloakTokenProvider.bearer_metadata`;
 * no provider (no Keycloak auth) -> an empty list.
 """
+
 from typing import (
     Any,
     List,
@@ -40,22 +41,22 @@ from ondewo.s2t.client.services_interface import ServicesInterface
 
 # Bound exactly once so a refactor that changes only an input or only an expectation cannot
 # silently make a test tautological.
-KEYCLOAK_URL: str = 'https://kc.example.com/auth'
-REALM: str = 'ondewo-ccai-platform'
-CLIENT_ID: str = 'ondewo-nlu-cai-sdk-public'
-USERNAME: str = 'tech-user@example.com'
-PASSWORD: str = 's3cr3t'
+KEYCLOAK_URL: str = "https://kc.example.com/auth"
+REALM: str = "ondewo-ccai-platform"
+CLIENT_ID: str = "ondewo-nlu-cai-sdk-public"
+USERNAME: str = "tech-user@example.com"
+PASSWORD: str = "s3cr3t"
 
 # The canonical `Authorization: Bearer` metadata the provider would return.
-EXPECTED_BEARER_METADATA: List[Tuple[str, str]] = [('authorization', 'Bearer test-access-token')]
+EXPECTED_BEARER_METADATA: List[Tuple[str, str]] = [("authorization", "Bearer test-access-token")]
 
 # Patch targets for the shared-provider factory, resolved in each interface module's namespace.
-_SYNC_FACTORY: str = 'ondewo.s2t.client.services_interface.get_keycloak_token_provider'
-_ASYNC_FACTORY: str = 'ondewo.s2t.client.async_services_interface.get_keycloak_token_provider'
+_SYNC_FACTORY: str = "ondewo.s2t.client.services_interface.get_keycloak_token_provider"
+_ASYNC_FACTORY: str = "ondewo.s2t.client.async_services_interface.get_keycloak_token_provider"
 
 # Patch targets for the gRPC channel factories so construction opens no real channel.
-_GRPC_INSECURE: str = 'grpc.insecure_channel'
-_GRPC_AIO_INSECURE: str = 'grpc.aio.insecure_channel'
+_GRPC_INSECURE: str = "grpc.insecure_channel"
+_GRPC_AIO_INSECURE: str = "grpc.aio.insecure_channel"
 
 
 class _ConcreteSyncInterface(ServicesInterface):
@@ -83,7 +84,7 @@ def config_without_keycloak() -> ClientConfig:
     Returns:
         ClientConfig: A config pointing to ``localhost:50051`` with no auth.
     """
-    return ClientConfig(host='localhost', port='50051')
+    return ClientConfig(host="localhost", port="50051")
 
 
 @pytest.fixture
@@ -94,8 +95,8 @@ def config_with_keycloak() -> ClientConfig:
         ClientConfig: A config that opts into the D18 headless offline-token flow.
     """
     return ClientConfig(
-        host='localhost',
-        port='50051',
+        host="localhost",
+        port="50051",
         keycloak_url=KEYCLOAK_URL,
         realm=REALM,
         client_id=CLIENT_ID,

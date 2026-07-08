@@ -60,12 +60,12 @@ class Client(BaseClient):
                 Additional options for the gRPC channel.
         """
         if not isinstance(config, BaseClientConfig):
-            raise ValueError('The provided config must be of type `ondewo.s2t.client_config.BaseClientConfig`')
+            raise ValueError("The provided config must be of type `ondewo.s2t.client_config.BaseClientConfig`")
 
         kwargs: Dict[str, Any] = {
-            'config': config,
-            'use_secure_channel': use_secure_channel,
-            'options': options,
+            "config": config,
+            "use_secure_channel": use_secure_channel,
+            "options": options,
         }
         self.services: ServicesContainer = ServicesContainer(
             speech_to_text=Speech2Text(**kwargs),

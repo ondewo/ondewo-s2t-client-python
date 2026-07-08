@@ -595,12 +595,8 @@ class TestAsyncTranscribeFileScenarios:
             fake_audio_bytes: Synthetic PCM payload for the transcription request.
         """
         first_pipeline: Speech2TextConfig = Speech2TextConfig(id="async-pipeline-001")
-        mock_stub.ListS2tPipelines.return_value = ListS2tPipelinesResponse(
-            pipeline_configs=[first_pipeline]
-        )
-        pipelines_result: ListS2tPipelinesResponse = await service.list_s2t_pipelines(
-            ListS2tPipelinesRequest()
-        )
+        mock_stub.ListS2tPipelines.return_value = ListS2tPipelinesResponse(pipeline_configs=[first_pipeline])
+        pipelines_result: ListS2tPipelinesResponse = await service.list_s2t_pipelines(ListS2tPipelinesRequest())
         pipeline: Speech2TextConfig = pipelines_result.pipeline_configs[0]
 
         request: TranscribeFileRequest = TranscribeFileRequest(

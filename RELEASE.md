@@ -1,67 +1,68 @@
 # Release History
 
 *****************
+
 ## Release ONDEWO S2T Python Client 7.4.0
 
 ### Improvements
- * Tracking API Version [7.4.0](https://github.com/ondewo/ondewo-s2t-api/releases/tag/7.4.0) ( [Documentation](https://ondewo.github.io/ondewo-s2t-api/) )
 
+* Tracking API Version [7.4.0](https://github.com/ondewo/ondewo-s2t-api/releases/tag/7.4.0) ( [Documentation](https://ondewo.github.io/ondewo-s2t-api/) )
 
 *****************
+
 ## Release ONDEWO S2T Python Client 7.3.1
 
 ### Bug Fix
- * [OND231-604](https://ondewo.atlassian.net/browse/OND231-604) Fix bugs in generate_services script.
 
+* [OND231-604](https://ondewo.atlassian.net/browse/OND231-604) Fix bugs in generate_services script.
 
 *****************
+
 ## Release ONDEWO S2T Python Client 7.3.0
 
 ### Improvements
- * Tracking API Version [7.3.0](https://github.com/ondewo/ondewo-s2t-api/releases/tag/7.3.0) ( [Documentation](https://ondewo.github.io/ondewo-s2t-api/) )
 
+* Tracking API Version [7.3.0](https://github.com/ondewo/ondewo-s2t-api/releases/tag/7.3.0) ( [Documentation](https://ondewo.github.io/ondewo-s2t-api/) )
 
 *****************
+
 ## Release ONDEWO S2T Python Client 7.2.0
 
 ### Improvements
- * Tracking API Version [7.2.0](https://github.com/ondewo/ondewo-s2t-api/releases/tag/7.2.0) ( [Documentation](https://ondewo.github.io/ondewo-s2t-api/) )
 
+* Tracking API Version [7.2.0](https://github.com/ondewo/ondewo-s2t-api/releases/tag/7.2.0) ( [Documentation](https://ondewo.github.io/ondewo-s2t-api/) )
 
 *****************
+
 ## Release ONDEWO S2T Python Client 7.1.0
 
 ### Improvements
- * Tracking API Version [7.1.0](https://github.com/ondewo/ondewo-s2t-api/releases/tag/7.1.0) ( [Documentation](https://ondewo.github.io/ondewo-s2t-api/) )
 
+* Tracking API Version [7.1.0](https://github.com/ondewo/ondewo-s2t-api/releases/tag/7.1.0) ( [Documentation](https://ondewo.github.io/ondewo-s2t-api/) )
 
 *****************
+
 ## Release ONDEWO S2T Python Client 7.0.0
 
 ### Improvements
- * Tracking API Version [7.0.0](https://github.com/ondewo/ondewo-s2t-api/releases/tag/7.0.0) ( [Documentation](https://ondewo.github.io/ondewo-s2t-api/) )
 
+* Tracking API Version [7.0.0](https://github.com/ondewo/ondewo-s2t-api/releases/tag/7.0.0) ( [Documentation](https://ondewo.github.io/ondewo-s2t-api/) )
 
 *****************
+
 ## Release ONDEWO S2T Python Client 6.1.0
 
 ### Improvements
- * Tracking API Version [6.1.0](https://github.com/ondewo/ondewo-s2t-api/releases/tag/6.1.0) ( [Documentation](https://ondewo.github.io/ondewo-s2t-api/) )
 
+* Tracking API Version [6.1.0](https://github.com/ondewo/ondewo-s2t-api/releases/tag/6.1.0) ( [Documentation](https://ondewo.github.io/ondewo-s2t-api/) )
 
 *****************
+
 ## Release ONDEWO S2T Python Client 6.0.0
 
 ### Improvements
- * Tracking API Version [6.0.0](https://github.com/ondewo/ondewo-s2t-api/releases/tag/6.0.0) ( [Documentation](https://ondewo.github.io/ondewo-s2t-api/) )
 
-
-*****************
-## Release ONDEWO S2T Python Client 6.0.0
-
-### Improvements
- * Tracking API Version [6.0.0](https://github.com/ondewo/ondewo-s2t-api/releases/tag/6.0.0) ( [Documentation](https://ondewo.github.io/ondewo-s2t-api/) )
-
+* Tracking API Version [6.0.0](https://github.com/ondewo/ondewo-s2t-api/releases/tag/6.0.0) ( [Documentation](https://ondewo.github.io/ondewo-s2t-api/) )
 
 *****************
 

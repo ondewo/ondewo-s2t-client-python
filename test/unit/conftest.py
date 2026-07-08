@@ -94,7 +94,7 @@ def audio_chunks() -> List[bytes]:
         List[bytes]: Ordered list of byte chunks, each at most ``CHUNK_SIZE`` bytes.
     """
     data: bytes = FAKE_AUDIO_BYTES
-    return [data[i: i + CHUNK_SIZE] for i in range(0, len(data), CHUNK_SIZE)]
+    return [data[i : i + CHUNK_SIZE] for i in range(0, len(data), CHUNK_SIZE)]
 
 
 @pytest.fixture
