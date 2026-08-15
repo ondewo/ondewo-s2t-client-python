@@ -260,7 +260,7 @@ class TranscribeRequestConfig(google.protobuf.message.Message):
           <li><code>aws_secret_access_key</code> (required) Secret access key to access Amazon Web Service.</li>
           <li><code>region</code> (required) Region name of Amazon Server.</li>
         </ul>
-        Example: <code>s2t_config_service={&apos;aws_access_key_id&apos;: &apos;YOUR_AWS_ACCESS_KEY_ID&apos;, &apos;aws_secret_access_key&apos;:
+        Example: <code>s2t_config_service={&apos;aws_access_key_id&apos;: &apos;YOUR_AWS_ACCESS_KEY_ID&apos;, &apos;aws_secret_access_key&apos;: 
         &apos;YOUR_AWS_SECRET_ACCESS_KEY&apos;, &apos;region&apos;: &apos;YOUR_AMAZON_SERVER_REGION_NAME&apos;}</code>
         For Deepgram S2T service, the following argument should be passed in form of a dict:
         <ul>
@@ -271,7 +271,7 @@ class TranscribeRequestConfig(google.protobuf.message.Message):
         For Google cloud S2T service, the following arguments should be passed in form of a dict:
         <ul>
           <li><code>api_key</code> (required) API key of Google cloud to access its S2T service.</li>
-          <li><code>api_endpoint</code> (optional) Regional API endpoint of Google cloud S2T service. (Defaults to
+          <li><code>api_endpoint</code> (optional) Regional API endpoint of Google cloud S2T service. (Defaults to 
         &apos;eu-speech.googleapis.com&apos;)</li>
         </ul>
         Example: <code>s2t_config_service={&apos;api_key&apos;: &apos;YOUR_GOOGLE_CLOUD_API_KEY&apos;, &apos;api_endpoint&apos;: &apos;YOUR_GOOGLE_CLOUD_API_ENDPOINT&apos;}</code>
@@ -280,7 +280,7 @@ class TranscribeRequestConfig(google.protobuf.message.Message):
           <li><code>subscription_key</code> (required) Subscription key to access Microsoft Azure Service.</li>
           <li><code>region</code> (required) Region name of Microsoft Azure Server.</li>
         </ul>
-        Example: <code>s2t_config_service={&apos;subscription_key&apos;: &apos;YOUR_MICROSOFT_AZURE_SUBSCRIPTION_KEY&apos;, &apos;region&apos;:
+        Example: <code>s2t_config_service={&apos;subscription_key&apos;: &apos;YOUR_MICROSOFT_AZURE_SUBSCRIPTION_KEY&apos;, &apos;region&apos;: 
         &apos;YOUR_MICROSOFT_AZURE_SERVER_REGION_NAME&apos;}</code>
         Note: ondewo-s2t will raise an error if you don&apos;t pass any of the required arguments above.
         """
@@ -446,7 +446,7 @@ class S2tCloudProviderConfigDeepgram(google.protobuf.message.Message):
     More details at: <a href="https://developers.deepgram.com/docs/smart-format">https://developers.deepgram.com/docs/smart-format</a>
     """
     numerals: builtins.bool
-    """Optional. Enables or disables <code>numerals</code> feature of Deepgram to convert numbers to numeric form in the resulted
+    """Optional. Enables or disables <code>numerals</code> feature of Deepgram to convert numbers to numeric form in the resulted 
     transcript. More details at: <a href="https://developers.deepgram.com/docs/numerals">https://developers.deepgram.com/docs/numerals</a>
     """
     measurements: builtins.bool
@@ -455,7 +455,7 @@ class S2tCloudProviderConfigDeepgram(google.protobuf.message.Message):
     More details at: <a href="https://developers.deepgram.com/docs/measurements">https://developers.deepgram.com/docs/measurements</a>
     """
     dictation: builtins.bool
-    """Optional. Enables or disables <code>dictation</code> feature of Deepgram to convert spoken dictation commands into their
+    """Optional. Enables or disables <code>dictation</code> feature of Deepgram to convert spoken dictation commands into their 
     corresponding punctuation marks. More details at: <a href="https://developers.deepgram.com/docs/dictation">https://developers.deepgram.com/docs/dictation</a>
     """
     def __init__(
@@ -494,7 +494,7 @@ class S2tCloudProviderConfigGoogle(google.protobuf.message.Message):
     TRANSCRIPT_NORMALIZATION_FIELD_NUMBER: builtins.int
     MAX_ALTERNATIVES_FIELD_NUMBER: builtins.int
     enable_automatic_punctuation: builtins.bool
-    """Optional. Enables or disables <code>automatic_punctuation</code> feature of Google s2t to add punctuations to the resulted
+    """Optional. Enables or disables <code>automatic_punctuation</code> feature of Google s2t to add punctuations to the resulted 
     transcript. More details at: <a href="https://cloud.google.com/speech-to-text/docs/automatic-punctuation">https://cloud.google.com/speech-to-text/docs/automatic-punctuation</a>
     """
     enable_word_time_offsets: builtins.bool
@@ -547,7 +547,7 @@ class S2tCloudProviderConfigMicrosoft(google.protobuf.message.Message):
     USE_FAST_TRANSCRIPTION_API_FIELD_NUMBER: builtins.int
     USE_DETAILED_OUTPUT_FORMAT_FIELD_NUMBER: builtins.int
     use_fast_transcription_api: builtins.bool
-    """Optional. Enables or disables the Microsoft Azure fast transcription API. It is faster than SDK but is in
+    """Optional. Enables or disables the Microsoft Azure fast transcription API. It is faster than SDK but is in 
     preview version.
     More details at: <a href="https://learn.microsoft.com/en-us/azure/ai-services/speech-service/fast-transcription-create">https://learn.microsoft.com/en-us/azure/ai-services/speech-service/fast-transcription-create</a>
     """
@@ -1398,7 +1398,7 @@ class S2tCloudServiceAmazon(google.protobuf.message.Message):
     (BCP-47) e.g. &apos;en-US&apos; or &apos;de-DE&apos;.
     """
     streaming_available: builtins.bool
-    """Specifies if streaming mode of Amazon web service speech to text is available for the selected language,
+    """Specifies if streaming mode of Amazon web service speech to text is available for the selected language, 
     otherwise batch mode transcription is used. See the list of languages and available transcription modes at:
     <a href="https://docs.aws.amazon.com/transcribe/latest/dg/supported-languages.html">https://docs.aws.amazon.com/transcribe/latest/dg/supported-languages.html</a>
     """
@@ -1912,8 +1912,8 @@ class TurnDetectionOptions(google.protobuf.message.Message):
     active: builtins.bool
     """Optional. Indicates if the turn-detection feature is active."""
     full_utterance_deployment: builtins.bool
-    """Optional. Whether to transcribe the whole utterance when turn moment is detected. It is helpful to increase
-    accuracy of transcriptions in cost of drop in speed. If deactivated, it just transcribe from last short silence
+    """Optional. Whether to transcribe the whole utterance when turn moment is detected. It is helpful to increase  
+    accuracy of transcriptions in cost of drop in speed. If deactivated, it just transcribe from last short silence 
     period and concatenates the transcriptions of small audio chunks between tiny silences.
     """
     turn_detection_system_prompt: builtins.str
@@ -2074,13 +2074,13 @@ class OpenaiLlmOptions(google.protobuf.message.Message):
     they have already appeared in the text, increasing the likelihood of the model discussing new topics.
     """
     prompt_cache_key: builtins.str
-    """Optional. Used by OpenAI to cache responses for similar requests to optimize your cache hit rates. Replaces the
+    """Optional. Used by OpenAI to cache responses for similar requests to optimize your cache hit rates. Replaces the 
     `user` field. [Learn more](https://platform.openai.com/docs/guides/prompt-caching).
     """
     reasoning_effort: global___ReasoningEffort.ValueType
-    """Optional. Constrains effort on reasoning for
-    [reasoning models](https://platform.openai.com/docs/guides/reasoning). Currently supported values are `none`,
-    `minimal`, `low`, `medium`, `high`, and `xhigh`. Reducing reasoning effort can result in faster responses and
+    """Optional. Constrains effort on reasoning for 
+    [reasoning models](https://platform.openai.com/docs/guides/reasoning). Currently supported values are `none`, 
+    `minimal`, `low`, `medium`, `high`, and `xhigh`. Reducing reasoning effort can result in faster responses and 
     fewer tokens used on reasoning in a response.
     """
     seed: builtins.int
@@ -2091,14 +2091,14 @@ class OpenaiLlmOptions(google.protobuf.message.Message):
     """Optional. Specifies the processing type used for serving the request.
     - If set to 'auto', then the request will be processed with the service tier configured in the Project settings.
       Unless otherwise configured, the Project will use 'default'.
-    - If set to 'default', then the request will be processed with the standard pricing and performance for the
+    - If set to 'default', then the request will be processed with the standard pricing and performance for the 
       selected model.
     - If set to '[flex](https://platform.openai.com/docs/guides/flex-processing)' or
       '[priority](https://openai.com/api-priority-processing/)', then the request will be processed with the
        corresponding service tier.
     - When not set, the default behavior is 'auto'.
-    When the `service_tier` parameter is set, the response body will include the `service_tier` value based on the
-    processing mode actually used to serve the request. This response value may be different from the value set in
+    When the `service_tier` parameter is set, the response body will include the `service_tier` value based on the 
+    processing mode actually used to serve the request. This response value may be different from the value set in 
     the parameter.
     """
     store: builtins.bool
@@ -2118,14 +2118,14 @@ class OpenaiLlmOptions(google.protobuf.message.Message):
     considers only the tokens with top_p probability mass. Ranges from 0 to 1.
     """
     user: builtins.str
-    """Optional. This field is being replaced by `safety_identifier` and `prompt_cache_key`. Use `prompt_cache_key`
+    """Optional. This field is being replaced by `safety_identifier` and `prompt_cache_key`. Use `prompt_cache_key` 
     instead to maintain caching optimizations. A stable identifier for your end-users. Used to boost cache hit rates
      by better bucketing similar requests and to help OpenAI detect and prevent abuse.
     [Learn more](https://platform.openai.com/docs/guides/safety-best-practices#safety-identifiers).
     """
     verbosity: global___Verbosity.ValueType
-    """Optional. Constrains the verbosity of the model's response. Lower values will result in more concise responses,
-    while higher values will result in more verbose responses.
+    """Optional. Constrains the verbosity of the model's response. Lower values will result in more concise responses, 
+    while higher values will result in more verbose responses. 
     Currently supported values are `low`, `medium`, and `high`.
     """
     @property
@@ -2152,7 +2152,7 @@ class OpenaiLlmOptions(google.protobuf.message.Message):
 
     @property
     def stop(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
-        """Optional. Not supported with latest reasoning models `o3` and `o4-mini`. Up to 4 sequences where the API will
+        """Optional. Not supported with latest reasoning models `o3` and `o4-mini`. Up to 4 sequences where the API will 
         stop generating further tokens. The returned text will not contain the stop sequence.
         """
 

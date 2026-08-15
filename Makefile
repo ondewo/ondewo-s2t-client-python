@@ -16,18 +16,22 @@ export
 
 # MUST BE THE SAME AS API in Mayor and Minor Version Number
 # example: API 2.9.0 --> Client 2.9.X
-ONDEWO_S2T_VERSION=7.4.0
+ONDEWO_S2T_VERSION=7.4.1
 
 ONDEWO_S2T_API_GIT_BRANCH=OND211-2418-add-keycloak-for-2-fa
-ONDEWO_PROTO_COMPILER_GIT_BRANCH=tags/5.10.0
+ONDEWO_PROTO_COMPILER_GIT_BRANCH=tags/5.12.0
 PYPI_USERNAME?=ENTER_HERE_YOUR_PYPI_USERNAME
 PYPI_PASSWORD?=ENTER_HERE_YOUR_PYPI_PASSWORD
 
 # You need to setup an access token at https://github.com/settings/tokens - permissions are important
 GITHUB_GH_TOKEN?=ENTER_YOUR_TOKEN_HERE
 
+# Terminate on the ***** separator that delimits release entries, NOT on /\*\*/ — that matched the first
+# markdown **bold** span inside the entry and silently truncated the notes there, with no error from
+# `gh release create`. Harmless only while no entry used inline bold; the 7.4.1 entry does. Same fix as
+# ondewo-nlu-client-python's Makefile.
 CURRENT_RELEASE_NOTES=`cat RELEASE.md \
-	| perl -ne 'print if /Release ONDEWO S2T Python Client ${ONDEWO_S2T_VERSION}/../\*\*/'`
+	| perl -ne 'print if /Release ONDEWO S2T Python Client ${ONDEWO_S2T_VERSION}/../^\*{5}/'`
 
 GH_REPO="https://github.com/ondewo/ondewo-s2t-client-python"
 DEVOPS_ACCOUNT_GIT="ondewo-devops-accounts"
