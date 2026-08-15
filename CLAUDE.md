@@ -403,3 +403,14 @@ The repo is now fully on **uv** (not just pyproject.toml):
 - **`[tool.mypy] python_version` must be `3.12`** wherever numpy 2.x is on the mypy path — its PEP-695 `type X = …` stubs fail to parse on < 3.12.
 - The release `git commit` uses **`--no-verify`** so pre-commit hooks never gate an automated release.
 - **Validated by a real PyPI publish** — `ondewo-t2s-client 6.5.0` was built with `uv build` and uploaded via twine end-to-end; the uv release pipeline works.
+
+## Jenkins — never trigger a multibranch scan or branch indexing
+
+**NEVER trigger a Jenkins multibranch scan or branch indexing.** Do not call a multibranch/folder job's
+`build`, `scan`, or reindex endpoints, click "Scan Repository Now" / "Build Now" on a folder, run
+`p4 scan`, or use any API/CLI that reindexes branches or scans the repository. A scan/reindex runs across
+**every** branch, consumes CI resources, and can kick off unintended builds and deploys.
+
+If a branch is not building — it was not discovered, or its job is marked `buildable: false` / orphaned —
+**report it and stop**. Let the user or a Jenkins admin adjust branch-discovery/config or rename the branch
+to the convention. Never force a build by scanning or reindexing.
