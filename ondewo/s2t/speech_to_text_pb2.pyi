@@ -202,6 +202,85 @@ REASONING_EFFORT_HIGH: ReasoningEffort.ValueType  # 4
 """High reasoning effort."""
 global___ReasoningEffort = ReasoningEffort
 
+class _VadMethod:
+    ValueType = typing.NewType("ValueType", builtins.int)
+    V: typing_extensions.TypeAlias = ValueType
+
+class _VadMethodEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_VadMethod.ValueType], builtins.type):
+    DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
+    VAD_METHOD_UNSPECIFIED: _VadMethod.ValueType  # 0
+    """No explicit choice. The method is then taken from the legacy
+    <code>VoiceActivityDetection.active</code> string, and from Pyannote if that is empty too.
+    """
+    VAD_METHOD_PYANNOTE: _VadMethod.ValueType  # 1
+    """Use the Pyannote segmentation model, configured by <code>VoiceActivityDetection.pyannote</code>."""
+    VAD_METHOD_SILERO: _VadMethod.ValueType  # 2
+    """Use the Silero model, configured by <code>VoiceActivityDetection.silero</code>."""
+
+class VadMethod(_VadMethod, metaclass=_VadMethodEnumTypeWrapper):
+    """<p>VadMethod selects the model used to split the audio stream into utterances.</p>"""
+
+VAD_METHOD_UNSPECIFIED: VadMethod.ValueType  # 0
+"""No explicit choice. The method is then taken from the legacy
+<code>VoiceActivityDetection.active</code> string, and from Pyannote if that is empty too.
+"""
+VAD_METHOD_PYANNOTE: VadMethod.ValueType  # 1
+"""Use the Pyannote segmentation model, configured by <code>VoiceActivityDetection.pyannote</code>."""
+VAD_METHOD_SILERO: VadMethod.ValueType  # 2
+"""Use the Silero model, configured by <code>VoiceActivityDetection.silero</code>."""
+global___VadMethod = VadMethod
+
+class _TsdMethod:
+    ValueType = typing.NewType("ValueType", builtins.int)
+    V: typing_extensions.TypeAlias = ValueType
+
+class _TsdMethodEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_TsdMethod.ValueType], builtins.type):
+    DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
+    TSD_METHOD_UNSPECIFIED: _TsdMethod.ValueType  # 0
+    """No explicit choice. TSD then follows the behaviour of older configurations that predate
+    this field, which is keyed on the active VAD: Pyannote whenever Pyannote is the VAD, since
+    its segmentation model doubles as a speaker filter; otherwise WeSpeaker if
+    <code>wespeaker_tsd.active</code> is set; otherwise no TSD at all. Note that
+    <code>wespeaker_tsd.active</code> is deliberately not consulted on the Pyannote path,
+    because it was never consulted there before this field existed.
+    """
+    TSD_METHOD_NONE: _TsdMethod.ValueType  # 1
+    """Disable target-speaker detection. Every detected utterance is transcribed, whoever spoke it."""
+    TSD_METHOD_PYANNOTE: _TsdMethod.ValueType  # 2
+    """Reuse the Pyannote segmentation model, which distinguishes speakers in addition to
+    detecting speech. Available only when Pyannote is also the active VAD.
+    """
+    TSD_METHOD_WESPEAKER: _TsdMethod.ValueType  # 3
+    """Use the dedicated WeSpeaker embedding model, configured by
+    <code>VoiceActivityDetection.wespeaker_tsd</code>. Works with any VAD.
+    """
+
+class TsdMethod(_TsdMethod, metaclass=_TsdMethodEnumTypeWrapper):
+    """<p>TsdMethod selects the model used for target-speaker detection (TSD): deciding whether a
+    newly detected utterance came from the main speaker of the call, so that speech from anyone
+    else (crosstalk, background speakers, barge-in) can be rejected.</p>
+    """
+
+TSD_METHOD_UNSPECIFIED: TsdMethod.ValueType  # 0
+"""No explicit choice. TSD then follows the behaviour of older configurations that predate
+this field, which is keyed on the active VAD: Pyannote whenever Pyannote is the VAD, since
+its segmentation model doubles as a speaker filter; otherwise WeSpeaker if
+<code>wespeaker_tsd.active</code> is set; otherwise no TSD at all. Note that
+<code>wespeaker_tsd.active</code> is deliberately not consulted on the Pyannote path,
+because it was never consulted there before this field existed.
+"""
+TSD_METHOD_NONE: TsdMethod.ValueType  # 1
+"""Disable target-speaker detection. Every detected utterance is transcribed, whoever spoke it."""
+TSD_METHOD_PYANNOTE: TsdMethod.ValueType  # 2
+"""Reuse the Pyannote segmentation model, which distinguishes speakers in addition to
+detecting speech. Available only when Pyannote is also the active VAD.
+"""
+TSD_METHOD_WESPEAKER: TsdMethod.ValueType  # 3
+"""Use the dedicated WeSpeaker embedding model, configured by
+<code>VoiceActivityDetection.wespeaker_tsd</code>. Works with any VAD.
+"""
+global___TsdMethod = TsdMethod
+
 @typing.final
 class TranscribeRequestConfig(google.protobuf.message.Message):
     """/////////////////////////
@@ -260,7 +339,7 @@ class TranscribeRequestConfig(google.protobuf.message.Message):
           <li><code>aws_secret_access_key</code> (required) Secret access key to access Amazon Web Service.</li>
           <li><code>region</code> (required) Region name of Amazon Server.</li>
         </ul>
-        Example: <code>s2t_config_service={&apos;aws_access_key_id&apos;: &apos;YOUR_AWS_ACCESS_KEY_ID&apos;, &apos;aws_secret_access_key&apos;: 
+        Example: <code>s2t_config_service={&apos;aws_access_key_id&apos;: &apos;YOUR_AWS_ACCESS_KEY_ID&apos;, &apos;aws_secret_access_key&apos;:
         &apos;YOUR_AWS_SECRET_ACCESS_KEY&apos;, &apos;region&apos;: &apos;YOUR_AMAZON_SERVER_REGION_NAME&apos;}</code>
         For Deepgram S2T service, the following argument should be passed in form of a dict:
         <ul>
@@ -271,7 +350,7 @@ class TranscribeRequestConfig(google.protobuf.message.Message):
         For Google cloud S2T service, the following arguments should be passed in form of a dict:
         <ul>
           <li><code>api_key</code> (required) API key of Google cloud to access its S2T service.</li>
-          <li><code>api_endpoint</code> (optional) Regional API endpoint of Google cloud S2T service. (Defaults to 
+          <li><code>api_endpoint</code> (optional) Regional API endpoint of Google cloud S2T service. (Defaults to
         &apos;eu-speech.googleapis.com&apos;)</li>
         </ul>
         Example: <code>s2t_config_service={&apos;api_key&apos;: &apos;YOUR_GOOGLE_CLOUD_API_KEY&apos;, &apos;api_endpoint&apos;: &apos;YOUR_GOOGLE_CLOUD_API_ENDPOINT&apos;}</code>
@@ -280,7 +359,7 @@ class TranscribeRequestConfig(google.protobuf.message.Message):
           <li><code>subscription_key</code> (required) Subscription key to access Microsoft Azure Service.</li>
           <li><code>region</code> (required) Region name of Microsoft Azure Server.</li>
         </ul>
-        Example: <code>s2t_config_service={&apos;subscription_key&apos;: &apos;YOUR_MICROSOFT_AZURE_SUBSCRIPTION_KEY&apos;, &apos;region&apos;: 
+        Example: <code>s2t_config_service={&apos;subscription_key&apos;: &apos;YOUR_MICROSOFT_AZURE_SUBSCRIPTION_KEY&apos;, &apos;region&apos;:
         &apos;YOUR_MICROSOFT_AZURE_SERVER_REGION_NAME&apos;}</code>
         Note: ondewo-s2t will raise an error if you don&apos;t pass any of the required arguments above.
         """
@@ -446,7 +525,7 @@ class S2tCloudProviderConfigDeepgram(google.protobuf.message.Message):
     More details at: <a href="https://developers.deepgram.com/docs/smart-format">https://developers.deepgram.com/docs/smart-format</a>
     """
     numerals: builtins.bool
-    """Optional. Enables or disables <code>numerals</code> feature of Deepgram to convert numbers to numeric form in the resulted 
+    """Optional. Enables or disables <code>numerals</code> feature of Deepgram to convert numbers to numeric form in the resulted
     transcript. More details at: <a href="https://developers.deepgram.com/docs/numerals">https://developers.deepgram.com/docs/numerals</a>
     """
     measurements: builtins.bool
@@ -455,7 +534,7 @@ class S2tCloudProviderConfigDeepgram(google.protobuf.message.Message):
     More details at: <a href="https://developers.deepgram.com/docs/measurements">https://developers.deepgram.com/docs/measurements</a>
     """
     dictation: builtins.bool
-    """Optional. Enables or disables <code>dictation</code> feature of Deepgram to convert spoken dictation commands into their 
+    """Optional. Enables or disables <code>dictation</code> feature of Deepgram to convert spoken dictation commands into their
     corresponding punctuation marks. More details at: <a href="https://developers.deepgram.com/docs/dictation">https://developers.deepgram.com/docs/dictation</a>
     """
     def __init__(
@@ -494,7 +573,7 @@ class S2tCloudProviderConfigGoogle(google.protobuf.message.Message):
     TRANSCRIPT_NORMALIZATION_FIELD_NUMBER: builtins.int
     MAX_ALTERNATIVES_FIELD_NUMBER: builtins.int
     enable_automatic_punctuation: builtins.bool
-    """Optional. Enables or disables <code>automatic_punctuation</code> feature of Google s2t to add punctuations to the resulted 
+    """Optional. Enables or disables <code>automatic_punctuation</code> feature of Google s2t to add punctuations to the resulted
     transcript. More details at: <a href="https://cloud.google.com/speech-to-text/docs/automatic-punctuation">https://cloud.google.com/speech-to-text/docs/automatic-punctuation</a>
     """
     enable_word_time_offsets: builtins.bool
@@ -547,7 +626,7 @@ class S2tCloudProviderConfigMicrosoft(google.protobuf.message.Message):
     USE_FAST_TRANSCRIPTION_API_FIELD_NUMBER: builtins.int
     USE_DETAILED_OUTPUT_FORMAT_FIELD_NUMBER: builtins.int
     use_fast_transcription_api: builtins.bool
-    """Optional. Enables or disables the Microsoft Azure fast transcription API. It is faster than SDK but is in 
+    """Optional. Enables or disables the Microsoft Azure fast transcription API. It is faster than SDK but is in
     preview version.
     More details at: <a href="https://learn.microsoft.com/en-us/azure/ai-services/speech-service/fast-transcription-create">https://learn.microsoft.com/en-us/azure/ai-services/speech-service/fast-transcription-create</a>
     """
@@ -1398,7 +1477,7 @@ class S2tCloudServiceAmazon(google.protobuf.message.Message):
     (BCP-47) e.g. &apos;en-US&apos; or &apos;de-DE&apos;.
     """
     streaming_available: builtins.bool
-    """Specifies if streaming mode of Amazon web service speech to text is available for the selected language, 
+    """Specifies if streaming mode of Amazon web service speech to text is available for the selected language,
     otherwise batch mode transcription is used. See the list of languages and available transcription modes at:
     <a href="https://docs.aws.amazon.com/transcribe/latest/dg/supported-languages.html">https://docs.aws.amazon.com/transcribe/latest/dg/supported-languages.html</a>
     """
@@ -1912,8 +1991,8 @@ class TurnDetectionOptions(google.protobuf.message.Message):
     active: builtins.bool
     """Optional. Indicates if the turn-detection feature is active."""
     full_utterance_deployment: builtins.bool
-    """Optional. Whether to transcribe the whole utterance when turn moment is detected. It is helpful to increase  
-    accuracy of transcriptions in cost of drop in speed. If deactivated, it just transcribe from last short silence 
+    """Optional. Whether to transcribe the whole utterance when turn moment is detected. It is helpful to increase
+    accuracy of transcriptions in cost of drop in speed. If deactivated, it just transcribe from last short silence
     period and concatenates the transcriptions of small audio chunks between tiny silences.
     """
     turn_detection_system_prompt: builtins.str
@@ -2074,13 +2153,13 @@ class OpenaiLlmOptions(google.protobuf.message.Message):
     they have already appeared in the text, increasing the likelihood of the model discussing new topics.
     """
     prompt_cache_key: builtins.str
-    """Optional. Used by OpenAI to cache responses for similar requests to optimize your cache hit rates. Replaces the 
+    """Optional. Used by OpenAI to cache responses for similar requests to optimize your cache hit rates. Replaces the
     `user` field. [Learn more](https://platform.openai.com/docs/guides/prompt-caching).
     """
     reasoning_effort: global___ReasoningEffort.ValueType
-    """Optional. Constrains effort on reasoning for 
-    [reasoning models](https://platform.openai.com/docs/guides/reasoning). Currently supported values are `none`, 
-    `minimal`, `low`, `medium`, `high`, and `xhigh`. Reducing reasoning effort can result in faster responses and 
+    """Optional. Constrains effort on reasoning for
+    [reasoning models](https://platform.openai.com/docs/guides/reasoning). Currently supported values are `none`,
+    `minimal`, `low`, `medium`, `high`, and `xhigh`. Reducing reasoning effort can result in faster responses and
     fewer tokens used on reasoning in a response.
     """
     seed: builtins.int
@@ -2091,14 +2170,14 @@ class OpenaiLlmOptions(google.protobuf.message.Message):
     """Optional. Specifies the processing type used for serving the request.
     - If set to 'auto', then the request will be processed with the service tier configured in the Project settings.
       Unless otherwise configured, the Project will use 'default'.
-    - If set to 'default', then the request will be processed with the standard pricing and performance for the 
+    - If set to 'default', then the request will be processed with the standard pricing and performance for the
       selected model.
     - If set to '[flex](https://platform.openai.com/docs/guides/flex-processing)' or
       '[priority](https://openai.com/api-priority-processing/)', then the request will be processed with the
        corresponding service tier.
     - When not set, the default behavior is 'auto'.
-    When the `service_tier` parameter is set, the response body will include the `service_tier` value based on the 
-    processing mode actually used to serve the request. This response value may be different from the value set in 
+    When the `service_tier` parameter is set, the response body will include the `service_tier` value based on the
+    processing mode actually used to serve the request. This response value may be different from the value set in
     the parameter.
     """
     store: builtins.bool
@@ -2118,14 +2197,14 @@ class OpenaiLlmOptions(google.protobuf.message.Message):
     considers only the tokens with top_p probability mass. Ranges from 0 to 1.
     """
     user: builtins.str
-    """Optional. This field is being replaced by `safety_identifier` and `prompt_cache_key`. Use `prompt_cache_key` 
+    """Optional. This field is being replaced by `safety_identifier` and `prompt_cache_key`. Use `prompt_cache_key`
     instead to maintain caching optimizations. A stable identifier for your end-users. Used to boost cache hit rates
      by better bucketing similar requests and to help OpenAI detect and prevent abuse.
     [Learn more](https://platform.openai.com/docs/guides/safety-best-practices#safety-identifiers).
     """
     verbosity: global___Verbosity.ValueType
-    """Optional. Constrains the verbosity of the model's response. Lower values will result in more concise responses, 
-    while higher values will result in more verbose responses. 
+    """Optional. Constrains the verbosity of the model's response. Lower values will result in more concise responses,
+    while higher values will result in more verbose responses.
     Currently supported values are `low`, `medium`, and `high`.
     """
     @property
@@ -2152,7 +2231,7 @@ class OpenaiLlmOptions(google.protobuf.message.Message):
 
     @property
     def stop(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
-        """Optional. Not supported with latest reasoning models `o3` and `o4-mini`. Up to 4 sequences where the API will 
+        """Optional. Not supported with latest reasoning models `o3` and `o4-mini`. Up to 4 sequences where the API will
         stop generating further tokens. The returned text will not contain the stop sequence.
         """
 
@@ -2286,13 +2365,40 @@ class VoiceActivityDetection(google.protobuf.message.Message):
     ACTIVE_FIELD_NUMBER: builtins.int
     SAMPLING_RATE_FIELD_NUMBER: builtins.int
     PYANNOTE_FIELD_NUMBER: builtins.int
+    SILERO_FIELD_NUMBER: builtins.int
+    WESPEAKER_TSD_FIELD_NUMBER: builtins.int
+    VAD_METHOD_FIELD_NUMBER: builtins.int
+    TSD_METHOD_FIELD_NUMBER: builtins.int
     active: builtins.str
-    """Indicates if voice activity detection is active."""
+    """Deprecated in favour of <code>vad_method</code>, but still honoured so that configurations
+    written before that field existed keep working unchanged. One of &apos;pyannote&apos; or
+    &apos;silero&apos;. Read only when <code>vad_method</code> is
+    <code>VAD_METHOD_UNSPECIFIED</code>.
+    """
     sampling_rate: builtins.int
     """Sampling rate for voice activity detection."""
+    vad_method: global___VadMethod.ValueType
+    """Which model splits the stream into utterances. Takes precedence over <code>active</code>;
+    leave unset to keep using <code>active</code>.
+    """
+    tsd_method: global___TsdMethod.ValueType
+    """Which model decides whether an utterance came from the main speaker. Independent of
+    <code>vad_method</code>, except that <code>TSD_METHOD_PYANNOTE</code> requires Pyannote to
+    also be the active VAD. Leave unset to keep the behaviour of older configurations.
+    """
     @property
     def pyannote(self) -> global___Pyannote:
-        """Configuration for the Pyannote model."""
+        """Configuration for the Pyannote model. Read when Pyannote is the resolved VAD or TSD method."""
+
+    @property
+    def silero(self) -> global___Silero:
+        """Configuration for the Silero model. Read when Silero is the resolved VAD method."""
+
+    @property
+    def wespeaker_tsd(self) -> global___WespeakerTsd:
+        """Configuration for WeSpeaker target-speaker detection. Read when WeSpeaker is the resolved
+        TSD method.
+        """
 
     def __init__(
         self,
@@ -2300,9 +2406,13 @@ class VoiceActivityDetection(google.protobuf.message.Message):
         active: builtins.str = ...,
         sampling_rate: builtins.int = ...,
         pyannote: global___Pyannote | None = ...,
+        silero: global___Silero | None = ...,
+        wespeaker_tsd: global___WespeakerTsd | None = ...,
+        vad_method: global___VadMethod.ValueType = ...,
+        tsd_method: global___TsdMethod.ValueType = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["pyannote", b"pyannote"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["active", b"active", "pyannote", b"pyannote", "sampling_rate", b"sampling_rate"]) -> None: ...
+    def HasField(self, field_name: typing.Literal["pyannote", b"pyannote", "silero", b"silero", "wespeaker_tsd", b"wespeaker_tsd"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["active", b"active", "pyannote", b"pyannote", "sampling_rate", b"sampling_rate", "silero", b"silero", "tsd_method", b"tsd_method", "vad_method", b"vad_method", "wespeaker_tsd", b"wespeaker_tsd"]) -> None: ...
 
 global___VoiceActivityDetection = VoiceActivityDetection
 
@@ -2349,6 +2459,117 @@ class Pyannote(google.protobuf.message.Message):
     def ClearField(self, field_name: typing.Literal["min_audio_size", b"min_audio_size", "min_duration_off", b"min_duration_off", "min_duration_on", b"min_duration_on", "model_name", b"model_name", "triton_server_host", b"triton_server_host", "triton_server_port", b"triton_server_port"]) -> None: ...
 
 global___Pyannote = Pyannote
+
+@typing.final
+class Silero(google.protobuf.message.Message):
+    """<p>Silero contains configuration for the Silero voice activity detection model.</p>
+    <p>Unlike <code>Pyannote</code>, Silero is configured with its own parameters rather than
+    <code>(min_duration_on, min_duration_off)</code>. They carry exactly the meaning they have
+    upstream in <code>get_speech_timestamps</code> / <code>VADIterator</code>.</p>
+    <p>Library: <a href="https://github.com/snakers4/silero-vad">silero-vad</a></p>
+    """
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    MODEL_NAME_FIELD_NUMBER: builtins.int
+    MIN_AUDIO_SIZE_FIELD_NUMBER: builtins.int
+    THRESHOLD_FIELD_NUMBER: builtins.int
+    MIN_SPEECH_DURATION_MS_FIELD_NUMBER: builtins.int
+    MIN_SILENCE_DURATION_MS_FIELD_NUMBER: builtins.int
+    SPEECH_PAD_MS_FIELD_NUMBER: builtins.int
+    TRITON_SERVER_HOST_FIELD_NUMBER: builtins.int
+    TRITON_SERVER_PORT_FIELD_NUMBER: builtins.int
+    model_name: builtins.str
+    """Full name of the Silero model."""
+    min_audio_size: builtins.int
+    """Minimum audio size for processing."""
+    threshold: builtins.float
+    """Speech probability, in [0, 1], above which a frame counts as speech. A run of speech
+    ends at the hysteresis threshold <code>threshold - 0.15</code>, as it does upstream, so
+    this sets both the onset and - through that offset - the release point.
+    """
+    min_speech_duration_ms: builtins.float
+    """Speech runs shorter than this many milliseconds are discarded. A run still open at the
+    end of the buffer is kept regardless, since more audio may extend it.
+    """
+    min_silence_duration_ms: builtins.float
+    """Silence, in milliseconds, that must follow the last speech before an utterance is
+    declared to have ended.
+    """
+    speech_pad_ms: builtins.float
+    """Padding, in milliseconds, added on each side of the detected boundary."""
+    triton_server_host: builtins.str
+    """Host name of triton inference server that serves the Silero model"""
+    triton_server_port: builtins.int
+    """Port number of triton inference server that serves the Silero model"""
+    def __init__(
+        self,
+        *,
+        model_name: builtins.str = ...,
+        min_audio_size: builtins.int = ...,
+        threshold: builtins.float = ...,
+        min_speech_duration_ms: builtins.float = ...,
+        min_silence_duration_ms: builtins.float = ...,
+        speech_pad_ms: builtins.float = ...,
+        triton_server_host: builtins.str = ...,
+        triton_server_port: builtins.int = ...,
+    ) -> None: ...
+    def ClearField(self, field_name: typing.Literal["min_audio_size", b"min_audio_size", "min_silence_duration_ms", b"min_silence_duration_ms", "min_speech_duration_ms", b"min_speech_duration_ms", "model_name", b"model_name", "speech_pad_ms", b"speech_pad_ms", "threshold", b"threshold", "triton_server_host", b"triton_server_host", "triton_server_port", b"triton_server_port"]) -> None: ...
+
+global___Silero = Silero
+
+@typing.final
+class WespeakerTsd(google.protobuf.message.Message):
+    """<p>WespeakerTsd contains configuration for the WeSpeaker target-speaker detection (TSD)
+    model. Given a reference speaker embedding, it decides whether a newly detected utterance
+    was spoken by the same person, so that speech from a different speaker (e.g. background
+    noise, crosstalk, or a barge-in) can be rejected.</p>
+    <p>Library: <a href="https://huggingface.co/pyannote/wespeaker-voxceleb-resnet34-LM">wespeaker-voxceleb-resnet34-LM</a></p>
+    """
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    ACTIVE_FIELD_NUMBER: builtins.int
+    MODEL_NAME_FIELD_NUMBER: builtins.int
+    TRITON_SERVER_HOST_FIELD_NUMBER: builtins.int
+    TRITON_SERVER_PORT_FIELD_NUMBER: builtins.int
+    SIMILARITY_THRESHOLD_FIELD_NUMBER: builtins.int
+    MIN_AUDIO_LENGTH_FIELD_NUMBER: builtins.int
+    REFERENCE_MAX_LENGTH_FIELD_NUMBER: builtins.int
+    active: builtins.bool
+    """Indicates if target-speaker detection is active."""
+    model_name: builtins.str
+    """Full name of the WeSpeaker model."""
+    triton_server_host: builtins.str
+    """Host name of triton inference server that serves the WeSpeaker model"""
+    triton_server_port: builtins.int
+    """Port number of triton inference server that serves the WeSpeaker model"""
+    similarity_threshold: builtins.float
+    """Cosine similarity, in [-1, 1], above which a candidate utterance is judged to come
+    from the same speaker as the reference.
+    """
+    min_audio_length: builtins.float
+    """Utterances shorter than this many seconds carry too little speaker information to
+    judge, and are treated as undecided rather than rejected.
+    """
+    reference_max_length: builtins.float
+    """The reference audio is cropped to its most recent this-many seconds before being
+    embedded.
+    """
+    def __init__(
+        self,
+        *,
+        active: builtins.bool = ...,
+        model_name: builtins.str = ...,
+        triton_server_host: builtins.str = ...,
+        triton_server_port: builtins.int = ...,
+        similarity_threshold: builtins.float = ...,
+        min_audio_length: builtins.float = ...,
+        reference_max_length: builtins.float = ...,
+    ) -> None: ...
+    def ClearField(self, field_name: typing.Literal["active", b"active", "min_audio_length", b"min_audio_length", "model_name", b"model_name", "reference_max_length", b"reference_max_length", "similarity_threshold", b"similarity_threshold", "triton_server_host", b"triton_server_host", "triton_server_port", b"triton_server_port"]) -> None: ...
+
+global___WespeakerTsd = WespeakerTsd
 
 @typing.final
 class PostProcessing(google.protobuf.message.Message):
