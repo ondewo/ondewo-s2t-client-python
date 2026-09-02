@@ -403,3 +403,64 @@ The repo is now fully on **uv** (not just pyproject.toml):
 - **`[tool.mypy] python_version` must be `3.12`** wherever numpy 2.x is on the mypy path — its PEP-695 `type X = …` stubs fail to parse on < 3.12.
 - The release `git commit` uses **`--no-verify`** so pre-commit hooks never gate an automated release.
 - **Validated by a real PyPI publish** — `ondewo-t2s-client 6.5.0` was built with `uv build` and uploaded via twine end-to-end; the uv release pipeline works.
+
+## GitHub Actions — the `tests` workflow is a required gate
+
+`.github/workflows/tests.yml` (job `unit-tests`) runs on **every push to every branch** (`branches: ["**"]`)
+and on every pull request. It is a **gate, not advisory**: a red run is a broken commit, so run it
+locally *before* pushing rather than discovering it on GitHub.
+
+**Reproduce it locally with the workflow's exact commands** — copy them from `tests.yml`, do not
+approximate them:
+
+```bash
+uv python install 3.12
+uv sync --extra dev --frozen
+uv run --frozen ruff check .
+uv run --frozen mypy ondewo
+uv run --frozen pytest test/unit -q \
+  --cov=ondewo.s2t.client.utils.keycloak \
+  --cov=ondewo.s2t.client.client_config \
+  --cov=ondewo.s2t.client.services_interface \
+  --cov=ondewo.s2t.client.async_services_interface \
+  --cov-report=term-missing \
+  --cov-report=xml \
+  --cov-fail-under=100
+```
+
+- **Keep `--frozen` on every command.** Without it `uv` silently re-resolves and installs whatever
+  is newest, so a **stale `uv.lock` passes locally and fails in CI** — CI always runs frozen. The
+  `Makefile` targets (`make test`, `make ruff`, `make mypy`) are *not* the gate: they run without
+  `--frozen`, so a green `make test` is not evidence the workflow is green. After any
+  `pyproject.toml` dependency edit, run `uv lock` and commit `uv.lock` in the same commit.
+- **The coverage gate is scoped by hand and the dotted `--cov=` form FAILS OPEN.** `pytest-cov`
+  only measures a dotted module the suite actually **imports**; a module nothing imports is dropped
+  from the report entirely instead of scoring 0%. Verified in this repo: adding
+  `--cov=ondewo.s2t.scripts.generate_services` (618 hand-written lines, imported by no test) to the
+  command above leaves the table at the same four rows, `TOTAL 209/209 100%`, and
+  `--cov-fail-under=100` still exits 0. So **`100%` is a statement about the four named modules
+  only** — it is not a claim about the hand-written surface as a whole, and adding a fifth `--cov=`
+  argument does **not** widen the gate. If you extend the scope, confirm the new module actually
+  appears as a row in the `term-missing` table; if it does not, the gate never saw it. (Contrast
+  `ondewo-nlu-client-python`, which scans the filesystem via `[tool.coverage.run] source` precisely
+  to avoid this. This repo has **no `[tool.coverage]` section at all** — the whole gate lives on the
+  workflow's command line, so do not go looking for it in `pyproject.toml`.)
+- **`uv python install 3.12` pins nothing.** There is no `.python-version`, and `requires-python`
+  is `>=3.9`, so `uv sync` builds `.venv` on whatever compatible interpreter it discovers first — a
+  fresh `uv sync --extra dev --frozen` here selects **CPython 3.14.6** while CI runs on 3.12. Both
+  are green today, but a passing local run says nothing about CI's interpreter. Check
+  `.venv/pyvenv.cfg` before blaming a version-specific failure on the code.
+- **`ruff check .` and `mypy ondewo` have different scopes.** ruff lints the whole tree (generated
+  `*_pb2*`, the two submodules and `*.ipynb` are excluded via `[tool.ruff] extend-exclude`); mypy is
+  pointed at the `ondewo` package only, so nothing under `test/` or `examples/` is type-checked by
+  the gate. A type error in a test file is invisible to CI.
+- **The pytest step writes `coverage.xml` into the repo root.** It is gitignored; do not commit it.
+- **Confirm a real run rather than assuming**, since this repo has no `gh` CLI available:
+
+  ```bash
+  SHA=$(git rev-parse HEAD)
+  curl -s "https://api.github.com/repos/ondewo/ondewo-s2t-client-python/actions/runs?head_sha=$SHA"
+  ```
+
+  Read `.workflow_runs[].status` / `.conclusion`; append `/jobs` to a run's API URL for the
+  per-step conclusions. The repo is public, so these endpoints need no token.
