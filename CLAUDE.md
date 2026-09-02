@@ -464,3 +464,14 @@ uv run --frozen pytest test/unit -q \
 
   Read `.workflow_runs[].status` / `.conclusion`; append `/jobs` to a run's API URL for the
   per-step conclusions. The repo is public, so these endpoints need no token.
+
+## Jenkins — never trigger a multibranch scan or branch indexing
+
+**NEVER trigger a Jenkins multibranch scan or branch indexing.** Do not call a multibranch/folder job's
+`build`, `scan`, or reindex endpoints, click "Scan Repository Now" / "Build Now" on a folder, run
+`p4 scan`, or use any API/CLI that reindexes branches or scans the repository. A scan/reindex runs across
+**every** branch, consumes CI resources, and can kick off unintended builds and deploys.
+
+If a branch is not building — it was not discovered, or its job is marked `buildable: false` / orphaned —
+**report it and stop**. Let the user or a Jenkins admin adjust branch-discovery/config or rename the branch
+to the convention. Never force a build by scanning or reindexing.
