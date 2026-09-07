@@ -28,16 +28,15 @@ jobs:
       - name: Mypy type check
         run: uv run --frozen mypy ondewo
 
-      # The repo is ~95% generated protobuf/gRPC stubs; coverage is gated on the HAND-WRITTEN surface
-      # (the Keycloak/D18 offline-token auth helper + client config) — the production-critical code this SDK owns.
-      # Generated *_pb2.py / *_pb2_grpc.py stubs are NOT in --cov.
+      # Bare `--cov`: the scope lives in pyproject.toml's [tool.coverage.run] `source = ["ondewo"]`,
+      # which coverage resolves by scanning the filesystem. The dotted `--cov=<module>` list this
+      # step used before only measured modules the suite imported, so an untested file was dropped
+      # from the report instead of scored 0% and the gate passed with whole files untested.
+      # Generated *_pb2.py / *_pb2_grpc.py stubs are the only thing `omit` takes out.
       - name: Unit tests + 100% coverage gate on hand-written code
         run: |
           uv run --frozen pytest test/unit -q \
-            --cov=ondewo.s2t.client.utils.keycloak \
-            --cov=ondewo.s2t.client.client_config \
-            --cov=ondewo.s2t.client.services_interface \
-            --cov=ondewo.s2t.client.async_services_interface \
+            --cov \
             --cov-report=term-missing \
             --cov-report=xml \
             --cov-fail-under=100

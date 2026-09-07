@@ -115,11 +115,16 @@ def proto_stem_to_file_name(stem: str) -> str:
       aiservices       -> aiservices  (already ends in s)
     """
     return stem
-    if stem.endswith("y"):
+    # Dead since the unconditional `return stem` above: S2T ships a single proto
+    # (speech-to-text.proto) and its service file must keep the stem verbatim, so the nlu
+    # pluralisation rules below are unreachable. Left in place because removing them is a
+    # behaviour decision for the generator's owner, and marked `no cover` so the
+    # `--cov-fail-under=100` gate measures reachable code only.
+    if stem.endswith("y"):  # pragma: no cover
         return stem[:-1] + "ies"
-    if stem.endswith("s"):
+    if stem.endswith("s"):  # pragma: no cover
         return stem
-    return stem + "s"
+    return stem + "s"  # pragma: no cover
 
 
 def _strip_proto_comments(content: str) -> str:
@@ -590,6 +595,7 @@ def main(proto_dir: Path, output_dir: Path) -> None:
                     file=sys.stderr,
                 )
             written_by[out] = f"{pf.stem}.proto"
+            written_by[out_async] = f"{pf.stem}.proto"
             out.write_text(_build_file_content(svc, type_to_stem))
             print(f"  generated {out}")
             out_async.write_text(_build_file_content(svc, type_to_stem, for_async=True))

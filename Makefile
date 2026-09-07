@@ -300,10 +300,14 @@ spc: ## Checks if the Release Branch, Tag and Pypi version already exist
 ########################################################
 
 test: ## Run unit tests with terminal + HTML coverage report
+	# Bare --cov so this mirrors the CI gate exactly: the scope is pyproject.toml's
+	# [tool.coverage.run] source = ["ondewo"]. The old --cov=ondewo/s2t/client left
+	# ondewo/s2t/scripts/ unmeasured, so `make test` could be green while CI was red.
 	uv run pytest test/unit \
-		--cov=ondewo/s2t/client \
+		--cov \
 		--cov-report=term-missing \
 		--cov-report=html:htmlcov \
+		--cov-fail-under=100 \
 		-v
 
 test_unit: ## Run unit tests without coverage
