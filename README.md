@@ -45,7 +45,7 @@ make setup_developer_environment_locally
 
 ```
 .
-├── examples               <----- Helpful for implementation of code
+├── examples                           <----- Helpful for implementation of code
 │   ├── audiofiles
 │   │   ├── sample_1.wav
 │   │   └── sample_2.wav
@@ -66,7 +66,7 @@ make setup_developer_environment_locally
 │   │   │   │   └── speech_to_text.py
 │   │   │   ├── utils
 │   │   │   │   ├── __init__.py
-│   │   │   │   └── keycloak.py           <----- D18 Keycloak headless offline-token provider
+│   │   │   │   └── keycloak.py        <----- D18 Keycloak headless offline-token provider
 │   │   │   ├── __init__.py
 │   │   │   ├── async_client.py
 │   │   │   ├── async_services_container.py
@@ -75,24 +75,28 @@ make setup_developer_environment_locally
 │   │   │   ├── client_config.py
 │   │   │   ├── services_container.py
 │   │   │   └── services_interface.py
+│   │   ├── scripts
+│   │   │   └── generate_services.py   <----- Generates the files marked auto-generated above
 │   │   ├── __init__.py
+│   │   ├── py.typed                   <----- PEP 561 marker; makes the shipped .pyi stubs usable
 │   │   ├── speech_to_text_pb2_grpc.py
 │   │   ├── speech_to_text_pb2.py
 │   │   └── speech_to_text_pb2.pyi
 │   └── __init__.py
-├── ondewo-proto-compiler           <----- @ https://github.com/ondewo/ondewo-proto-compiler
-├── ondewo-s2t-api                  <----- @ https://github.com/ondewo/ondewo-s2t-api
+├── test
+│   └── unit                           <----- Hermetic unit tests; no S2T server required
+├── ondewo-proto-compiler              <----- @ https://github.com/ondewo/ondewo-proto-compiler
+├── ondewo-s2t-api                     <----- @ https://github.com/ondewo/ondewo-s2t-api
+├── CLAUDE.md
 ├── CONTRIBUTING.md
 ├── Dockerfile.utils
 ├── LICENSE
 ├── Makefile
-├── mypy.ini
+├── MANIFEST.in
 ├── README.md
 ├── RELEASE.md
-├── requirements-dev.txt
-├── requirements.txt
-├── setup.cfg
-└── setup.py
+├── pyproject.toml                     <----- Dependencies + ruff / mypy / coverage config
+└── uv.lock                            <----- Committed lockfile; CI installs with --frozen
 
 ```
 
@@ -100,12 +104,33 @@ make setup_developer_environment_locally
 
 The `make build` command is dependent on 2 `repositories` and their speciefied `version`:
 
-- [ondewo-s2t-api](https://github.com/ondewo/ondewo-s2t-api) -- `S2T_API_GIT_BRANCH` in `Makefile`
+- [ondewo-s2t-api](https://github.com/ondewo/ondewo-s2t-api) -- `ONDEWO_S2T_API_GIT_BRANCH` in `Makefile`
 - [ondewo-proto-compiler](https://github.com/ondewo/ondewo-proto-compiler) -- `ONDEWO_PROTO_COMPILER_GIT_BRANCH` in `Makefile`
 
 It will generate a `_pb2.py`, `_pb2.pyi` and `_pb2_grpc.py` file for every `.proto` in the api submodule.
 
 > :warning: All Files in the `ondewo` folder that dont have `pb2` in their name are handwritten, and therefor need to be manually adjusted to any changes in the proto-code.
+
+## Development
+
+The project is managed with [uv](https://docs.astral.sh/uv/); `uv.lock` is committed and CI installs
+frozen, so every dependency edit must be followed by `uv lock`.
+
+```bash
+make setup_developer_environment_locally   # installs uv, syncs .venv, installs the pre-commit hooks
+uv run --frozen ruff check .               # lint
+uv run --frozen mypy ondewo                # type check
+make test                                  # unit tests + the 100% coverage gate
+```
+
+`make test` and the `tests` GitHub Actions workflow run the same gate: coverage scope lives in
+`pyproject.toml` under `[tool.coverage.run] source = ["ondewo"]`, which coverage resolves by scanning
+the filesystem, so a new file with no tests fails `--cov-fail-under=100` instead of being skipped.
+Only the generated `*_pb2.py` / `*_pb2_grpc.py` stubs are omitted.
+
+Run the hooks over the whole tree with `make precommit_hooks_run_all_files` (or
+`uv run --extra dev pre-commit run --all-files`). A bare `uvx pre-commit` cannot see `mypy`, because
+that hook is declared `language: system` and resolves `mypy` from `PATH`.
 
 ## Examples
 
@@ -117,8 +142,10 @@ The `/examples` folder provides a possible implementation of this library. To ru
 - keycloak_url `// Base URL of the Keycloak server (optional headless-auth parameter)`
 - realm `// Keycloak realm (optional headless-auth parameter)`
 - client_id `// Public Keycloak client id, no secret (optional headless-auth parameter)`
-- user_name `// Technical-user email/username for the Keycloak ROPC grant (optional)`
+- username `// Technical-user email/username for the Keycloak ROPC grant (optional)`
 - password `// Technical-user password (optional)`
+
+`user_name` is still accepted as a backward-compatible alias for `username`; when both are set, `username` wins.
 
 A bare `{"host": ..., "port": ...}` config (as in `examples/configs/insecure_grpc.json`) stays valid for an unauthenticated / ingress-injected-auth server; the Keycloak fields are only required together when any one of them is set.
 
