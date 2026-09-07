@@ -59,7 +59,11 @@ install_precommit_hooks: ## Installs pre-commit hooks and sets them up for the o
 	uv run pre-commit install --hook-type commit-msg
 
 precommit_hooks_run_all_files: ## Runs all pre-commit hooks on all files and not just the changed ones
-	uv run pre-commit run --all-files
+	# --extra dev is required: the mypy hook is `language: system` (deliberately, so it can see the types-*
+	# packages), so pre-commit resolves `mypy` from PATH. A bare `uv run` syncs only the default dependency
+	# group, leaving .venv without mypy, and the hook dies with "Executable `mypy` not found" — which fails
+	# `generate_services` and aborts the release.
+	uv run --extra dev pre-commit run --all-files
 
 install_dependencies_locally: ## Install runtime + dev dependencies locally into the uv-managed .venv
 	uv sync --extra dev
@@ -83,11 +87,11 @@ help: ## Print usage info about help targets
 makefile_chapters: ## Shows all sections of Makefile
 	@echo `cat Makefile| grep "########################################################" -A 1 | grep -v "########################################################"`
 
-TEST:
-	@echo ${GITHUB_GH_TOKEN}
-	@echo ${PYPI_USERNAME}
-	@echo ${PYPI_PASSWORD}
-	@echo "\n${CURRENT_RELEASE_NOTES}"
+TEST: ## Prints some important variables
+	@echo "Release Notes: \n \n$(CURRENT_RELEASE_NOTES)"
+	@echo "GH Token: \t $(if $(GITHUB_GH_TOKEN),<set>,<unset>)"
+	@echo "PyPI User: \t $(PYPI_USERNAME)"
+	@echo "PyPI Password: \t $(if $(PYPI_PASSWORD),<set>,<unset>)"
 
 check_build: ## Checks if all built proto-code is there
 	@rm -rf build_check.txt
