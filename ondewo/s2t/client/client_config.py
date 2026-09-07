@@ -14,7 +14,7 @@
 
 """Client configuration for the ONDEWO S2T SDK.
 
-Defines :class:`ClientConfig`, a frozen ``dataclass_json`` extension of
+Defines :class:`ClientConfig`, a frozen dataclass extension of
 ``BaseClientConfig`` that carries the connection target (``host``/``port``/``grpc_cert``)
 plus the headless Keycloak authentication parameters used by the D18 offline-token flow
 (see :mod:`ondewo.s2t.client.utils.keycloak`).
@@ -37,11 +37,9 @@ from typing import (
     Optional,
 )
 
-from dataclasses_json import dataclass_json
 from ondewo.utils.base_client_config import BaseClientConfig
 
 
-@dataclass_json
 @dataclass(frozen=True)
 class ClientConfig(BaseClientConfig):
     """Config for ONDEWO S2T client.

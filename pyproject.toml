@@ -22,15 +22,20 @@ classifiers = [
     "Programming Language :: Python :: 3.12",
     "Topic :: Software Development :: Libraries",
 ]
+# Runtime imports across ondewo/ and examples/ are exactly: grpc, google.protobuf, ondewo.utils,
+# requests and urllib3. grpcio-reflection, grpcio-tools, regex and setuptools were never imported
+# (grpc_reflection/grpc_tools only appear in sys.modules because grpc's _runtime_protos.py probes
+# for them behind try/except); codegen runs in the proto-compiler docker image, not from this
+# package. urllib3 is imported directly by client/utils/keycloak.py but arrives with requests,
+# which is how ondewo-nlu-client-python declares it too.
 dependencies = [
     "grpcio",
-    "grpcio-reflection",
-    "grpcio-tools",
+    # >=3.3.0 is what finally drops the dataclasses-json -> marshmallow chain (BaseClientConfig implements
+    # to_dict/from_dict/to_json/from_json itself). 3.2.0 still supplies those helpers via @dataclass_json, so
+    # this package works on both -- raise the floor to >=3.3.0 once client-utils 3.3.0 is on PyPI.
     "ondewo-client-utils>=3.2.0",
     "protobuf",
-    "regex",
     "requests",
-    "setuptools",
 ]
 
 [project.optional-dependencies]
@@ -125,7 +130,6 @@ ignore_missing_imports = true
 # Third-party packages without (complete) type stubs.
 [[tool.mypy.overrides]]
 module = [
-    "dataclasses_json.*",
     "google.protobuf.*",
     "grpc.*",
     "ondewo.utils.*",
