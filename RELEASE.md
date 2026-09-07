@@ -226,12 +226,16 @@
 * [[OND231-338]] -
   Add mute_audio field in TranscribeStreamRequest.
 
+*****************
+
 ## Release ONDEWO S2T Python Client 3.0.0
 
 ### New breaking Features
 
 * [[OND231-334]] -
   Rename Description, GetServiceInfoResponse, Inference and Normalization messages to include S2T
+
+*****************
 
 ## Release ONDEWO S2T Python Client 2.0.0
 
@@ -245,11 +249,15 @@
   transcription text (str) and a score (float).
 * Update examples in _/example_s folder.
 
+*****************
+
 ## Release ONDEWO S2T Python Client 1.5.0
 
 ### New Features
 
 * Compatible with ONDEWO-S2T 1.5.* GRPC server
+
+*****************
 
 ## Release ONDEWO S2T Python Client 1.4.1
 
@@ -273,3 +281,5 @@
 
 * CI/CD Integration is missing
 * Extend the README.md with an examples usage
+
+*****************
