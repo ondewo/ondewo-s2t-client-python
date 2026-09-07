@@ -2487,17 +2487,24 @@ class Silero(google.protobuf.message.Message):
     """Speech probability, in [0, 1], above which a frame counts as speech. A run of speech
     ends at the hysteresis threshold <code>threshold - 0.15</code>, as it does upstream, so
     this sets both the onset and - through that offset - the release point.
+    Optional, and explicitly so: 0 is a legitimate value here, and without presence tracking
+    it would be indistinguishable from an unset field and silently replaced by the default.
     """
     min_speech_duration_ms: builtins.float
     """Speech runs shorter than this many milliseconds are discarded. A run still open at the
     end of the buffer is kept regardless, since more audio may extend it.
+    Optional for the same reason as <code>threshold</code>: 0 means &apos;discard nothing&apos;.
     """
     min_silence_duration_ms: builtins.float
     """Silence, in milliseconds, that must follow the last speech before an utterance is
     declared to have ended.
+    Optional for the same reason as <code>threshold</code>: 0 means &apos;end the utterance as
+    soon as the speech stops&apos;.
     """
     speech_pad_ms: builtins.float
-    """Padding, in milliseconds, added on each side of the detected boundary."""
+    """Padding, in milliseconds, added on each side of the detected boundary.
+    Optional for the same reason as <code>threshold</code>: 0 means &apos;no padding&apos;.
+    """
     triton_server_host: builtins.str
     """Host name of triton inference server that serves the Silero model"""
     triton_server_port: builtins.int
@@ -2507,14 +2514,23 @@ class Silero(google.protobuf.message.Message):
         *,
         model_name: builtins.str = ...,
         min_audio_size: builtins.int = ...,
-        threshold: builtins.float = ...,
-        min_speech_duration_ms: builtins.float = ...,
-        min_silence_duration_ms: builtins.float = ...,
-        speech_pad_ms: builtins.float = ...,
+        threshold: builtins.float | None = ...,
+        min_speech_duration_ms: builtins.float | None = ...,
+        min_silence_duration_ms: builtins.float | None = ...,
+        speech_pad_ms: builtins.float | None = ...,
         triton_server_host: builtins.str = ...,
         triton_server_port: builtins.int = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing.Literal["min_audio_size", b"min_audio_size", "min_silence_duration_ms", b"min_silence_duration_ms", "min_speech_duration_ms", b"min_speech_duration_ms", "model_name", b"model_name", "speech_pad_ms", b"speech_pad_ms", "threshold", b"threshold", "triton_server_host", b"triton_server_host", "triton_server_port", b"triton_server_port"]) -> None: ...
+    def HasField(self, field_name: typing.Literal["_min_silence_duration_ms", b"_min_silence_duration_ms", "_min_speech_duration_ms", b"_min_speech_duration_ms", "_speech_pad_ms", b"_speech_pad_ms", "_threshold", b"_threshold", "min_silence_duration_ms", b"min_silence_duration_ms", "min_speech_duration_ms", b"min_speech_duration_ms", "speech_pad_ms", b"speech_pad_ms", "threshold", b"threshold"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["_min_silence_duration_ms", b"_min_silence_duration_ms", "_min_speech_duration_ms", b"_min_speech_duration_ms", "_speech_pad_ms", b"_speech_pad_ms", "_threshold", b"_threshold", "min_audio_size", b"min_audio_size", "min_silence_duration_ms", b"min_silence_duration_ms", "min_speech_duration_ms", b"min_speech_duration_ms", "model_name", b"model_name", "speech_pad_ms", b"speech_pad_ms", "threshold", b"threshold", "triton_server_host", b"triton_server_host", "triton_server_port", b"triton_server_port"]) -> None: ...
+    @typing.overload
+    def WhichOneof(self, oneof_group: typing.Literal["_min_silence_duration_ms", b"_min_silence_duration_ms"]) -> typing.Literal["min_silence_duration_ms"] | None: ...
+    @typing.overload
+    def WhichOneof(self, oneof_group: typing.Literal["_min_speech_duration_ms", b"_min_speech_duration_ms"]) -> typing.Literal["min_speech_duration_ms"] | None: ...
+    @typing.overload
+    def WhichOneof(self, oneof_group: typing.Literal["_speech_pad_ms", b"_speech_pad_ms"]) -> typing.Literal["speech_pad_ms"] | None: ...
+    @typing.overload
+    def WhichOneof(self, oneof_group: typing.Literal["_threshold", b"_threshold"]) -> typing.Literal["threshold"] | None: ...
 
 global___Silero = Silero
 
@@ -2547,10 +2563,14 @@ class WespeakerTsd(google.protobuf.message.Message):
     similarity_threshold: builtins.float
     """Cosine similarity, in [-1, 1], above which a candidate utterance is judged to come
     from the same speaker as the reference.
+    Optional, and explicitly so: 0 sits in the middle of the valid range, and without
+    presence tracking it would be indistinguishable from an unset field.
     """
     min_audio_length: builtins.float
     """Utterances shorter than this many seconds carry too little speaker information to
     judge, and are treated as undecided rather than rejected.
+    Optional for the same reason as <code>similarity_threshold</code>: 0 means &apos;judge
+    every utterance, however short&apos;.
     """
     reference_max_length: builtins.float
     """The reference audio is cropped to its most recent this-many seconds before being
@@ -2563,11 +2583,16 @@ class WespeakerTsd(google.protobuf.message.Message):
         model_name: builtins.str = ...,
         triton_server_host: builtins.str = ...,
         triton_server_port: builtins.int = ...,
-        similarity_threshold: builtins.float = ...,
-        min_audio_length: builtins.float = ...,
+        similarity_threshold: builtins.float | None = ...,
+        min_audio_length: builtins.float | None = ...,
         reference_max_length: builtins.float = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing.Literal["active", b"active", "min_audio_length", b"min_audio_length", "model_name", b"model_name", "reference_max_length", b"reference_max_length", "similarity_threshold", b"similarity_threshold", "triton_server_host", b"triton_server_host", "triton_server_port", b"triton_server_port"]) -> None: ...
+    def HasField(self, field_name: typing.Literal["_min_audio_length", b"_min_audio_length", "_similarity_threshold", b"_similarity_threshold", "min_audio_length", b"min_audio_length", "similarity_threshold", b"similarity_threshold"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["_min_audio_length", b"_min_audio_length", "_similarity_threshold", b"_similarity_threshold", "active", b"active", "min_audio_length", b"min_audio_length", "model_name", b"model_name", "reference_max_length", b"reference_max_length", "similarity_threshold", b"similarity_threshold", "triton_server_host", b"triton_server_host", "triton_server_port", b"triton_server_port"]) -> None: ...
+    @typing.overload
+    def WhichOneof(self, oneof_group: typing.Literal["_min_audio_length", b"_min_audio_length"]) -> typing.Literal["min_audio_length"] | None: ...
+    @typing.overload
+    def WhichOneof(self, oneof_group: typing.Literal["_similarity_threshold", b"_similarity_threshold"]) -> typing.Literal["similarity_threshold"] | None: ...
 
 global___WespeakerTsd = WespeakerTsd
 
