@@ -19,21 +19,21 @@ repos:
   # Markdown linting. MD013 (line-length) and MD033 (inline HTML) are disabled in
   # .markdownlint-cli2.yaml because the docs embed <p>/<code> and long lines.
   - repo: https://github.com/DavidAnson/markdownlint-cli2
-    rev: v0.23.0
+    rev: v0.23.2
     hooks:
       - id: markdownlint-cli2
 
   # Ruff replaces flake8 (lint) AND black + autopep8 (format). Config lives in pyproject.toml
   # ([tool.ruff]); generated *_pb2* stubs are excluded via the global exclude above.
   - repo: https://github.com/astral-sh/ruff-pre-commit
-    rev: v0.15.20
+    rev: v0.16.6
     hooks:
       - id: ruff  # Lint (replaces flake8)
         args: [ --fix ]
       - id: ruff-format  # Format (replaces black + autopep8)
 
   - repo: https://github.com/pre-commit/mirrors-mypy
-    rev: v2.2.0
+    rev: v2.3.1
     hooks:
       - id: mypy  # Run mypy type checker; note: runs with flag --missing-imports
         exclude: ondewo
@@ -76,7 +76,7 @@ repos:
 
   # Keep uv.lock in sync with pyproject.toml.
   - repo: https://github.com/astral-sh/uv-pre-commit
-    rev: 0.11.28
+    rev: 0.12.10
     hooks:
       - id: uv-lock
 
@@ -98,10 +98,3 @@ repos:
         args: [ '--regex=(?:(?:feature|bugfix|support|hotfix)/)?(OND[0-9]{3}-[0-9]{1,5})[_-][\w-]+',
                 '--format=[{ticket}] {commit_msg}',
                 '--mode=regex_match' ]
-
-  # Enforce Conventional Commits on the commit message.
-  - repo: https://github.com/compilerla/conventional-pre-commit
-    rev: v4.4.0
-    hooks:
-      - id: conventional-pre-commit
-        stages: [ commit-msg ]

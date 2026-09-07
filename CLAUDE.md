@@ -408,7 +408,7 @@ The repo is now fully on **uv** (not just pyproject.toml):
 
 `.github/workflows/tests.yml` (job `unit-tests`) runs on **every push to every branch** (`branches: ["**"]`)
 and on every pull request. It is a **gate, not advisory**: a red run is a broken commit, so run it
-locally *before* pushing rather than discovering it on GitHub.
+locally _before_ pushing rather than discovering it on GitHub.
 
 **Reproduce it locally with the workflow's exact commands** — copy them from `tests.yml`, do not
 approximate them:
@@ -430,7 +430,7 @@ uv run --frozen pytest test/unit -q \
 
 - **Keep `--frozen` on every command.** Without it `uv` silently re-resolves and installs whatever
   is newest, so a **stale `uv.lock` passes locally and fails in CI** — CI always runs frozen. The
-  `Makefile` targets (`make test`, `make ruff`, `make mypy`) are *not* the gate: they run without
+  `Makefile` targets (`make test`, `make ruff`, `make mypy`) are _not_ the gate: they run without
   `--frozen`, so a green `make test` is not evidence the workflow is green. After any
   `pyproject.toml` dependency edit, run `uv lock` and commit `uv.lock` in the same commit.
 - **The coverage gate is scoped by hand and the dotted `--cov=` form FAILS OPEN.** `pytest-cov`
