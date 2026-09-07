@@ -124,7 +124,10 @@ Scope lives in `pyproject.toml`, **not** on the command line:
   instead of scored 0%. It printed "Required test coverage of 100% reached" while
   `ondewo/s2t/scripts/generate_services.py` (250 statements) was never measured at all. Measured
   surface went from 222 to 623 statements when this was fixed.
-- `omit` is only the generated `*_pb2.py` / `*_pb2_grpc.py` stubs. Nothing hand-written is omitted.
+- `omit` is only the generated `*_pb2.py` / `*_pb2_grpc.py` stubs. Nothing hand-written under
+  `ondewo/` is omitted. `examples/` is deliberately outside `source` — it is sample code, not
+  library source — so although `test/unit/test_examples.py` drives both example scripts, an
+  uncovered branch added to one of them does **not** fail the gate.
 - `[tool.coverage.report] include_namespace_packages = true` is **required**: `ondewo/s2t/scripts/`
   has no `__init__.py`, so coverage's package walk skips the whole directory without it — the same
   fail-open shape by a different route. The option belongs under `[report]`; under `[run]` coverage
@@ -591,11 +594,17 @@ different versions.
 
 ### Sharp edges
 
-- **Never run `uvx pre-commit run --all-files` here.** The `mypy` hook is `language: system`
-  (deliberately, so it sees the `types-*` packages), so pre-commit resolves `mypy` from `PATH`; an
-  ephemeral `uvx` environment has none and the hook fails with "Executable `mypy` not found" — a
-  false red. Use `uv run --frozen pre-commit run --all-files` or `make precommit_hooks_run_all_files`
-  (`PATH="$PWD/.venv/bin:$PATH" uvx pre-commit …` also works, if you must use `uvx`).
+- **The `mypy` hook must keep its `entry: uv run --frozen --extra dev mypy` override.** The hook is
+  `language: system` (deliberately, so it sees the `types-*` packages and the runtime deps that
+  type-checking `test/` and `examples/` needs — `language: python` with `additional_dependencies`
+  would isolate it from all of them and, with `ignore_missing_imports = false`, fail on the first
+  `import ondewo.s2t…`). But `language: system` with the stock `entry: mypy` resolves from `PATH`,
+  and an ephemeral `uvx pre-commit` environment has no `mypy` there: the hook died with
+  "Executable `mypy` not found" — a false red — until the entry was pinned to this project's
+  `.venv` through `uv run`. With the override, `uvx pre-commit run --all-files`,
+  `uv run --extra dev pre-commit run --all-files` and `make precommit_hooks_run_all_files` all
+  pass; the cost is that `uv` must be on `PATH` when hooks run, which is already true of every
+  Makefile target here.
 - **`MD053` must stay `false`** in `.markdownlint-cli2.yaml`: its auto-fix deletes the
   `[comment]: <>` reference-definition markers the release tooling greps for. `markdownlint-cli2`
   runs with `fix: true`, so it _will_ rewrite committed markdown — commit those rewrites.

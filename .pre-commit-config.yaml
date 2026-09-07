@@ -46,6 +46,14 @@ repos:
         # for the hook and will run it in whatever environment you happen to be in when
         # you run git commit or pre-commit run => https://jaredkhan.com/blog/mypy-pre-commit
         language: system
+        # ... but "whatever environment you happen to be in" is exactly the problem: the stock
+        # `entry: mypy` resolves from PATH, so the hook dies with "Executable `mypy` not found"
+        # under `uvx pre-commit run --all-files` (an ephemeral env with no mypy) or in any shell
+        # where .venv is not activated. Resolving it through `uv run` instead pins the hook to
+        # THIS project's .venv -- the environment that has the types-* stubs, grpcio, protobuf
+        # and ondewo-client-utils that type-checking test/ and examples/ needs -- no matter which
+        # environment pre-commit itself was launched from. --frozen keeps it off uv.lock.
+        entry: uv run --frozen --extra dev mypy
         # use require_serial so that script
         # is only called once per commit
         require_serial: true

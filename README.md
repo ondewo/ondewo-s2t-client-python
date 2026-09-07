@@ -129,8 +129,9 @@ the filesystem, so a new file with no tests fails `--cov-fail-under=100` instead
 Only the generated `*_pb2.py` / `*_pb2_grpc.py` stubs are omitted.
 
 Run the hooks over the whole tree with `make precommit_hooks_run_all_files` (or
-`uv run --extra dev pre-commit run --all-files`). A bare `uvx pre-commit` cannot see `mypy`, because
-that hook is declared `language: system` and resolves `mypy` from `PATH`.
+`uv run --extra dev pre-commit run --all-files`, or a bare `uvx pre-commit run --all-files`). The
+`mypy` hook is declared `language: system` so it can see the `types-*` stubs, and its entry is
+pinned to `uv run --frozen --extra dev mypy` so it finds them from any environment.
 
 ## Examples
 
