@@ -30,3 +30,30 @@ accept your pull requests.
    recommended coding standards for this organization.
 1. Ensure that your code has an appropriate set of unit tests which all pass.
 1. Submit a pull request.
+
+## Before You Submit
+
+Every push runs the `tests` workflow (`.github/workflows/tests.yml`) on every branch, and a red run
+blocks the change. Reproduce it locally with the workflow's own commands:
+
+```bash
+uv sync --extra dev --frozen
+uv run --frozen ruff check .
+uv run --frozen mypy ondewo
+uv run --frozen pytest test/unit -q --cov --cov-report=term-missing --cov-fail-under=100
+```
+
+The coverage gate is enforced at **100%** over everything under `ondewo/` except the generated
+`*_pb2.py` / `*_pb2_grpc.py` stubs, so a new file needs tests in the same change. `--frozen` is not
+optional: it is how CI installs, and dropping it hides a stale `uv.lock`. After editing dependencies
+in `pyproject.toml`, run `uv lock` and commit `uv.lock` alongside.
+
+Also run the hooks over the whole tree before opening the pull request:
+
+```bash
+make precommit_hooks_run_all_files
+```
+
+Commit subjects are plain [Conventional Commits](https://www.conventionalcommits.org/) (`feat: …`,
+`fix(scope): …`). Do **not** prepend the JIRA ticket yourself — the `giticket` hook reads it from the
+branch name (`(feature|bugfix|support|hotfix)/OND<xxx>-<n>-…`) and adds the `[OND…]` prefix for you.
