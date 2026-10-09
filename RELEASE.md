@@ -8,7 +8,7 @@
 
 * [[OND211-2443]](https://ondewo.atlassian.net/browse/OND211-2443) **`ClientConfig` printed the mutual-TLS private key in clear text.** `ondewo-client-utils` 4.1.0 added `grpc_client_cert` / `grpc_client_key` to `BaseClientConfig` and declared the key `repr=False`, but this class overrides `__repr__` and ignored that flag, so `repr()` / `str()` rendered the PEM. `grpc_client_key` and every other field declared `repr=False` now render as `***REDACTED***`.
 * [[OND211-2443]](https://ondewo.atlassian.net/browse/OND211-2443) Dependency: `ondewo-client-utils>=4.1.1` on Python >= 3.12 (`>=3.2.0` below, which has no client-key field).
-* Regenerated with [ondewo-proto-compiler 5.15.2](https://github.com/ondewo/ondewo-proto-compiler/releases/tag/5.15.2).
+* Regenerated with [ondewo-proto-compiler 5.15.3](https://github.com/ondewo/ondewo-proto-compiler/releases/tag/5.15.3), which fixes the build check on hyphenated `.proto` files (`speech-to-text.proto`). The Makefile no longer passes `EXTRA_PROTO_DIR=ondewo-s2t-api/googleapis/google/`: the API ships no `googleapis` directory and imports only the well-known types bundled with `grpc_tools`.
 
 *****************
 
