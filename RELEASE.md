@@ -285,6 +285,18 @@
 
 *****************
 
+## Release ONDEWO S2T Python Client 1.4.0
+
+### Improvements
+
+* Compatible with ONDEWO-S2T 1.4.* GRPC server
+
+### Known issues not covered in this release
+
+* More examples of using the API are needed
+
+*****************
+
 ## Release ONDEWO S2T Python Client 1.3.0
 
 ### New Features
