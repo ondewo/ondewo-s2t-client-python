@@ -93,9 +93,11 @@ class ClientConfig(BaseClientConfig):
     token_expiration_in_s: Optional[int] = None
     keycloak_verify_ssl: bool = True
 
-    #: Fields whose value must never be rendered. ``grpc_cert`` is PEM material and ``password`` is
-    #: the ROPC login secret; both are printed verbatim by the ``__repr__`` ``@dataclass`` generates.
-    SECRET_FIELD_NAMES: ClassVar[FrozenSet[str]] = frozenset({"password", "grpc_cert"})
+    #: Fields whose value must never be rendered. ``grpc_cert`` is PEM material, ``password`` is the
+    #: ROPC login secret and ``grpc_client_key`` is the mutual-TLS private key; all are printed verbatim
+    #: by the ``__repr__`` ``@dataclass`` generates. ``__repr__`` additionally redacts every field declared
+    #: with ``repr=False``, so a secret ``BaseClientConfig`` adds and hides is not printed by this override.
+    SECRET_FIELD_NAMES: ClassVar[FrozenSet[str]] = frozenset({"password", "grpc_cert", "grpc_client_key"})
 
     def __repr__(self) -> str:
         """
@@ -105,6 +107,11 @@ class ClientConfig(BaseClientConfig):
         ``log.debug(f"...{config}")`` -- or a bare traceback carrying locals -- writes the ROPC
         password and the gRPC certificate to its logs in clear text. Downstream services do exactly
         that: a repository-wide sweep in ondewo-vtsi found this class among its leaking dataclasses.
+
+        A field is redacted when it is named in ``SECRET_FIELD_NAMES`` OR declared with ``repr=False``.
+        The second condition matters because this override replaces the generated ``__repr__``, which
+        is what honours ``repr=False``: ``BaseClientConfig.grpc_client_key`` (the mutual-TLS private
+        key) is declared that way, and iterating ``fields()`` without checking it printed the key.
 
         An EMPTY secret still renders as ``''`` rather than as ``***REDACTED***``. The distinction is
         deliberate: the marker reads as "this is set and sensitive", which is actively misleading
@@ -117,7 +124,7 @@ class ClientConfig(BaseClientConfig):
         rendered: List[str] = []
         for config_field in fields(self):
             value: Any = getattr(self, config_field.name, None)
-            if config_field.name in self.SECRET_FIELD_NAMES and value:
+            if (config_field.name in self.SECRET_FIELD_NAMES or not config_field.repr) and value:
                 rendered.append(f"{config_field.name}='***REDACTED***'")
             else:
                 rendered.append(f"{config_field.name}={value!r}")
