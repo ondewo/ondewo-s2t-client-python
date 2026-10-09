@@ -49,6 +49,7 @@ test/
     test_services_interface.py           # Auth-metadata plumbing on both interfaces
     test_client_config_redacts_secrets.py# ClientConfig __repr__ redaction
     test_keycloak.py                     # Offline-token provider (login/refresh/registry/teardown)
+    test_mutual_tls_end_to_end.py        # Real TLS / mutual-TLS handshakes through Client + AsyncClient
     test_generate_services.py            # The code generator itself
     test_examples.py                     # The examples/ scripts still import and parse
 ```
