@@ -18,7 +18,7 @@ export
 # example: API 2.9.0 --> Client 2.9.X
 ONDEWO_S2T_VERSION=7.5.1
 ONDEWO_S2T_API_GIT_BRANCH=tags/7.5.0
-ONDEWO_PROTO_COMPILER_GIT_BRANCH=tags/5.15.2
+ONDEWO_PROTO_COMPILER_GIT_BRANCH=tags/5.15.3
 PYPI_USERNAME?=ENTER_HERE_YOUR_PYPI_USERNAME
 PYPI_PASSWORD?=ENTER_HERE_YOUR_PYPI_PASSWORD
 
@@ -37,9 +37,7 @@ DEVOPS_ACCOUNT_GIT="ondewo-devops-accounts"
 DEVOPS_ACCOUNT_DIR="./${DEVOPS_ACCOUNT_GIT}"
 ONDEWO_S2T_API_DIR=ondewo-s2t-api
 ONDEWO_PROTO_COMPILER_DIR=ondewo-proto-compiler
-GOOGLE_APIS_DIR=${ONDEWO_S2T_API_DIR}/googleapis
 ONDEWO_PROTOS_DIR=${ONDEWO_S2T_API_DIR}/ondewo/
-GOOGLE_PROTOS_DIR=${GOOGLE_APIS_DIR}/google/
 OUTPUT_DIR=.
 IMAGE_UTILS_NAME=ondewo-s2t-client-utils-python:${ONDEWO_S2T_VERSION}
 .DEFAULT_GOAL := help
@@ -130,7 +128,6 @@ build_compiler:  ## Build proto compiler docker image
 generate_ondewo_protos:  ## Generate python code from proto files
 	make -f ondewo-proto-compiler/python/Makefile run \
 		PROTO_DIR=${ONDEWO_PROTOS_DIR} \
-		EXTRA_PROTO_DIR=${GOOGLE_PROTOS_DIR} \
 		TARGET_DIR='ondewo' \
 		OUTPUT_DIR=${OUTPUT_DIR}
 	-make precommit_hooks_run_all_files
