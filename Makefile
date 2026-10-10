@@ -88,7 +88,7 @@ makefile_chapters: ## Shows all sections of Makefile
 TEST: ## Prints some important variables
 	@echo "Release Notes: \n \n$(CURRENT_RELEASE_NOTES)"
 	@echo "GH Token: \t $(if $(GITHUB_GH_TOKEN),<set>,<unset>)"
-	@echo "PyPI User: \t $(PYPI_USERNAME)"
+	@echo "PyPI User: \t $(if $(PYPI_USERNAME),<set>,<unset>)"
 	@echo "PyPI Password: \t $(if $(PYPI_PASSWORD),<set>,<unset>)"
 
 check_build: ## Checks if all built proto-code is there
@@ -196,8 +196,10 @@ create_release_tag: ## Create Release Tag and push it to origin
 	git tag -a ${ONDEWO_S2T_VERSION} -m "release/${ONDEWO_S2T_VERSION}"
 	git push origin ${ONDEWO_S2T_VERSION}
 
+# "$${GITHUB_GH_TOKEN}" is expanded by the shell from the environment. $(GITHUB_GH_TOKEN) would be
+# expanded by make INTO the recipe line, i.e. onto the argv of `/bin/sh -c`.
 login_to_gh: ## Login to Github CLI with Access Token
-	@echo $(GITHUB_GH_TOKEN) | gh auth login -p ssh --with-token
+	@printf '%s\n' "$${GITHUB_GH_TOKEN}" | gh auth login -p ssh --with-token
 
 build_gh_release: ## Generate Github Release with CLI
 	gh release create --repo $(GH_REPO) "$(ONDEWO_S2T_VERSION)" -n "$(CURRENT_RELEASE_NOTES)" -t "Release ${ONDEWO_S2T_VERSION}"
@@ -225,8 +227,10 @@ build_package: ## Builds PYPI Package
 	uv build
 	chmod -R a+rw dist
 
+# twine reads TWINE_USERNAME / TWINE_PASSWORD from the environment; `-u` / `-p` would put the
+# credentials on its argv, which /proc/<pid>/cmdline shows to every user on the host.
 upload_package: ## Uploads PYPI Package
-	@twine upload --verbose -r pypi dist/* -u${PYPI_USERNAME} -p${PYPI_PASSWORD}
+	@TWINE_USERNAME="$${PYPI_USERNAME}" TWINE_PASSWORD="$${PYPI_PASSWORD}" twine upload --verbose -r pypi dist/*
 
 clear_package_data: ## Clears PYPI Package
 	echo "Waiting 5s so directory for removal is not busy anymore"
@@ -237,8 +241,8 @@ push_to_pypi_via_docker_image:  ## Push source code to pypi via docker
 	[ -d $(OUTPUT_DIR) ] || mkdir -p $(OUTPUT_DIR)
 	@docker run --rm \
 		-v ${shell pwd}/dist:/home/ondewo/dist \
-		-e PYPI_USERNAME=${PYPI_USERNAME} \
-		-e PYPI_PASSWORD=${PYPI_PASSWORD} \
+		-e PYPI_USERNAME \
+		-e PYPI_PASSWORD \
 		${IMAGE_UTILS_NAME} make push_to_pypi
 	rm -rf dist
 
@@ -254,8 +258,8 @@ show_pypi_via_docker_image: build_utils_docker_image ## Push source code to pypi
 	[ -d $(OUTPUT_DIR) ] || mkdir -p $(OUTPUT_DIR)
 	@docker run --rm \
 		-v ${shell pwd}/dist:/home/ondewo/dist \
-		-e PYPI_USERNAME=${PYPI_USERNAME} \
-		-e PYPI_PASSWORD=${PYPI_PASSWORD} \
+		-e PYPI_USERNAME \
+		-e PYPI_PASSWORD \
 		${IMAGE_UTILS_NAME} make show_pypi
 	rm -rf dist
 
@@ -267,7 +271,7 @@ push_to_gh: login_to_gh build_gh_release ## Logs into GitHub CLI and Releases
 
 release_to_github_via_docker_image:  ## Release to Github via docker
 	@docker run --rm \
-		-e GITHUB_GH_TOKEN=${GITHUB_GH_TOKEN} \
+		-e GITHUB_GH_TOKEN \
 		${IMAGE_UTILS_NAME} make push_to_gh
 
 ########################################################
@@ -280,9 +284,14 @@ clone_devops_accounts: ## Clones devops-accounts repo
 	if [ -d $(DEVOPS_ACCOUNT_GIT) ]; then rm -Rf $(DEVOPS_ACCOUNT_GIT); fi
 	git clone git@bitbucket.org:ondewo/${DEVOPS_ACCOUNT_GIT}.git
 
+# The credentials are exported into the sub-make's ENVIRONMENT. `make release NAME=<value>` would put
+# every value on make's argv, which /proc/<pid>/cmdline shows to every user on the host.
 run_release_with_devops: ## Gets Credentials from devops-repo and run release command with them
-	$(eval info:= $(shell cat ${DEVOPS_ACCOUNT_DIR}/account_github.env | grep GITHUB_GH; cat ${DEVOPS_ACCOUNT_DIR}/account_pypi.env | grep PYPI_USERNAME; cat ${DEVOPS_ACCOUNT_DIR}/account_pypi.env | grep PYPI_PASSWORD))
-	@make release $(info)
+	@set -a \
+		&& eval "$$(grep -h -E '^(GITHUB_GH_TOKEN|PYPI_USERNAME|PYPI_PASSWORD)=' \
+			${DEVOPS_ACCOUNT_DIR}/account_github.env ${DEVOPS_ACCOUNT_DIR}/account_pypi.env)" \
+		&& set +a \
+		&& $(MAKE) release
 
 spc: ## Checks if the Release Branch, Tag and Pypi version already exist
 	$(eval filtered_branches:= $(shell git branch --all | grep "release/${ONDEWO_S2T_VERSION}"))
