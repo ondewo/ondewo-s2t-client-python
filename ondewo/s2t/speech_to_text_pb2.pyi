@@ -1988,6 +1988,12 @@ class TurnDetectionOptions(google.protobuf.message.Message):
     TURN_DETECTION_SYSTEM_PROMPT_FIELD_NUMBER: builtins.int
     TURN_DETECTION_USER_PROMPT_FIELD_NUMBER: builtins.int
     TURN_DETECTION_LLM_OPENAI_OPTIONS_FIELD_NUMBER: builtins.int
+    CONVERSATION_CONTEXT_FIELD_NUMBER: builtins.int
+    END_OF_TURN_PROBABILITY_THRESHOLD_FIELD_NUMBER: builtins.int
+    HOLD_BANDS_FIELD_NUMBER: builtins.int
+    UNCERTAIN_MIN_WORDS_FIELD_NUMBER: builtins.int
+    INCOMPLETE_MAX_SILENCE_SECONDS_FIELD_NUMBER: builtins.int
+    EXACT_PROBABILITY_FIELD_NUMBER: builtins.int
     active: builtins.bool
     """Optional. Indicates if the turn-detection feature is active."""
     full_utterance_deployment: builtins.bool
@@ -1999,9 +2005,64 @@ class TurnDetectionOptions(google.protobuf.message.Message):
     """Optional. System prompt used to guide the turn-detection model."""
     turn_detection_user_prompt: builtins.str
     """Optional. User prompt used as input to the turn-detection model."""
+    end_of_turn_probability_threshold: builtins.float
+    """Optional. The end-of-utterance probability at or above which the caller is taken to have finished the turn,
+    valid range: 0 - 1. Unset = the server's configured value (default: the threshold configured for the
+    language of the stream). Used only by an end-of-utterance model; ignored by a chat-LLM turn detector.
+    Precedence: the request config's value, then the pipeline config's value, then the server's configured value.
+    """
+    uncertain_min_words: builtins.int
+    """Optional. The minimum number of words an utterance needs before a hold band may hold it; a shorter utterance
+    judged finished is committed at once. Unset = the server's configured value (default: 3). Used only by an
+    end-of-utterance model; ignored by a chat-LLM turn detector. Precedence: the request config's value, then
+    the pipeline config's value, then the server's configured value.
+    """
+    incomplete_max_silence_seconds: builtins.float
+    """Optional. Seconds of silence after an utterance judged NOT finished before it is finished anyway, valid
+    range: 0 - 4. The server raises a value below the voice activity detection's <code>min_duration_off</code>
+    to it. Unset = the server's configured value (default: the <code>min_duration_off</code> in use). Applies to
+    every "not finished" verdict, whichever turn detector gave it. Precedence: the request config's value, then
+    the pipeline config's value, then the server's configured value.
+    """
+    exact_probability: builtins.bool
+    """Optional. Whether an end-of-utterance model computes the exact probability of the end-of-utterance token
+    instead of reading it from the returned top log probabilities. Unset = the server's configured value
+    (default: false). Requires a deployment that returns prompt log probabilities (vLLM
+    <code>prompt_logprobs</code>); on any other deployment the probability reads 0, so every turn is judged not
+    finished and waits for <code>incomplete_max_silence_seconds</code>. Used only by an end-of-utterance model;
+    ignored by a chat-LLM turn detector. Precedence: the request config's value, then the pipeline config's
+    value, then the server's configured value.
+    """
     @property
     def turn_detection_llm_openai_options(self) -> global___OpenaiLlmOptions:
         """Optional. Configuration options for the OpenAI client used for turn detection."""
+
+    @property
+    def conversation_context(self) -> global___TurnDetectionConversationContext:
+        """Optional. The latest turns of the conversation before the caller's utterance under evaluation, handed to an
+        end-of-utterance model (the LiveKit-shaped model that scores the probability of the end-of-utterance token)
+        as preceding chat turns, so that it can judge the utterance against what was said before, e.g. a bare
+        number answering a question for a number. The server keeps the context per stream, outside the effective
+        request config: a request whose turn detection carries this field replaces it, an empty wrapper (no turns)
+        clears it, and a request without it (including one that carries other turn detection options) keeps it. That
+        is why it is a wrapper: the server merges request configs per whole top-level field, so a field it did not
+        store itself could not survive a later request that carries turn detection without it. The server caps the
+        number of turns and the length of each turn it uses. Unset or empty: the utterance is judged alone, exactly
+        as before this field existed. Used only by an end-of-utterance model; ignored by a chat-LLM turn detector.
+        Honoured only in a request config (<code>TranscribeRequestConfig.utterance_detection.turn_detection</code>);
+        ignored in a pipeline config (<code>StreamingSpeechRecognition.turn_detection</code>), where a per-stream
+        context has no meaning.
+        """
+
+    @property
+    def hold_bands(self) -> global___TurnDetectionHoldBands:
+        """Optional. The hold bands of an end-of-utterance model: how long a turn judged finished, but only with a
+        probability below a band's upper bound, waits for further silence before it is committed. Unset = the
+        server's configured value (default: the bands configured for the language of the stream). A wrapper only so
+        that "set with no bands" (a turn at or above the threshold is committed at once) means something different
+        from "unset". Used only by an end-of-utterance model; ignored by a chat-LLM turn detector. Precedence: the
+        request config's value, then the pipeline config's value, then the server's configured value.
+        """
 
     def __init__(
         self,
@@ -2011,21 +2072,156 @@ class TurnDetectionOptions(google.protobuf.message.Message):
         turn_detection_system_prompt: builtins.str | None = ...,
         turn_detection_user_prompt: builtins.str | None = ...,
         turn_detection_llm_openai_options: global___OpenaiLlmOptions | None = ...,
+        conversation_context: global___TurnDetectionConversationContext | None = ...,
+        end_of_turn_probability_threshold: builtins.float | None = ...,
+        hold_bands: global___TurnDetectionHoldBands | None = ...,
+        uncertain_min_words: builtins.int | None = ...,
+        incomplete_max_silence_seconds: builtins.float | None = ...,
+        exact_probability: builtins.bool | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["_active", b"_active", "_full_utterance_deployment", b"_full_utterance_deployment", "_turn_detection_llm_openai_options", b"_turn_detection_llm_openai_options", "_turn_detection_system_prompt", b"_turn_detection_system_prompt", "_turn_detection_user_prompt", b"_turn_detection_user_prompt", "active", b"active", "full_utterance_deployment", b"full_utterance_deployment", "turn_detection_llm_openai_options", b"turn_detection_llm_openai_options", "turn_detection_system_prompt", b"turn_detection_system_prompt", "turn_detection_user_prompt", b"turn_detection_user_prompt"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["_active", b"_active", "_full_utterance_deployment", b"_full_utterance_deployment", "_turn_detection_llm_openai_options", b"_turn_detection_llm_openai_options", "_turn_detection_system_prompt", b"_turn_detection_system_prompt", "_turn_detection_user_prompt", b"_turn_detection_user_prompt", "active", b"active", "full_utterance_deployment", b"full_utterance_deployment", "turn_detection_llm_openai_options", b"turn_detection_llm_openai_options", "turn_detection_system_prompt", b"turn_detection_system_prompt", "turn_detection_user_prompt", b"turn_detection_user_prompt"]) -> None: ...
+    def HasField(self, field_name: typing.Literal["_active", b"_active", "_conversation_context", b"_conversation_context", "_end_of_turn_probability_threshold", b"_end_of_turn_probability_threshold", "_exact_probability", b"_exact_probability", "_full_utterance_deployment", b"_full_utterance_deployment", "_hold_bands", b"_hold_bands", "_incomplete_max_silence_seconds", b"_incomplete_max_silence_seconds", "_turn_detection_llm_openai_options", b"_turn_detection_llm_openai_options", "_turn_detection_system_prompt", b"_turn_detection_system_prompt", "_turn_detection_user_prompt", b"_turn_detection_user_prompt", "_uncertain_min_words", b"_uncertain_min_words", "active", b"active", "conversation_context", b"conversation_context", "end_of_turn_probability_threshold", b"end_of_turn_probability_threshold", "exact_probability", b"exact_probability", "full_utterance_deployment", b"full_utterance_deployment", "hold_bands", b"hold_bands", "incomplete_max_silence_seconds", b"incomplete_max_silence_seconds", "turn_detection_llm_openai_options", b"turn_detection_llm_openai_options", "turn_detection_system_prompt", b"turn_detection_system_prompt", "turn_detection_user_prompt", b"turn_detection_user_prompt", "uncertain_min_words", b"uncertain_min_words"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["_active", b"_active", "_conversation_context", b"_conversation_context", "_end_of_turn_probability_threshold", b"_end_of_turn_probability_threshold", "_exact_probability", b"_exact_probability", "_full_utterance_deployment", b"_full_utterance_deployment", "_hold_bands", b"_hold_bands", "_incomplete_max_silence_seconds", b"_incomplete_max_silence_seconds", "_turn_detection_llm_openai_options", b"_turn_detection_llm_openai_options", "_turn_detection_system_prompt", b"_turn_detection_system_prompt", "_turn_detection_user_prompt", b"_turn_detection_user_prompt", "_uncertain_min_words", b"_uncertain_min_words", "active", b"active", "conversation_context", b"conversation_context", "end_of_turn_probability_threshold", b"end_of_turn_probability_threshold", "exact_probability", b"exact_probability", "full_utterance_deployment", b"full_utterance_deployment", "hold_bands", b"hold_bands", "incomplete_max_silence_seconds", b"incomplete_max_silence_seconds", "turn_detection_llm_openai_options", b"turn_detection_llm_openai_options", "turn_detection_system_prompt", b"turn_detection_system_prompt", "turn_detection_user_prompt", b"turn_detection_user_prompt", "uncertain_min_words", b"uncertain_min_words"]) -> None: ...
     @typing.overload
     def WhichOneof(self, oneof_group: typing.Literal["_active", b"_active"]) -> typing.Literal["active"] | None: ...
     @typing.overload
+    def WhichOneof(self, oneof_group: typing.Literal["_conversation_context", b"_conversation_context"]) -> typing.Literal["conversation_context"] | None: ...
+    @typing.overload
+    def WhichOneof(self, oneof_group: typing.Literal["_end_of_turn_probability_threshold", b"_end_of_turn_probability_threshold"]) -> typing.Literal["end_of_turn_probability_threshold"] | None: ...
+    @typing.overload
+    def WhichOneof(self, oneof_group: typing.Literal["_exact_probability", b"_exact_probability"]) -> typing.Literal["exact_probability"] | None: ...
+    @typing.overload
     def WhichOneof(self, oneof_group: typing.Literal["_full_utterance_deployment", b"_full_utterance_deployment"]) -> typing.Literal["full_utterance_deployment"] | None: ...
+    @typing.overload
+    def WhichOneof(self, oneof_group: typing.Literal["_hold_bands", b"_hold_bands"]) -> typing.Literal["hold_bands"] | None: ...
+    @typing.overload
+    def WhichOneof(self, oneof_group: typing.Literal["_incomplete_max_silence_seconds", b"_incomplete_max_silence_seconds"]) -> typing.Literal["incomplete_max_silence_seconds"] | None: ...
     @typing.overload
     def WhichOneof(self, oneof_group: typing.Literal["_turn_detection_llm_openai_options", b"_turn_detection_llm_openai_options"]) -> typing.Literal["turn_detection_llm_openai_options"] | None: ...
     @typing.overload
     def WhichOneof(self, oneof_group: typing.Literal["_turn_detection_system_prompt", b"_turn_detection_system_prompt"]) -> typing.Literal["turn_detection_system_prompt"] | None: ...
     @typing.overload
     def WhichOneof(self, oneof_group: typing.Literal["_turn_detection_user_prompt", b"_turn_detection_user_prompt"]) -> typing.Literal["turn_detection_user_prompt"] | None: ...
+    @typing.overload
+    def WhichOneof(self, oneof_group: typing.Literal["_uncertain_min_words", b"_uncertain_min_words"]) -> typing.Literal["uncertain_min_words"] | None: ...
 
 global___TurnDetectionOptions = TurnDetectionOptions
+
+@typing.final
+class TurnDetectionConversationContext(google.protobuf.message.Message):
+    """<p>The conversation context handed to an end-of-utterance turn-detection model.</p>"""
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    TURNS_FIELD_NUMBER: builtins.int
+    @property
+    def turns(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___TurnDetectionContextTurn]:
+        """The turns of the conversation, oldest first. They EXCLUDE the caller's utterance under evaluation, which
+        the server appends itself.
+        """
+
+    def __init__(
+        self,
+        *,
+        turns: collections.abc.Iterable[global___TurnDetectionContextTurn] | None = ...,
+    ) -> None: ...
+    def ClearField(self, field_name: typing.Literal["turns", b"turns"]) -> None: ...
+
+global___TurnDetectionConversationContext = TurnDetectionConversationContext
+
+@typing.final
+class TurnDetectionContextTurn(google.protobuf.message.Message):
+    """<p>One turn of the conversation context of the turn detection.</p>"""
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    class _Role:
+        ValueType = typing.NewType("ValueType", builtins.int)
+        V: typing_extensions.TypeAlias = ValueType
+
+    class _RoleEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[TurnDetectionContextTurn._Role.ValueType], builtins.type):
+        DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
+        ROLE_UNSPECIFIED: TurnDetectionContextTurn._Role.ValueType  # 0
+        """Unspecified role. The server ignores a turn without a role."""
+        ROLE_USER: TurnDetectionContextTurn._Role.ValueType  # 1
+        """The caller, i.e. the speaker whose turns are detected."""
+        ROLE_ASSISTANT: TurnDetectionContextTurn._Role.ValueType  # 2
+        """The voice assistant. Its text is what the caller HEARD, i.e. the spoken prefix of an interrupted
+        utterance.
+        """
+
+    class Role(_Role, metaclass=_RoleEnumTypeWrapper):
+        """<p>Who spoke the turn.</p>"""
+
+    ROLE_UNSPECIFIED: TurnDetectionContextTurn.Role.ValueType  # 0
+    """Unspecified role. The server ignores a turn without a role."""
+    ROLE_USER: TurnDetectionContextTurn.Role.ValueType  # 1
+    """The caller, i.e. the speaker whose turns are detected."""
+    ROLE_ASSISTANT: TurnDetectionContextTurn.Role.ValueType  # 2
+    """The voice assistant. Its text is what the caller HEARD, i.e. the spoken prefix of an interrupted
+    utterance.
+    """
+
+    ROLE_FIELD_NUMBER: builtins.int
+    TEXT_FIELD_NUMBER: builtins.int
+    role: global___TurnDetectionContextTurn.Role.ValueType
+    """Who spoke the turn."""
+    text: builtins.str
+    """The text of the turn."""
+    def __init__(
+        self,
+        *,
+        role: global___TurnDetectionContextTurn.Role.ValueType = ...,
+        text: builtins.str = ...,
+    ) -> None: ...
+    def ClearField(self, field_name: typing.Literal["role", b"role", "text", b"text"]) -> None: ...
+
+global___TurnDetectionContextTurn = TurnDetectionContextTurn
+
+@typing.final
+class TurnDetectionHoldBands(google.protobuf.message.Message):
+    """<p>The hold bands of an end-of-utterance turn-detection model.</p>"""
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    BANDS_FIELD_NUMBER: builtins.int
+    @property
+    def bands(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___TurnDetectionHoldBand]:
+        """The bands; the first band, sorted by <code>upper_probability</code>, whose upper probability exceeds the
+        end-of-utterance probability decides the hold. A probability above every band is finished at once.
+        """
+
+    def __init__(
+        self,
+        *,
+        bands: collections.abc.Iterable[global___TurnDetectionHoldBand] | None = ...,
+    ) -> None: ...
+    def ClearField(self, field_name: typing.Literal["bands", b"bands"]) -> None: ...
+
+global___TurnDetectionHoldBands = TurnDetectionHoldBands
+
+@typing.final
+class TurnDetectionHoldBand(google.protobuf.message.Message):
+    """<p>One hold band of an end-of-utterance turn-detection model.</p>"""
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    UPPER_PROBABILITY_FIELD_NUMBER: builtins.int
+    MAX_SILENCE_SECONDS_FIELD_NUMBER: builtins.int
+    upper_probability: builtins.float
+    """The exclusive upper bound of the end-of-utterance probabilities this band covers, valid range: 0 - 1."""
+    max_silence_seconds: builtins.float
+    """Seconds of silence a turn in this band waits before it is committed, valid range: 0 - 4. The server never
+    holds longer than <code>incomplete_max_silence_seconds</code>.
+    """
+    def __init__(
+        self,
+        *,
+        upper_probability: builtins.float = ...,
+        max_silence_seconds: builtins.float = ...,
+    ) -> None: ...
+    def ClearField(self, field_name: typing.Literal["max_silence_seconds", b"max_silence_seconds", "upper_probability", b"upper_probability"]) -> None: ...
+
+global___TurnDetectionHoldBand = TurnDetectionHoldBand
 
 @typing.final
 class OpenaiLlmOptions(google.protobuf.message.Message):
