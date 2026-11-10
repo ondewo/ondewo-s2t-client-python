@@ -704,10 +704,20 @@ class UtteranceDetectionOptions(google.protobuf.message.Message):
     TRANSCRIBE_NOT_FINAL_FIELD_NUMBER: builtins.int
     NEXT_CHUNK_TIMEOUT_FIELD_NUMBER: builtins.int
     TURN_DETECTION_FIELD_NUMBER: builtins.int
+    MIN_AUDIO_CHUNK_SIZE_FIELD_NUMBER: builtins.int
     transcribe_not_final: builtins.bool
     """Return also immediate transcription results"""
     next_chunk_timeout: builtins.float
     """if time between audio chunks exceeds next_chunk_timeout, stream will be stopped"""
+    min_audio_chunk_size: builtins.int
+    """Optional. The processing chunk of THIS stream, in samples at the pipeline's sampling rate: the server buffers
+    the incoming audio until it holds this many samples and only then runs the voice-activity search, the sliding
+    transcription and the turn detector, so it is the cadence at which an utterance can end (8000 samples at
+    16 kHz = 0.5 s; 1600 = 0.1 s). Overrides <code>StreamingSpeechRecognition.min_audio_chunk_size</code> of the
+    pipeline config for this stream only. Allowed: 320 - 32000 (20 ms - 2 s at 16 kHz); a smaller chunk costs
+    proportionally more voice-activity and transcription requests. Read from the first request of a stream that
+    carries it; a later request cannot change a running stream's chunk. Unset: the pipeline's value.
+    """
     @property
     def turn_detection(self) -> global___TurnDetectionOptions:
         """The turn detection options"""
@@ -718,9 +728,12 @@ class UtteranceDetectionOptions(google.protobuf.message.Message):
         transcribe_not_final: builtins.bool = ...,
         next_chunk_timeout: builtins.float = ...,
         turn_detection: global___TurnDetectionOptions | None = ...,
+        min_audio_chunk_size: builtins.int | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["oneof_transcribe_not_final", b"oneof_transcribe_not_final", "oneof_turn_detection", b"oneof_turn_detection", "transcribe_not_final", b"transcribe_not_final", "turn_detection", b"turn_detection"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["next_chunk_timeout", b"next_chunk_timeout", "oneof_transcribe_not_final", b"oneof_transcribe_not_final", "oneof_turn_detection", b"oneof_turn_detection", "transcribe_not_final", b"transcribe_not_final", "turn_detection", b"turn_detection"]) -> None: ...
+    def HasField(self, field_name: typing.Literal["_min_audio_chunk_size", b"_min_audio_chunk_size", "min_audio_chunk_size", b"min_audio_chunk_size", "oneof_transcribe_not_final", b"oneof_transcribe_not_final", "oneof_turn_detection", b"oneof_turn_detection", "transcribe_not_final", b"transcribe_not_final", "turn_detection", b"turn_detection"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["_min_audio_chunk_size", b"_min_audio_chunk_size", "min_audio_chunk_size", b"min_audio_chunk_size", "next_chunk_timeout", b"next_chunk_timeout", "oneof_transcribe_not_final", b"oneof_transcribe_not_final", "oneof_turn_detection", b"oneof_turn_detection", "transcribe_not_final", b"transcribe_not_final", "turn_detection", b"turn_detection"]) -> None: ...
+    @typing.overload
+    def WhichOneof(self, oneof_group: typing.Literal["_min_audio_chunk_size", b"_min_audio_chunk_size"]) -> typing.Literal["min_audio_chunk_size"] | None: ...
     @typing.overload
     def WhichOneof(self, oneof_group: typing.Literal["oneof_transcribe_not_final", b"oneof_transcribe_not_final"]) -> typing.Literal["transcribe_not_final"] | None: ...
     @typing.overload
