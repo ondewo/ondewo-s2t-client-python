@@ -2007,6 +2007,11 @@ class TurnDetectionOptions(google.protobuf.message.Message):
     UNCERTAIN_MIN_WORDS_FIELD_NUMBER: builtins.int
     INCOMPLETE_MAX_SILENCE_SECONDS_FIELD_NUMBER: builtins.int
     EXACT_PROBABILITY_FIELD_NUMBER: builtins.int
+    PIPECAT_TRITON_MODEL_NAME_FIELD_NUMBER: builtins.int
+    PIPECAT_TRITON_SERVER_HOST_FIELD_NUMBER: builtins.int
+    PIPECAT_TRITON_SERVER_PORT_FIELD_NUMBER: builtins.int
+    PIPECAT_MAX_AUDIO_SECONDS_FIELD_NUMBER: builtins.int
+    PIPECAT_TIMEOUT_SECONDS_FIELD_NUMBER: builtins.int
     active: builtins.bool
     """Optional. Indicates if the turn-detection feature is active."""
     full_utterance_deployment: builtins.bool
@@ -2046,9 +2051,43 @@ class TurnDetectionOptions(google.protobuf.message.Message):
     ignored by a chat-LLM turn detector. Precedence: the request config's value, then the pipeline config's
     value, then the server's configured value.
     """
+    pipecat_triton_model_name: builtins.str
+    """Optional. The Triton model name of pipecat Smart Turn. Unset = the server's configured value (default:
+    <code>ondewo-s2t-model-multi-turn-detection-pipecat-smart-turn-3.2-onnx-triton</code>). Used only when
+    <code>turn_detection_llm_openai_options.model</code> selects pipecat Smart Turn. Precedence: the request
+    config's value, then the pipeline config's value, then the server's configured value.
+    """
+    pipecat_triton_server_host: builtins.str
+    """Optional. Host name of the Triton inference server that serves pipecat Smart Turn, as
+    <code>Pyannote.triton_server_host</code>. Unset = the server's configured value. The connection uses the
+    server's Triton client TLS settings. Used only with pipecat Smart Turn. Precedence as above.
+    """
+    pipecat_triton_server_port: builtins.int
+    """Optional. Port of the Triton inference server that serves pipecat Smart Turn, as
+    <code>Pyannote.triton_server_port</code>. Unset = the server's configured value. Used only with pipecat
+    Smart Turn. Precedence as above.
+    """
+    pipecat_max_audio_seconds: builtins.float
+    """Optional. Seconds of the caller's audio, ending at the decision moment, that pipecat Smart Turn hears; valid
+    range: 1 - 8 (shorter audio is left-padded with silence to 8 s, as the model was trained). Unset = the
+    server's configured value (default: 8). Used only with pipecat Smart Turn. Precedence as above.
+    """
+    pipecat_timeout_seconds: builtins.float
+    """Optional. Seconds to wait for Triton's answer; a turn whose verdict does not arrive in time is judged not
+    finished and waits for <code>incomplete_max_silence_seconds</code>. Valid range: 0 - 5, exclusive of 0. Unset
+    = the server's configured value (default: 0.2). Used only with pipecat Smart Turn. Precedence as above.
+    """
     @property
     def turn_detection_llm_openai_options(self) -> global___OpenaiLlmOptions:
-        """Optional. Configuration options for the OpenAI client used for turn detection."""
+        """Optional. Configuration options for the OpenAI client used for turn detection. Its <code>model</code> also
+        selects the turn-detection model: a name starting with <code>pipecat-smart-turn</code> selects pipecat Smart
+        Turn (audio only, served by Triton, configured by the <code>pipecat_*</code> fields; the other OpenAI options
+        are ignored); a name starting with <code>ondewo-s2t-model-de-turn-detection</code> selects the ONDEWO German
+        turn-detection model (the turn's text and timing, served by vLLM: the whole name is the served model name and
+        <code>base_url</code>, <code>api_key</code>, <code>timeout</code> address the deployment); any other name is
+        a chat LLM or an end-of-utterance LLM. A name starting with <code>pipecat-</code> or
+        <code>ondewo-s2t-model-</code> that matches neither prefix is refused with INVALID_ARGUMENT.
+        """
 
     @property
     def conversation_context(self) -> global___TurnDetectionConversationContext:
@@ -2091,9 +2130,14 @@ class TurnDetectionOptions(google.protobuf.message.Message):
         uncertain_min_words: builtins.int | None = ...,
         incomplete_max_silence_seconds: builtins.float | None = ...,
         exact_probability: builtins.bool | None = ...,
+        pipecat_triton_model_name: builtins.str | None = ...,
+        pipecat_triton_server_host: builtins.str | None = ...,
+        pipecat_triton_server_port: builtins.int | None = ...,
+        pipecat_max_audio_seconds: builtins.float | None = ...,
+        pipecat_timeout_seconds: builtins.float | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["_active", b"_active", "_conversation_context", b"_conversation_context", "_end_of_turn_probability_threshold", b"_end_of_turn_probability_threshold", "_exact_probability", b"_exact_probability", "_full_utterance_deployment", b"_full_utterance_deployment", "_hold_bands", b"_hold_bands", "_incomplete_max_silence_seconds", b"_incomplete_max_silence_seconds", "_turn_detection_llm_openai_options", b"_turn_detection_llm_openai_options", "_turn_detection_system_prompt", b"_turn_detection_system_prompt", "_turn_detection_user_prompt", b"_turn_detection_user_prompt", "_uncertain_min_words", b"_uncertain_min_words", "active", b"active", "conversation_context", b"conversation_context", "end_of_turn_probability_threshold", b"end_of_turn_probability_threshold", "exact_probability", b"exact_probability", "full_utterance_deployment", b"full_utterance_deployment", "hold_bands", b"hold_bands", "incomplete_max_silence_seconds", b"incomplete_max_silence_seconds", "turn_detection_llm_openai_options", b"turn_detection_llm_openai_options", "turn_detection_system_prompt", b"turn_detection_system_prompt", "turn_detection_user_prompt", b"turn_detection_user_prompt", "uncertain_min_words", b"uncertain_min_words"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["_active", b"_active", "_conversation_context", b"_conversation_context", "_end_of_turn_probability_threshold", b"_end_of_turn_probability_threshold", "_exact_probability", b"_exact_probability", "_full_utterance_deployment", b"_full_utterance_deployment", "_hold_bands", b"_hold_bands", "_incomplete_max_silence_seconds", b"_incomplete_max_silence_seconds", "_turn_detection_llm_openai_options", b"_turn_detection_llm_openai_options", "_turn_detection_system_prompt", b"_turn_detection_system_prompt", "_turn_detection_user_prompt", b"_turn_detection_user_prompt", "_uncertain_min_words", b"_uncertain_min_words", "active", b"active", "conversation_context", b"conversation_context", "end_of_turn_probability_threshold", b"end_of_turn_probability_threshold", "exact_probability", b"exact_probability", "full_utterance_deployment", b"full_utterance_deployment", "hold_bands", b"hold_bands", "incomplete_max_silence_seconds", b"incomplete_max_silence_seconds", "turn_detection_llm_openai_options", b"turn_detection_llm_openai_options", "turn_detection_system_prompt", b"turn_detection_system_prompt", "turn_detection_user_prompt", b"turn_detection_user_prompt", "uncertain_min_words", b"uncertain_min_words"]) -> None: ...
+    def HasField(self, field_name: typing.Literal["_active", b"_active", "_conversation_context", b"_conversation_context", "_end_of_turn_probability_threshold", b"_end_of_turn_probability_threshold", "_exact_probability", b"_exact_probability", "_full_utterance_deployment", b"_full_utterance_deployment", "_hold_bands", b"_hold_bands", "_incomplete_max_silence_seconds", b"_incomplete_max_silence_seconds", "_pipecat_max_audio_seconds", b"_pipecat_max_audio_seconds", "_pipecat_timeout_seconds", b"_pipecat_timeout_seconds", "_pipecat_triton_model_name", b"_pipecat_triton_model_name", "_pipecat_triton_server_host", b"_pipecat_triton_server_host", "_pipecat_triton_server_port", b"_pipecat_triton_server_port", "_turn_detection_llm_openai_options", b"_turn_detection_llm_openai_options", "_turn_detection_system_prompt", b"_turn_detection_system_prompt", "_turn_detection_user_prompt", b"_turn_detection_user_prompt", "_uncertain_min_words", b"_uncertain_min_words", "active", b"active", "conversation_context", b"conversation_context", "end_of_turn_probability_threshold", b"end_of_turn_probability_threshold", "exact_probability", b"exact_probability", "full_utterance_deployment", b"full_utterance_deployment", "hold_bands", b"hold_bands", "incomplete_max_silence_seconds", b"incomplete_max_silence_seconds", "pipecat_max_audio_seconds", b"pipecat_max_audio_seconds", "pipecat_timeout_seconds", b"pipecat_timeout_seconds", "pipecat_triton_model_name", b"pipecat_triton_model_name", "pipecat_triton_server_host", b"pipecat_triton_server_host", "pipecat_triton_server_port", b"pipecat_triton_server_port", "turn_detection_llm_openai_options", b"turn_detection_llm_openai_options", "turn_detection_system_prompt", b"turn_detection_system_prompt", "turn_detection_user_prompt", b"turn_detection_user_prompt", "uncertain_min_words", b"uncertain_min_words"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["_active", b"_active", "_conversation_context", b"_conversation_context", "_end_of_turn_probability_threshold", b"_end_of_turn_probability_threshold", "_exact_probability", b"_exact_probability", "_full_utterance_deployment", b"_full_utterance_deployment", "_hold_bands", b"_hold_bands", "_incomplete_max_silence_seconds", b"_incomplete_max_silence_seconds", "_pipecat_max_audio_seconds", b"_pipecat_max_audio_seconds", "_pipecat_timeout_seconds", b"_pipecat_timeout_seconds", "_pipecat_triton_model_name", b"_pipecat_triton_model_name", "_pipecat_triton_server_host", b"_pipecat_triton_server_host", "_pipecat_triton_server_port", b"_pipecat_triton_server_port", "_turn_detection_llm_openai_options", b"_turn_detection_llm_openai_options", "_turn_detection_system_prompt", b"_turn_detection_system_prompt", "_turn_detection_user_prompt", b"_turn_detection_user_prompt", "_uncertain_min_words", b"_uncertain_min_words", "active", b"active", "conversation_context", b"conversation_context", "end_of_turn_probability_threshold", b"end_of_turn_probability_threshold", "exact_probability", b"exact_probability", "full_utterance_deployment", b"full_utterance_deployment", "hold_bands", b"hold_bands", "incomplete_max_silence_seconds", b"incomplete_max_silence_seconds", "pipecat_max_audio_seconds", b"pipecat_max_audio_seconds", "pipecat_timeout_seconds", b"pipecat_timeout_seconds", "pipecat_triton_model_name", b"pipecat_triton_model_name", "pipecat_triton_server_host", b"pipecat_triton_server_host", "pipecat_triton_server_port", b"pipecat_triton_server_port", "turn_detection_llm_openai_options", b"turn_detection_llm_openai_options", "turn_detection_system_prompt", b"turn_detection_system_prompt", "turn_detection_user_prompt", b"turn_detection_user_prompt", "uncertain_min_words", b"uncertain_min_words"]) -> None: ...
     @typing.overload
     def WhichOneof(self, oneof_group: typing.Literal["_active", b"_active"]) -> typing.Literal["active"] | None: ...
     @typing.overload
@@ -2108,6 +2152,16 @@ class TurnDetectionOptions(google.protobuf.message.Message):
     def WhichOneof(self, oneof_group: typing.Literal["_hold_bands", b"_hold_bands"]) -> typing.Literal["hold_bands"] | None: ...
     @typing.overload
     def WhichOneof(self, oneof_group: typing.Literal["_incomplete_max_silence_seconds", b"_incomplete_max_silence_seconds"]) -> typing.Literal["incomplete_max_silence_seconds"] | None: ...
+    @typing.overload
+    def WhichOneof(self, oneof_group: typing.Literal["_pipecat_max_audio_seconds", b"_pipecat_max_audio_seconds"]) -> typing.Literal["pipecat_max_audio_seconds"] | None: ...
+    @typing.overload
+    def WhichOneof(self, oneof_group: typing.Literal["_pipecat_timeout_seconds", b"_pipecat_timeout_seconds"]) -> typing.Literal["pipecat_timeout_seconds"] | None: ...
+    @typing.overload
+    def WhichOneof(self, oneof_group: typing.Literal["_pipecat_triton_model_name", b"_pipecat_triton_model_name"]) -> typing.Literal["pipecat_triton_model_name"] | None: ...
+    @typing.overload
+    def WhichOneof(self, oneof_group: typing.Literal["_pipecat_triton_server_host", b"_pipecat_triton_server_host"]) -> typing.Literal["pipecat_triton_server_host"] | None: ...
+    @typing.overload
+    def WhichOneof(self, oneof_group: typing.Literal["_pipecat_triton_server_port", b"_pipecat_triton_server_port"]) -> typing.Literal["pipecat_triton_server_port"] | None: ...
     @typing.overload
     def WhichOneof(self, oneof_group: typing.Literal["_turn_detection_llm_openai_options", b"_turn_detection_llm_openai_options"]) -> typing.Literal["turn_detection_llm_openai_options"] | None: ...
     @typing.overload
