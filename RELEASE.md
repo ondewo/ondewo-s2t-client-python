@@ -2,6 +2,19 @@
 
 *****************
 
+## Release ONDEWO S2T Python Client 7.5.2
+
+### New Features
+
+* [[OND236-120]](https://ondewo.atlassian.net/browse/OND236-120) Tracking the unreleased ondewo-s2t-api 7.6.0 on
+  `feature/OND236-120-barge-in-cancel`: the turn-detection conversation context and per-call end-of-turn fields,
+  `UtteranceDetectionOptions.min_audio_chunk_size`, the pipecat Smart Turn fields, and the per-request
+  partial-transcription period `UtteranceDetectionOptions.transcribe_not_final_period_seconds` (with its pipeline
+  default `StreamingSpeechRecognition.transcribe_not_final_period_seconds`). Stubs regenerated with
+  ondewo-proto-compiler 5.15.3.
+
+*****************
+
 ## Release ONDEWO S2T Python Client 7.5.1
 
 ### Bug Fixes
