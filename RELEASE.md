@@ -12,6 +12,9 @@
   partial-transcription period `UtteranceDetectionOptions.transcribe_not_final_period_seconds` (with its pipeline
   default `StreamingSpeechRecognition.transcribe_not_final_period_seconds`). Stubs regenerated with
   ondewo-proto-compiler 5.15.3.
+* [[OND236-120]](https://ondewo.atlassian.net/browse/OND236-120) `StreamingSpeechRecognition.transcribe_not_final`
+  is now `optional bool` (wire-compatible), so `HasField("transcribe_not_final")` tells an explicit `false` apart
+  from unset. Unset means the server default, now `true`; an explicit `false` opts out.
 
 *****************
 

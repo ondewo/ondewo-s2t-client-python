@@ -707,7 +707,11 @@ class UtteranceDetectionOptions(google.protobuf.message.Message):
     MIN_AUDIO_CHUNK_SIZE_FIELD_NUMBER: builtins.int
     TRANSCRIBE_NOT_FINAL_PERIOD_SECONDS_FIELD_NUMBER: builtins.int
     transcribe_not_final: builtins.bool
-    """Return also immediate transcription results"""
+    """Return also immediate transcription results (non-final transcriptions of an utterance while it is
+    still being spoken). Unset: the pipeline's <code>StreamingSpeechRecognition.transcribe_not_final</code>,
+    then the server default, which is now <code>true</code>; an explicit <code>false</code> opts this
+    request out of non-final results.
+    """
     next_chunk_timeout: builtins.float
     """if time between audio chunks exceeds next_chunk_timeout, stream will be stopped"""
     min_audio_chunk_size: builtins.int
@@ -1976,7 +1980,12 @@ class StreamingSpeechRecognition(google.protobuf.message.Message):
     TURN_DETECTION_FIELD_NUMBER: builtins.int
     TRANSCRIBE_NOT_FINAL_PERIOD_SECONDS_FIELD_NUMBER: builtins.int
     transcribe_not_final: builtins.bool
-    """Indicates whether to transcribe non-final results."""
+    """Indicates whether to transcribe non-final results for every stream of this pipeline. Unset: the server
+    default, which is now <code>true</code>; an explicit <code>false</code> opts the pipeline out of non-final
+    results. A request's <code>UtteranceDetectionOptions.transcribe_not_final</code> overrides it. Declared
+    <code>optional</code> (same field number, wire-compatible) so an explicit <code>false</code> can be told
+    apart from unset.
+    """
     decoding_method: builtins.str
     """Decoding method for speech recognition."""
     sampling_rate: builtins.int
@@ -1999,7 +2008,7 @@ class StreamingSpeechRecognition(google.protobuf.message.Message):
     def __init__(
         self,
         *,
-        transcribe_not_final: builtins.bool = ...,
+        transcribe_not_final: builtins.bool | None = ...,
         decoding_method: builtins.str = ...,
         sampling_rate: builtins.int = ...,
         min_audio_chunk_size: builtins.int = ...,
@@ -2007,8 +2016,11 @@ class StreamingSpeechRecognition(google.protobuf.message.Message):
         turn_detection: global___TurnDetectionOptions | None = ...,
         transcribe_not_final_period_seconds: builtins.float | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["_transcribe_not_final_period_seconds", b"_transcribe_not_final_period_seconds", "transcribe_not_final_period_seconds", b"transcribe_not_final_period_seconds", "turn_detection", b"turn_detection"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["_transcribe_not_final_period_seconds", b"_transcribe_not_final_period_seconds", "decoding_method", b"decoding_method", "min_audio_chunk_size", b"min_audio_chunk_size", "next_chunk_timeout", b"next_chunk_timeout", "sampling_rate", b"sampling_rate", "transcribe_not_final", b"transcribe_not_final", "transcribe_not_final_period_seconds", b"transcribe_not_final_period_seconds", "turn_detection", b"turn_detection"]) -> None: ...
+    def HasField(self, field_name: typing.Literal["_transcribe_not_final", b"_transcribe_not_final", "_transcribe_not_final_period_seconds", b"_transcribe_not_final_period_seconds", "transcribe_not_final", b"transcribe_not_final", "transcribe_not_final_period_seconds", b"transcribe_not_final_period_seconds", "turn_detection", b"turn_detection"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["_transcribe_not_final", b"_transcribe_not_final", "_transcribe_not_final_period_seconds", b"_transcribe_not_final_period_seconds", "decoding_method", b"decoding_method", "min_audio_chunk_size", b"min_audio_chunk_size", "next_chunk_timeout", b"next_chunk_timeout", "sampling_rate", b"sampling_rate", "transcribe_not_final", b"transcribe_not_final", "transcribe_not_final_period_seconds", b"transcribe_not_final_period_seconds", "turn_detection", b"turn_detection"]) -> None: ...
+    @typing.overload
+    def WhichOneof(self, oneof_group: typing.Literal["_transcribe_not_final", b"_transcribe_not_final"]) -> typing.Literal["transcribe_not_final"] | None: ...
+    @typing.overload
     def WhichOneof(self, oneof_group: typing.Literal["_transcribe_not_final_period_seconds", b"_transcribe_not_final_period_seconds"]) -> typing.Literal["transcribe_not_final_period_seconds"] | None: ...
 
 global___StreamingSpeechRecognition = StreamingSpeechRecognition
