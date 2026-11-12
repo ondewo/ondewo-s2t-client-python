@@ -663,6 +663,7 @@ class TranscriptionReturnOptions(google.protobuf.message.Message):
     RETURN_ALTERNATIVE_WORDS_FIELD_NUMBER: builtins.int
     RETURN_ALTERNATIVE_WORDS_NR_FIELD_NUMBER: builtins.int
     RETURN_WORD_TIMING_FIELD_NUMBER: builtins.int
+    RETURN_END_OF_SPEECH_CANDIDATE_FIELD_NUMBER: builtins.int
     return_start_of_speech: builtins.bool
     """should server make response indicating that the beginning of the speech was detected"""
     return_audio: builtins.bool
@@ -679,6 +680,15 @@ class TranscriptionReturnOptions(google.protobuf.message.Message):
     """Optional. Number of alternative words to results"""
     return_word_timing: builtins.bool
     """Optional. Whether or not to return timestamps of start and end of the words. Only used in TranscribeFile."""
+    return_end_of_speech_candidate: builtins.bool
+    """Optional. Whether the server should send an end-of-speech candidate on a stream (see
+    <code>TranscribeStreamResponse.end_of_speech_candidate</code> for what is sent and when). Only used in
+    TranscribeStream, and only acted on under server-side turn detection. Fixed per stream, like
+    <code>return_start_of_speech</code>: the server completes each request config from the one in effect, so a
+    later request without <code>return_options</code> keeps it, but a later <code>return_options</code> block
+    replaces every return option at once and must repeat this field, or the candidate stops for the rest of the
+    stream. Defaults to false: no candidate is sent, exactly as before this field existed.
+    """
     def __init__(
         self,
         *,
@@ -690,8 +700,9 @@ class TranscriptionReturnOptions(google.protobuf.message.Message):
         return_alternative_words: builtins.bool = ...,
         return_alternative_words_nr: builtins.int = ...,
         return_word_timing: builtins.bool = ...,
+        return_end_of_speech_candidate: builtins.bool = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing.Literal["return_alternative_transcriptions", b"return_alternative_transcriptions", "return_alternative_transcriptions_nr", b"return_alternative_transcriptions_nr", "return_alternative_words", b"return_alternative_words", "return_alternative_words_nr", b"return_alternative_words_nr", "return_audio", b"return_audio", "return_confidence_score", b"return_confidence_score", "return_start_of_speech", b"return_start_of_speech", "return_word_timing", b"return_word_timing"]) -> None: ...
+    def ClearField(self, field_name: typing.Literal["return_alternative_transcriptions", b"return_alternative_transcriptions", "return_alternative_transcriptions_nr", b"return_alternative_transcriptions_nr", "return_alternative_words", b"return_alternative_words", "return_alternative_words_nr", b"return_alternative_words_nr", "return_audio", b"return_audio", "return_confidence_score", b"return_confidence_score", "return_end_of_speech_candidate", b"return_end_of_speech_candidate", "return_start_of_speech", b"return_start_of_speech", "return_word_timing", b"return_word_timing"]) -> None: ...
 
 global___TranscriptionReturnOptions = TranscriptionReturnOptions
 
@@ -977,6 +988,7 @@ class TranscribeStreamResponse(google.protobuf.message.Message):
     AUDIO_FIELD_NUMBER: builtins.int
     UTTERANCE_START_FIELD_NUMBER: builtins.int
     AUDIO_UUID_FIELD_NUMBER: builtins.int
+    END_OF_SPEECH_CANDIDATE_FIELD_NUMBER: builtins.int
     CONFIG_FIELD_NUMBER: builtins.int
     time: builtins.float
     """The time the transcription took"""
@@ -992,6 +1004,20 @@ class TranscribeStreamResponse(google.protobuf.message.Message):
     """is it a start of the utterance"""
     audio_uuid: builtins.str
     """id of the transcribed audio file"""
+    end_of_speech_candidate: builtins.bool
+    """Whether this response is an end-of-speech candidate. Sent only when the request set
+    <code>TranscriptionReturnOptions.return_end_of_speech_candidate</code>, only under server-side turn
+    detection, and only on the chunk where the server found the end of the caller's speech and its turn detector
+    held the utterance open (not finished, an uncertain hold band, or the minimum endpointing delay), so the final
+    may follow seconds later. Not sent without turn detection, when the detector judges the turn finished (the
+    final is then sent on that same chunk), or while the utterance has no text yet. Never set on a final.
+    At most once per pause: if the caller resumes speaking and pauses again, the next pause may send another one.
+    With non-final results on, it is a FLAG on the non-final response the server sends for that chunk anyway, so
+    it is an ordinary partial plus the hint, not an extra response; with non-final results off, the server sends
+    one non-final response carrying the current text in <code>transcriptions</code>. It is a hint, not a commit:
+    the utterance's final still follows, or the utterance continues if the caller resumes, and the final text may
+    differ. Always false otherwise.
+    """
     @property
     def transcriptions(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___Transcription]:
         """List of transcriptions with confidence level"""
@@ -1010,10 +1036,11 @@ class TranscribeStreamResponse(google.protobuf.message.Message):
         audio: builtins.bytes = ...,
         utterance_start: builtins.bool = ...,
         audio_uuid: builtins.str = ...,
+        end_of_speech_candidate: builtins.bool = ...,
         config: global___TranscribeRequestConfig | None = ...,
     ) -> None: ...
     def HasField(self, field_name: typing.Literal["config", b"config", "oneof_config", b"oneof_config"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["audio", b"audio", "audio_uuid", b"audio_uuid", "config", b"config", "final", b"final", "oneof_config", b"oneof_config", "return_audio", b"return_audio", "time", b"time", "transcriptions", b"transcriptions", "utterance_start", b"utterance_start"]) -> None: ...
+    def ClearField(self, field_name: typing.Literal["audio", b"audio", "audio_uuid", b"audio_uuid", "config", b"config", "end_of_speech_candidate", b"end_of_speech_candidate", "final", b"final", "oneof_config", b"oneof_config", "return_audio", b"return_audio", "time", b"time", "transcriptions", b"transcriptions", "utterance_start", b"utterance_start"]) -> None: ...
     def WhichOneof(self, oneof_group: typing.Literal["oneof_config", b"oneof_config"]) -> typing.Literal["config"] | None: ...
 
 global___TranscribeStreamResponse = TranscribeStreamResponse

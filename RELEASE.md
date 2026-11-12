@@ -15,6 +15,13 @@
 * [[OND236-120]](https://ondewo.atlassian.net/browse/OND236-120) `StreamingSpeechRecognition.transcribe_not_final`
   is now `optional bool` (wire-compatible), so `HasField("transcribe_not_final")` tells an explicit `false` apart
   from unset. Unset means the server default, now `true`; an explicit `false` opts out.
+* [[OND236-120]](https://ondewo.atlassian.net/browse/OND236-120) End-of-speech candidate:
+  `TranscribeStreamResponse.end_of_speech_candidate` marks the chunk where S2T found the end of the caller's speech
+  and its turn detector held the utterance open (not finished, an uncertain hold band, or the minimum endpointing
+  delay). Only under server-side turn detection, never on a final, at most once per pause. With non-final results on
+  it is a flag on that chunk's partial, without them one non-final response with the current text; the final still
+  follows (or the utterance continues). Opt in with `TranscriptionReturnOptions.return_end_of_speech_candidate`
+  (default `false`), fixed per stream like `return_start_of_speech`.
 
 *****************
 
