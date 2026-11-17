@@ -2054,7 +2054,15 @@ global___StreamingSpeechRecognition = StreamingSpeechRecognition
 
 @typing.final
 class TurnDetectionOptions(google.protobuf.message.Message):
-    """<p>Configuration of the options to turn-detection in utterances</p>"""
+    """<p>TurnDetectionOptions configures turn detection: deciding, at a pause of the caller, whether the caller has
+    finished the turn. Exactly one turn detector is chosen by <code>oneof_turn_detector</code>; the fields outside it
+    apply to every detector.</p>
+    <p>Precedence for every field: the request config's value
+    (<code>TranscribeRequestConfig.utterance_detection.turn_detection</code>), then the pipeline config's value
+    (<code>StreamingSpeechRecognition.turn_detection</code>), then the server's configured value. When the request
+    config chooses a different detector than the pipeline config, the request config's detector is used with only
+    its own fields: none of the pipeline config's detector fields carry over.</p>
+    """
 
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
@@ -2063,120 +2071,83 @@ class TurnDetectionOptions(google.protobuf.message.Message):
     TURN_DETECTION_SYSTEM_PROMPT_FIELD_NUMBER: builtins.int
     TURN_DETECTION_USER_PROMPT_FIELD_NUMBER: builtins.int
     TURN_DETECTION_LLM_OPENAI_OPTIONS_FIELD_NUMBER: builtins.int
-    CONVERSATION_CONTEXT_FIELD_NUMBER: builtins.int
-    END_OF_TURN_PROBABILITY_THRESHOLD_FIELD_NUMBER: builtins.int
-    HOLD_BANDS_FIELD_NUMBER: builtins.int
-    UNCERTAIN_MIN_WORDS_FIELD_NUMBER: builtins.int
     INCOMPLETE_MAX_SILENCE_SECONDS_FIELD_NUMBER: builtins.int
-    EXACT_PROBABILITY_FIELD_NUMBER: builtins.int
-    PIPECAT_TRITON_MODEL_NAME_FIELD_NUMBER: builtins.int
-    PIPECAT_TRITON_SERVER_HOST_FIELD_NUMBER: builtins.int
-    PIPECAT_TRITON_SERVER_PORT_FIELD_NUMBER: builtins.int
-    PIPECAT_MAX_AUDIO_SECONDS_FIELD_NUMBER: builtins.int
-    PIPECAT_TIMEOUT_SECONDS_FIELD_NUMBER: builtins.int
+    TURN_DETECTION_CONVERSATION_CONTEXT_FIELD_NUMBER: builtins.int
+    TURN_DETECTION_CHAT_LLM_OPTIONS_FIELD_NUMBER: builtins.int
+    TURN_DETECTION_END_OF_UTTERANCE_LLM_OPTIONS_FIELD_NUMBER: builtins.int
+    TURN_DETECTION_ONDEWO_DE_OPTIONS_FIELD_NUMBER: builtins.int
+    TURN_DETECTION_ONDEWO_DE_FUSION_OPTIONS_FIELD_NUMBER: builtins.int
+    TURN_DETECTION_PIPECAT_SMART_TURN_OPTIONS_FIELD_NUMBER: builtins.int
     active: builtins.bool
     """Optional. Indicates if the turn-detection feature is active."""
     full_utterance_deployment: builtins.bool
-    """Optional. Whether to transcribe the whole utterance when turn moment is detected. It is helpful to increase
-    accuracy of transcriptions in cost of drop in speed. If deactivated, it just transcribe from last short silence
-    period and concatenates the transcriptions of small audio chunks between tiny silences.
+    """Optional. Whether to transcribe the whole utterance when the end of a turn is detected. It increases the
+    accuracy of the transcription at the cost of speed. If deactivated, only the audio after the last short
+    silence is transcribed and the transcriptions of the short audio chunks between silences are concatenated.
     """
     turn_detection_system_prompt: builtins.str
-    """Optional. System prompt used to guide the turn-detection model."""
-    turn_detection_user_prompt: builtins.str
-    """Optional. User prompt used as input to the turn-detection model."""
-    end_of_turn_probability_threshold: builtins.float
-    """Optional. The end-of-utterance probability at or above which the caller is taken to have finished the turn,
-    valid range: 0 - 1. Unset = the server's configured value (default: the threshold configured for the
-    language of the stream). Used only by an end-of-utterance model; ignored by a chat-LLM turn detector.
-    Precedence: the request config's value, then the pipeline config's value, then the server's configured value.
+    """Optional. Deprecated in favour of <code>turn_detection_chat_llm_options.system_prompt</code>, but still
+    honoured so that configurations written for ondewo-s2t-api 7.5.0 and earlier keep working unchanged. Read
+    only when <code>oneof_turn_detector</code> is not set.
     """
-    uncertain_min_words: builtins.int
-    """Optional. The minimum number of words an utterance needs before a hold band may hold it; a shorter utterance
-    judged finished is committed at once. Unset = the server's configured value (default: 3). Used only by an
-    end-of-utterance model; ignored by a chat-LLM turn detector. Precedence: the request config's value, then
-    the pipeline config's value, then the server's configured value.
+    turn_detection_user_prompt: builtins.str
+    """Optional. Deprecated in favour of <code>turn_detection_chat_llm_options.user_prompt</code>, but still
+    honoured. Read only when <code>oneof_turn_detector</code> is not set.
     """
     incomplete_max_silence_seconds: builtins.float
     """Optional. Seconds of silence after an utterance judged NOT finished before it is finished anyway, valid
     range: 0 - 4. The server raises a value below the voice activity detection's <code>min_duration_off</code>
     to it. Unset = the server's configured value (default: the <code>min_duration_off</code> in use). Applies to
-    every "not finished" verdict, whichever turn detector gave it. Precedence: the request config's value, then
-    the pipeline config's value, then the server's configured value.
-    """
-    exact_probability: builtins.bool
-    """Optional. Whether an end-of-utterance model computes the exact probability of the end-of-utterance token
-    instead of reading it from the returned top log probabilities. Unset = the server's configured value
-    (default: false). Requires a deployment that returns prompt log probabilities (vLLM
-    <code>prompt_logprobs</code>); on any other deployment the probability reads 0, so every turn is judged not
-    finished and waits for <code>incomplete_max_silence_seconds</code>. Used only by an end-of-utterance model;
-    ignored by a chat-LLM turn detector. Precedence: the request config's value, then the pipeline config's
-    value, then the server's configured value.
-    """
-    pipecat_triton_model_name: builtins.str
-    """Optional. The Triton model name of pipecat Smart Turn. Unset = the server's configured value (default:
-    <code>ondewo-s2t-model-multi-turn-detection-pipecat-smart-turn-3.2-onnx-triton</code>). Used only when
-    <code>turn_detection_llm_openai_options.model</code> selects pipecat Smart Turn. Precedence: the request
-    config's value, then the pipeline config's value, then the server's configured value.
-    """
-    pipecat_triton_server_host: builtins.str
-    """Optional. Host name of the Triton inference server that serves pipecat Smart Turn, as
-    <code>Pyannote.triton_server_host</code>. Unset = the server's configured value. The connection uses the
-    server's Triton client TLS settings. Used only with pipecat Smart Turn. Precedence as above.
-    """
-    pipecat_triton_server_port: builtins.int
-    """Optional. Port of the Triton inference server that serves pipecat Smart Turn, as
-    <code>Pyannote.triton_server_port</code>. Unset = the server's configured value. Used only with pipecat
-    Smart Turn. Precedence as above.
-    """
-    pipecat_max_audio_seconds: builtins.float
-    """Optional. Seconds of the caller's audio, ending at the decision moment, that pipecat Smart Turn hears; valid
-    range: 1 - 8 (shorter audio is left-padded with silence to 8 s, as the model was trained). Unset = the
-    server's configured value (default: 8). Used only with pipecat Smart Turn. Precedence as above.
-    """
-    pipecat_timeout_seconds: builtins.float
-    """Optional. Seconds to wait for Triton's answer; a turn whose verdict does not arrive in time is judged not
-    finished and waits for <code>incomplete_max_silence_seconds</code>. Valid range: 0 - 5, exclusive of 0. Unset
-    = the server's configured value (default: 0.2). Used only with pipecat Smart Turn. Precedence as above.
+    every "not finished" verdict, whichever detector gave it, including a verdict that did not arrive in time.
     """
     @property
     def turn_detection_llm_openai_options(self) -> global___OpenaiLlmOptions:
-        """Optional. Configuration options for the OpenAI client used for turn detection. Its <code>model</code> also
-        selects the turn-detection model: a name starting with <code>pipecat-smart-turn</code> selects pipecat Smart
-        Turn (audio only, served by Triton, configured by the <code>pipecat_*</code> fields; the other OpenAI options
-        are ignored); a name starting with <code>ondewo-s2t-model-de-turn-detection</code> selects the ONDEWO German
-        turn-detection model (the turn's text and timing, served by vLLM: the whole name is the served model name and
-        <code>base_url</code>, <code>api_key</code>, <code>timeout</code> address the deployment); any other name is
-        a chat LLM or an end-of-utterance LLM. A name starting with <code>pipecat-</code> or
-        <code>ondewo-s2t-model-</code> that matches neither prefix is refused with INVALID_ARGUMENT.
+        """Optional. Deprecated in favour of <code>oneof_turn_detector</code>, but still honoured. Read only when
+        <code>oneof_turn_detector</code> is not set; its <code>model</code> then selects the detector by its name, as
+        before <code>oneof_turn_detector</code> existed: a name starting with <code>pipecat-smart-turn</code> selects
+        pipecat Smart Turn, one starting with <code>ondewo-s2t-model-de-vad-tsd-ondewo-qwen3</code> the ONDEWO German
+        turn-detection model, one starting with <code>ondewo-s2t-model-de-fusion-turn-detection</code> the ONDEWO
+        German fusion turn detector, and any other name a chat LLM or an end-of-utterance LLM. A name starting with
+        <code>pipecat-</code> or <code>ondewo-s2t-model-</code> that matches none of these is refused with
+        INVALID_ARGUMENT. On this path every detector-specific value is the server's configured value.
         """
 
     @property
-    def conversation_context(self) -> global___TurnDetectionConversationContext:
-        """Optional. The latest turns of the conversation before the caller's utterance under evaluation, handed to an
-        end-of-utterance model (the LiveKit-shaped model that scores the probability of the end-of-utterance token)
-        as preceding chat turns, so that it can judge the utterance against what was said before, e.g. a bare
-        number answering a question for a number. The server keeps the context per stream, outside the effective
-        request config: a request whose turn detection carries this field replaces it, an empty wrapper (no turns)
-        clears it, and a request without it (including one that carries other turn detection options) keeps it. That
-        is why it is a wrapper: the server merges request configs per whole top-level field, so a field it did not
-        store itself could not survive a later request that carries turn detection without it. The server caps the
-        number of turns and the length of each turn it uses. Unset or empty: the utterance is judged alone, exactly
-        as before this field existed. Used only by an end-of-utterance model; ignored by a chat-LLM turn detector.
-        Honoured only in a request config (<code>TranscribeRequestConfig.utterance_detection.turn_detection</code>);
-        ignored in a pipeline config (<code>StreamingSpeechRecognition.turn_detection</code>), where a per-stream
-        context has no meaning.
+    def turn_detection_conversation_context(self) -> global___TurnDetectionConversationContext:
+        """Optional. The latest turns of the conversation before the caller's utterance under evaluation, handed to the
+        end-of-utterance LLM as preceding chat turns so that it can judge the utterance against what was said
+        before, e.g. a bare number answering a question for a number. Kept outside <code>oneof_turn_detector</code>
+        because it is conversation data, not detector configuration: the server keeps it per stream, a request
+        whose turn detection carries this field replaces it, an empty wrapper (no turns) clears it, and a request
+        without it keeps it. That is why it is a wrapper: the server merges request configs per whole top-level
+        field, so a field it did not store itself could not survive a later request that carries turn detection
+        without it. The server caps the number of turns and the length of each turn. Unset or empty: the utterance
+        is judged alone. Read only by <code>turn_detection_end_of_utterance_llm_options</code>; ignored by every
+        other detector. Honoured only in a request config; ignored in a pipeline config, where a per-stream context
+        has no meaning.
         """
 
     @property
-    def hold_bands(self) -> global___TurnDetectionHoldBands:
-        """Optional. The hold bands of an end-of-utterance model: how long a turn judged finished, but only with a
-        probability below a band's upper bound, waits for further silence before it is committed. Unset = the
-        server's configured value (default: the bands configured for the language of the stream). A wrapper only so
-        that "set with no bands" (a turn at or above the threshold is committed at once) means something different
-        from "unset". Used only by an end-of-utterance model; ignored by a chat-LLM turn detector. Precedence: the
-        request config's value, then the pipeline config's value, then the server's configured value.
+    def turn_detection_chat_llm_options(self) -> global___TurnDetectionChatLlmOptions:
+        """A chat LLM asked, with a prompt, whether the caller has finished the turn."""
+
+    @property
+    def turn_detection_end_of_utterance_llm_options(self) -> global___TurnDetectionEndOfUtteranceLlmOptions:
+        """An end-of-utterance LLM (LiveKit-shaped) that scores the probability of the end-of-utterance token."""
+
+    @property
+    def turn_detection_ondewo_de_options(self) -> global___TurnDetectionOndewoDeOptions:
+        """The ONDEWO German turn-detection model: the turn's text and timing, served by vLLM."""
+
+    @property
+    def turn_detection_ondewo_de_fusion_options(self) -> global___TurnDetectionOndewoDeFusionOptions:
+        """The ONDEWO German fusion turn detector: the ONDEWO German text model on vLLM plus acoustic heads on
+        Triton, combined into one end-of-turn probability.
         """
+
+    @property
+    def turn_detection_pipecat_smart_turn_options(self) -> global___TurnDetectionPipecatSmartTurnOptions:
+        """pipecat Smart Turn v3.2: audio only, served by Triton."""
 
     def __init__(
         self,
@@ -2186,44 +2157,24 @@ class TurnDetectionOptions(google.protobuf.message.Message):
         turn_detection_system_prompt: builtins.str | None = ...,
         turn_detection_user_prompt: builtins.str | None = ...,
         turn_detection_llm_openai_options: global___OpenaiLlmOptions | None = ...,
-        conversation_context: global___TurnDetectionConversationContext | None = ...,
-        end_of_turn_probability_threshold: builtins.float | None = ...,
-        hold_bands: global___TurnDetectionHoldBands | None = ...,
-        uncertain_min_words: builtins.int | None = ...,
         incomplete_max_silence_seconds: builtins.float | None = ...,
-        exact_probability: builtins.bool | None = ...,
-        pipecat_triton_model_name: builtins.str | None = ...,
-        pipecat_triton_server_host: builtins.str | None = ...,
-        pipecat_triton_server_port: builtins.int | None = ...,
-        pipecat_max_audio_seconds: builtins.float | None = ...,
-        pipecat_timeout_seconds: builtins.float | None = ...,
+        turn_detection_conversation_context: global___TurnDetectionConversationContext | None = ...,
+        turn_detection_chat_llm_options: global___TurnDetectionChatLlmOptions | None = ...,
+        turn_detection_end_of_utterance_llm_options: global___TurnDetectionEndOfUtteranceLlmOptions | None = ...,
+        turn_detection_ondewo_de_options: global___TurnDetectionOndewoDeOptions | None = ...,
+        turn_detection_ondewo_de_fusion_options: global___TurnDetectionOndewoDeFusionOptions | None = ...,
+        turn_detection_pipecat_smart_turn_options: global___TurnDetectionPipecatSmartTurnOptions | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["_active", b"_active", "_conversation_context", b"_conversation_context", "_end_of_turn_probability_threshold", b"_end_of_turn_probability_threshold", "_exact_probability", b"_exact_probability", "_full_utterance_deployment", b"_full_utterance_deployment", "_hold_bands", b"_hold_bands", "_incomplete_max_silence_seconds", b"_incomplete_max_silence_seconds", "_pipecat_max_audio_seconds", b"_pipecat_max_audio_seconds", "_pipecat_timeout_seconds", b"_pipecat_timeout_seconds", "_pipecat_triton_model_name", b"_pipecat_triton_model_name", "_pipecat_triton_server_host", b"_pipecat_triton_server_host", "_pipecat_triton_server_port", b"_pipecat_triton_server_port", "_turn_detection_llm_openai_options", b"_turn_detection_llm_openai_options", "_turn_detection_system_prompt", b"_turn_detection_system_prompt", "_turn_detection_user_prompt", b"_turn_detection_user_prompt", "_uncertain_min_words", b"_uncertain_min_words", "active", b"active", "conversation_context", b"conversation_context", "end_of_turn_probability_threshold", b"end_of_turn_probability_threshold", "exact_probability", b"exact_probability", "full_utterance_deployment", b"full_utterance_deployment", "hold_bands", b"hold_bands", "incomplete_max_silence_seconds", b"incomplete_max_silence_seconds", "pipecat_max_audio_seconds", b"pipecat_max_audio_seconds", "pipecat_timeout_seconds", b"pipecat_timeout_seconds", "pipecat_triton_model_name", b"pipecat_triton_model_name", "pipecat_triton_server_host", b"pipecat_triton_server_host", "pipecat_triton_server_port", b"pipecat_triton_server_port", "turn_detection_llm_openai_options", b"turn_detection_llm_openai_options", "turn_detection_system_prompt", b"turn_detection_system_prompt", "turn_detection_user_prompt", b"turn_detection_user_prompt", "uncertain_min_words", b"uncertain_min_words"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["_active", b"_active", "_conversation_context", b"_conversation_context", "_end_of_turn_probability_threshold", b"_end_of_turn_probability_threshold", "_exact_probability", b"_exact_probability", "_full_utterance_deployment", b"_full_utterance_deployment", "_hold_bands", b"_hold_bands", "_incomplete_max_silence_seconds", b"_incomplete_max_silence_seconds", "_pipecat_max_audio_seconds", b"_pipecat_max_audio_seconds", "_pipecat_timeout_seconds", b"_pipecat_timeout_seconds", "_pipecat_triton_model_name", b"_pipecat_triton_model_name", "_pipecat_triton_server_host", b"_pipecat_triton_server_host", "_pipecat_triton_server_port", b"_pipecat_triton_server_port", "_turn_detection_llm_openai_options", b"_turn_detection_llm_openai_options", "_turn_detection_system_prompt", b"_turn_detection_system_prompt", "_turn_detection_user_prompt", b"_turn_detection_user_prompt", "_uncertain_min_words", b"_uncertain_min_words", "active", b"active", "conversation_context", b"conversation_context", "end_of_turn_probability_threshold", b"end_of_turn_probability_threshold", "exact_probability", b"exact_probability", "full_utterance_deployment", b"full_utterance_deployment", "hold_bands", b"hold_bands", "incomplete_max_silence_seconds", b"incomplete_max_silence_seconds", "pipecat_max_audio_seconds", b"pipecat_max_audio_seconds", "pipecat_timeout_seconds", b"pipecat_timeout_seconds", "pipecat_triton_model_name", b"pipecat_triton_model_name", "pipecat_triton_server_host", b"pipecat_triton_server_host", "pipecat_triton_server_port", b"pipecat_triton_server_port", "turn_detection_llm_openai_options", b"turn_detection_llm_openai_options", "turn_detection_system_prompt", b"turn_detection_system_prompt", "turn_detection_user_prompt", b"turn_detection_user_prompt", "uncertain_min_words", b"uncertain_min_words"]) -> None: ...
+    def HasField(self, field_name: typing.Literal["_active", b"_active", "_full_utterance_deployment", b"_full_utterance_deployment", "_incomplete_max_silence_seconds", b"_incomplete_max_silence_seconds", "_turn_detection_conversation_context", b"_turn_detection_conversation_context", "_turn_detection_llm_openai_options", b"_turn_detection_llm_openai_options", "_turn_detection_system_prompt", b"_turn_detection_system_prompt", "_turn_detection_user_prompt", b"_turn_detection_user_prompt", "active", b"active", "full_utterance_deployment", b"full_utterance_deployment", "incomplete_max_silence_seconds", b"incomplete_max_silence_seconds", "oneof_turn_detector", b"oneof_turn_detector", "turn_detection_chat_llm_options", b"turn_detection_chat_llm_options", "turn_detection_conversation_context", b"turn_detection_conversation_context", "turn_detection_end_of_utterance_llm_options", b"turn_detection_end_of_utterance_llm_options", "turn_detection_llm_openai_options", b"turn_detection_llm_openai_options", "turn_detection_ondewo_de_fusion_options", b"turn_detection_ondewo_de_fusion_options", "turn_detection_ondewo_de_options", b"turn_detection_ondewo_de_options", "turn_detection_pipecat_smart_turn_options", b"turn_detection_pipecat_smart_turn_options", "turn_detection_system_prompt", b"turn_detection_system_prompt", "turn_detection_user_prompt", b"turn_detection_user_prompt"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["_active", b"_active", "_full_utterance_deployment", b"_full_utterance_deployment", "_incomplete_max_silence_seconds", b"_incomplete_max_silence_seconds", "_turn_detection_conversation_context", b"_turn_detection_conversation_context", "_turn_detection_llm_openai_options", b"_turn_detection_llm_openai_options", "_turn_detection_system_prompt", b"_turn_detection_system_prompt", "_turn_detection_user_prompt", b"_turn_detection_user_prompt", "active", b"active", "full_utterance_deployment", b"full_utterance_deployment", "incomplete_max_silence_seconds", b"incomplete_max_silence_seconds", "oneof_turn_detector", b"oneof_turn_detector", "turn_detection_chat_llm_options", b"turn_detection_chat_llm_options", "turn_detection_conversation_context", b"turn_detection_conversation_context", "turn_detection_end_of_utterance_llm_options", b"turn_detection_end_of_utterance_llm_options", "turn_detection_llm_openai_options", b"turn_detection_llm_openai_options", "turn_detection_ondewo_de_fusion_options", b"turn_detection_ondewo_de_fusion_options", "turn_detection_ondewo_de_options", b"turn_detection_ondewo_de_options", "turn_detection_pipecat_smart_turn_options", b"turn_detection_pipecat_smart_turn_options", "turn_detection_system_prompt", b"turn_detection_system_prompt", "turn_detection_user_prompt", b"turn_detection_user_prompt"]) -> None: ...
     @typing.overload
     def WhichOneof(self, oneof_group: typing.Literal["_active", b"_active"]) -> typing.Literal["active"] | None: ...
     @typing.overload
-    def WhichOneof(self, oneof_group: typing.Literal["_conversation_context", b"_conversation_context"]) -> typing.Literal["conversation_context"] | None: ...
-    @typing.overload
-    def WhichOneof(self, oneof_group: typing.Literal["_end_of_turn_probability_threshold", b"_end_of_turn_probability_threshold"]) -> typing.Literal["end_of_turn_probability_threshold"] | None: ...
-    @typing.overload
-    def WhichOneof(self, oneof_group: typing.Literal["_exact_probability", b"_exact_probability"]) -> typing.Literal["exact_probability"] | None: ...
-    @typing.overload
     def WhichOneof(self, oneof_group: typing.Literal["_full_utterance_deployment", b"_full_utterance_deployment"]) -> typing.Literal["full_utterance_deployment"] | None: ...
-    @typing.overload
-    def WhichOneof(self, oneof_group: typing.Literal["_hold_bands", b"_hold_bands"]) -> typing.Literal["hold_bands"] | None: ...
     @typing.overload
     def WhichOneof(self, oneof_group: typing.Literal["_incomplete_max_silence_seconds", b"_incomplete_max_silence_seconds"]) -> typing.Literal["incomplete_max_silence_seconds"] | None: ...
     @typing.overload
-    def WhichOneof(self, oneof_group: typing.Literal["_pipecat_max_audio_seconds", b"_pipecat_max_audio_seconds"]) -> typing.Literal["pipecat_max_audio_seconds"] | None: ...
-    @typing.overload
-    def WhichOneof(self, oneof_group: typing.Literal["_pipecat_timeout_seconds", b"_pipecat_timeout_seconds"]) -> typing.Literal["pipecat_timeout_seconds"] | None: ...
-    @typing.overload
-    def WhichOneof(self, oneof_group: typing.Literal["_pipecat_triton_model_name", b"_pipecat_triton_model_name"]) -> typing.Literal["pipecat_triton_model_name"] | None: ...
-    @typing.overload
-    def WhichOneof(self, oneof_group: typing.Literal["_pipecat_triton_server_host", b"_pipecat_triton_server_host"]) -> typing.Literal["pipecat_triton_server_host"] | None: ...
-    @typing.overload
-    def WhichOneof(self, oneof_group: typing.Literal["_pipecat_triton_server_port", b"_pipecat_triton_server_port"]) -> typing.Literal["pipecat_triton_server_port"] | None: ...
+    def WhichOneof(self, oneof_group: typing.Literal["_turn_detection_conversation_context", b"_turn_detection_conversation_context"]) -> typing.Literal["turn_detection_conversation_context"] | None: ...
     @typing.overload
     def WhichOneof(self, oneof_group: typing.Literal["_turn_detection_llm_openai_options", b"_turn_detection_llm_openai_options"]) -> typing.Literal["turn_detection_llm_openai_options"] | None: ...
     @typing.overload
@@ -2231,19 +2182,257 @@ class TurnDetectionOptions(google.protobuf.message.Message):
     @typing.overload
     def WhichOneof(self, oneof_group: typing.Literal["_turn_detection_user_prompt", b"_turn_detection_user_prompt"]) -> typing.Literal["turn_detection_user_prompt"] | None: ...
     @typing.overload
-    def WhichOneof(self, oneof_group: typing.Literal["_uncertain_min_words", b"_uncertain_min_words"]) -> typing.Literal["uncertain_min_words"] | None: ...
+    def WhichOneof(self, oneof_group: typing.Literal["oneof_turn_detector", b"oneof_turn_detector"]) -> typing.Literal["turn_detection_chat_llm_options", "turn_detection_end_of_utterance_llm_options", "turn_detection_ondewo_de_options", "turn_detection_ondewo_de_fusion_options", "turn_detection_pipecat_smart_turn_options"] | None: ...
 
 global___TurnDetectionOptions = TurnDetectionOptions
 
 @typing.final
-class TurnDetectionConversationContext(google.protobuf.message.Message):
-    """<p>The conversation context handed to an end-of-utterance turn-detection model.</p>"""
+class TurnDetectionChatLlmOptions(google.protobuf.message.Message):
+    """<p>TurnDetectionChatLlmOptions configures a chat LLM as the turn detector: the LLM is asked, with the prompts
+    below and the transcription of the turn, whether the caller has finished.</p>
+    """
 
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
-    TURNS_FIELD_NUMBER: builtins.int
+    OPENAI_LLM_OPTIONS_FIELD_NUMBER: builtins.int
+    SYSTEM_PROMPT_FIELD_NUMBER: builtins.int
+    USER_PROMPT_FIELD_NUMBER: builtins.int
+    system_prompt: builtins.str
+    """Optional. System prompt that guides the LLM. Unset = the server's configured prompt."""
+    user_prompt: builtins.str
+    """Optional. User prompt that carries the turn under evaluation. Unset = the server's configured prompt."""
     @property
-    def turns(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___TurnDetectionContextTurn]:
+    def openai_llm_options(self) -> global___OpenaiLlmOptions:
+        """Optional. The OpenAI-compatible endpoint and model of the chat LLM. Unset fields take the server's
+        configured values. A <code>model</code> starting with <code>pipecat-</code> or
+        <code>ondewo-s2t-model-</code> is refused with INVALID_ARGUMENT: those detectors have their own options.
+        """
+
+    def __init__(
+        self,
+        *,
+        openai_llm_options: global___OpenaiLlmOptions | None = ...,
+        system_prompt: builtins.str | None = ...,
+        user_prompt: builtins.str | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing.Literal["_openai_llm_options", b"_openai_llm_options", "_system_prompt", b"_system_prompt", "_user_prompt", b"_user_prompt", "openai_llm_options", b"openai_llm_options", "system_prompt", b"system_prompt", "user_prompt", b"user_prompt"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["_openai_llm_options", b"_openai_llm_options", "_system_prompt", b"_system_prompt", "_user_prompt", b"_user_prompt", "openai_llm_options", b"openai_llm_options", "system_prompt", b"system_prompt", "user_prompt", b"user_prompt"]) -> None: ...
+    @typing.overload
+    def WhichOneof(self, oneof_group: typing.Literal["_openai_llm_options", b"_openai_llm_options"]) -> typing.Literal["openai_llm_options"] | None: ...
+    @typing.overload
+    def WhichOneof(self, oneof_group: typing.Literal["_system_prompt", b"_system_prompt"]) -> typing.Literal["system_prompt"] | None: ...
+    @typing.overload
+    def WhichOneof(self, oneof_group: typing.Literal["_user_prompt", b"_user_prompt"]) -> typing.Literal["user_prompt"] | None: ...
+
+global___TurnDetectionChatLlmOptions = TurnDetectionChatLlmOptions
+
+@typing.final
+class TurnDetectionEndOfUtteranceLlmOptions(google.protobuf.message.Message):
+    """<p>TurnDetectionEndOfUtteranceLlmOptions configures an end-of-utterance LLM (LiveKit-shaped, e.g.
+    <code>livekit/turn-detector</code>) as the turn detector: the model scores the probability of the
+    end-of-utterance token after the turn's transcription and, when
+    <code>TurnDetectionOptions.turn_detection_conversation_context</code> is set, the turns before it.</p>
+    """
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    OPENAI_LLM_OPTIONS_FIELD_NUMBER: builtins.int
+    END_OF_TURN_PROBABILITY_THRESHOLD_FIELD_NUMBER: builtins.int
+    TURN_DETECTION_HOLD_BANDS_FIELD_NUMBER: builtins.int
+    UNCERTAIN_MIN_WORDS_FIELD_NUMBER: builtins.int
+    EXACT_PROBABILITY_FIELD_NUMBER: builtins.int
+    end_of_turn_probability_threshold: builtins.float
+    """Optional. The end-of-utterance probability at or above which the caller is taken to have finished the turn,
+    valid range: 0 - 1. Unset = the server's configured value (default: the threshold configured for the
+    language of the stream).
+    """
+    uncertain_min_words: builtins.int
+    """Optional. The minimum number of words an utterance needs before a hold band may hold it; a shorter
+    utterance judged finished is committed at once. Unset = the server's configured value (default: 3).
+    """
+    exact_probability: builtins.bool
+    """Optional. Whether the exact probability of the end-of-utterance token is computed instead of being read
+    from the returned top log probabilities. Unset = the server's configured value (default: false). Requires a
+    deployment that returns prompt log probabilities (vLLM <code>prompt_logprobs</code>); on any other
+    deployment the probability reads 0, so every turn is judged not finished and waits for
+    <code>TurnDetectionOptions.incomplete_max_silence_seconds</code>.
+    """
+    @property
+    def openai_llm_options(self) -> global___OpenaiLlmOptions:
+        """Optional. The OpenAI-compatible endpoint and served model name. Unset fields take the server's configured
+        values.
+        """
+
+    @property
+    def turn_detection_hold_bands(self) -> global___TurnDetectionHoldBands:
+        """Optional. How long a turn judged finished, but only with a probability below a band's upper bound, waits
+        for further silence before it is committed. Unset = the server's configured value (default: the bands
+        configured for the language of the stream). A wrapper only so that "set with no bands" (a turn at or above
+        the threshold is committed at once) means something different from "unset".
+        """
+
+    def __init__(
+        self,
+        *,
+        openai_llm_options: global___OpenaiLlmOptions | None = ...,
+        end_of_turn_probability_threshold: builtins.float | None = ...,
+        turn_detection_hold_bands: global___TurnDetectionHoldBands | None = ...,
+        uncertain_min_words: builtins.int | None = ...,
+        exact_probability: builtins.bool | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing.Literal["_end_of_turn_probability_threshold", b"_end_of_turn_probability_threshold", "_exact_probability", b"_exact_probability", "_openai_llm_options", b"_openai_llm_options", "_turn_detection_hold_bands", b"_turn_detection_hold_bands", "_uncertain_min_words", b"_uncertain_min_words", "end_of_turn_probability_threshold", b"end_of_turn_probability_threshold", "exact_probability", b"exact_probability", "openai_llm_options", b"openai_llm_options", "turn_detection_hold_bands", b"turn_detection_hold_bands", "uncertain_min_words", b"uncertain_min_words"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["_end_of_turn_probability_threshold", b"_end_of_turn_probability_threshold", "_exact_probability", b"_exact_probability", "_openai_llm_options", b"_openai_llm_options", "_turn_detection_hold_bands", b"_turn_detection_hold_bands", "_uncertain_min_words", b"_uncertain_min_words", "end_of_turn_probability_threshold", b"end_of_turn_probability_threshold", "exact_probability", b"exact_probability", "openai_llm_options", b"openai_llm_options", "turn_detection_hold_bands", b"turn_detection_hold_bands", "uncertain_min_words", b"uncertain_min_words"]) -> None: ...
+    @typing.overload
+    def WhichOneof(self, oneof_group: typing.Literal["_end_of_turn_probability_threshold", b"_end_of_turn_probability_threshold"]) -> typing.Literal["end_of_turn_probability_threshold"] | None: ...
+    @typing.overload
+    def WhichOneof(self, oneof_group: typing.Literal["_exact_probability", b"_exact_probability"]) -> typing.Literal["exact_probability"] | None: ...
+    @typing.overload
+    def WhichOneof(self, oneof_group: typing.Literal["_openai_llm_options", b"_openai_llm_options"]) -> typing.Literal["openai_llm_options"] | None: ...
+    @typing.overload
+    def WhichOneof(self, oneof_group: typing.Literal["_turn_detection_hold_bands", b"_turn_detection_hold_bands"]) -> typing.Literal["turn_detection_hold_bands"] | None: ...
+    @typing.overload
+    def WhichOneof(self, oneof_group: typing.Literal["_uncertain_min_words", b"_uncertain_min_words"]) -> typing.Literal["uncertain_min_words"] | None: ...
+
+global___TurnDetectionEndOfUtteranceLlmOptions = TurnDetectionEndOfUtteranceLlmOptions
+
+@typing.final
+class TurnDetectionOndewoDeOptions(google.protobuf.message.Message):
+    """<p>TurnDetectionOndewoDeOptions configures the ONDEWO German turn-detection model as the turn detector. It judges
+    the turn from its text and word timing and is served by vLLM.</p>
+    """
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    OPENAI_LLM_OPTIONS_FIELD_NUMBER: builtins.int
+    @property
+    def openai_llm_options(self) -> global___OpenaiLlmOptions:
+        """Optional. The vLLM deployment: <code>base_url</code>, <code>api_key</code> and <code>timeout</code> address
+        it, <code>model</code> is the served model name, e.g.
+        <code>ondewo-s2t-model-de-vad-tsd-ondewo-qwen3-0.6b</code>. Unset fields take the server's configured values.
+        """
+
+    def __init__(
+        self,
+        *,
+        openai_llm_options: global___OpenaiLlmOptions | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing.Literal["_openai_llm_options", b"_openai_llm_options", "openai_llm_options", b"openai_llm_options"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["_openai_llm_options", b"_openai_llm_options", "openai_llm_options", b"openai_llm_options"]) -> None: ...
+    def WhichOneof(self, oneof_group: typing.Literal["_openai_llm_options", b"_openai_llm_options"]) -> typing.Literal["openai_llm_options"] | None: ...
+
+global___TurnDetectionOndewoDeOptions = TurnDetectionOndewoDeOptions
+
+@typing.final
+class TurnDetectionOndewoDeFusionOptions(google.protobuf.message.Message):
+    """<p>TurnDetectionOndewoDeFusionOptions configures the ONDEWO German fusion turn detector. It combines the ONDEWO
+    German text model on vLLM, acoustic heads on Triton and signals computed from the stream into one end-of-turn
+    probability. The Triton heads, the text model's served name and the weights file are server settings.</p>
+    """
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    OPENAI_LLM_OPTIONS_FIELD_NUMBER: builtins.int
+    END_OF_TURN_PROBABILITY_THRESHOLD_FIELD_NUMBER: builtins.int
+    end_of_turn_probability_threshold: builtins.float
+    """Optional. The end-of-turn probability at or above which the caller is taken to have finished the turn,
+    valid range: 0 - 1. Unset = the server's configured value, else the weights file's threshold.
+    """
+    @property
+    def openai_llm_options(self) -> global___OpenaiLlmOptions:
+        """Optional. Addresses the vLLM deployment of the text model (<code>base_url</code>, <code>api_key</code>,
+        <code>timeout</code>); <code>model</code> names the fusion variant, e.g.
+        <code>ondewo-s2t-model-de-fusion-turn-detection</code>. Unset fields take the server's configured values.
+        """
+
+    def __init__(
+        self,
+        *,
+        openai_llm_options: global___OpenaiLlmOptions | None = ...,
+        end_of_turn_probability_threshold: builtins.float | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing.Literal["_end_of_turn_probability_threshold", b"_end_of_turn_probability_threshold", "_openai_llm_options", b"_openai_llm_options", "end_of_turn_probability_threshold", b"end_of_turn_probability_threshold", "openai_llm_options", b"openai_llm_options"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["_end_of_turn_probability_threshold", b"_end_of_turn_probability_threshold", "_openai_llm_options", b"_openai_llm_options", "end_of_turn_probability_threshold", b"end_of_turn_probability_threshold", "openai_llm_options", b"openai_llm_options"]) -> None: ...
+    @typing.overload
+    def WhichOneof(self, oneof_group: typing.Literal["_end_of_turn_probability_threshold", b"_end_of_turn_probability_threshold"]) -> typing.Literal["end_of_turn_probability_threshold"] | None: ...
+    @typing.overload
+    def WhichOneof(self, oneof_group: typing.Literal["_openai_llm_options", b"_openai_llm_options"]) -> typing.Literal["openai_llm_options"] | None: ...
+
+global___TurnDetectionOndewoDeFusionOptions = TurnDetectionOndewoDeFusionOptions
+
+@typing.final
+class TurnDetectionPipecatSmartTurnOptions(google.protobuf.message.Message):
+    """<p>TurnDetectionPipecatSmartTurnOptions configures pipecat Smart Turn v3.2 as the turn detector. It judges the
+    turn from the caller's audio alone and is served by Triton.</p>
+    <p>Model: <a href="https://github.com/pipecat-ai/smart-turn">pipecat Smart Turn</a></p>
+    """
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    MODEL_NAME_FIELD_NUMBER: builtins.int
+    TRITON_SERVER_HOST_FIELD_NUMBER: builtins.int
+    TRITON_SERVER_PORT_FIELD_NUMBER: builtins.int
+    MAX_AUDIO_SECONDS_FIELD_NUMBER: builtins.int
+    TIMEOUT_SECONDS_FIELD_NUMBER: builtins.int
+    model_name: builtins.str
+    """Optional. Full name of the Triton model. Unset = the server's configured value (default:
+    <code>ondewo-s2t-model-multi-turn-detection-pipecat-smart-turn-3.2-onnx-triton</code>).
+    """
+    triton_server_host: builtins.str
+    """Optional. Host name of the Triton inference server that serves the model, as
+    <code>Pyannote.triton_server_host</code>. Unset = the server's configured value. The connection uses the
+    server's Triton client TLS settings.
+    """
+    triton_server_port: builtins.int
+    """Optional. Port of the Triton inference server that serves the model, as
+    <code>Pyannote.triton_server_port</code>. Unset = the server's configured value.
+    """
+    max_audio_seconds: builtins.float
+    """Optional. Seconds of the caller's audio, ending at the decision moment, that the model hears; valid range:
+    1 - 8. Shorter audio is left-padded with silence to 8 s, as the model was trained. Unset = the server's
+    configured value (default: 8).
+    """
+    timeout_seconds: builtins.float
+    """Optional. Seconds to wait for Triton's answer, valid range: greater than 0, at most 5. A turn whose verdict
+    does not arrive in time is judged not finished and waits for
+    <code>TurnDetectionOptions.incomplete_max_silence_seconds</code>. Unset = the server's configured value
+    (default: 0.2).
+    """
+    def __init__(
+        self,
+        *,
+        model_name: builtins.str | None = ...,
+        triton_server_host: builtins.str | None = ...,
+        triton_server_port: builtins.int | None = ...,
+        max_audio_seconds: builtins.float | None = ...,
+        timeout_seconds: builtins.float | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing.Literal["_max_audio_seconds", b"_max_audio_seconds", "_model_name", b"_model_name", "_timeout_seconds", b"_timeout_seconds", "_triton_server_host", b"_triton_server_host", "_triton_server_port", b"_triton_server_port", "max_audio_seconds", b"max_audio_seconds", "model_name", b"model_name", "timeout_seconds", b"timeout_seconds", "triton_server_host", b"triton_server_host", "triton_server_port", b"triton_server_port"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["_max_audio_seconds", b"_max_audio_seconds", "_model_name", b"_model_name", "_timeout_seconds", b"_timeout_seconds", "_triton_server_host", b"_triton_server_host", "_triton_server_port", b"_triton_server_port", "max_audio_seconds", b"max_audio_seconds", "model_name", b"model_name", "timeout_seconds", b"timeout_seconds", "triton_server_host", b"triton_server_host", "triton_server_port", b"triton_server_port"]) -> None: ...
+    @typing.overload
+    def WhichOneof(self, oneof_group: typing.Literal["_max_audio_seconds", b"_max_audio_seconds"]) -> typing.Literal["max_audio_seconds"] | None: ...
+    @typing.overload
+    def WhichOneof(self, oneof_group: typing.Literal["_model_name", b"_model_name"]) -> typing.Literal["model_name"] | None: ...
+    @typing.overload
+    def WhichOneof(self, oneof_group: typing.Literal["_timeout_seconds", b"_timeout_seconds"]) -> typing.Literal["timeout_seconds"] | None: ...
+    @typing.overload
+    def WhichOneof(self, oneof_group: typing.Literal["_triton_server_host", b"_triton_server_host"]) -> typing.Literal["triton_server_host"] | None: ...
+    @typing.overload
+    def WhichOneof(self, oneof_group: typing.Literal["_triton_server_port", b"_triton_server_port"]) -> typing.Literal["triton_server_port"] | None: ...
+
+global___TurnDetectionPipecatSmartTurnOptions = TurnDetectionPipecatSmartTurnOptions
+
+@typing.final
+class TurnDetectionConversationContext(google.protobuf.message.Message):
+    """<p>TurnDetectionConversationContext carries the latest turns of the conversation for
+    <code>TurnDetectionEndOfUtteranceLlmOptions</code> (see
+    <code>TurnDetectionOptions.turn_detection_conversation_context</code>). No other detector reads it.</p>
+    """
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    TURN_DETECTION_CONTEXT_TURNS_FIELD_NUMBER: builtins.int
+    @property
+    def turn_detection_context_turns(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___TurnDetectionContextTurn]:
         """The turns of the conversation, oldest first. They EXCLUDE the caller's utterance under evaluation, which
         the server appends itself.
         """
@@ -2251,15 +2440,17 @@ class TurnDetectionConversationContext(google.protobuf.message.Message):
     def __init__(
         self,
         *,
-        turns: collections.abc.Iterable[global___TurnDetectionContextTurn] | None = ...,
+        turn_detection_context_turns: collections.abc.Iterable[global___TurnDetectionContextTurn] | None = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing.Literal["turns", b"turns"]) -> None: ...
+    def ClearField(self, field_name: typing.Literal["turn_detection_context_turns", b"turn_detection_context_turns"]) -> None: ...
 
 global___TurnDetectionConversationContext = TurnDetectionConversationContext
 
 @typing.final
 class TurnDetectionContextTurn(google.protobuf.message.Message):
-    """<p>One turn of the conversation context of the turn detection.</p>"""
+    """<p>One turn of the conversation context of the turn detection, read only by
+    <code>TurnDetectionEndOfUtteranceLlmOptions</code>.</p>
+    """
 
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
@@ -2308,29 +2499,32 @@ global___TurnDetectionContextTurn = TurnDetectionContextTurn
 
 @typing.final
 class TurnDetectionHoldBands(google.protobuf.message.Message):
-    """<p>The hold bands of an end-of-utterance turn-detection model.</p>"""
+    """<p>TurnDetectionHoldBands carries the hold bands of <code>TurnDetectionEndOfUtteranceLlmOptions</code>. No other
+    detector reads them.</p>
+    """
 
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
-    BANDS_FIELD_NUMBER: builtins.int
+    TURN_DETECTION_HOLD_BANDS_FIELD_NUMBER: builtins.int
     @property
-    def bands(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___TurnDetectionHoldBand]:
-        """The bands; the first band, sorted by <code>upper_probability</code>, whose upper probability exceeds the
-        end-of-utterance probability decides the hold. A probability above every band is finished at once.
+    def turn_detection_hold_bands(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___TurnDetectionHoldBand]:
+        """The bands, each holding a turn judged finished with a probability below its upper bound: the first band,
+        sorted by <code>upper_probability</code>, whose upper probability exceeds the end-of-utterance probability
+        decides the hold. A probability above every band is finished at once.
         """
 
     def __init__(
         self,
         *,
-        bands: collections.abc.Iterable[global___TurnDetectionHoldBand] | None = ...,
+        turn_detection_hold_bands: collections.abc.Iterable[global___TurnDetectionHoldBand] | None = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing.Literal["bands", b"bands"]) -> None: ...
+    def ClearField(self, field_name: typing.Literal["turn_detection_hold_bands", b"turn_detection_hold_bands"]) -> None: ...
 
 global___TurnDetectionHoldBands = TurnDetectionHoldBands
 
 @typing.final
 class TurnDetectionHoldBand(google.protobuf.message.Message):
-    """<p>One hold band of an end-of-utterance turn-detection model.</p>"""
+    """<p>One hold band of <code>TurnDetectionEndOfUtteranceLlmOptions</code>.</p>"""
 
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
@@ -2340,7 +2534,7 @@ class TurnDetectionHoldBand(google.protobuf.message.Message):
     """The exclusive upper bound of the end-of-utterance probabilities this band covers, valid range: 0 - 1."""
     max_silence_seconds: builtins.float
     """Seconds of silence a turn in this band waits before it is committed, valid range: 0 - 4. The server never
-    holds longer than <code>incomplete_max_silence_seconds</code>.
+    holds longer than <code>TurnDetectionOptions.incomplete_max_silence_seconds</code>.
     """
     def __init__(
         self,
