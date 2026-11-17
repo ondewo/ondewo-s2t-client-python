@@ -2304,6 +2304,14 @@ class TurnDetectionOndewoDeOptions(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
     OPENAI_LLM_OPTIONS_FIELD_NUMBER: builtins.int
+    END_OF_TURN_PROBABILITY_THRESHOLD_FIELD_NUMBER: builtins.int
+    end_of_turn_probability_threshold: builtins.float
+    """Optional. The end-of-turn probability the model must reach for the caller to be taken to have finished the
+    turn, valid range: 0 - 1. A turn below it is judged not finished and waits for
+    <code>TurnDetectionOptions.incomplete_max_silence_seconds</code>. Unset = the server's configured value
+    (default: 0.5). Precedence: the request config's value, then the pipeline config's value, then the server's
+    configured value.
+    """
     @property
     def openai_llm_options(self) -> global___OpenaiLlmOptions:
         """Optional. The vLLM deployment: <code>base_url</code>, <code>api_key</code> and <code>timeout</code> address
@@ -2315,9 +2323,13 @@ class TurnDetectionOndewoDeOptions(google.protobuf.message.Message):
         self,
         *,
         openai_llm_options: global___OpenaiLlmOptions | None = ...,
+        end_of_turn_probability_threshold: builtins.float | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["_openai_llm_options", b"_openai_llm_options", "openai_llm_options", b"openai_llm_options"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["_openai_llm_options", b"_openai_llm_options", "openai_llm_options", b"openai_llm_options"]) -> None: ...
+    def HasField(self, field_name: typing.Literal["_end_of_turn_probability_threshold", b"_end_of_turn_probability_threshold", "_openai_llm_options", b"_openai_llm_options", "end_of_turn_probability_threshold", b"end_of_turn_probability_threshold", "openai_llm_options", b"openai_llm_options"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["_end_of_turn_probability_threshold", b"_end_of_turn_probability_threshold", "_openai_llm_options", b"_openai_llm_options", "end_of_turn_probability_threshold", b"end_of_turn_probability_threshold", "openai_llm_options", b"openai_llm_options"]) -> None: ...
+    @typing.overload
+    def WhichOneof(self, oneof_group: typing.Literal["_end_of_turn_probability_threshold", b"_end_of_turn_probability_threshold"]) -> typing.Literal["end_of_turn_probability_threshold"] | None: ...
+    @typing.overload
     def WhichOneof(self, oneof_group: typing.Literal["_openai_llm_options", b"_openai_llm_options"]) -> typing.Literal["openai_llm_options"] | None: ...
 
 global___TurnDetectionOndewoDeOptions = TurnDetectionOndewoDeOptions
@@ -2373,6 +2385,7 @@ class TurnDetectionPipecatSmartTurnOptions(google.protobuf.message.Message):
     TRITON_SERVER_PORT_FIELD_NUMBER: builtins.int
     MAX_AUDIO_SECONDS_FIELD_NUMBER: builtins.int
     TIMEOUT_SECONDS_FIELD_NUMBER: builtins.int
+    END_OF_TURN_PROBABILITY_THRESHOLD_FIELD_NUMBER: builtins.int
     model_name: builtins.str
     """Optional. Full name of the Triton model. Unset = the server's configured value (default:
     <code>ondewo-s2t-model-multi-turn-detection-pipecat-smart-turn-3.2-onnx-triton</code>).
@@ -2397,6 +2410,13 @@ class TurnDetectionPipecatSmartTurnOptions(google.protobuf.message.Message):
     <code>TurnDetectionOptions.incomplete_max_silence_seconds</code>. Unset = the server's configured value
     (default: 0.2).
     """
+    end_of_turn_probability_threshold: builtins.float
+    """Optional. The end-of-turn probability Smart Turn must report for the caller to be taken to have finished the
+    turn, valid range: 0 - 1. A turn below it is judged not finished and waits for
+    <code>TurnDetectionOptions.incomplete_max_silence_seconds</code>. Unset = the server's configured value
+    (default: 0.5). Precedence: the request config's value, then the pipeline config's value, then the server's
+    configured value.
+    """
     def __init__(
         self,
         *,
@@ -2405,9 +2425,12 @@ class TurnDetectionPipecatSmartTurnOptions(google.protobuf.message.Message):
         triton_server_port: builtins.int | None = ...,
         max_audio_seconds: builtins.float | None = ...,
         timeout_seconds: builtins.float | None = ...,
+        end_of_turn_probability_threshold: builtins.float | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["_max_audio_seconds", b"_max_audio_seconds", "_model_name", b"_model_name", "_timeout_seconds", b"_timeout_seconds", "_triton_server_host", b"_triton_server_host", "_triton_server_port", b"_triton_server_port", "max_audio_seconds", b"max_audio_seconds", "model_name", b"model_name", "timeout_seconds", b"timeout_seconds", "triton_server_host", b"triton_server_host", "triton_server_port", b"triton_server_port"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["_max_audio_seconds", b"_max_audio_seconds", "_model_name", b"_model_name", "_timeout_seconds", b"_timeout_seconds", "_triton_server_host", b"_triton_server_host", "_triton_server_port", b"_triton_server_port", "max_audio_seconds", b"max_audio_seconds", "model_name", b"model_name", "timeout_seconds", b"timeout_seconds", "triton_server_host", b"triton_server_host", "triton_server_port", b"triton_server_port"]) -> None: ...
+    def HasField(self, field_name: typing.Literal["_end_of_turn_probability_threshold", b"_end_of_turn_probability_threshold", "_max_audio_seconds", b"_max_audio_seconds", "_model_name", b"_model_name", "_timeout_seconds", b"_timeout_seconds", "_triton_server_host", b"_triton_server_host", "_triton_server_port", b"_triton_server_port", "end_of_turn_probability_threshold", b"end_of_turn_probability_threshold", "max_audio_seconds", b"max_audio_seconds", "model_name", b"model_name", "timeout_seconds", b"timeout_seconds", "triton_server_host", b"triton_server_host", "triton_server_port", b"triton_server_port"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["_end_of_turn_probability_threshold", b"_end_of_turn_probability_threshold", "_max_audio_seconds", b"_max_audio_seconds", "_model_name", b"_model_name", "_timeout_seconds", b"_timeout_seconds", "_triton_server_host", b"_triton_server_host", "_triton_server_port", b"_triton_server_port", "end_of_turn_probability_threshold", b"end_of_turn_probability_threshold", "max_audio_seconds", b"max_audio_seconds", "model_name", b"model_name", "timeout_seconds", b"timeout_seconds", "triton_server_host", b"triton_server_host", "triton_server_port", b"triton_server_port"]) -> None: ...
+    @typing.overload
+    def WhichOneof(self, oneof_group: typing.Literal["_end_of_turn_probability_threshold", b"_end_of_turn_probability_threshold"]) -> typing.Literal["end_of_turn_probability_threshold"] | None: ...
     @typing.overload
     def WhichOneof(self, oneof_group: typing.Literal["_max_audio_seconds", b"_max_audio_seconds"]) -> typing.Literal["max_audio_seconds"] | None: ...
     @typing.overload
