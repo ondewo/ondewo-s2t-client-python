@@ -6,7 +6,7 @@ import warnings
 from google.protobuf import empty_pb2 as google_dot_protobuf_dot_empty__pb2
 from ondewo.s2t import speech_to_text_pb2 as ondewo_dot_s2t_dot_speech__to__text__pb2
 
-GRPC_GENERATED_VERSION = '1.67.1'
+GRPC_GENERATED_VERSION = '1.85.1'
 GRPC_VERSION = grpc.__version__
 _version_not_supported = False
 
@@ -19,14 +19,14 @@ except ImportError:
 if _version_not_supported:
     raise RuntimeError(
         f'The grpc package installed is at version {GRPC_VERSION},'
-        + f' but the generated code in ondewo/s2t/speech_to_text_pb2_grpc.py depends on'
+        + ' but the generated code in ondewo/s2t/speech_to_text_pb2_grpc.py depends on'
         + f' grpcio>={GRPC_GENERATED_VERSION}.'
         + f' Please upgrade your grpc module to grpcio>={GRPC_GENERATED_VERSION}'
         + f' or downgrade your generated code using grpcio-tools<={GRPC_VERSION}.'
     )
 
 
-class Speech2TextStub(object):
+class Speech2TextStub:
     """<p>Speech-to-text service</p>
     """
 
@@ -118,7 +118,7 @@ class Speech2TextStub(object):
                 _registered_method=True)
 
 
-class Speech2TextServicer(object):
+class Speech2TextServicer:
     """<p>Speech-to-text service</p>
     """
 
@@ -329,7 +329,7 @@ def add_Speech2TextServicer_to_server(servicer, server):
 
 
  # This class is part of an EXPERIMENTAL API.
-class Speech2Text(object):
+class Speech2Text:
     """<p>Speech-to-text service</p>
     """
 

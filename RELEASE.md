@@ -2,7 +2,7 @@
 
 *****************
 
-## Release ONDEWO S2T Python Client 7.5.2
+## Release ONDEWO S2T Python Client 7.6.0
 
 ### New Features
 
@@ -22,6 +22,13 @@
   it is a flag on that chunk's partial, without them one non-final response with the current text; the final still
   follows (or the utterance continues). Opt in with `TranscriptionReturnOptions.return_end_of_speech_candidate`
   (default `false`), fixed per stream like `return_start_of_speech`.
+
+### Improvements
+
+* Tracking API Version [7.6.0](https://github.com/ondewo/ondewo-s2t-api/releases/tag/7.6.0) ( [Documentation](https://ondewo.github.io/ondewo-s2t-api/) )
+* [[OND236-120]](https://ondewo.atlassian.net/browse/OND236-120) Generated with ondewo-proto-compiler 5.17.0: new
+  runtime floors `requires-python >=3.10`, `protobuf>=7.35.1,<8` and `grpcio>=1.85.1` (the stubs refuse an older
+  runtime at import); `.pyi` stubs from mypy-protobuf 5.1.0.
 
 *****************
 

@@ -7,10 +7,10 @@ It exposes both a synchronous (`Client`) and an asynchronous (`AsyncClient`) int
 by a generated service wrapper (`Speech2Text`) that delegates directly to the gRPC stub.
 
 **Package name:** `ondewo-s2t-client`
-**Current version:** `7.5.2` — held in three places that must agree: `pyproject.toml` `version`,
+**Current version:** `7.6.0` — held in three places that must agree: `pyproject.toml` `version`,
 `Makefile` `ONDEWO_S2T_VERSION`, and the newest `## Release … <VERSION>` heading in `RELEASE.md`.
 `make update_setup` copies the Makefile value into `pyproject.toml`.
-**Python:** `requires-python = ">=3.9"`; CI runs 3.12.
+**Python:** `requires-python = ">=3.10"`; CI runs 3.12.
 
 ---
 

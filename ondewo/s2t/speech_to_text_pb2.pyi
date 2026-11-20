@@ -16,29 +16,34 @@ See the License for the specific language governing permissions and
 limitations under the License.https://ondewo.slack.com/archives/CAWPP61NY
 """
 
-import builtins
-import collections.abc
-import google.protobuf.descriptor
-import google.protobuf.internal.containers
-import google.protobuf.internal.enum_type_wrapper
-import google.protobuf.message
-import google.protobuf.struct_pb2
+from collections import abc as _abc
+from google.protobuf import descriptor as _descriptor
+from google.protobuf import message as _message
+from google.protobuf import struct_pb2 as _struct_pb2
+from google.protobuf.internal import containers as _containers
+from google.protobuf.internal import enum_type_wrapper as _enum_type_wrapper
+import builtins as _builtins
 import sys
-import typing
+import typing as _typing
 
-if sys.version_info >= (3, 10):
-    import typing as typing_extensions
+if sys.version_info >= (3, 11):
+    from typing import TypeAlias as _TypeAlias, Never as _Never
 else:
-    import typing_extensions
+    from typing_extensions import TypeAlias as _TypeAlias, Never as _Never
 
-DESCRIPTOR: google.protobuf.descriptor.FileDescriptor
+if sys.version_info >= (3, 13):
+    from warnings import deprecated as _deprecated
+else:
+    from typing_extensions import deprecated as _deprecated
+
+DESCRIPTOR: _descriptor.FileDescriptor
 
 class _Decoding:
-    ValueType = typing.NewType("ValueType", builtins.int)
-    V: typing_extensions.TypeAlias = ValueType
+    ValueType = _typing.NewType("ValueType", _builtins.int)
+    V: _TypeAlias = ValueType  # noqa: Y015
 
-class _DecodingEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_Decoding.ValueType], builtins.type):
-    DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
+class _DecodingEnumTypeWrapper(_enum_type_wrapper._EnumTypeWrapper[_Decoding.ValueType], _builtins.type):
+    DESCRIPTOR: _descriptor.EnumDescriptor
     DEFAULT: _Decoding.ValueType  # 0
     """decoding will be defined by the pipeline config"""
     GREEDY: _Decoding.ValueType  # 1
@@ -64,14 +69,14 @@ BEAM_SEARCH_WITH_LM: Decoding.ValueType  # 2
 """beam search will be used independently on pipeline config"""
 BEAM_SEARCH: Decoding.ValueType  # 3
 """beam search without LM head, to configure decoding mode for seq2seq models."""
-global___Decoding = Decoding
+Global___Decoding: _TypeAlias = Decoding  # noqa: Y015
 
 class _InferenceBackend:
-    ValueType = typing.NewType("ValueType", builtins.int)
-    V: typing_extensions.TypeAlias = ValueType
+    ValueType = _typing.NewType("ValueType", _builtins.int)
+    V: _TypeAlias = ValueType  # noqa: Y015
 
-class _InferenceBackendEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_InferenceBackend.ValueType], builtins.type):
-    DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
+class _InferenceBackendEnumTypeWrapper(_enum_type_wrapper._EnumTypeWrapper[_InferenceBackend.ValueType], _builtins.type):
+    DESCRIPTOR: _descriptor.EnumDescriptor
     INFERENCE_BACKEND_UNKNOWN: _InferenceBackend.ValueType  # 0
     """Not set"""
     INFERENCE_BACKEND_PYTORCH: _InferenceBackend.ValueType  # 1
@@ -104,14 +109,14 @@ INFERENCE_BACKEND_CLOUD_SERVICE_GOOGLE: InferenceBackend.ValueType  # 5
 """Run Google S2T cloud service"""
 INFERENCE_BACKEND_CLOUD_SERVICE_MICROSOFT: InferenceBackend.ValueType  # 6
 """Run Microsoft Azure S2T cloud service"""
-global___InferenceBackend = InferenceBackend
+Global___InferenceBackend: _TypeAlias = InferenceBackend  # noqa: Y015
 
 class _ServiceTier:
-    ValueType = typing.NewType("ValueType", builtins.int)
-    V: typing_extensions.TypeAlias = ValueType
+    ValueType = _typing.NewType("ValueType", _builtins.int)
+    V: _TypeAlias = ValueType  # noqa: Y015
 
-class _ServiceTierEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_ServiceTier.ValueType], builtins.type):
-    DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
+class _ServiceTierEnumTypeWrapper(_enum_type_wrapper._EnumTypeWrapper[_ServiceTier.ValueType], _builtins.type):
+    DESCRIPTOR: _descriptor.EnumDescriptor
     SERVICE_TIER_UNSPECIFIED: _ServiceTier.ValueType  # 0
     """Unspecified service tier."""
     SERVICE_TIER_AUTO: _ServiceTier.ValueType  # 1
@@ -140,14 +145,14 @@ SERVICE_TIER_SCALE: ServiceTier.ValueType  # 4
 """Scale service tier."""
 SERVICE_TIER_PRIORITY: ServiceTier.ValueType  # 5
 """Priority service tier."""
-global___ServiceTier = ServiceTier
+Global___ServiceTier: _TypeAlias = ServiceTier  # noqa: Y015
 
 class _Verbosity:
-    ValueType = typing.NewType("ValueType", builtins.int)
-    V: typing_extensions.TypeAlias = ValueType
+    ValueType = _typing.NewType("ValueType", _builtins.int)
+    V: _TypeAlias = ValueType  # noqa: Y015
 
-class _VerbosityEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_Verbosity.ValueType], builtins.type):
-    DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
+class _VerbosityEnumTypeWrapper(_enum_type_wrapper._EnumTypeWrapper[_Verbosity.ValueType], _builtins.type):
+    DESCRIPTOR: _descriptor.EnumDescriptor
     VERBOSITY_UNSPECIFIED: _Verbosity.ValueType  # 0
     """Unspecified verbosity."""
     VERBOSITY_LOW: _Verbosity.ValueType  # 1
@@ -168,14 +173,14 @@ VERBOSITY_MEDIUM: Verbosity.ValueType  # 2
 """Medium verbosity."""
 VERBOSITY_HIGH: Verbosity.ValueType  # 3
 """High verbosity."""
-global___Verbosity = Verbosity
+Global___Verbosity: _TypeAlias = Verbosity  # noqa: Y015
 
 class _ReasoningEffort:
-    ValueType = typing.NewType("ValueType", builtins.int)
-    V: typing_extensions.TypeAlias = ValueType
+    ValueType = _typing.NewType("ValueType", _builtins.int)
+    V: _TypeAlias = ValueType  # noqa: Y015
 
-class _ReasoningEffortEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_ReasoningEffort.ValueType], builtins.type):
-    DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
+class _ReasoningEffortEnumTypeWrapper(_enum_type_wrapper._EnumTypeWrapper[_ReasoningEffort.ValueType], _builtins.type):
+    DESCRIPTOR: _descriptor.EnumDescriptor
     REASONING_EFFORT_UNSPECIFIED: _ReasoningEffort.ValueType  # 0
     """Unspecified reasoning effort."""
     REASONING_EFFORT_MINIMAL: _ReasoningEffort.ValueType  # 1
@@ -200,14 +205,14 @@ REASONING_EFFORT_MEDIUM: ReasoningEffort.ValueType  # 3
 """Medium reasoning effort."""
 REASONING_EFFORT_HIGH: ReasoningEffort.ValueType  # 4
 """High reasoning effort."""
-global___ReasoningEffort = ReasoningEffort
+Global___ReasoningEffort: _TypeAlias = ReasoningEffort  # noqa: Y015
 
 class _VadMethod:
-    ValueType = typing.NewType("ValueType", builtins.int)
-    V: typing_extensions.TypeAlias = ValueType
+    ValueType = _typing.NewType("ValueType", _builtins.int)
+    V: _TypeAlias = ValueType  # noqa: Y015
 
-class _VadMethodEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_VadMethod.ValueType], builtins.type):
-    DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
+class _VadMethodEnumTypeWrapper(_enum_type_wrapper._EnumTypeWrapper[_VadMethod.ValueType], _builtins.type):
+    DESCRIPTOR: _descriptor.EnumDescriptor
     VAD_METHOD_UNSPECIFIED: _VadMethod.ValueType  # 0
     """No explicit choice. The method is then taken from the legacy
     <code>VoiceActivityDetection.active</code> string, and from Pyannote if that is empty too.
@@ -228,14 +233,14 @@ VAD_METHOD_PYANNOTE: VadMethod.ValueType  # 1
 """Use the Pyannote segmentation model, configured by <code>VoiceActivityDetection.pyannote</code>."""
 VAD_METHOD_SILERO: VadMethod.ValueType  # 2
 """Use the Silero model, configured by <code>VoiceActivityDetection.silero</code>."""
-global___VadMethod = VadMethod
+Global___VadMethod: _TypeAlias = VadMethod  # noqa: Y015
 
 class _TsdMethod:
-    ValueType = typing.NewType("ValueType", builtins.int)
-    V: typing_extensions.TypeAlias = ValueType
+    ValueType = _typing.NewType("ValueType", _builtins.int)
+    V: _TypeAlias = ValueType  # noqa: Y015
 
-class _TsdMethodEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_TsdMethod.ValueType], builtins.type):
-    DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
+class _TsdMethodEnumTypeWrapper(_enum_type_wrapper._EnumTypeWrapper[_TsdMethod.ValueType], _builtins.type):
+    DESCRIPTOR: _descriptor.EnumDescriptor
     TSD_METHOD_UNSPECIFIED: _TsdMethod.ValueType  # 0
     """No explicit choice. TSD then follows the behaviour of older configurations that predate
     this field, which is keyed on the active VAD: Pyannote whenever Pyannote is the VAD, since
@@ -279,10 +284,10 @@ TSD_METHOD_WESPEAKER: TsdMethod.ValueType  # 3
 """Use the dedicated WeSpeaker embedding model, configured by
 <code>VoiceActivityDetection.wespeaker_tsd</code>. Works with any VAD.
 """
-global___TsdMethod = TsdMethod
+Global___TsdMethod: _TypeAlias = TsdMethod  # noqa: Y015
 
-@typing.final
-class TranscribeRequestConfig(google.protobuf.message.Message):
+@_typing.final
+class TranscribeRequestConfig(_message.Message):
     """/////////////////////////
     Configuration Message //
     /////////////////////////
@@ -290,47 +295,47 @@ class TranscribeRequestConfig(google.protobuf.message.Message):
     <p>Configuration for a request to transcribe audio</p>
     """
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    S2T_PIPELINE_ID_FIELD_NUMBER: builtins.int
-    DECODING_FIELD_NUMBER: builtins.int
-    LANGUAGE_MODEL_NAME_FIELD_NUMBER: builtins.int
-    POST_PROCESSING_FIELD_NUMBER: builtins.int
-    UTTERANCE_DETECTION_FIELD_NUMBER: builtins.int
-    PYANNOTE_FIELD_NUMBER: builtins.int
-    RETURN_OPTIONS_FIELD_NUMBER: builtins.int
-    LANGUAGE_FIELD_NUMBER: builtins.int
-    TASK_FIELD_NUMBER: builtins.int
-    S2T_SERVICE_CONFIG_FIELD_NUMBER: builtins.int
-    S2T_CLOUD_PROVIDER_CONFIG_FIELD_NUMBER: builtins.int
-    s2t_pipeline_id: builtins.str
+    S2T_PIPELINE_ID_FIELD_NUMBER: _builtins.int
+    DECODING_FIELD_NUMBER: _builtins.int
+    LANGUAGE_MODEL_NAME_FIELD_NUMBER: _builtins.int
+    POST_PROCESSING_FIELD_NUMBER: _builtins.int
+    UTTERANCE_DETECTION_FIELD_NUMBER: _builtins.int
+    PYANNOTE_FIELD_NUMBER: _builtins.int
+    RETURN_OPTIONS_FIELD_NUMBER: _builtins.int
+    LANGUAGE_FIELD_NUMBER: _builtins.int
+    TASK_FIELD_NUMBER: _builtins.int
+    S2T_SERVICE_CONFIG_FIELD_NUMBER: _builtins.int
+    S2T_CLOUD_PROVIDER_CONFIG_FIELD_NUMBER: _builtins.int
+    s2t_pipeline_id: _builtins.str
     """Required. id of the pipeline (model setup) that will generate audio"""
-    decoding: global___Decoding.ValueType
+    decoding: Global___Decoding.ValueType
     """Optional. decoding type"""
-    language_model_name: builtins.str
+    language_model_name: _builtins.str
     """Name of the language model"""
-    language: builtins.str
+    language: _builtins.str
     """Optional. Specify language of transcription to return"""
-    task: builtins.str
+    task: _builtins.str
     """Optional. Specify task of s2t model, e.g. &apos;transcribe&apos; and &apos;translate&apos;"""
-    @property
-    def post_processing(self) -> global___PostProcessingOptions:
+    @_builtins.property
+    def post_processing(self) -> Global___PostProcessingOptions:
         """The postprocessing options"""
 
-    @property
-    def utterance_detection(self) -> global___UtteranceDetectionOptions:
+    @_builtins.property
+    def utterance_detection(self) -> Global___UtteranceDetectionOptions:
         """The utterance detection options"""
 
-    @property
-    def pyannote(self) -> global___Pyannote:
+    @_builtins.property
+    def pyannote(self) -> Global___Pyannote:
         """Voice activity detection with pyannote"""
 
-    @property
-    def return_options(self) -> global___TranscriptionReturnOptions:
+    @_builtins.property
+    def return_options(self) -> Global___TranscriptionReturnOptions:
         """The transcribe return options"""
 
-    @property
-    def s2t_service_config(self) -> google.protobuf.struct_pb2.Struct:
+    @_builtins.property
+    def s2t_service_config(self) -> _struct_pb2.Struct:
         """Optional. <code>s2t_service_config</code> provides the configuration of the service such as API key, bearer tokens, JWT,
         and other header information as key value pairs, e.g., <pre><code>MY_API_KEY=&apos;LKJDIFe244LKJOI&apos;</code></pre>
         For Amazon S2T service, the following arguments should be passed in form of a dict:
@@ -364,8 +369,8 @@ class TranscribeRequestConfig(google.protobuf.message.Message):
         Note: ondewo-s2t will raise an error if you don&apos;t pass any of the required arguments above.
         """
 
-    @property
-    def s2t_cloud_provider_config(self) -> global___S2tCloudProviderConfig:
+    @_builtins.property
+    def s2t_cloud_provider_config(self) -> Global___S2tCloudProviderConfig:
         """Optional. Defines the cloud provider&apos;s specific configuration for using speech to text cloud services.
         The default value is None.
         """
@@ -373,314 +378,384 @@ class TranscribeRequestConfig(google.protobuf.message.Message):
     def __init__(
         self,
         *,
-        s2t_pipeline_id: builtins.str = ...,
-        decoding: global___Decoding.ValueType = ...,
-        language_model_name: builtins.str = ...,
-        post_processing: global___PostProcessingOptions | None = ...,
-        utterance_detection: global___UtteranceDetectionOptions | None = ...,
-        pyannote: global___Pyannote | None = ...,
-        return_options: global___TranscriptionReturnOptions | None = ...,
-        language: builtins.str | None = ...,
-        task: builtins.str | None = ...,
-        s2t_service_config: google.protobuf.struct_pb2.Struct | None = ...,
-        s2t_cloud_provider_config: global___S2tCloudProviderConfig | None = ...,
+        s2t_pipeline_id: _builtins.str = ...,
+        decoding: Global___Decoding.ValueType = ...,
+        language_model_name: _builtins.str = ...,
+        post_processing: Global___PostProcessingOptions | None = ...,
+        utterance_detection: Global___UtteranceDetectionOptions | None = ...,
+        pyannote: Global___Pyannote | None = ...,
+        return_options: Global___TranscriptionReturnOptions | None = ...,
+        language: _builtins.str | None = ...,
+        task: _builtins.str | None = ...,
+        s2t_service_config: _struct_pb2.Struct | None = ...,
+        s2t_cloud_provider_config: Global___S2tCloudProviderConfig | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["_language", b"_language", "_s2t_cloud_provider_config", b"_s2t_cloud_provider_config", "_s2t_service_config", b"_s2t_service_config", "_task", b"_task", "language", b"language", "language_model_name", b"language_model_name", "oneof_language_model_name", b"oneof_language_model_name", "oneof_post_processing", b"oneof_post_processing", "oneof_return_options", b"oneof_return_options", "oneof_utterance_detection", b"oneof_utterance_detection", "post_processing", b"post_processing", "pyannote", b"pyannote", "return_options", b"return_options", "s2t_cloud_provider_config", b"s2t_cloud_provider_config", "s2t_service_config", b"s2t_service_config", "task", b"task", "utterance_detection", b"utterance_detection", "voice_activity_detection", b"voice_activity_detection"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["_language", b"_language", "_s2t_cloud_provider_config", b"_s2t_cloud_provider_config", "_s2t_service_config", b"_s2t_service_config", "_task", b"_task", "decoding", b"decoding", "language", b"language", "language_model_name", b"language_model_name", "oneof_language_model_name", b"oneof_language_model_name", "oneof_post_processing", b"oneof_post_processing", "oneof_return_options", b"oneof_return_options", "oneof_utterance_detection", b"oneof_utterance_detection", "post_processing", b"post_processing", "pyannote", b"pyannote", "return_options", b"return_options", "s2t_cloud_provider_config", b"s2t_cloud_provider_config", "s2t_pipeline_id", b"s2t_pipeline_id", "s2t_service_config", b"s2t_service_config", "task", b"task", "utterance_detection", b"utterance_detection", "voice_activity_detection", b"voice_activity_detection"]) -> None: ...
-    @typing.overload
-    def WhichOneof(self, oneof_group: typing.Literal["_language", b"_language"]) -> typing.Literal["language"] | None: ...
-    @typing.overload
-    def WhichOneof(self, oneof_group: typing.Literal["_s2t_cloud_provider_config", b"_s2t_cloud_provider_config"]) -> typing.Literal["s2t_cloud_provider_config"] | None: ...
-    @typing.overload
-    def WhichOneof(self, oneof_group: typing.Literal["_s2t_service_config", b"_s2t_service_config"]) -> typing.Literal["s2t_service_config"] | None: ...
-    @typing.overload
-    def WhichOneof(self, oneof_group: typing.Literal["_task", b"_task"]) -> typing.Literal["task"] | None: ...
-    @typing.overload
-    def WhichOneof(self, oneof_group: typing.Literal["oneof_language_model_name", b"oneof_language_model_name"]) -> typing.Literal["language_model_name"] | None: ...
-    @typing.overload
-    def WhichOneof(self, oneof_group: typing.Literal["oneof_post_processing", b"oneof_post_processing"]) -> typing.Literal["post_processing"] | None: ...
-    @typing.overload
-    def WhichOneof(self, oneof_group: typing.Literal["oneof_return_options", b"oneof_return_options"]) -> typing.Literal["return_options"] | None: ...
-    @typing.overload
-    def WhichOneof(self, oneof_group: typing.Literal["oneof_utterance_detection", b"oneof_utterance_detection"]) -> typing.Literal["utterance_detection"] | None: ...
-    @typing.overload
-    def WhichOneof(self, oneof_group: typing.Literal["voice_activity_detection", b"voice_activity_detection"]) -> typing.Literal["pyannote"] | None: ...
+    _HasFieldArgType: _TypeAlias = _typing.Literal["_language", b"_language", "_s2t_cloud_provider_config", b"_s2t_cloud_provider_config", "_s2t_service_config", b"_s2t_service_config", "_task", b"_task", "language", b"language", "language_model_name", b"language_model_name", "oneof_language_model_name", b"oneof_language_model_name", "oneof_post_processing", b"oneof_post_processing", "oneof_return_options", b"oneof_return_options", "oneof_utterance_detection", b"oneof_utterance_detection", "post_processing", b"post_processing", "pyannote", b"pyannote", "return_options", b"return_options", "s2t_cloud_provider_config", b"s2t_cloud_provider_config", "s2t_service_config", b"s2t_service_config", "task", b"task", "utterance_detection", b"utterance_detection", "voice_activity_detection", b"voice_activity_detection"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["_language", b"_language", "_s2t_cloud_provider_config", b"_s2t_cloud_provider_config", "_s2t_service_config", b"_s2t_service_config", "_task", b"_task", "decoding", b"decoding", "language", b"language", "language_model_name", b"language_model_name", "oneof_language_model_name", b"oneof_language_model_name", "oneof_post_processing", b"oneof_post_processing", "oneof_return_options", b"oneof_return_options", "oneof_utterance_detection", b"oneof_utterance_detection", "post_processing", b"post_processing", "pyannote", b"pyannote", "return_options", b"return_options", "s2t_cloud_provider_config", b"s2t_cloud_provider_config", "s2t_pipeline_id", b"s2t_pipeline_id", "s2t_service_config", b"s2t_service_config", "task", b"task", "utterance_detection", b"utterance_detection", "voice_activity_detection", b"voice_activity_detection"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    _WhichOneofReturnType__language: _TypeAlias = _typing.Literal["language"]  # noqa: Y015
+    _WhichOneofArgType__language: _TypeAlias = _typing.Literal["_language", b"_language"]  # noqa: Y015
+    _WhichOneofReturnType__s2t_cloud_provider_config: _TypeAlias = _typing.Literal["s2t_cloud_provider_config"]  # noqa: Y015
+    _WhichOneofArgType__s2t_cloud_provider_config: _TypeAlias = _typing.Literal["_s2t_cloud_provider_config", b"_s2t_cloud_provider_config"]  # noqa: Y015
+    _WhichOneofReturnType__s2t_service_config: _TypeAlias = _typing.Literal["s2t_service_config"]  # noqa: Y015
+    _WhichOneofArgType__s2t_service_config: _TypeAlias = _typing.Literal["_s2t_service_config", b"_s2t_service_config"]  # noqa: Y015
+    _WhichOneofReturnType__task: _TypeAlias = _typing.Literal["task"]  # noqa: Y015
+    _WhichOneofArgType__task: _TypeAlias = _typing.Literal["_task", b"_task"]  # noqa: Y015
+    _WhichOneofReturnType_oneof_language_model_name: _TypeAlias = _typing.Literal["language_model_name"]  # noqa: Y015
+    _WhichOneofArgType_oneof_language_model_name: _TypeAlias = _typing.Literal["oneof_language_model_name", b"oneof_language_model_name"]  # noqa: Y015
+    _WhichOneofReturnType_oneof_post_processing: _TypeAlias = _typing.Literal["post_processing"]  # noqa: Y015
+    _WhichOneofArgType_oneof_post_processing: _TypeAlias = _typing.Literal["oneof_post_processing", b"oneof_post_processing"]  # noqa: Y015
+    _WhichOneofReturnType_oneof_return_options: _TypeAlias = _typing.Literal["return_options"]  # noqa: Y015
+    _WhichOneofArgType_oneof_return_options: _TypeAlias = _typing.Literal["oneof_return_options", b"oneof_return_options"]  # noqa: Y015
+    _WhichOneofReturnType_oneof_utterance_detection: _TypeAlias = _typing.Literal["utterance_detection"]  # noqa: Y015
+    _WhichOneofArgType_oneof_utterance_detection: _TypeAlias = _typing.Literal["oneof_utterance_detection", b"oneof_utterance_detection"]  # noqa: Y015
+    _WhichOneofReturnType_voice_activity_detection: _TypeAlias = _typing.Literal["pyannote"]  # noqa: Y015
+    _WhichOneofArgType_voice_activity_detection: _TypeAlias = _typing.Literal["voice_activity_detection", b"voice_activity_detection"]  # noqa: Y015
+    @_typing.overload
+    def WhichOneof(self, oneof_group: _WhichOneofArgType__language) -> _WhichOneofReturnType__language | None: ...
+    @_typing.overload
+    def WhichOneof(self, oneof_group: _WhichOneofArgType__s2t_cloud_provider_config) -> _WhichOneofReturnType__s2t_cloud_provider_config | None: ...
+    @_typing.overload
+    def WhichOneof(self, oneof_group: _WhichOneofArgType__s2t_service_config) -> _WhichOneofReturnType__s2t_service_config | None: ...
+    @_typing.overload
+    def WhichOneof(self, oneof_group: _WhichOneofArgType__task) -> _WhichOneofReturnType__task | None: ...
+    @_typing.overload
+    def WhichOneof(self, oneof_group: _WhichOneofArgType_oneof_language_model_name) -> _WhichOneofReturnType_oneof_language_model_name | None: ...
+    @_typing.overload
+    def WhichOneof(self, oneof_group: _WhichOneofArgType_oneof_post_processing) -> _WhichOneofReturnType_oneof_post_processing | None: ...
+    @_typing.overload
+    def WhichOneof(self, oneof_group: _WhichOneofArgType_oneof_return_options) -> _WhichOneofReturnType_oneof_return_options | None: ...
+    @_typing.overload
+    def WhichOneof(self, oneof_group: _WhichOneofArgType_oneof_utterance_detection) -> _WhichOneofReturnType_oneof_utterance_detection | None: ...
+    @_typing.overload
+    def WhichOneof(self, oneof_group: _WhichOneofArgType_voice_activity_detection) -> _WhichOneofReturnType_voice_activity_detection | None: ...
 
-global___TranscribeRequestConfig = TranscribeRequestConfig
+Global___TranscribeRequestConfig: _TypeAlias = TranscribeRequestConfig  # noqa: Y015
 
-@typing.final
-class S2tCloudProviderConfig(google.protobuf.message.Message):
+@_typing.final
+class S2tCloudProviderConfig(_message.Message):
     """<p>Configuration for cloud provider settings for Speech-to-Text (S2T).</p>"""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    S2T_CLOUD_PROVIDER_CONFIG_AMAZON_FIELD_NUMBER: builtins.int
-    S2T_CLOUD_PROVIDER_CONFIG_DEEPGRAM_FIELD_NUMBER: builtins.int
-    S2T_CLOUD_PROVIDER_CONFIG_GOOGLE_FIELD_NUMBER: builtins.int
-    S2T_CLOUD_PROVIDER_CONFIG_MICROSOFT_FIELD_NUMBER: builtins.int
-    @property
-    def s2t_cloud_provider_config_amazon(self) -> global___S2tCloudProviderConfigAmazon:
+    S2T_CLOUD_PROVIDER_CONFIG_AMAZON_FIELD_NUMBER: _builtins.int
+    S2T_CLOUD_PROVIDER_CONFIG_DEEPGRAM_FIELD_NUMBER: _builtins.int
+    S2T_CLOUD_PROVIDER_CONFIG_GOOGLE_FIELD_NUMBER: _builtins.int
+    S2T_CLOUD_PROVIDER_CONFIG_MICROSOFT_FIELD_NUMBER: _builtins.int
+    @_builtins.property
+    def s2t_cloud_provider_config_amazon(self) -> Global___S2tCloudProviderConfigAmazon:
         """Optional. Configuration for Amazon web service speech-to-text provider."""
 
-    @property
-    def s2t_cloud_provider_config_deepgram(self) -> global___S2tCloudProviderConfigDeepgram:
+    @_builtins.property
+    def s2t_cloud_provider_config_deepgram(self) -> Global___S2tCloudProviderConfigDeepgram:
         """Optional. Configuration for DeepGram speech-to-text provider."""
 
-    @property
-    def s2t_cloud_provider_config_google(self) -> global___S2tCloudProviderConfigGoogle:
+    @_builtins.property
+    def s2t_cloud_provider_config_google(self) -> Global___S2tCloudProviderConfigGoogle:
         """Optional. Configuration for Google speech-to-text provider."""
 
-    @property
-    def s2t_cloud_provider_config_microsoft(self) -> global___S2tCloudProviderConfigMicrosoft:
+    @_builtins.property
+    def s2t_cloud_provider_config_microsoft(self) -> Global___S2tCloudProviderConfigMicrosoft:
         """Optional. Configuration for Microsoft Azure speech-to-text provider."""
 
     def __init__(
         self,
         *,
-        s2t_cloud_provider_config_amazon: global___S2tCloudProviderConfigAmazon | None = ...,
-        s2t_cloud_provider_config_deepgram: global___S2tCloudProviderConfigDeepgram | None = ...,
-        s2t_cloud_provider_config_google: global___S2tCloudProviderConfigGoogle | None = ...,
-        s2t_cloud_provider_config_microsoft: global___S2tCloudProviderConfigMicrosoft | None = ...,
+        s2t_cloud_provider_config_amazon: Global___S2tCloudProviderConfigAmazon | None = ...,
+        s2t_cloud_provider_config_deepgram: Global___S2tCloudProviderConfigDeepgram | None = ...,
+        s2t_cloud_provider_config_google: Global___S2tCloudProviderConfigGoogle | None = ...,
+        s2t_cloud_provider_config_microsoft: Global___S2tCloudProviderConfigMicrosoft | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["_s2t_cloud_provider_config_amazon", b"_s2t_cloud_provider_config_amazon", "_s2t_cloud_provider_config_deepgram", b"_s2t_cloud_provider_config_deepgram", "_s2t_cloud_provider_config_google", b"_s2t_cloud_provider_config_google", "_s2t_cloud_provider_config_microsoft", b"_s2t_cloud_provider_config_microsoft", "s2t_cloud_provider_config_amazon", b"s2t_cloud_provider_config_amazon", "s2t_cloud_provider_config_deepgram", b"s2t_cloud_provider_config_deepgram", "s2t_cloud_provider_config_google", b"s2t_cloud_provider_config_google", "s2t_cloud_provider_config_microsoft", b"s2t_cloud_provider_config_microsoft"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["_s2t_cloud_provider_config_amazon", b"_s2t_cloud_provider_config_amazon", "_s2t_cloud_provider_config_deepgram", b"_s2t_cloud_provider_config_deepgram", "_s2t_cloud_provider_config_google", b"_s2t_cloud_provider_config_google", "_s2t_cloud_provider_config_microsoft", b"_s2t_cloud_provider_config_microsoft", "s2t_cloud_provider_config_amazon", b"s2t_cloud_provider_config_amazon", "s2t_cloud_provider_config_deepgram", b"s2t_cloud_provider_config_deepgram", "s2t_cloud_provider_config_google", b"s2t_cloud_provider_config_google", "s2t_cloud_provider_config_microsoft", b"s2t_cloud_provider_config_microsoft"]) -> None: ...
-    @typing.overload
-    def WhichOneof(self, oneof_group: typing.Literal["_s2t_cloud_provider_config_amazon", b"_s2t_cloud_provider_config_amazon"]) -> typing.Literal["s2t_cloud_provider_config_amazon"] | None: ...
-    @typing.overload
-    def WhichOneof(self, oneof_group: typing.Literal["_s2t_cloud_provider_config_deepgram", b"_s2t_cloud_provider_config_deepgram"]) -> typing.Literal["s2t_cloud_provider_config_deepgram"] | None: ...
-    @typing.overload
-    def WhichOneof(self, oneof_group: typing.Literal["_s2t_cloud_provider_config_google", b"_s2t_cloud_provider_config_google"]) -> typing.Literal["s2t_cloud_provider_config_google"] | None: ...
-    @typing.overload
-    def WhichOneof(self, oneof_group: typing.Literal["_s2t_cloud_provider_config_microsoft", b"_s2t_cloud_provider_config_microsoft"]) -> typing.Literal["s2t_cloud_provider_config_microsoft"] | None: ...
+    _HasFieldArgType: _TypeAlias = _typing.Literal["_s2t_cloud_provider_config_amazon", b"_s2t_cloud_provider_config_amazon", "_s2t_cloud_provider_config_deepgram", b"_s2t_cloud_provider_config_deepgram", "_s2t_cloud_provider_config_google", b"_s2t_cloud_provider_config_google", "_s2t_cloud_provider_config_microsoft", b"_s2t_cloud_provider_config_microsoft", "s2t_cloud_provider_config_amazon", b"s2t_cloud_provider_config_amazon", "s2t_cloud_provider_config_deepgram", b"s2t_cloud_provider_config_deepgram", "s2t_cloud_provider_config_google", b"s2t_cloud_provider_config_google", "s2t_cloud_provider_config_microsoft", b"s2t_cloud_provider_config_microsoft"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["_s2t_cloud_provider_config_amazon", b"_s2t_cloud_provider_config_amazon", "_s2t_cloud_provider_config_deepgram", b"_s2t_cloud_provider_config_deepgram", "_s2t_cloud_provider_config_google", b"_s2t_cloud_provider_config_google", "_s2t_cloud_provider_config_microsoft", b"_s2t_cloud_provider_config_microsoft", "s2t_cloud_provider_config_amazon", b"s2t_cloud_provider_config_amazon", "s2t_cloud_provider_config_deepgram", b"s2t_cloud_provider_config_deepgram", "s2t_cloud_provider_config_google", b"s2t_cloud_provider_config_google", "s2t_cloud_provider_config_microsoft", b"s2t_cloud_provider_config_microsoft"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    _WhichOneofReturnType__s2t_cloud_provider_config_amazon: _TypeAlias = _typing.Literal["s2t_cloud_provider_config_amazon"]  # noqa: Y015
+    _WhichOneofArgType__s2t_cloud_provider_config_amazon: _TypeAlias = _typing.Literal["_s2t_cloud_provider_config_amazon", b"_s2t_cloud_provider_config_amazon"]  # noqa: Y015
+    _WhichOneofReturnType__s2t_cloud_provider_config_deepgram: _TypeAlias = _typing.Literal["s2t_cloud_provider_config_deepgram"]  # noqa: Y015
+    _WhichOneofArgType__s2t_cloud_provider_config_deepgram: _TypeAlias = _typing.Literal["_s2t_cloud_provider_config_deepgram", b"_s2t_cloud_provider_config_deepgram"]  # noqa: Y015
+    _WhichOneofReturnType__s2t_cloud_provider_config_google: _TypeAlias = _typing.Literal["s2t_cloud_provider_config_google"]  # noqa: Y015
+    _WhichOneofArgType__s2t_cloud_provider_config_google: _TypeAlias = _typing.Literal["_s2t_cloud_provider_config_google", b"_s2t_cloud_provider_config_google"]  # noqa: Y015
+    _WhichOneofReturnType__s2t_cloud_provider_config_microsoft: _TypeAlias = _typing.Literal["s2t_cloud_provider_config_microsoft"]  # noqa: Y015
+    _WhichOneofArgType__s2t_cloud_provider_config_microsoft: _TypeAlias = _typing.Literal["_s2t_cloud_provider_config_microsoft", b"_s2t_cloud_provider_config_microsoft"]  # noqa: Y015
+    @_typing.overload
+    def WhichOneof(self, oneof_group: _WhichOneofArgType__s2t_cloud_provider_config_amazon) -> _WhichOneofReturnType__s2t_cloud_provider_config_amazon | None: ...
+    @_typing.overload
+    def WhichOneof(self, oneof_group: _WhichOneofArgType__s2t_cloud_provider_config_deepgram) -> _WhichOneofReturnType__s2t_cloud_provider_config_deepgram | None: ...
+    @_typing.overload
+    def WhichOneof(self, oneof_group: _WhichOneofArgType__s2t_cloud_provider_config_google) -> _WhichOneofReturnType__s2t_cloud_provider_config_google | None: ...
+    @_typing.overload
+    def WhichOneof(self, oneof_group: _WhichOneofArgType__s2t_cloud_provider_config_microsoft) -> _WhichOneofReturnType__s2t_cloud_provider_config_microsoft | None: ...
 
-global___S2tCloudProviderConfig = S2tCloudProviderConfig
+Global___S2tCloudProviderConfig: _TypeAlias = S2tCloudProviderConfig  # noqa: Y015
 
-@typing.final
-class S2tCloudProviderConfigAmazon(google.protobuf.message.Message):
+@_typing.final
+class S2tCloudProviderConfigAmazon(_message.Message):
     """<p>Configuration details specific to the Amazon web service speech-to-text provider.</p>"""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    ENABLE_PARTIAL_RESULTS_STABILIZATION_FIELD_NUMBER: builtins.int
-    PARTIAL_RESULTS_STABILITY_FIELD_NUMBER: builtins.int
-    LANGUAGE_MODEL_NAME_FIELD_NUMBER: builtins.int
-    VOCABULARY_NAME_FIELD_NUMBER: builtins.int
-    enable_partial_results_stabilization: builtins.bool
+    ENABLE_PARTIAL_RESULTS_STABILIZATION_FIELD_NUMBER: _builtins.int
+    PARTIAL_RESULTS_STABILITY_FIELD_NUMBER: _builtins.int
+    LANGUAGE_MODEL_NAME_FIELD_NUMBER: _builtins.int
+    VOCABULARY_NAME_FIELD_NUMBER: _builtins.int
+    enable_partial_results_stabilization: _builtins.bool
     """Optional. Enables or disables <code>partial_results_stabilization</code> feature. More details at:
     <a href="https://docs.aws.amazon.com/transcribe/latest/dg/streaming-partial-results.html#streaming-partial-result-stabilization">https://docs.aws.amazon.com/transcribe/latest/dg/streaming-partial-results.html#streaming-partial-result-stabilization</a>
     """
-    partial_results_stability: builtins.str
+    partial_results_stability: _builtins.str
     """Optional. You can use this field to set the stability level of the transcription results.
     A higher stability level means that the transcription results are less likely to change.
     Higher stability levels can come with lower overall transcription accuracy.
     Acceptable values: [&quot;low&quot;, &quot;medium&quot;, &quot;high&quot;]. Defaults to &quot;high&quot; if not set explicitly. More details at:
     <a href="https://aws.amazon.com/blogs/machine-learning/amazon-transcribe-now-supports-partial-results-stabilization-for-streaming-audio/">https://aws.amazon.com/blogs/machine-learning/amazon-transcribe-now-supports-partial-results-stabilization-for-streaming-audio/</a>
     """
-    language_model_name: builtins.str
+    language_model_name: _builtins.str
     """Optional. The name of your customize language model you want to use.
     More details at: <a href="https://docs.aws.amazon.com/transcribe/latest/dg/custom-language-models.html">https://docs.aws.amazon.com/transcribe/latest/dg/custom-language-models.html</a>
     """
-    vocabulary_name: builtins.str
+    vocabulary_name: _builtins.str
     """Optional. The name of your customize vocabulary you want to use.
     More details at: <a href="https://docs.aws.amazon.com/transcribe/latest/dg/custom-vocabulary.html">https://docs.aws.amazon.com/transcribe/latest/dg/custom-vocabulary.html</a>
     """
     def __init__(
         self,
         *,
-        enable_partial_results_stabilization: builtins.bool | None = ...,
-        partial_results_stability: builtins.str | None = ...,
-        language_model_name: builtins.str | None = ...,
-        vocabulary_name: builtins.str | None = ...,
+        enable_partial_results_stabilization: _builtins.bool | None = ...,
+        partial_results_stability: _builtins.str | None = ...,
+        language_model_name: _builtins.str | None = ...,
+        vocabulary_name: _builtins.str | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["_enable_partial_results_stabilization", b"_enable_partial_results_stabilization", "_language_model_name", b"_language_model_name", "_partial_results_stability", b"_partial_results_stability", "_vocabulary_name", b"_vocabulary_name", "enable_partial_results_stabilization", b"enable_partial_results_stabilization", "language_model_name", b"language_model_name", "partial_results_stability", b"partial_results_stability", "vocabulary_name", b"vocabulary_name"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["_enable_partial_results_stabilization", b"_enable_partial_results_stabilization", "_language_model_name", b"_language_model_name", "_partial_results_stability", b"_partial_results_stability", "_vocabulary_name", b"_vocabulary_name", "enable_partial_results_stabilization", b"enable_partial_results_stabilization", "language_model_name", b"language_model_name", "partial_results_stability", b"partial_results_stability", "vocabulary_name", b"vocabulary_name"]) -> None: ...
-    @typing.overload
-    def WhichOneof(self, oneof_group: typing.Literal["_enable_partial_results_stabilization", b"_enable_partial_results_stabilization"]) -> typing.Literal["enable_partial_results_stabilization"] | None: ...
-    @typing.overload
-    def WhichOneof(self, oneof_group: typing.Literal["_language_model_name", b"_language_model_name"]) -> typing.Literal["language_model_name"] | None: ...
-    @typing.overload
-    def WhichOneof(self, oneof_group: typing.Literal["_partial_results_stability", b"_partial_results_stability"]) -> typing.Literal["partial_results_stability"] | None: ...
-    @typing.overload
-    def WhichOneof(self, oneof_group: typing.Literal["_vocabulary_name", b"_vocabulary_name"]) -> typing.Literal["vocabulary_name"] | None: ...
+    _HasFieldArgType: _TypeAlias = _typing.Literal["_enable_partial_results_stabilization", b"_enable_partial_results_stabilization", "_language_model_name", b"_language_model_name", "_partial_results_stability", b"_partial_results_stability", "_vocabulary_name", b"_vocabulary_name", "enable_partial_results_stabilization", b"enable_partial_results_stabilization", "language_model_name", b"language_model_name", "partial_results_stability", b"partial_results_stability", "vocabulary_name", b"vocabulary_name"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["_enable_partial_results_stabilization", b"_enable_partial_results_stabilization", "_language_model_name", b"_language_model_name", "_partial_results_stability", b"_partial_results_stability", "_vocabulary_name", b"_vocabulary_name", "enable_partial_results_stabilization", b"enable_partial_results_stabilization", "language_model_name", b"language_model_name", "partial_results_stability", b"partial_results_stability", "vocabulary_name", b"vocabulary_name"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    _WhichOneofReturnType__enable_partial_results_stabilization: _TypeAlias = _typing.Literal["enable_partial_results_stabilization"]  # noqa: Y015
+    _WhichOneofArgType__enable_partial_results_stabilization: _TypeAlias = _typing.Literal["_enable_partial_results_stabilization", b"_enable_partial_results_stabilization"]  # noqa: Y015
+    _WhichOneofReturnType__language_model_name: _TypeAlias = _typing.Literal["language_model_name"]  # noqa: Y015
+    _WhichOneofArgType__language_model_name: _TypeAlias = _typing.Literal["_language_model_name", b"_language_model_name"]  # noqa: Y015
+    _WhichOneofReturnType__partial_results_stability: _TypeAlias = _typing.Literal["partial_results_stability"]  # noqa: Y015
+    _WhichOneofArgType__partial_results_stability: _TypeAlias = _typing.Literal["_partial_results_stability", b"_partial_results_stability"]  # noqa: Y015
+    _WhichOneofReturnType__vocabulary_name: _TypeAlias = _typing.Literal["vocabulary_name"]  # noqa: Y015
+    _WhichOneofArgType__vocabulary_name: _TypeAlias = _typing.Literal["_vocabulary_name", b"_vocabulary_name"]  # noqa: Y015
+    @_typing.overload
+    def WhichOneof(self, oneof_group: _WhichOneofArgType__enable_partial_results_stabilization) -> _WhichOneofReturnType__enable_partial_results_stabilization | None: ...
+    @_typing.overload
+    def WhichOneof(self, oneof_group: _WhichOneofArgType__language_model_name) -> _WhichOneofReturnType__language_model_name | None: ...
+    @_typing.overload
+    def WhichOneof(self, oneof_group: _WhichOneofArgType__partial_results_stability) -> _WhichOneofReturnType__partial_results_stability | None: ...
+    @_typing.overload
+    def WhichOneof(self, oneof_group: _WhichOneofArgType__vocabulary_name) -> _WhichOneofReturnType__vocabulary_name | None: ...
 
-global___S2tCloudProviderConfigAmazon = S2tCloudProviderConfigAmazon
+Global___S2tCloudProviderConfigAmazon: _TypeAlias = S2tCloudProviderConfigAmazon  # noqa: Y015
 
-@typing.final
-class S2tCloudProviderConfigDeepgram(google.protobuf.message.Message):
+@_typing.final
+class S2tCloudProviderConfigDeepgram(_message.Message):
     """<p>Configuration details specific to the Deepgram speech-to-text provider.</p>"""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    PUNCTUATE_FIELD_NUMBER: builtins.int
-    SMART_FORMAT_FIELD_NUMBER: builtins.int
-    NUMERALS_FIELD_NUMBER: builtins.int
-    MEASUREMENTS_FIELD_NUMBER: builtins.int
-    DICTATION_FIELD_NUMBER: builtins.int
-    punctuate: builtins.bool
+    PUNCTUATE_FIELD_NUMBER: _builtins.int
+    SMART_FORMAT_FIELD_NUMBER: _builtins.int
+    NUMERALS_FIELD_NUMBER: _builtins.int
+    MEASUREMENTS_FIELD_NUMBER: _builtins.int
+    DICTATION_FIELD_NUMBER: _builtins.int
+    punctuate: _builtins.bool
     """Optional. Enables or disables <code>punctuate</code> feature of Deepgram to add punctuations to the resulted transcript.
     More details at: <a href="https://developers.deepgram.com/docs/punctuation">https://developers.deepgram.com/docs/punctuation</a>
     """
-    smart_format: builtins.bool
+    smart_format: _builtins.bool
     """Optional. Enables or disables <code>smart_format</code> feature of Deepgram transcription result to improve readability.
     More details at: <a href="https://developers.deepgram.com/docs/smart-format">https://developers.deepgram.com/docs/smart-format</a>
     """
-    numerals: builtins.bool
+    numerals: _builtins.bool
     """Optional. Enables or disables <code>numerals</code> feature of Deepgram to convert numbers to numeric form in the resulted
     transcript. More details at: <a href="https://developers.deepgram.com/docs/numerals">https://developers.deepgram.com/docs/numerals</a>
     """
-    measurements: builtins.bool
+    measurements: _builtins.bool
     """Optional. Enables or disables <code>measurements</code> feature of Deepgram to convert measurement units (i.e. Kilogram)
     to abbreviated form (i.e. Kg) in the resulted transcript.
     More details at: <a href="https://developers.deepgram.com/docs/measurements">https://developers.deepgram.com/docs/measurements</a>
     """
-    dictation: builtins.bool
+    dictation: _builtins.bool
     """Optional. Enables or disables <code>dictation</code> feature of Deepgram to convert spoken dictation commands into their
     corresponding punctuation marks. More details at: <a href="https://developers.deepgram.com/docs/dictation">https://developers.deepgram.com/docs/dictation</a>
     """
     def __init__(
         self,
         *,
-        punctuate: builtins.bool | None = ...,
-        smart_format: builtins.bool | None = ...,
-        numerals: builtins.bool | None = ...,
-        measurements: builtins.bool | None = ...,
-        dictation: builtins.bool | None = ...,
+        punctuate: _builtins.bool | None = ...,
+        smart_format: _builtins.bool | None = ...,
+        numerals: _builtins.bool | None = ...,
+        measurements: _builtins.bool | None = ...,
+        dictation: _builtins.bool | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["_dictation", b"_dictation", "_measurements", b"_measurements", "_numerals", b"_numerals", "_punctuate", b"_punctuate", "_smart_format", b"_smart_format", "dictation", b"dictation", "measurements", b"measurements", "numerals", b"numerals", "punctuate", b"punctuate", "smart_format", b"smart_format"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["_dictation", b"_dictation", "_measurements", b"_measurements", "_numerals", b"_numerals", "_punctuate", b"_punctuate", "_smart_format", b"_smart_format", "dictation", b"dictation", "measurements", b"measurements", "numerals", b"numerals", "punctuate", b"punctuate", "smart_format", b"smart_format"]) -> None: ...
-    @typing.overload
-    def WhichOneof(self, oneof_group: typing.Literal["_dictation", b"_dictation"]) -> typing.Literal["dictation"] | None: ...
-    @typing.overload
-    def WhichOneof(self, oneof_group: typing.Literal["_measurements", b"_measurements"]) -> typing.Literal["measurements"] | None: ...
-    @typing.overload
-    def WhichOneof(self, oneof_group: typing.Literal["_numerals", b"_numerals"]) -> typing.Literal["numerals"] | None: ...
-    @typing.overload
-    def WhichOneof(self, oneof_group: typing.Literal["_punctuate", b"_punctuate"]) -> typing.Literal["punctuate"] | None: ...
-    @typing.overload
-    def WhichOneof(self, oneof_group: typing.Literal["_smart_format", b"_smart_format"]) -> typing.Literal["smart_format"] | None: ...
+    _HasFieldArgType: _TypeAlias = _typing.Literal["_dictation", b"_dictation", "_measurements", b"_measurements", "_numerals", b"_numerals", "_punctuate", b"_punctuate", "_smart_format", b"_smart_format", "dictation", b"dictation", "measurements", b"measurements", "numerals", b"numerals", "punctuate", b"punctuate", "smart_format", b"smart_format"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["_dictation", b"_dictation", "_measurements", b"_measurements", "_numerals", b"_numerals", "_punctuate", b"_punctuate", "_smart_format", b"_smart_format", "dictation", b"dictation", "measurements", b"measurements", "numerals", b"numerals", "punctuate", b"punctuate", "smart_format", b"smart_format"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    _WhichOneofReturnType__dictation: _TypeAlias = _typing.Literal["dictation"]  # noqa: Y015
+    _WhichOneofArgType__dictation: _TypeAlias = _typing.Literal["_dictation", b"_dictation"]  # noqa: Y015
+    _WhichOneofReturnType__measurements: _TypeAlias = _typing.Literal["measurements"]  # noqa: Y015
+    _WhichOneofArgType__measurements: _TypeAlias = _typing.Literal["_measurements", b"_measurements"]  # noqa: Y015
+    _WhichOneofReturnType__numerals: _TypeAlias = _typing.Literal["numerals"]  # noqa: Y015
+    _WhichOneofArgType__numerals: _TypeAlias = _typing.Literal["_numerals", b"_numerals"]  # noqa: Y015
+    _WhichOneofReturnType__punctuate: _TypeAlias = _typing.Literal["punctuate"]  # noqa: Y015
+    _WhichOneofArgType__punctuate: _TypeAlias = _typing.Literal["_punctuate", b"_punctuate"]  # noqa: Y015
+    _WhichOneofReturnType__smart_format: _TypeAlias = _typing.Literal["smart_format"]  # noqa: Y015
+    _WhichOneofArgType__smart_format: _TypeAlias = _typing.Literal["_smart_format", b"_smart_format"]  # noqa: Y015
+    @_typing.overload
+    def WhichOneof(self, oneof_group: _WhichOneofArgType__dictation) -> _WhichOneofReturnType__dictation | None: ...
+    @_typing.overload
+    def WhichOneof(self, oneof_group: _WhichOneofArgType__measurements) -> _WhichOneofReturnType__measurements | None: ...
+    @_typing.overload
+    def WhichOneof(self, oneof_group: _WhichOneofArgType__numerals) -> _WhichOneofReturnType__numerals | None: ...
+    @_typing.overload
+    def WhichOneof(self, oneof_group: _WhichOneofArgType__punctuate) -> _WhichOneofReturnType__punctuate | None: ...
+    @_typing.overload
+    def WhichOneof(self, oneof_group: _WhichOneofArgType__smart_format) -> _WhichOneofReturnType__smart_format | None: ...
 
-global___S2tCloudProviderConfigDeepgram = S2tCloudProviderConfigDeepgram
+Global___S2tCloudProviderConfigDeepgram: _TypeAlias = S2tCloudProviderConfigDeepgram  # noqa: Y015
 
-@typing.final
-class S2tCloudProviderConfigGoogle(google.protobuf.message.Message):
+@_typing.final
+class S2tCloudProviderConfigGoogle(_message.Message):
     """<p>Configuration details specific to the Google speech-to-text provider.</p>"""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    ENABLE_AUTOMATIC_PUNCTUATION_FIELD_NUMBER: builtins.int
-    ENABLE_WORD_TIME_OFFSETS_FIELD_NUMBER: builtins.int
-    ENABLE_WORD_CONFIDENCE_FIELD_NUMBER: builtins.int
-    TRANSCRIPT_NORMALIZATION_FIELD_NUMBER: builtins.int
-    MAX_ALTERNATIVES_FIELD_NUMBER: builtins.int
-    enable_automatic_punctuation: builtins.bool
+    ENABLE_AUTOMATIC_PUNCTUATION_FIELD_NUMBER: _builtins.int
+    ENABLE_WORD_TIME_OFFSETS_FIELD_NUMBER: _builtins.int
+    ENABLE_WORD_CONFIDENCE_FIELD_NUMBER: _builtins.int
+    TRANSCRIPT_NORMALIZATION_FIELD_NUMBER: _builtins.int
+    MAX_ALTERNATIVES_FIELD_NUMBER: _builtins.int
+    enable_automatic_punctuation: _builtins.bool
     """Optional. Enables or disables <code>automatic_punctuation</code> feature of Google s2t to add punctuations to the resulted
     transcript. More details at: <a href="https://cloud.google.com/speech-to-text/docs/automatic-punctuation">https://cloud.google.com/speech-to-text/docs/automatic-punctuation</a>
     """
-    enable_word_time_offsets: builtins.bool
+    enable_word_time_offsets: _builtins.bool
     """Optional. Enables or disables <code>word_time_offsets</code> feature of Google s2t to add word-level timestamps (time-offset)
     to the resulted transcript. More details at: <a href="https://cloud.google.com/speech-to-text/docs/async-time-offsets">https://cloud.google.com/speech-to-text/docs/async-time-offsets</a>
     """
-    enable_word_confidence: builtins.bool
+    enable_word_confidence: _builtins.bool
     """Optional. Enables or disables <code>word_confidence</code> feature of Google s2t to add word-level confidence scores
     to the resulted transcript. More details at: <a href="https://cloud.google.com/speech-to-text/docs/word-confidence">https://cloud.google.com/speech-to-text/docs/word-confidence</a>
     """
-    transcript_normalization: builtins.bool
+    transcript_normalization: _builtins.bool
     """Optional. Enables or disables <code>transcript_normalization</code> feature of Google s2t to automatically
     replace parts of the transcript with phrases of your choosing. More details at:
     <a href="https://cloud.google.com/speech-to-text/v2/docs/reference/rpc/google.cloud.speech.v2#transcriptnormalization">https://cloud.google.com/speech-to-text/v2/docs/reference/rpc/google.cloud.speech.v2#transcriptnormalization</a>
     """
-    max_alternatives: builtins.int
+    max_alternatives: _builtins.int
     """Optional. Maximum number of recognition hypotheses to be returned, may be returned fewer than <code>max_alternatives</code>.
     Valid values are 0-30. A value of 0 or 1 will return a maximum of one. If omitted, will return a maximum of one.
     """
     def __init__(
         self,
         *,
-        enable_automatic_punctuation: builtins.bool | None = ...,
-        enable_word_time_offsets: builtins.bool | None = ...,
-        enable_word_confidence: builtins.bool | None = ...,
-        transcript_normalization: builtins.bool | None = ...,
-        max_alternatives: builtins.int | None = ...,
+        enable_automatic_punctuation: _builtins.bool | None = ...,
+        enable_word_time_offsets: _builtins.bool | None = ...,
+        enable_word_confidence: _builtins.bool | None = ...,
+        transcript_normalization: _builtins.bool | None = ...,
+        max_alternatives: _builtins.int | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["_enable_automatic_punctuation", b"_enable_automatic_punctuation", "_enable_word_confidence", b"_enable_word_confidence", "_enable_word_time_offsets", b"_enable_word_time_offsets", "_max_alternatives", b"_max_alternatives", "_transcript_normalization", b"_transcript_normalization", "enable_automatic_punctuation", b"enable_automatic_punctuation", "enable_word_confidence", b"enable_word_confidence", "enable_word_time_offsets", b"enable_word_time_offsets", "max_alternatives", b"max_alternatives", "transcript_normalization", b"transcript_normalization"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["_enable_automatic_punctuation", b"_enable_automatic_punctuation", "_enable_word_confidence", b"_enable_word_confidence", "_enable_word_time_offsets", b"_enable_word_time_offsets", "_max_alternatives", b"_max_alternatives", "_transcript_normalization", b"_transcript_normalization", "enable_automatic_punctuation", b"enable_automatic_punctuation", "enable_word_confidence", b"enable_word_confidence", "enable_word_time_offsets", b"enable_word_time_offsets", "max_alternatives", b"max_alternatives", "transcript_normalization", b"transcript_normalization"]) -> None: ...
-    @typing.overload
-    def WhichOneof(self, oneof_group: typing.Literal["_enable_automatic_punctuation", b"_enable_automatic_punctuation"]) -> typing.Literal["enable_automatic_punctuation"] | None: ...
-    @typing.overload
-    def WhichOneof(self, oneof_group: typing.Literal["_enable_word_confidence", b"_enable_word_confidence"]) -> typing.Literal["enable_word_confidence"] | None: ...
-    @typing.overload
-    def WhichOneof(self, oneof_group: typing.Literal["_enable_word_time_offsets", b"_enable_word_time_offsets"]) -> typing.Literal["enable_word_time_offsets"] | None: ...
-    @typing.overload
-    def WhichOneof(self, oneof_group: typing.Literal["_max_alternatives", b"_max_alternatives"]) -> typing.Literal["max_alternatives"] | None: ...
-    @typing.overload
-    def WhichOneof(self, oneof_group: typing.Literal["_transcript_normalization", b"_transcript_normalization"]) -> typing.Literal["transcript_normalization"] | None: ...
+    _HasFieldArgType: _TypeAlias = _typing.Literal["_enable_automatic_punctuation", b"_enable_automatic_punctuation", "_enable_word_confidence", b"_enable_word_confidence", "_enable_word_time_offsets", b"_enable_word_time_offsets", "_max_alternatives", b"_max_alternatives", "_transcript_normalization", b"_transcript_normalization", "enable_automatic_punctuation", b"enable_automatic_punctuation", "enable_word_confidence", b"enable_word_confidence", "enable_word_time_offsets", b"enable_word_time_offsets", "max_alternatives", b"max_alternatives", "transcript_normalization", b"transcript_normalization"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["_enable_automatic_punctuation", b"_enable_automatic_punctuation", "_enable_word_confidence", b"_enable_word_confidence", "_enable_word_time_offsets", b"_enable_word_time_offsets", "_max_alternatives", b"_max_alternatives", "_transcript_normalization", b"_transcript_normalization", "enable_automatic_punctuation", b"enable_automatic_punctuation", "enable_word_confidence", b"enable_word_confidence", "enable_word_time_offsets", b"enable_word_time_offsets", "max_alternatives", b"max_alternatives", "transcript_normalization", b"transcript_normalization"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    _WhichOneofReturnType__enable_automatic_punctuation: _TypeAlias = _typing.Literal["enable_automatic_punctuation"]  # noqa: Y015
+    _WhichOneofArgType__enable_automatic_punctuation: _TypeAlias = _typing.Literal["_enable_automatic_punctuation", b"_enable_automatic_punctuation"]  # noqa: Y015
+    _WhichOneofReturnType__enable_word_confidence: _TypeAlias = _typing.Literal["enable_word_confidence"]  # noqa: Y015
+    _WhichOneofArgType__enable_word_confidence: _TypeAlias = _typing.Literal["_enable_word_confidence", b"_enable_word_confidence"]  # noqa: Y015
+    _WhichOneofReturnType__enable_word_time_offsets: _TypeAlias = _typing.Literal["enable_word_time_offsets"]  # noqa: Y015
+    _WhichOneofArgType__enable_word_time_offsets: _TypeAlias = _typing.Literal["_enable_word_time_offsets", b"_enable_word_time_offsets"]  # noqa: Y015
+    _WhichOneofReturnType__max_alternatives: _TypeAlias = _typing.Literal["max_alternatives"]  # noqa: Y015
+    _WhichOneofArgType__max_alternatives: _TypeAlias = _typing.Literal["_max_alternatives", b"_max_alternatives"]  # noqa: Y015
+    _WhichOneofReturnType__transcript_normalization: _TypeAlias = _typing.Literal["transcript_normalization"]  # noqa: Y015
+    _WhichOneofArgType__transcript_normalization: _TypeAlias = _typing.Literal["_transcript_normalization", b"_transcript_normalization"]  # noqa: Y015
+    @_typing.overload
+    def WhichOneof(self, oneof_group: _WhichOneofArgType__enable_automatic_punctuation) -> _WhichOneofReturnType__enable_automatic_punctuation | None: ...
+    @_typing.overload
+    def WhichOneof(self, oneof_group: _WhichOneofArgType__enable_word_confidence) -> _WhichOneofReturnType__enable_word_confidence | None: ...
+    @_typing.overload
+    def WhichOneof(self, oneof_group: _WhichOneofArgType__enable_word_time_offsets) -> _WhichOneofReturnType__enable_word_time_offsets | None: ...
+    @_typing.overload
+    def WhichOneof(self, oneof_group: _WhichOneofArgType__max_alternatives) -> _WhichOneofReturnType__max_alternatives | None: ...
+    @_typing.overload
+    def WhichOneof(self, oneof_group: _WhichOneofArgType__transcript_normalization) -> _WhichOneofReturnType__transcript_normalization | None: ...
 
-global___S2tCloudProviderConfigGoogle = S2tCloudProviderConfigGoogle
+Global___S2tCloudProviderConfigGoogle: _TypeAlias = S2tCloudProviderConfigGoogle  # noqa: Y015
 
-@typing.final
-class S2tCloudProviderConfigMicrosoft(google.protobuf.message.Message):
+@_typing.final
+class S2tCloudProviderConfigMicrosoft(_message.Message):
     """<p>Configuration details specific to the Microsoft Azure speech-to-text provider.</p>"""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    USE_FAST_TRANSCRIPTION_API_FIELD_NUMBER: builtins.int
-    USE_DETAILED_OUTPUT_FORMAT_FIELD_NUMBER: builtins.int
-    use_fast_transcription_api: builtins.bool
+    USE_FAST_TRANSCRIPTION_API_FIELD_NUMBER: _builtins.int
+    USE_DETAILED_OUTPUT_FORMAT_FIELD_NUMBER: _builtins.int
+    use_fast_transcription_api: _builtins.bool
     """Optional. Enables or disables the Microsoft Azure fast transcription API. It is faster than SDK but is in
     preview version.
     More details at: <a href="https://learn.microsoft.com/en-us/azure/ai-services/speech-service/fast-transcription-create">https://learn.microsoft.com/en-us/azure/ai-services/speech-service/fast-transcription-create</a>
     """
-    use_detailed_output_format: builtins.bool
+    use_detailed_output_format: _builtins.bool
     """Optional. Enables or disables the <code>detailed</code> format for the result of Microsoft Azure s2t service
     to add timestamps and confidences to the resulted transcript.
     """
     def __init__(
         self,
         *,
-        use_fast_transcription_api: builtins.bool | None = ...,
-        use_detailed_output_format: builtins.bool | None = ...,
+        use_fast_transcription_api: _builtins.bool | None = ...,
+        use_detailed_output_format: _builtins.bool | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["_use_detailed_output_format", b"_use_detailed_output_format", "_use_fast_transcription_api", b"_use_fast_transcription_api", "use_detailed_output_format", b"use_detailed_output_format", "use_fast_transcription_api", b"use_fast_transcription_api"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["_use_detailed_output_format", b"_use_detailed_output_format", "_use_fast_transcription_api", b"_use_fast_transcription_api", "use_detailed_output_format", b"use_detailed_output_format", "use_fast_transcription_api", b"use_fast_transcription_api"]) -> None: ...
-    @typing.overload
-    def WhichOneof(self, oneof_group: typing.Literal["_use_detailed_output_format", b"_use_detailed_output_format"]) -> typing.Literal["use_detailed_output_format"] | None: ...
-    @typing.overload
-    def WhichOneof(self, oneof_group: typing.Literal["_use_fast_transcription_api", b"_use_fast_transcription_api"]) -> typing.Literal["use_fast_transcription_api"] | None: ...
+    _HasFieldArgType: _TypeAlias = _typing.Literal["_use_detailed_output_format", b"_use_detailed_output_format", "_use_fast_transcription_api", b"_use_fast_transcription_api", "use_detailed_output_format", b"use_detailed_output_format", "use_fast_transcription_api", b"use_fast_transcription_api"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["_use_detailed_output_format", b"_use_detailed_output_format", "_use_fast_transcription_api", b"_use_fast_transcription_api", "use_detailed_output_format", b"use_detailed_output_format", "use_fast_transcription_api", b"use_fast_transcription_api"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    _WhichOneofReturnType__use_detailed_output_format: _TypeAlias = _typing.Literal["use_detailed_output_format"]  # noqa: Y015
+    _WhichOneofArgType__use_detailed_output_format: _TypeAlias = _typing.Literal["_use_detailed_output_format", b"_use_detailed_output_format"]  # noqa: Y015
+    _WhichOneofReturnType__use_fast_transcription_api: _TypeAlias = _typing.Literal["use_fast_transcription_api"]  # noqa: Y015
+    _WhichOneofArgType__use_fast_transcription_api: _TypeAlias = _typing.Literal["_use_fast_transcription_api", b"_use_fast_transcription_api"]  # noqa: Y015
+    @_typing.overload
+    def WhichOneof(self, oneof_group: _WhichOneofArgType__use_detailed_output_format) -> _WhichOneofReturnType__use_detailed_output_format | None: ...
+    @_typing.overload
+    def WhichOneof(self, oneof_group: _WhichOneofArgType__use_fast_transcription_api) -> _WhichOneofReturnType__use_fast_transcription_api | None: ...
 
-global___S2tCloudProviderConfigMicrosoft = S2tCloudProviderConfigMicrosoft
+Global___S2tCloudProviderConfigMicrosoft: _TypeAlias = S2tCloudProviderConfigMicrosoft  # noqa: Y015
 
-@typing.final
-class TranscriptionReturnOptions(google.protobuf.message.Message):
+@_typing.final
+class TranscriptionReturnOptions(_message.Message):
     """<p>Configuration of the return values of a transcribe request</p>"""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    RETURN_START_OF_SPEECH_FIELD_NUMBER: builtins.int
-    RETURN_AUDIO_FIELD_NUMBER: builtins.int
-    RETURN_CONFIDENCE_SCORE_FIELD_NUMBER: builtins.int
-    RETURN_ALTERNATIVE_TRANSCRIPTIONS_FIELD_NUMBER: builtins.int
-    RETURN_ALTERNATIVE_TRANSCRIPTIONS_NR_FIELD_NUMBER: builtins.int
-    RETURN_ALTERNATIVE_WORDS_FIELD_NUMBER: builtins.int
-    RETURN_ALTERNATIVE_WORDS_NR_FIELD_NUMBER: builtins.int
-    RETURN_WORD_TIMING_FIELD_NUMBER: builtins.int
-    RETURN_END_OF_SPEECH_CANDIDATE_FIELD_NUMBER: builtins.int
-    return_start_of_speech: builtins.bool
+    RETURN_START_OF_SPEECH_FIELD_NUMBER: _builtins.int
+    RETURN_AUDIO_FIELD_NUMBER: _builtins.int
+    RETURN_CONFIDENCE_SCORE_FIELD_NUMBER: _builtins.int
+    RETURN_ALTERNATIVE_TRANSCRIPTIONS_FIELD_NUMBER: _builtins.int
+    RETURN_ALTERNATIVE_TRANSCRIPTIONS_NR_FIELD_NUMBER: _builtins.int
+    RETURN_ALTERNATIVE_WORDS_FIELD_NUMBER: _builtins.int
+    RETURN_ALTERNATIVE_WORDS_NR_FIELD_NUMBER: _builtins.int
+    RETURN_WORD_TIMING_FIELD_NUMBER: _builtins.int
+    RETURN_END_OF_SPEECH_CANDIDATE_FIELD_NUMBER: _builtins.int
+    return_start_of_speech: _builtins.bool
     """should server make response indicating that the beginning of the speech was detected"""
-    return_audio: builtins.bool
+    return_audio: _builtins.bool
     """should s2t server return audio bytes of transcribed utterance"""
-    return_confidence_score: builtins.bool
+    return_confidence_score: _builtins.bool
     """Whether or not to return confidence scores"""
-    return_alternative_transcriptions: builtins.bool
+    return_alternative_transcriptions: _builtins.bool
     """Whether or not to return alternative results from beam-search"""
-    return_alternative_transcriptions_nr: builtins.int
+    return_alternative_transcriptions_nr: _builtins.int
     """Optional. Number of alternative transcriptions results from beam-search or greedy-search"""
-    return_alternative_words: builtins.bool
+    return_alternative_words: _builtins.bool
     """Whether or not to return alternative results from beam-search"""
-    return_alternative_words_nr: builtins.int
+    return_alternative_words_nr: _builtins.int
     """Optional. Number of alternative words to results"""
-    return_word_timing: builtins.bool
+    return_word_timing: _builtins.bool
     """Optional. Whether or not to return timestamps of start and end of the words. Only used in TranscribeFile."""
-    return_end_of_speech_candidate: builtins.bool
+    return_end_of_speech_candidate: _builtins.bool
     """Optional. Whether the server should send an end-of-speech candidate on a stream (see
     <code>TranscribeStreamResponse.end_of_speech_candidate</code> for what is sent and when). Only used in
     TranscribeStream, and only acted on under server-side turn detection. Fixed per stream, like
@@ -692,40 +767,44 @@ class TranscriptionReturnOptions(google.protobuf.message.Message):
     def __init__(
         self,
         *,
-        return_start_of_speech: builtins.bool = ...,
-        return_audio: builtins.bool = ...,
-        return_confidence_score: builtins.bool = ...,
-        return_alternative_transcriptions: builtins.bool = ...,
-        return_alternative_transcriptions_nr: builtins.int = ...,
-        return_alternative_words: builtins.bool = ...,
-        return_alternative_words_nr: builtins.int = ...,
-        return_word_timing: builtins.bool = ...,
-        return_end_of_speech_candidate: builtins.bool = ...,
+        return_start_of_speech: _builtins.bool = ...,
+        return_audio: _builtins.bool = ...,
+        return_confidence_score: _builtins.bool = ...,
+        return_alternative_transcriptions: _builtins.bool = ...,
+        return_alternative_transcriptions_nr: _builtins.int = ...,
+        return_alternative_words: _builtins.bool = ...,
+        return_alternative_words_nr: _builtins.int = ...,
+        return_word_timing: _builtins.bool = ...,
+        return_end_of_speech_candidate: _builtins.bool = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing.Literal["return_alternative_transcriptions", b"return_alternative_transcriptions", "return_alternative_transcriptions_nr", b"return_alternative_transcriptions_nr", "return_alternative_words", b"return_alternative_words", "return_alternative_words_nr", b"return_alternative_words_nr", "return_audio", b"return_audio", "return_confidence_score", b"return_confidence_score", "return_end_of_speech_candidate", b"return_end_of_speech_candidate", "return_start_of_speech", b"return_start_of_speech", "return_word_timing", b"return_word_timing"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _Never  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["return_alternative_transcriptions", b"return_alternative_transcriptions", "return_alternative_transcriptions_nr", b"return_alternative_transcriptions_nr", "return_alternative_words", b"return_alternative_words", "return_alternative_words_nr", b"return_alternative_words_nr", "return_audio", b"return_audio", "return_confidence_score", b"return_confidence_score", "return_end_of_speech_candidate", b"return_end_of_speech_candidate", "return_start_of_speech", b"return_start_of_speech", "return_word_timing", b"return_word_timing"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-global___TranscriptionReturnOptions = TranscriptionReturnOptions
+Global___TranscriptionReturnOptions: _TypeAlias = TranscriptionReturnOptions  # noqa: Y015
 
-@typing.final
-class UtteranceDetectionOptions(google.protobuf.message.Message):
+@_typing.final
+class UtteranceDetectionOptions(_message.Message):
     """<p>Configuration of the options to detect utterances</p>"""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    TRANSCRIBE_NOT_FINAL_FIELD_NUMBER: builtins.int
-    NEXT_CHUNK_TIMEOUT_FIELD_NUMBER: builtins.int
-    TURN_DETECTION_FIELD_NUMBER: builtins.int
-    MIN_AUDIO_CHUNK_SIZE_FIELD_NUMBER: builtins.int
-    TRANSCRIBE_NOT_FINAL_PERIOD_SECONDS_FIELD_NUMBER: builtins.int
-    transcribe_not_final: builtins.bool
+    TRANSCRIBE_NOT_FINAL_FIELD_NUMBER: _builtins.int
+    NEXT_CHUNK_TIMEOUT_FIELD_NUMBER: _builtins.int
+    TURN_DETECTION_FIELD_NUMBER: _builtins.int
+    MIN_AUDIO_CHUNK_SIZE_FIELD_NUMBER: _builtins.int
+    TRANSCRIBE_NOT_FINAL_PERIOD_SECONDS_FIELD_NUMBER: _builtins.int
+    transcribe_not_final: _builtins.bool
     """Return also immediate transcription results (non-final transcriptions of an utterance while it is
     still being spoken). Unset: the pipeline's <code>StreamingSpeechRecognition.transcribe_not_final</code>,
     then the server default, which is now <code>true</code>; an explicit <code>false</code> opts this
     request out of non-final results.
     """
-    next_chunk_timeout: builtins.float
+    next_chunk_timeout: _builtins.float
     """if time between audio chunks exceeds next_chunk_timeout, stream will be stopped"""
-    min_audio_chunk_size: builtins.int
+    min_audio_chunk_size: _builtins.int
     """Optional. The processing chunk of THIS stream, in samples at the pipeline's sampling rate: the server buffers
     the incoming audio until it holds this many samples and only then runs the voice-activity search, the sliding
     transcription and the turn detector, so it is the cadence at which an utterance can end (8000 samples at
@@ -734,7 +813,7 @@ class UtteranceDetectionOptions(google.protobuf.message.Message):
     proportionally more voice-activity and transcription requests. Read from the first request of a stream that
     carries it; a later request cannot change a running stream's chunk. Unset: the pipeline's value.
     """
-    transcribe_not_final_period_seconds: builtins.float
+    transcribe_not_final_period_seconds: _builtins.float
     """Optional. The minimum new audio, in seconds, between two non-final transcriptions of an utterance (the
     partial-transcription cadence; applies only while <code>transcribe_not_final</code> is in force). Overrides
     <code>StreamingSpeechRecognition.transcribe_not_final_period_seconds</code> of the pipeline config and the
@@ -743,50 +822,60 @@ class UtteranceDetectionOptions(google.protobuf.message.Message):
     per processing chunk, so the effective cadence is rounded up to whole <code>min_audio_chunk_size</code>
     chunks. Unset: the pipeline's value, then the server setting.
     """
-    @property
-    def turn_detection(self) -> global___TurnDetectionOptions:
+    @_builtins.property
+    def turn_detection(self) -> Global___TurnDetectionOptions:
         """The turn detection options"""
 
     def __init__(
         self,
         *,
-        transcribe_not_final: builtins.bool = ...,
-        next_chunk_timeout: builtins.float = ...,
-        turn_detection: global___TurnDetectionOptions | None = ...,
-        min_audio_chunk_size: builtins.int | None = ...,
-        transcribe_not_final_period_seconds: builtins.float | None = ...,
+        transcribe_not_final: _builtins.bool = ...,
+        next_chunk_timeout: _builtins.float = ...,
+        turn_detection: Global___TurnDetectionOptions | None = ...,
+        min_audio_chunk_size: _builtins.int | None = ...,
+        transcribe_not_final_period_seconds: _builtins.float | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["_min_audio_chunk_size", b"_min_audio_chunk_size", "_transcribe_not_final_period_seconds", b"_transcribe_not_final_period_seconds", "min_audio_chunk_size", b"min_audio_chunk_size", "oneof_transcribe_not_final", b"oneof_transcribe_not_final", "oneof_turn_detection", b"oneof_turn_detection", "transcribe_not_final", b"transcribe_not_final", "transcribe_not_final_period_seconds", b"transcribe_not_final_period_seconds", "turn_detection", b"turn_detection"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["_min_audio_chunk_size", b"_min_audio_chunk_size", "_transcribe_not_final_period_seconds", b"_transcribe_not_final_period_seconds", "min_audio_chunk_size", b"min_audio_chunk_size", "next_chunk_timeout", b"next_chunk_timeout", "oneof_transcribe_not_final", b"oneof_transcribe_not_final", "oneof_turn_detection", b"oneof_turn_detection", "transcribe_not_final", b"transcribe_not_final", "transcribe_not_final_period_seconds", b"transcribe_not_final_period_seconds", "turn_detection", b"turn_detection"]) -> None: ...
-    @typing.overload
-    def WhichOneof(self, oneof_group: typing.Literal["_min_audio_chunk_size", b"_min_audio_chunk_size"]) -> typing.Literal["min_audio_chunk_size"] | None: ...
-    @typing.overload
-    def WhichOneof(self, oneof_group: typing.Literal["_transcribe_not_final_period_seconds", b"_transcribe_not_final_period_seconds"]) -> typing.Literal["transcribe_not_final_period_seconds"] | None: ...
-    @typing.overload
-    def WhichOneof(self, oneof_group: typing.Literal["oneof_transcribe_not_final", b"oneof_transcribe_not_final"]) -> typing.Literal["transcribe_not_final"] | None: ...
-    @typing.overload
-    def WhichOneof(self, oneof_group: typing.Literal["oneof_turn_detection", b"oneof_turn_detection"]) -> typing.Literal["turn_detection"] | None: ...
+    _HasFieldArgType: _TypeAlias = _typing.Literal["_min_audio_chunk_size", b"_min_audio_chunk_size", "_transcribe_not_final_period_seconds", b"_transcribe_not_final_period_seconds", "min_audio_chunk_size", b"min_audio_chunk_size", "oneof_transcribe_not_final", b"oneof_transcribe_not_final", "oneof_turn_detection", b"oneof_turn_detection", "transcribe_not_final", b"transcribe_not_final", "transcribe_not_final_period_seconds", b"transcribe_not_final_period_seconds", "turn_detection", b"turn_detection"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["_min_audio_chunk_size", b"_min_audio_chunk_size", "_transcribe_not_final_period_seconds", b"_transcribe_not_final_period_seconds", "min_audio_chunk_size", b"min_audio_chunk_size", "next_chunk_timeout", b"next_chunk_timeout", "oneof_transcribe_not_final", b"oneof_transcribe_not_final", "oneof_turn_detection", b"oneof_turn_detection", "transcribe_not_final", b"transcribe_not_final", "transcribe_not_final_period_seconds", b"transcribe_not_final_period_seconds", "turn_detection", b"turn_detection"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    _WhichOneofReturnType__min_audio_chunk_size: _TypeAlias = _typing.Literal["min_audio_chunk_size"]  # noqa: Y015
+    _WhichOneofArgType__min_audio_chunk_size: _TypeAlias = _typing.Literal["_min_audio_chunk_size", b"_min_audio_chunk_size"]  # noqa: Y015
+    _WhichOneofReturnType__transcribe_not_final_period_seconds: _TypeAlias = _typing.Literal["transcribe_not_final_period_seconds"]  # noqa: Y015
+    _WhichOneofArgType__transcribe_not_final_period_seconds: _TypeAlias = _typing.Literal["_transcribe_not_final_period_seconds", b"_transcribe_not_final_period_seconds"]  # noqa: Y015
+    _WhichOneofReturnType_oneof_transcribe_not_final: _TypeAlias = _typing.Literal["transcribe_not_final"]  # noqa: Y015
+    _WhichOneofArgType_oneof_transcribe_not_final: _TypeAlias = _typing.Literal["oneof_transcribe_not_final", b"oneof_transcribe_not_final"]  # noqa: Y015
+    _WhichOneofReturnType_oneof_turn_detection: _TypeAlias = _typing.Literal["turn_detection"]  # noqa: Y015
+    _WhichOneofArgType_oneof_turn_detection: _TypeAlias = _typing.Literal["oneof_turn_detection", b"oneof_turn_detection"]  # noqa: Y015
+    @_typing.overload
+    def WhichOneof(self, oneof_group: _WhichOneofArgType__min_audio_chunk_size) -> _WhichOneofReturnType__min_audio_chunk_size | None: ...
+    @_typing.overload
+    def WhichOneof(self, oneof_group: _WhichOneofArgType__transcribe_not_final_period_seconds) -> _WhichOneofReturnType__transcribe_not_final_period_seconds | None: ...
+    @_typing.overload
+    def WhichOneof(self, oneof_group: _WhichOneofArgType_oneof_transcribe_not_final) -> _WhichOneofReturnType_oneof_transcribe_not_final | None: ...
+    @_typing.overload
+    def WhichOneof(self, oneof_group: _WhichOneofArgType_oneof_turn_detection) -> _WhichOneofReturnType_oneof_turn_detection | None: ...
 
-global___UtteranceDetectionOptions = UtteranceDetectionOptions
+Global___UtteranceDetectionOptions: _TypeAlias = UtteranceDetectionOptions  # noqa: Y015
 
-@typing.final
-class PostProcessingOptions(google.protobuf.message.Message):
+@_typing.final
+class PostProcessingOptions(_message.Message):
     """<p>Configuration of the post-processing options</p>"""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    SPELLING_CORRECTION_FIELD_NUMBER: builtins.int
-    NORMALIZE_FIELD_NUMBER: builtins.int
-    CONFIG_FIELD_NUMBER: builtins.int
-    LLM_POST_PROCESSING_FIELD_NUMBER: builtins.int
-    spelling_correction: builtins.bool
+    SPELLING_CORRECTION_FIELD_NUMBER: _builtins.int
+    NORMALIZE_FIELD_NUMBER: _builtins.int
+    CONFIG_FIELD_NUMBER: _builtins.int
+    LLM_POST_PROCESSING_FIELD_NUMBER: _builtins.int
+    spelling_correction: _builtins.bool
     """Whether to use spelling correction"""
-    normalize: builtins.bool
+    normalize: _builtins.bool
     """Whether to disable normalization"""
-    llm_post_processing: builtins.bool
+    llm_post_processing: _builtins.bool
     """Whether to disable LLM post-processing"""
-    @property
-    def config(self) -> global___PostProcessing:
+    @_builtins.property
+    def config(self) -> Global___PostProcessing:
         """Post-processing configuration specifying the active post-processors in the pipeline, as well as their individual
         configuration. If not set, all values are replaced by the ones in current pipeline.
         """
@@ -794,18 +883,21 @@ class PostProcessingOptions(google.protobuf.message.Message):
     def __init__(
         self,
         *,
-        spelling_correction: builtins.bool = ...,
-        normalize: builtins.bool = ...,
-        config: global___PostProcessing | None = ...,
-        llm_post_processing: builtins.bool = ...,
+        spelling_correction: _builtins.bool = ...,
+        normalize: _builtins.bool = ...,
+        config: Global___PostProcessing | None = ...,
+        llm_post_processing: _builtins.bool = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["config", b"config"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["config", b"config", "llm_post_processing", b"llm_post_processing", "normalize", b"normalize", "spelling_correction", b"spelling_correction"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _typing.Literal["config", b"config"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["config", b"config", "llm_post_processing", b"llm_post_processing", "normalize", b"normalize", "spelling_correction", b"spelling_correction"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-global___PostProcessingOptions = PostProcessingOptions
+Global___PostProcessingOptions: _TypeAlias = PostProcessingOptions  # noqa: Y015
 
-@typing.final
-class Transcription(google.protobuf.message.Message):
+@_typing.final
+class Transcription(_message.Message):
     """/////////////////////////
      TRANSCRIPTION TYPE  //
     /////////////////////////
@@ -813,53 +905,57 @@ class Transcription(google.protobuf.message.Message):
     <p>The transcription message</p>
     """
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    TRANSCRIPTION_FIELD_NUMBER: builtins.int
-    CONFIDENCE_SCORE_FIELD_NUMBER: builtins.int
-    WORDS_FIELD_NUMBER: builtins.int
-    ALTERNATIVES_FIELD_NUMBER: builtins.int
-    transcription: builtins.str
+    TRANSCRIPTION_FIELD_NUMBER: _builtins.int
+    CONFIDENCE_SCORE_FIELD_NUMBER: _builtins.int
+    WORDS_FIELD_NUMBER: _builtins.int
+    ALTERNATIVES_FIELD_NUMBER: _builtins.int
+    transcription: _builtins.str
     """The transcribed text"""
-    confidence_score: builtins.float
+    confidence_score: _builtins.float
     """The corresponding confidence score. The confidence estimate between 0.0 and 1.0. A higher number
     indicates an estimated greater likelihood that the recognized words are correct.
     """
-    @property
-    def words(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___WordDetail]:
+    @_builtins.property
+    def words(self) -> _containers.RepeatedCompositeFieldContainer[Global___WordDetail]:
         """List of the words of transcription with their confidence scores and probable alternatives"""
 
-    @property
-    def alternatives(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___TranscriptionAlternative]:
+    @_builtins.property
+    def alternatives(self) -> _containers.RepeatedCompositeFieldContainer[Global___TranscriptionAlternative]:
         """List of alternative transcriptions, confidence scores, words timings and alternative words"""
 
     def __init__(
         self,
         *,
-        transcription: builtins.str = ...,
-        confidence_score: builtins.float = ...,
-        words: collections.abc.Iterable[global___WordDetail] | None = ...,
-        alternatives: collections.abc.Iterable[global___TranscriptionAlternative] | None = ...,
+        transcription: _builtins.str = ...,
+        confidence_score: _builtins.float = ...,
+        words: _abc.Iterable[Global___WordDetail] | None = ...,
+        alternatives: _abc.Iterable[Global___TranscriptionAlternative] | None = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing.Literal["alternatives", b"alternatives", "confidence_score", b"confidence_score", "transcription", b"transcription", "words", b"words"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _Never  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["alternatives", b"alternatives", "confidence_score", b"confidence_score", "transcription", b"transcription", "words", b"words"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-global___Transcription = Transcription
+Global___Transcription: _TypeAlias = Transcription  # noqa: Y015
 
-@typing.final
-class TranscriptionAlternative(google.protobuf.message.Message):
+@_typing.final
+class TranscriptionAlternative(_message.Message):
     """<p>The alternative transcription message</p>"""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    TRANSCRIPT_FIELD_NUMBER: builtins.int
-    CONFIDENCE_FIELD_NUMBER: builtins.int
-    WORDS_FIELD_NUMBER: builtins.int
-    transcript: builtins.str
+    TRANSCRIPT_FIELD_NUMBER: _builtins.int
+    CONFIDENCE_FIELD_NUMBER: _builtins.int
+    WORDS_FIELD_NUMBER: _builtins.int
+    transcript: _builtins.str
     """The alternative transcribed text"""
-    confidence: builtins.float
+    confidence: _builtins.float
     """The corresponding confidence score to the alternative transcript."""
-    @property
-    def words(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___WordDetail]:
+    @_builtins.property
+    def words(self) -> _containers.RepeatedCompositeFieldContainer[Global___WordDetail]:
         """A list of word-specific information for each recognized word, including word timings, confidence score of
         the word and alternative words.
         """
@@ -867,78 +963,90 @@ class TranscriptionAlternative(google.protobuf.message.Message):
     def __init__(
         self,
         *,
-        transcript: builtins.str = ...,
-        confidence: builtins.float = ...,
-        words: collections.abc.Iterable[global___WordDetail] | None = ...,
+        transcript: _builtins.str = ...,
+        confidence: _builtins.float = ...,
+        words: _abc.Iterable[Global___WordDetail] | None = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing.Literal["confidence", b"confidence", "transcript", b"transcript", "words", b"words"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _Never  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["confidence", b"confidence", "transcript", b"transcript", "words", b"words"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-global___TranscriptionAlternative = TranscriptionAlternative
+Global___TranscriptionAlternative: _TypeAlias = TranscriptionAlternative  # noqa: Y015
 
-@typing.final
-class WordDetail(google.protobuf.message.Message):
+@_typing.final
+class WordDetail(_message.Message):
     """<p>WordDetail provides word-specific information for recognized words.</p>"""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    START_TIME_FIELD_NUMBER: builtins.int
-    END_TIME_FIELD_NUMBER: builtins.int
-    WORD_FIELD_NUMBER: builtins.int
-    CONFIDENCE_FIELD_NUMBER: builtins.int
-    WORD_ALTERNATIVES_FIELD_NUMBER: builtins.int
-    start_time: builtins.float
+    START_TIME_FIELD_NUMBER: _builtins.int
+    END_TIME_FIELD_NUMBER: _builtins.int
+    WORD_FIELD_NUMBER: _builtins.int
+    CONFIDENCE_FIELD_NUMBER: _builtins.int
+    WORD_ALTERNATIVES_FIELD_NUMBER: _builtins.int
+    start_time: _builtins.float
     """The start time of the spoken word relative to the beginning of the audio.
     The accuracy of the time offset can vary, and this is an experimental feature.
     """
-    end_time: builtins.float
+    end_time: _builtins.float
     """The end time of the spoken word relative to the beginning of the audio.
     The accuracy of the time offset can vary, and this is an experimental feature.
     """
-    word: builtins.str
+    word: _builtins.str
     """The recognized word corresponding to this set of information."""
-    confidence: builtins.float
+    confidence: _builtins.float
     """The corresponding confidence score to the word."""
-    @property
-    def word_alternatives(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___WordAlternative]:
+    @_builtins.property
+    def word_alternatives(self) -> _containers.RepeatedCompositeFieldContainer[Global___WordAlternative]:
         """List of alternative words and confidence scores of each."""
 
     def __init__(
         self,
         *,
-        start_time: builtins.float = ...,
-        end_time: builtins.float = ...,
-        word: builtins.str = ...,
-        confidence: builtins.float = ...,
-        word_alternatives: collections.abc.Iterable[global___WordAlternative] | None = ...,
+        start_time: _builtins.float = ...,
+        end_time: _builtins.float = ...,
+        word: _builtins.str = ...,
+        confidence: _builtins.float = ...,
+        word_alternatives: _abc.Iterable[Global___WordAlternative] | None = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing.Literal["confidence", b"confidence", "end_time", b"end_time", "start_time", b"start_time", "word", b"word", "word_alternatives", b"word_alternatives"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _Never  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["confidence", b"confidence", "end_time", b"end_time", "start_time", b"start_time", "word", b"word", "word_alternatives", b"word_alternatives"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-global___WordDetail = WordDetail
+Global___WordDetail: _TypeAlias = WordDetail  # noqa: Y015
 
-@typing.final
-class WordAlternative(google.protobuf.message.Message):
+@_typing.final
+class WordAlternative(_message.Message):
     """<p>The word alternative message</p>"""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    WORD_FIELD_NUMBER: builtins.int
-    CONFIDENCE_FIELD_NUMBER: builtins.int
-    word: builtins.str
+    WORD_FIELD_NUMBER: _builtins.int
+    CONFIDENCE_FIELD_NUMBER: _builtins.int
+    word: _builtins.str
     """The recognized word corresponding to this set of information."""
-    confidence: builtins.float
+    confidence: _builtins.float
     """The corresponding confidence score to the alternative word."""
     def __init__(
         self,
         *,
-        word: builtins.str = ...,
-        confidence: builtins.float = ...,
+        word: _builtins.str = ...,
+        confidence: _builtins.float = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing.Literal["confidence", b"confidence", "word", b"word"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _Never  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["confidence", b"confidence", "word", b"word"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-global___WordAlternative = WordAlternative
+Global___WordAlternative: _TypeAlias = WordAlternative  # noqa: Y015
 
-@typing.final
-class TranscribeStreamRequest(google.protobuf.message.Message):
+@_typing.final
+class TranscribeStreamRequest(_message.Message):
     """/////////////////////
     TRANSCRIBE STREAM //
     /////////////////////
@@ -946,65 +1054,68 @@ class TranscribeStreamRequest(google.protobuf.message.Message):
     <p>Request to transcribe an audio stream</p>
     """
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    AUDIO_CHUNK_FIELD_NUMBER: builtins.int
-    END_OF_STREAM_FIELD_NUMBER: builtins.int
-    CONFIG_FIELD_NUMBER: builtins.int
-    MUTE_AUDIO_FIELD_NUMBER: builtins.int
-    audio_chunk: builtins.bytes
+    AUDIO_CHUNK_FIELD_NUMBER: _builtins.int
+    END_OF_STREAM_FIELD_NUMBER: _builtins.int
+    CONFIG_FIELD_NUMBER: _builtins.int
+    MUTE_AUDIO_FIELD_NUMBER: _builtins.int
+    audio_chunk: _builtins.bytes
     """wav file to transcribe"""
-    end_of_stream: builtins.bool
+    end_of_stream: _builtins.bool
     """if it's the final chunk of the stream"""
-    mute_audio: builtins.bool
+    mute_audio: _builtins.bool
     """Whether or not to mute the audio signal. Defaults to false."""
-    @property
-    def config(self) -> global___TranscribeRequestConfig:
+    @_builtins.property
+    def config(self) -> Global___TranscribeRequestConfig:
         """The configuration to override the default configuration"""
 
     def __init__(
         self,
         *,
-        audio_chunk: builtins.bytes = ...,
-        end_of_stream: builtins.bool = ...,
-        config: global___TranscribeRequestConfig | None = ...,
-        mute_audio: builtins.bool = ...,
+        audio_chunk: _builtins.bytes = ...,
+        end_of_stream: _builtins.bool = ...,
+        config: Global___TranscribeRequestConfig | None = ...,
+        mute_audio: _builtins.bool = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["config", b"config"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["audio_chunk", b"audio_chunk", "config", b"config", "end_of_stream", b"end_of_stream", "mute_audio", b"mute_audio"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _typing.Literal["config", b"config"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["audio_chunk", b"audio_chunk", "config", b"config", "end_of_stream", b"end_of_stream", "mute_audio", b"mute_audio"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-global___TranscribeStreamRequest = TranscribeStreamRequest
+Global___TranscribeStreamRequest: _TypeAlias = TranscribeStreamRequest  # noqa: Y015
 
-@typing.final
-class TranscribeStreamResponse(google.protobuf.message.Message):
+@_typing.final
+class TranscribeStreamResponse(_message.Message):
     """<p>The response message of a stream transcription</p>"""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    TRANSCRIPTIONS_FIELD_NUMBER: builtins.int
-    TIME_FIELD_NUMBER: builtins.int
-    FINAL_FIELD_NUMBER: builtins.int
-    RETURN_AUDIO_FIELD_NUMBER: builtins.int
-    AUDIO_FIELD_NUMBER: builtins.int
-    UTTERANCE_START_FIELD_NUMBER: builtins.int
-    AUDIO_UUID_FIELD_NUMBER: builtins.int
-    END_OF_SPEECH_CANDIDATE_FIELD_NUMBER: builtins.int
-    CONFIG_FIELD_NUMBER: builtins.int
-    time: builtins.float
+    TRANSCRIPTIONS_FIELD_NUMBER: _builtins.int
+    TIME_FIELD_NUMBER: _builtins.int
+    FINAL_FIELD_NUMBER: _builtins.int
+    RETURN_AUDIO_FIELD_NUMBER: _builtins.int
+    AUDIO_FIELD_NUMBER: _builtins.int
+    UTTERANCE_START_FIELD_NUMBER: _builtins.int
+    AUDIO_UUID_FIELD_NUMBER: _builtins.int
+    END_OF_SPEECH_CANDIDATE_FIELD_NUMBER: _builtins.int
+    CONFIG_FIELD_NUMBER: _builtins.int
+    time: _builtins.float
     """The time the transcription took"""
-    final: builtins.bool
+    final: _builtins.bool
     """Whether or not this transcription is final (transcribed texts might change if transcription is
     started before the end of an utterance).
     """
-    return_audio: builtins.bool
+    return_audio: _builtins.bool
     """is audio bytes of the utterance in response"""
-    audio: builtins.bytes
+    audio: _builtins.bytes
     """audio bytes of the transcribed utterance"""
-    utterance_start: builtins.bool
+    utterance_start: _builtins.bool
     """is it a start of the utterance"""
-    audio_uuid: builtins.str
+    audio_uuid: _builtins.str
     """id of the transcribed audio file"""
-    end_of_speech_candidate: builtins.bool
+    end_of_speech_candidate: _builtins.bool
     """Whether this response is an end-of-speech candidate. Sent only when the request set
     <code>TranscriptionReturnOptions.return_end_of_speech_candidate</code>, only under server-side turn
     detection, and only on the chunk where the server found the end of the caller's speech and its turn detector
@@ -1018,35 +1129,39 @@ class TranscribeStreamResponse(google.protobuf.message.Message):
     the utterance's final still follows, or the utterance continues if the caller resumes, and the final text may
     differ. Always false otherwise.
     """
-    @property
-    def transcriptions(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___Transcription]:
+    @_builtins.property
+    def transcriptions(self) -> _containers.RepeatedCompositeFieldContainer[Global___Transcription]:
         """List of transcriptions with confidence level"""
 
-    @property
-    def config(self) -> global___TranscribeRequestConfig:
+    @_builtins.property
+    def config(self) -> Global___TranscribeRequestConfig:
         """The configuration for the transcription"""
 
     def __init__(
         self,
         *,
-        transcriptions: collections.abc.Iterable[global___Transcription] | None = ...,
-        time: builtins.float = ...,
-        final: builtins.bool = ...,
-        return_audio: builtins.bool = ...,
-        audio: builtins.bytes = ...,
-        utterance_start: builtins.bool = ...,
-        audio_uuid: builtins.str = ...,
-        end_of_speech_candidate: builtins.bool = ...,
-        config: global___TranscribeRequestConfig | None = ...,
+        transcriptions: _abc.Iterable[Global___Transcription] | None = ...,
+        time: _builtins.float = ...,
+        final: _builtins.bool = ...,
+        return_audio: _builtins.bool = ...,
+        audio: _builtins.bytes = ...,
+        utterance_start: _builtins.bool = ...,
+        audio_uuid: _builtins.str = ...,
+        end_of_speech_candidate: _builtins.bool = ...,
+        config: Global___TranscribeRequestConfig | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["config", b"config", "oneof_config", b"oneof_config"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["audio", b"audio", "audio_uuid", b"audio_uuid", "config", b"config", "end_of_speech_candidate", b"end_of_speech_candidate", "final", b"final", "oneof_config", b"oneof_config", "return_audio", b"return_audio", "time", b"time", "transcriptions", b"transcriptions", "utterance_start", b"utterance_start"]) -> None: ...
-    def WhichOneof(self, oneof_group: typing.Literal["oneof_config", b"oneof_config"]) -> typing.Literal["config"] | None: ...
+    _HasFieldArgType: _TypeAlias = _typing.Literal["config", b"config", "oneof_config", b"oneof_config"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["audio", b"audio", "audio_uuid", b"audio_uuid", "config", b"config", "end_of_speech_candidate", b"end_of_speech_candidate", "final", b"final", "oneof_config", b"oneof_config", "return_audio", b"return_audio", "time", b"time", "transcriptions", b"transcriptions", "utterance_start", b"utterance_start"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    _WhichOneofReturnType_oneof_config: _TypeAlias = _typing.Literal["config"]  # noqa: Y015
+    _WhichOneofArgType_oneof_config: _TypeAlias = _typing.Literal["oneof_config", b"oneof_config"]  # noqa: Y015
+    def WhichOneof(self, oneof_group: _WhichOneofArgType_oneof_config) -> _WhichOneofReturnType_oneof_config | None: ...
 
-global___TranscribeStreamResponse = TranscribeStreamResponse
+Global___TranscribeStreamResponse: _TypeAlias = TranscribeStreamResponse  # noqa: Y015
 
-@typing.final
-class TranscribeFileRequest(google.protobuf.message.Message):
+@_typing.final
+class TranscribeFileRequest(_message.Message):
     """///////////////////
     TRANSCRIBE FILE //
     ///////////////////
@@ -1054,57 +1169,64 @@ class TranscribeFileRequest(google.protobuf.message.Message):
     <p>A request to transcribe an audio file</p>
     """
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    AUDIO_FILE_FIELD_NUMBER: builtins.int
-    CONFIG_FIELD_NUMBER: builtins.int
-    audio_file: builtins.bytes
+    AUDIO_FILE_FIELD_NUMBER: _builtins.int
+    CONFIG_FIELD_NUMBER: _builtins.int
+    audio_file: _builtins.bytes
     """wav file to transcribe"""
-    @property
-    def config(self) -> global___TranscribeRequestConfig:
+    @_builtins.property
+    def config(self) -> Global___TranscribeRequestConfig:
         """The configuration to override the default configuration"""
 
     def __init__(
         self,
         *,
-        audio_file: builtins.bytes = ...,
-        config: global___TranscribeRequestConfig | None = ...,
+        audio_file: _builtins.bytes = ...,
+        config: Global___TranscribeRequestConfig | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["config", b"config"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["audio_file", b"audio_file", "config", b"config"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _typing.Literal["config", b"config"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["audio_file", b"audio_file", "config", b"config"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-global___TranscribeFileRequest = TranscribeFileRequest
+Global___TranscribeFileRequest: _TypeAlias = TranscribeFileRequest  # noqa: Y015
 
-@typing.final
-class TranscribeFileResponse(google.protobuf.message.Message):
+@_typing.final
+class TranscribeFileResponse(_message.Message):
     """<p>The response message for a transcribe file request</p>"""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    TRANSCRIPTIONS_FIELD_NUMBER: builtins.int
-    TIME_FIELD_NUMBER: builtins.int
-    AUDIO_UUID_FIELD_NUMBER: builtins.int
-    time: builtins.float
+    TRANSCRIPTIONS_FIELD_NUMBER: _builtins.int
+    TIME_FIELD_NUMBER: _builtins.int
+    AUDIO_UUID_FIELD_NUMBER: _builtins.int
+    time: _builtins.float
     """The time the transcription took"""
-    audio_uuid: builtins.str
+    audio_uuid: _builtins.str
     """id of the transcribed audio file"""
-    @property
-    def transcriptions(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___Transcription]:
+    @_builtins.property
+    def transcriptions(self) -> _containers.RepeatedCompositeFieldContainer[Global___Transcription]:
         """List of transcriptions with confidence level"""
 
     def __init__(
         self,
         *,
-        transcriptions: collections.abc.Iterable[global___Transcription] | None = ...,
-        time: builtins.float = ...,
-        audio_uuid: builtins.str = ...,
+        transcriptions: _abc.Iterable[Global___Transcription] | None = ...,
+        time: _builtins.float = ...,
+        audio_uuid: _builtins.str = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing.Literal["audio_uuid", b"audio_uuid", "time", b"time", "transcriptions", b"transcriptions"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _Never  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["audio_uuid", b"audio_uuid", "time", b"time", "transcriptions", b"transcriptions"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-global___TranscribeFileResponse = TranscribeFileResponse
+Global___TranscribeFileResponse: _TypeAlias = TranscribeFileResponse  # noqa: Y015
 
-@typing.final
-class S2tPipelineId(google.protobuf.message.Message):
+@_typing.final
+class S2tPipelineId(_message.Message):
     """////////////////////
     GET S2T PIPELINE //
     ////////////////////
@@ -1112,22 +1234,26 @@ class S2tPipelineId(google.protobuf.message.Message):
     <p>The pipeline id for a specific pipeline configuration</p>
     """
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    ID_FIELD_NUMBER: builtins.int
-    id: builtins.str
+    ID_FIELD_NUMBER: _builtins.int
+    id: _builtins.str
     """id of the model that will generate audio"""
     def __init__(
         self,
         *,
-        id: builtins.str = ...,
+        id: _builtins.str = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing.Literal["id", b"id"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _Never  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["id", b"id"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-global___S2tPipelineId = S2tPipelineId
+Global___S2tPipelineId: _TypeAlias = S2tPipelineId  # noqa: Y015
 
-@typing.final
-class ListS2tPipelinesRequest(google.protobuf.message.Message):
+@_typing.final
+class ListS2tPipelinesRequest(_message.Message):
     """//////////////////////
     LIST S2T PIPELINES //
     //////////////////////
@@ -1135,49 +1261,53 @@ class ListS2tPipelinesRequest(google.protobuf.message.Message):
     <p>Request to list all speech-to-text pipelines. Optionally also filter criteria can be set</p>
     """
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    LANGUAGES_FIELD_NUMBER: builtins.int
-    PIPELINE_OWNERS_FIELD_NUMBER: builtins.int
-    DOMAINS_FIELD_NUMBER: builtins.int
-    REGISTERED_ONLY_FIELD_NUMBER: builtins.int
-    registered_only: builtins.bool
+    LANGUAGES_FIELD_NUMBER: _builtins.int
+    PIPELINE_OWNERS_FIELD_NUMBER: _builtins.int
+    DOMAINS_FIELD_NUMBER: _builtins.int
+    REGISTERED_ONLY_FIELD_NUMBER: _builtins.int
+    registered_only: _builtins.bool
     """If true, return only registered pipelines.
     Default false: return registered and persisted (from config files) configs.
     """
-    @property
-    def languages(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
+    @_builtins.property
+    def languages(self) -> _containers.RepeatedScalarFieldContainer[_builtins.str]:
         """Filter for languages"""
 
-    @property
-    def pipeline_owners(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
+    @_builtins.property
+    def pipeline_owners(self) -> _containers.RepeatedScalarFieldContainer[_builtins.str]:
         """Filter for pipeline owners"""
 
-    @property
-    def domains(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
+    @_builtins.property
+    def domains(self) -> _containers.RepeatedScalarFieldContainer[_builtins.str]:
         """Filter for domains"""
 
     def __init__(
         self,
         *,
-        languages: collections.abc.Iterable[builtins.str] | None = ...,
-        pipeline_owners: collections.abc.Iterable[builtins.str] | None = ...,
-        domains: collections.abc.Iterable[builtins.str] | None = ...,
-        registered_only: builtins.bool = ...,
+        languages: _abc.Iterable[_builtins.str] | None = ...,
+        pipeline_owners: _abc.Iterable[_builtins.str] | None = ...,
+        domains: _abc.Iterable[_builtins.str] | None = ...,
+        registered_only: _builtins.bool = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing.Literal["domains", b"domains", "languages", b"languages", "pipeline_owners", b"pipeline_owners", "registered_only", b"registered_only"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _Never  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["domains", b"domains", "languages", b"languages", "pipeline_owners", b"pipeline_owners", "registered_only", b"registered_only"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-global___ListS2tPipelinesRequest = ListS2tPipelinesRequest
+Global___ListS2tPipelinesRequest: _TypeAlias = ListS2tPipelinesRequest  # noqa: Y015
 
-@typing.final
-class ListS2tPipelinesResponse(google.protobuf.message.Message):
+@_typing.final
+class ListS2tPipelinesResponse(_message.Message):
     """<p>ListS2tPipelinesResponse is used to return a list of all speech-to-text pipelines.</p>"""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    PIPELINE_CONFIGS_FIELD_NUMBER: builtins.int
-    @property
-    def pipeline_configs(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___Speech2TextConfig]:
+    PIPELINE_CONFIGS_FIELD_NUMBER: _builtins.int
+    @_builtins.property
+    def pipeline_configs(self) -> _containers.RepeatedCompositeFieldContainer[Global___Speech2TextConfig]:
         """A list of <code>Speech2TextConfig</code> message instances containing the configuration of each pipeline.
         Example: [{id: &quot;pipeline_1&quot;, description: {language: &quot;en&quot;}, active: true, ...}, {id: &quot;pipeline_2&quot;,
         description: {language: &quot;fr&quot;}, active: true, ...}]
@@ -1186,14 +1316,18 @@ class ListS2tPipelinesResponse(google.protobuf.message.Message):
     def __init__(
         self,
         *,
-        pipeline_configs: collections.abc.Iterable[global___Speech2TextConfig] | None = ...,
+        pipeline_configs: _abc.Iterable[Global___Speech2TextConfig] | None = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing.Literal["pipeline_configs", b"pipeline_configs"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _Never  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["pipeline_configs", b"pipeline_configs"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-global___ListS2tPipelinesResponse = ListS2tPipelinesResponse
+Global___ListS2tPipelinesResponse: _TypeAlias = ListS2tPipelinesResponse  # noqa: Y015
 
-@typing.final
-class ListS2tLanguagesRequest(google.protobuf.message.Message):
+@_typing.final
+class ListS2tLanguagesRequest(_message.Message):
     """//////////////////////
     LIST S2T LANGUAGES //
     //////////////////////
@@ -1201,16 +1335,16 @@ class ListS2tLanguagesRequest(google.protobuf.message.Message):
     <p>ListS2tLanguagesRequest is used to request a list of available languages. Optionally, filters can be set.</p>
     """
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    DOMAINS_FIELD_NUMBER: builtins.int
-    PIPELINE_OWNERS_FIELD_NUMBER: builtins.int
-    @property
-    def domains(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
+    DOMAINS_FIELD_NUMBER: _builtins.int
+    PIPELINE_OWNERS_FIELD_NUMBER: _builtins.int
+    @_builtins.property
+    def domains(self) -> _containers.RepeatedScalarFieldContainer[_builtins.str]:
         """Filter for domains.  Example: [&quot;medical&quot;, &quot;finance&quot;]"""
 
-    @property
-    def pipeline_owners(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
+    @_builtins.property
+    def pipeline_owners(self) -> _containers.RepeatedScalarFieldContainer[_builtins.str]:
         """Filter for pipeline owners.
         Example: [&quot;ondewo&quot;, &quot;partner_company&quot;]
         """
@@ -1218,35 +1352,43 @@ class ListS2tLanguagesRequest(google.protobuf.message.Message):
     def __init__(
         self,
         *,
-        domains: collections.abc.Iterable[builtins.str] | None = ...,
-        pipeline_owners: collections.abc.Iterable[builtins.str] | None = ...,
+        domains: _abc.Iterable[_builtins.str] | None = ...,
+        pipeline_owners: _abc.Iterable[_builtins.str] | None = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing.Literal["domains", b"domains", "pipeline_owners", b"pipeline_owners"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _Never  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["domains", b"domains", "pipeline_owners", b"pipeline_owners"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-global___ListS2tLanguagesRequest = ListS2tLanguagesRequest
+Global___ListS2tLanguagesRequest: _TypeAlias = ListS2tLanguagesRequest  # noqa: Y015
 
-@typing.final
-class ListS2tLanguagesResponse(google.protobuf.message.Message):
+@_typing.final
+class ListS2tLanguagesResponse(_message.Message):
     """<p>Response message to list available languages</p>"""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    LANGUAGES_FIELD_NUMBER: builtins.int
-    @property
-    def languages(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
+    LANGUAGES_FIELD_NUMBER: _builtins.int
+    @_builtins.property
+    def languages(self) -> _containers.RepeatedScalarFieldContainer[_builtins.str]:
         """available languages"""
 
     def __init__(
         self,
         *,
-        languages: collections.abc.Iterable[builtins.str] | None = ...,
+        languages: _abc.Iterable[_builtins.str] | None = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing.Literal["languages", b"languages"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _Never  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["languages", b"languages"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-global___ListS2tLanguagesResponse = ListS2tLanguagesResponse
+Global___ListS2tLanguagesResponse: _TypeAlias = ListS2tLanguagesResponse  # noqa: Y015
 
-@typing.final
-class ListS2tDomainsRequest(google.protobuf.message.Message):
+@_typing.final
+class ListS2tDomainsRequest(_message.Message):
     """////////////////////
     LIST S2T DOMAINS //
     ////////////////////
@@ -1254,50 +1396,58 @@ class ListS2tDomainsRequest(google.protobuf.message.Message):
     <p>Request message to list available domains. Optionally also filters can be set.</p>
     """
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    LANGUAGES_FIELD_NUMBER: builtins.int
-    PIPELINE_OWNERS_FIELD_NUMBER: builtins.int
-    @property
-    def languages(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
+    LANGUAGES_FIELD_NUMBER: _builtins.int
+    PIPELINE_OWNERS_FIELD_NUMBER: _builtins.int
+    @_builtins.property
+    def languages(self) -> _containers.RepeatedScalarFieldContainer[_builtins.str]:
         """Filter for languages"""
 
-    @property
-    def pipeline_owners(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
+    @_builtins.property
+    def pipeline_owners(self) -> _containers.RepeatedScalarFieldContainer[_builtins.str]:
         """Filter for pipeline owner"""
 
     def __init__(
         self,
         *,
-        languages: collections.abc.Iterable[builtins.str] | None = ...,
-        pipeline_owners: collections.abc.Iterable[builtins.str] | None = ...,
+        languages: _abc.Iterable[_builtins.str] | None = ...,
+        pipeline_owners: _abc.Iterable[_builtins.str] | None = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing.Literal["languages", b"languages", "pipeline_owners", b"pipeline_owners"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _Never  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["languages", b"languages", "pipeline_owners", b"pipeline_owners"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-global___ListS2tDomainsRequest = ListS2tDomainsRequest
+Global___ListS2tDomainsRequest: _TypeAlias = ListS2tDomainsRequest  # noqa: Y015
 
-@typing.final
-class ListS2tDomainsResponse(google.protobuf.message.Message):
+@_typing.final
+class ListS2tDomainsResponse(_message.Message):
     """<p>Response message to list available domains</p>"""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    DOMAINS_FIELD_NUMBER: builtins.int
-    @property
-    def domains(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
+    DOMAINS_FIELD_NUMBER: _builtins.int
+    @_builtins.property
+    def domains(self) -> _containers.RepeatedScalarFieldContainer[_builtins.str]:
         """domains available. Example: [&quot;medical&quot;, &quot;finance&quot;]"""
 
     def __init__(
         self,
         *,
-        domains: collections.abc.Iterable[builtins.str] | None = ...,
+        domains: _abc.Iterable[_builtins.str] | None = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing.Literal["domains", b"domains"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _Never  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["domains", b"domains"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-global___ListS2tDomainsResponse = ListS2tDomainsResponse
+Global___ListS2tDomainsResponse: _TypeAlias = ListS2tDomainsResponse  # noqa: Y015
 
-@typing.final
-class S2tGetServiceInfoResponse(google.protobuf.message.Message):
+@_typing.final
+class S2tGetServiceInfoResponse(_message.Message):
     """////////////////////
     GET SERVICE INFO //
     ////////////////////
@@ -1305,22 +1455,26 @@ class S2tGetServiceInfoResponse(google.protobuf.message.Message):
     <p>S2tGetServiceInfoResponse is used to return version information about the speech-to-text service.</p>
     """
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    VERSION_FIELD_NUMBER: builtins.int
-    version: builtins.str
+    VERSION_FIELD_NUMBER: _builtins.int
+    version: _builtins.str
     """Version number based on semantic versioning, e.g. &quot;4.2.0&quot;."""
     def __init__(
         self,
         *,
-        version: builtins.str = ...,
+        version: _builtins.str = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing.Literal["version", b"version"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _Never  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["version", b"version"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-global___S2tGetServiceInfoResponse = S2tGetServiceInfoResponse
+Global___S2tGetServiceInfoResponse: _TypeAlias = S2tGetServiceInfoResponse  # noqa: Y015
 
-@typing.final
-class Speech2TextConfig(google.protobuf.message.Message):
+@_typing.final
+class Speech2TextConfig(_message.Message):
     """/////////////////////////////////
     SPEECH-2-TEXT PIPELINE CONFIG //
     /////////////////////////////////
@@ -1328,732 +1482,802 @@ class Speech2TextConfig(google.protobuf.message.Message):
     <p>Speech2TextConfig is a configuration message for the speech-to-text pipeline</p>
     """
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    ID_FIELD_NUMBER: builtins.int
-    DESCRIPTION_FIELD_NUMBER: builtins.int
-    ACTIVE_FIELD_NUMBER: builtins.int
-    INFERENCE_FIELD_NUMBER: builtins.int
-    STREAMING_SERVER_FIELD_NUMBER: builtins.int
-    VOICE_ACTIVITY_DETECTION_FIELD_NUMBER: builtins.int
-    POST_PROCESSING_FIELD_NUMBER: builtins.int
-    LOGGING_FIELD_NUMBER: builtins.int
-    id: builtins.str
+    ID_FIELD_NUMBER: _builtins.int
+    DESCRIPTION_FIELD_NUMBER: _builtins.int
+    ACTIVE_FIELD_NUMBER: _builtins.int
+    INFERENCE_FIELD_NUMBER: _builtins.int
+    STREAMING_SERVER_FIELD_NUMBER: _builtins.int
+    VOICE_ACTIVITY_DETECTION_FIELD_NUMBER: _builtins.int
+    POST_PROCESSING_FIELD_NUMBER: _builtins.int
+    LOGGING_FIELD_NUMBER: _builtins.int
+    id: _builtins.str
     """Unique identifier for the configuration."""
-    active: builtins.bool
+    active: _builtins.bool
     """Indicates if the configuration is active."""
-    @property
-    def description(self) -> global___S2tDescription:
+    @_builtins.property
+    def description(self) -> Global___S2tDescription:
         """Description of the speech-to-text system."""
 
-    @property
-    def inference(self) -> global___S2tInference:
+    @_builtins.property
+    def inference(self) -> Global___S2tInference:
         """Configuration for inference models."""
 
-    @property
-    def streaming_server(self) -> global___StreamingServer:
+    @_builtins.property
+    def streaming_server(self) -> Global___StreamingServer:
         """Configuration for the streaming server."""
 
-    @property
-    def voice_activity_detection(self) -> global___VoiceActivityDetection:
+    @_builtins.property
+    def voice_activity_detection(self) -> Global___VoiceActivityDetection:
         """Configuration for voice activity detection."""
 
-    @property
-    def post_processing(self) -> global___PostProcessing:
+    @_builtins.property
+    def post_processing(self) -> Global___PostProcessing:
         """Configuration for post-processing."""
 
-    @property
-    def logging(self) -> global___Logging:
+    @_builtins.property
+    def logging(self) -> Global___Logging:
         """Configuration for logging."""
 
     def __init__(
         self,
         *,
-        id: builtins.str = ...,
-        description: global___S2tDescription | None = ...,
-        active: builtins.bool = ...,
-        inference: global___S2tInference | None = ...,
-        streaming_server: global___StreamingServer | None = ...,
-        voice_activity_detection: global___VoiceActivityDetection | None = ...,
-        post_processing: global___PostProcessing | None = ...,
-        logging: global___Logging | None = ...,
+        id: _builtins.str = ...,
+        description: Global___S2tDescription | None = ...,
+        active: _builtins.bool = ...,
+        inference: Global___S2tInference | None = ...,
+        streaming_server: Global___StreamingServer | None = ...,
+        voice_activity_detection: Global___VoiceActivityDetection | None = ...,
+        post_processing: Global___PostProcessing | None = ...,
+        logging: Global___Logging | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["description", b"description", "inference", b"inference", "logging", b"logging", "post_processing", b"post_processing", "streaming_server", b"streaming_server", "voice_activity_detection", b"voice_activity_detection"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["active", b"active", "description", b"description", "id", b"id", "inference", b"inference", "logging", b"logging", "post_processing", b"post_processing", "streaming_server", b"streaming_server", "voice_activity_detection", b"voice_activity_detection"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _typing.Literal["description", b"description", "inference", b"inference", "logging", b"logging", "post_processing", b"post_processing", "streaming_server", b"streaming_server", "voice_activity_detection", b"voice_activity_detection"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["active", b"active", "description", b"description", "id", b"id", "inference", b"inference", "logging", b"logging", "post_processing", b"post_processing", "streaming_server", b"streaming_server", "voice_activity_detection", b"voice_activity_detection"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-global___Speech2TextConfig = Speech2TextConfig
+Global___Speech2TextConfig: _TypeAlias = Speech2TextConfig  # noqa: Y015
 
-@typing.final
-class S2tDescription(google.protobuf.message.Message):
+@_typing.final
+class S2tDescription(_message.Message):
     """<p>S2tDescription contains descriptive information about the speech-to-text pipeline.</p>"""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    LANGUAGE_FIELD_NUMBER: builtins.int
-    PIPELINE_OWNER_FIELD_NUMBER: builtins.int
-    DOMAIN_FIELD_NUMBER: builtins.int
-    COMMENTS_FIELD_NUMBER: builtins.int
-    language: builtins.str
+    LANGUAGE_FIELD_NUMBER: _builtins.int
+    PIPELINE_OWNER_FIELD_NUMBER: _builtins.int
+    DOMAIN_FIELD_NUMBER: _builtins.int
+    COMMENTS_FIELD_NUMBER: _builtins.int
+    language: _builtins.str
     """Language of the speech-to-text system."""
-    pipeline_owner: builtins.str
+    pipeline_owner: _builtins.str
     """Owner of the pipeline."""
-    domain: builtins.str
+    domain: _builtins.str
     """Domain of the speech-to-text system."""
-    comments: builtins.str
+    comments: _builtins.str
     """Comments about the system."""
     def __init__(
         self,
         *,
-        language: builtins.str = ...,
-        pipeline_owner: builtins.str = ...,
-        domain: builtins.str = ...,
-        comments: builtins.str = ...,
+        language: _builtins.str = ...,
+        pipeline_owner: _builtins.str = ...,
+        domain: _builtins.str = ...,
+        comments: _builtins.str = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing.Literal["comments", b"comments", "domain", b"domain", "language", b"language", "pipeline_owner", b"pipeline_owner"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _Never  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["comments", b"comments", "domain", b"domain", "language", b"language", "pipeline_owner", b"pipeline_owner"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-global___S2tDescription = S2tDescription
+Global___S2tDescription: _TypeAlias = S2tDescription  # noqa: Y015
 
-@typing.final
-class S2tInference(google.protobuf.message.Message):
+@_typing.final
+class S2tInference(_message.Message):
     """<p>S2tInference contains information about inference models used in the speech-to-text pipeline.</p>"""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    ACOUSTIC_MODELS_FIELD_NUMBER: builtins.int
-    LANGUAGE_MODELS_FIELD_NUMBER: builtins.int
-    INFERENCE_BACKEND_FIELD_NUMBER: builtins.int
-    inference_backend: global___InferenceBackend.ValueType
+    ACOUSTIC_MODELS_FIELD_NUMBER: _builtins.int
+    LANGUAGE_MODELS_FIELD_NUMBER: _builtins.int
+    INFERENCE_BACKEND_FIELD_NUMBER: _builtins.int
+    inference_backend: Global___InferenceBackend.ValueType
     """Configuration for the inference backend."""
-    @property
-    def acoustic_models(self) -> global___AcousticModels:
+    @_builtins.property
+    def acoustic_models(self) -> Global___AcousticModels:
         """Configuration for the acoustic models."""
 
-    @property
-    def language_models(self) -> global___LanguageModels:
+    @_builtins.property
+    def language_models(self) -> Global___LanguageModels:
         """Configuration for the language models."""
 
     def __init__(
         self,
         *,
-        acoustic_models: global___AcousticModels | None = ...,
-        language_models: global___LanguageModels | None = ...,
-        inference_backend: global___InferenceBackend.ValueType = ...,
+        acoustic_models: Global___AcousticModels | None = ...,
+        language_models: Global___LanguageModels | None = ...,
+        inference_backend: Global___InferenceBackend.ValueType = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["acoustic_models", b"acoustic_models", "language_models", b"language_models"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["acoustic_models", b"acoustic_models", "inference_backend", b"inference_backend", "language_models", b"language_models"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _typing.Literal["acoustic_models", b"acoustic_models", "language_models", b"language_models"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["acoustic_models", b"acoustic_models", "inference_backend", b"inference_backend", "language_models", b"language_models"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-global___S2tInference = S2tInference
+Global___S2tInference: _TypeAlias = S2tInference  # noqa: Y015
 
-@typing.final
-class AcousticModels(google.protobuf.message.Message):
+@_typing.final
+class AcousticModels(_message.Message):
     """<p>AcousticModels contains information about different types of acoustic models.</p>"""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    TYPE_FIELD_NUMBER: builtins.int
-    WAV2VEC_FIELD_NUMBER: builtins.int
-    WAV2VEC_TRITON_FIELD_NUMBER: builtins.int
-    WHISPER_FIELD_NUMBER: builtins.int
-    WHISPER_TRITON_FIELD_NUMBER: builtins.int
-    S2T_CLOUD_SERVICE_AMAZON_FIELD_NUMBER: builtins.int
-    S2T_CLOUD_SERVICE_DEEPGRAM_FIELD_NUMBER: builtins.int
-    S2T_CLOUD_SERVICE_GOOGLE_FIELD_NUMBER: builtins.int
-    S2T_CLOUD_SERVICE_MICROSOFT_FIELD_NUMBER: builtins.int
-    PARAKEET_FIELD_NUMBER: builtins.int
-    type: builtins.str
+    TYPE_FIELD_NUMBER: _builtins.int
+    WAV2VEC_FIELD_NUMBER: _builtins.int
+    WAV2VEC_TRITON_FIELD_NUMBER: _builtins.int
+    WHISPER_FIELD_NUMBER: _builtins.int
+    WHISPER_TRITON_FIELD_NUMBER: _builtins.int
+    S2T_CLOUD_SERVICE_AMAZON_FIELD_NUMBER: _builtins.int
+    S2T_CLOUD_SERVICE_DEEPGRAM_FIELD_NUMBER: _builtins.int
+    S2T_CLOUD_SERVICE_GOOGLE_FIELD_NUMBER: _builtins.int
+    S2T_CLOUD_SERVICE_MICROSOFT_FIELD_NUMBER: _builtins.int
+    PARAKEET_FIELD_NUMBER: _builtins.int
+    type: _builtins.str
     """Type of the acoustic model."""
-    @property
-    def wav2vec(self) -> global___Wav2Vec:
+    @_builtins.property
+    def wav2vec(self) -> Global___Wav2Vec:
         """Configuration for the Wav2Vec model."""
 
-    @property
-    def wav2vec_triton(self) -> global___Wav2VecTriton:
+    @_builtins.property
+    def wav2vec_triton(self) -> Global___Wav2VecTriton:
         """Configuration for the Wav2Vec model using Triton."""
 
-    @property
-    def whisper(self) -> global___Whisper:
+    @_builtins.property
+    def whisper(self) -> Global___Whisper:
         """Configuration for the Whisper model."""
 
-    @property
-    def whisper_triton(self) -> global___WhisperTriton:
+    @_builtins.property
+    def whisper_triton(self) -> Global___WhisperTriton:
         """Configuration for the Whisper model using Triton."""
 
-    @property
-    def s2t_cloud_service_amazon(self) -> global___S2tCloudServiceAmazon:
+    @_builtins.property
+    def s2t_cloud_service_amazon(self) -> Global___S2tCloudServiceAmazon:
         """Amazon web service cloud service inference settings."""
 
-    @property
-    def s2t_cloud_service_deepgram(self) -> global___S2tCloudServiceDeepgram:
+    @_builtins.property
+    def s2t_cloud_service_deepgram(self) -> Global___S2tCloudServiceDeepgram:
         """Deepgram cloud service inference settings."""
 
-    @property
-    def s2t_cloud_service_google(self) -> global___S2tCloudServiceGoogle:
+    @_builtins.property
+    def s2t_cloud_service_google(self) -> Global___S2tCloudServiceGoogle:
         """Google cloud service inference settings."""
 
-    @property
-    def s2t_cloud_service_microsoft(self) -> global___S2tCloudServiceMicrosoft:
+    @_builtins.property
+    def s2t_cloud_service_microsoft(self) -> Global___S2tCloudServiceMicrosoft:
         """Microsoft Azure cloud service inference settings."""
 
-    @property
-    def parakeet(self) -> global___Parakeet:
+    @_builtins.property
+    def parakeet(self) -> Global___Parakeet:
         """Configuration for the Parakeet model."""
 
     def __init__(
         self,
         *,
-        type: builtins.str = ...,
-        wav2vec: global___Wav2Vec | None = ...,
-        wav2vec_triton: global___Wav2VecTriton | None = ...,
-        whisper: global___Whisper | None = ...,
-        whisper_triton: global___WhisperTriton | None = ...,
-        s2t_cloud_service_amazon: global___S2tCloudServiceAmazon | None = ...,
-        s2t_cloud_service_deepgram: global___S2tCloudServiceDeepgram | None = ...,
-        s2t_cloud_service_google: global___S2tCloudServiceGoogle | None = ...,
-        s2t_cloud_service_microsoft: global___S2tCloudServiceMicrosoft | None = ...,
-        parakeet: global___Parakeet | None = ...,
+        type: _builtins.str = ...,
+        wav2vec: Global___Wav2Vec | None = ...,
+        wav2vec_triton: Global___Wav2VecTriton | None = ...,
+        whisper: Global___Whisper | None = ...,
+        whisper_triton: Global___WhisperTriton | None = ...,
+        s2t_cloud_service_amazon: Global___S2tCloudServiceAmazon | None = ...,
+        s2t_cloud_service_deepgram: Global___S2tCloudServiceDeepgram | None = ...,
+        s2t_cloud_service_google: Global___S2tCloudServiceGoogle | None = ...,
+        s2t_cloud_service_microsoft: Global___S2tCloudServiceMicrosoft | None = ...,
+        parakeet: Global___Parakeet | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["parakeet", b"parakeet", "s2t_cloud_service_amazon", b"s2t_cloud_service_amazon", "s2t_cloud_service_deepgram", b"s2t_cloud_service_deepgram", "s2t_cloud_service_google", b"s2t_cloud_service_google", "s2t_cloud_service_microsoft", b"s2t_cloud_service_microsoft", "wav2vec", b"wav2vec", "wav2vec_triton", b"wav2vec_triton", "whisper", b"whisper", "whisper_triton", b"whisper_triton"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["parakeet", b"parakeet", "s2t_cloud_service_amazon", b"s2t_cloud_service_amazon", "s2t_cloud_service_deepgram", b"s2t_cloud_service_deepgram", "s2t_cloud_service_google", b"s2t_cloud_service_google", "s2t_cloud_service_microsoft", b"s2t_cloud_service_microsoft", "type", b"type", "wav2vec", b"wav2vec", "wav2vec_triton", b"wav2vec_triton", "whisper", b"whisper", "whisper_triton", b"whisper_triton"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _typing.Literal["parakeet", b"parakeet", "s2t_cloud_service_amazon", b"s2t_cloud_service_amazon", "s2t_cloud_service_deepgram", b"s2t_cloud_service_deepgram", "s2t_cloud_service_google", b"s2t_cloud_service_google", "s2t_cloud_service_microsoft", b"s2t_cloud_service_microsoft", "wav2vec", b"wav2vec", "wav2vec_triton", b"wav2vec_triton", "whisper", b"whisper", "whisper_triton", b"whisper_triton"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["parakeet", b"parakeet", "s2t_cloud_service_amazon", b"s2t_cloud_service_amazon", "s2t_cloud_service_deepgram", b"s2t_cloud_service_deepgram", "s2t_cloud_service_google", b"s2t_cloud_service_google", "s2t_cloud_service_microsoft", b"s2t_cloud_service_microsoft", "type", b"type", "wav2vec", b"wav2vec", "wav2vec_triton", b"wav2vec_triton", "whisper", b"whisper", "whisper_triton", b"whisper_triton"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-global___AcousticModels = AcousticModels
+Global___AcousticModels: _TypeAlias = AcousticModels  # noqa: Y015
 
-@typing.final
-class S2tCloudServiceAmazon(google.protobuf.message.Message):
+@_typing.final
+class S2tCloudServiceAmazon(_message.Message):
     """<p>S2tCloudServiceAmazon message contains settings for the Amazon web service Cloud service inference.</p>"""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    LANGUAGE_FIELD_NUMBER: builtins.int
-    STREAMING_AVAILABLE_FIELD_NUMBER: builtins.int
-    ENABLE_PARTIAL_RESULTS_STABILIZATION_FIELD_NUMBER: builtins.int
-    PARTIAL_RESULTS_STABILITY_FIELD_NUMBER: builtins.int
-    LANGUAGE_MODEL_NAME_FIELD_NUMBER: builtins.int
-    VOCABULARY_NAME_FIELD_NUMBER: builtins.int
-    language: builtins.str
+    LANGUAGE_FIELD_NUMBER: _builtins.int
+    STREAMING_AVAILABLE_FIELD_NUMBER: _builtins.int
+    ENABLE_PARTIAL_RESULTS_STABILIZATION_FIELD_NUMBER: _builtins.int
+    PARTIAL_RESULTS_STABILITY_FIELD_NUMBER: _builtins.int
+    LANGUAGE_MODEL_NAME_FIELD_NUMBER: _builtins.int
+    VOCABULARY_NAME_FIELD_NUMBER: _builtins.int
+    language: _builtins.str
     """Language of the audio to transcribe by Amazon web service s2t cloud service. It should be 4-letter language code
     (BCP-47) e.g. &apos;en-US&apos; or &apos;de-DE&apos;.
     """
-    streaming_available: builtins.bool
+    streaming_available: _builtins.bool
     """Specifies if streaming mode of Amazon web service speech to text is available for the selected language,
     otherwise batch mode transcription is used. See the list of languages and available transcription modes at:
     <a href="https://docs.aws.amazon.com/transcribe/latest/dg/supported-languages.html">https://docs.aws.amazon.com/transcribe/latest/dg/supported-languages.html</a>
     """
-    enable_partial_results_stabilization: builtins.bool
+    enable_partial_results_stabilization: _builtins.bool
     """Enables or disables <code>partial_results_stabilization</code> feature. More details at:
     <a href="https://docs.aws.amazon.com/transcribe/latest/dg/streaming-partial-results.html#streaming-partial-result-stabilization">https://docs.aws.amazon.com/transcribe/latest/dg/streaming-partial-results.html#streaming-partial-result-stabilization</a>
     """
-    partial_results_stability: builtins.str
+    partial_results_stability: _builtins.str
     """You can use this field to set the stability level of the transcription results.
     A higher stability level means that the transcription results are less likely to change.
     Higher stability levels can come with lower overall transcription accuracy.
     Defaults to &quot;high&quot; if not set explicitly.
     """
-    language_model_name: builtins.str
+    language_model_name: _builtins.str
     """The name of your customize language model you want to use.
     More details at: <a href="https://docs.aws.amazon.com/transcribe/latest/dg/custom-language-models.html">https://docs.aws.amazon.com/transcribe/latest/dg/custom-language-models.html</a>
     """
-    vocabulary_name: builtins.str
+    vocabulary_name: _builtins.str
     """The name of your customize vocabulary you want to use.
     More details at: <a href="https://docs.aws.amazon.com/transcribe/latest/dg/custom-vocabulary.html">https://docs.aws.amazon.com/transcribe/latest/dg/custom-vocabulary.html</a>
     """
     def __init__(
         self,
         *,
-        language: builtins.str = ...,
-        streaming_available: builtins.bool = ...,
-        enable_partial_results_stabilization: builtins.bool = ...,
-        partial_results_stability: builtins.str = ...,
-        language_model_name: builtins.str = ...,
-        vocabulary_name: builtins.str = ...,
+        language: _builtins.str = ...,
+        streaming_available: _builtins.bool = ...,
+        enable_partial_results_stabilization: _builtins.bool = ...,
+        partial_results_stability: _builtins.str = ...,
+        language_model_name: _builtins.str = ...,
+        vocabulary_name: _builtins.str = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing.Literal["enable_partial_results_stabilization", b"enable_partial_results_stabilization", "language", b"language", "language_model_name", b"language_model_name", "partial_results_stability", b"partial_results_stability", "streaming_available", b"streaming_available", "vocabulary_name", b"vocabulary_name"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _Never  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["enable_partial_results_stabilization", b"enable_partial_results_stabilization", "language", b"language", "language_model_name", b"language_model_name", "partial_results_stability", b"partial_results_stability", "streaming_available", b"streaming_available", "vocabulary_name", b"vocabulary_name"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-global___S2tCloudServiceAmazon = S2tCloudServiceAmazon
+Global___S2tCloudServiceAmazon: _TypeAlias = S2tCloudServiceAmazon  # noqa: Y015
 
-@typing.final
-class S2tCloudServiceDeepgram(google.protobuf.message.Message):
+@_typing.final
+class S2tCloudServiceDeepgram(_message.Message):
     """<p>S2tCloudServiceDeepgram message contains settings for the Deepgram Cloud service inference.</p>"""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    MODEL_NAME_FIELD_NUMBER: builtins.int
-    LANGUAGE_FIELD_NUMBER: builtins.int
-    PUNCTUATE_FIELD_NUMBER: builtins.int
-    SMART_FORMAT_FIELD_NUMBER: builtins.int
-    NUMERALS_FIELD_NUMBER: builtins.int
-    MEASUREMENTS_FIELD_NUMBER: builtins.int
-    DICTATION_FIELD_NUMBER: builtins.int
-    model_name: builtins.str
+    MODEL_NAME_FIELD_NUMBER: _builtins.int
+    LANGUAGE_FIELD_NUMBER: _builtins.int
+    PUNCTUATE_FIELD_NUMBER: _builtins.int
+    SMART_FORMAT_FIELD_NUMBER: _builtins.int
+    NUMERALS_FIELD_NUMBER: _builtins.int
+    MEASUREMENTS_FIELD_NUMBER: _builtins.int
+    DICTATION_FIELD_NUMBER: _builtins.int
+    model_name: _builtins.str
     """Model name from one of the speech-to-text models provided by Deepgram for the desired use-case.
     Provided model names and details at: <a href="https://developers.deepgram.com/docs/model">https://developers.deepgram.com/docs/model</a>
     """
-    language: builtins.str
+    language: _builtins.str
     """Language of the audio to transcribe by Deepgram s2t cloud service. It should be 4-letter language code
     (BCP-47) e.g. &apos;en-US&apos; or &apos;de-DE&apos;.
     """
-    punctuate: builtins.bool
+    punctuate: _builtins.bool
     """Enables or disables <code>punctuate</code> feature of Deepgram to add punctuations to the resulted transcript.
     More details at: <a href="https://developers.deepgram.com/docs/punctuation">https://developers.deepgram.com/docs/punctuation</a>
     """
-    smart_format: builtins.bool
+    smart_format: _builtins.bool
     """Enables or disables <code>smart_format</code> feature of Deepgram transcription result to improve readability.
     More details at: <a href="https://developers.deepgram.com/docs/smart-format">https://developers.deepgram.com/docs/smart-format</a>
     """
-    numerals: builtins.bool
+    numerals: _builtins.bool
     """Enables or disables <code>numerals</code> feature of Deepgram to convert numbers to numeric form in the resulted transcript.
     More details at: <a href="https://developers.deepgram.com/docs/numerals">https://developers.deepgram.com/docs/numerals</a>
     """
-    measurements: builtins.bool
+    measurements: _builtins.bool
     """Enables or disables <code>measurements</code> feature of Deepgram to convert measurement units (i.e. Kilogram)
     to abbreviated form (i.e. Kg) in the resulted transcript.
     More details at: <a href="https://developers.deepgram.com/docs/measurements">https://developers.deepgram.com/docs/measurements</a>
     """
-    dictation: builtins.bool
+    dictation: _builtins.bool
     """Enables or disables <code>dictation</code> feature of Deepgram to convert spoken dictation commands into their corresponding
     punctuation marks. More details at: <a href="https://developers.deepgram.com/docs/dictation">https://developers.deepgram.com/docs/dictation</a>
     """
     def __init__(
         self,
         *,
-        model_name: builtins.str = ...,
-        language: builtins.str = ...,
-        punctuate: builtins.bool = ...,
-        smart_format: builtins.bool = ...,
-        numerals: builtins.bool = ...,
-        measurements: builtins.bool = ...,
-        dictation: builtins.bool = ...,
+        model_name: _builtins.str = ...,
+        language: _builtins.str = ...,
+        punctuate: _builtins.bool = ...,
+        smart_format: _builtins.bool = ...,
+        numerals: _builtins.bool = ...,
+        measurements: _builtins.bool = ...,
+        dictation: _builtins.bool = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing.Literal["dictation", b"dictation", "language", b"language", "measurements", b"measurements", "model_name", b"model_name", "numerals", b"numerals", "punctuate", b"punctuate", "smart_format", b"smart_format"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _Never  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["dictation", b"dictation", "language", b"language", "measurements", b"measurements", "model_name", b"model_name", "numerals", b"numerals", "punctuate", b"punctuate", "smart_format", b"smart_format"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-global___S2tCloudServiceDeepgram = S2tCloudServiceDeepgram
+Global___S2tCloudServiceDeepgram: _TypeAlias = S2tCloudServiceDeepgram  # noqa: Y015
 
-@typing.final
-class S2tCloudServiceGoogle(google.protobuf.message.Message):
+@_typing.final
+class S2tCloudServiceGoogle(_message.Message):
     """<p>S2tCloudServiceGoogle message contains settings for the Google Cloud service inference.</p>"""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    MODEL_NAME_FIELD_NUMBER: builtins.int
-    LANGUAGE_FIELD_NUMBER: builtins.int
-    ENABLE_AUTOMATIC_PUNCTUATION_FIELD_NUMBER: builtins.int
-    ENABLE_WORD_TIME_OFFSETS_FIELD_NUMBER: builtins.int
-    ENABLE_WORD_CONFIDENCE_FIELD_NUMBER: builtins.int
-    TRANSCRIPT_NORMALIZATION_FIELD_NUMBER: builtins.int
-    MAX_ALTERNATIVES_FIELD_NUMBER: builtins.int
-    model_name: builtins.str
+    MODEL_NAME_FIELD_NUMBER: _builtins.int
+    LANGUAGE_FIELD_NUMBER: _builtins.int
+    ENABLE_AUTOMATIC_PUNCTUATION_FIELD_NUMBER: _builtins.int
+    ENABLE_WORD_TIME_OFFSETS_FIELD_NUMBER: _builtins.int
+    ENABLE_WORD_CONFIDENCE_FIELD_NUMBER: _builtins.int
+    TRANSCRIPT_NORMALIZATION_FIELD_NUMBER: _builtins.int
+    MAX_ALTERNATIVES_FIELD_NUMBER: _builtins.int
+    model_name: _builtins.str
     """Model name from one of the speech-to-text models provided by Google for the desired use-case.
     Provided model names and details at: <a href="https://cloud.google.com/speech-to-text/docs/transcription-model">https://cloud.google.com/speech-to-text/docs/transcription-model</a>
     """
-    language: builtins.str
+    language: _builtins.str
     """Language of the audio to transcribe by Google s2t cloud service. It should be 4-letter language code
     (BCP-47) e.g. &apos;en-US&apos; or &apos;de-DE&apos;.
     """
-    enable_automatic_punctuation: builtins.bool
+    enable_automatic_punctuation: _builtins.bool
     """Enables or disables <code>automatic_punctuation</code> feature of Google s2t to add punctuations to the resulted transcript.
     More details at: <a href="https://cloud.google.com/speech-to-text/docs/automatic-punctuation">https://cloud.google.com/speech-to-text/docs/automatic-punctuation</a>
     """
-    enable_word_time_offsets: builtins.bool
+    enable_word_time_offsets: _builtins.bool
     """Enables or disables <code>word_time_offsets</code> feature of Google s2t to add word-level timestamps (time-offsets)
     to the resulted transcript. More details at: <a href="https://cloud.google.com/speech-to-text/docs/async-time-offsets">https://cloud.google.com/speech-to-text/docs/async-time-offsets</a>
     """
-    enable_word_confidence: builtins.bool
+    enable_word_confidence: _builtins.bool
     """Enables or disables <code>word_confidence</code> feature of Google s2t to add word-level confidence scores
     to the resulted transcript. More details at: <a href="https://cloud.google.com/speech-to-text/docs/word-confidence">https://cloud.google.com/speech-to-text/docs/word-confidence</a>
     """
-    transcript_normalization: builtins.bool
+    transcript_normalization: _builtins.bool
     """Enables or disables <code>transcript_normalization</code> feature of Google s2t to automatically
     replace parts of the transcript with phrases of your choosing. More details at:
     <a href="https://cloud.google.com/speech-to-text/v2/docs/reference/rpc/google.cloud.speech.v2#transcriptnormalization">https://cloud.google.com/speech-to-text/v2/docs/reference/rpc/google.cloud.speech.v2#transcriptnormalization</a>
     """
-    max_alternatives: builtins.int
+    max_alternatives: _builtins.int
     """Maximum number of recognition hypotheses to be returned. The server may return fewer than <code>max_alternatives</code>.
     Valid values are 0-30. A value of 0 or 1 will return a maximum of one. If omitted, will return a maximum of one.
     """
     def __init__(
         self,
         *,
-        model_name: builtins.str = ...,
-        language: builtins.str = ...,
-        enable_automatic_punctuation: builtins.bool = ...,
-        enable_word_time_offsets: builtins.bool = ...,
-        enable_word_confidence: builtins.bool = ...,
-        transcript_normalization: builtins.bool = ...,
-        max_alternatives: builtins.int = ...,
+        model_name: _builtins.str = ...,
+        language: _builtins.str = ...,
+        enable_automatic_punctuation: _builtins.bool = ...,
+        enable_word_time_offsets: _builtins.bool = ...,
+        enable_word_confidence: _builtins.bool = ...,
+        transcript_normalization: _builtins.bool = ...,
+        max_alternatives: _builtins.int = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing.Literal["enable_automatic_punctuation", b"enable_automatic_punctuation", "enable_word_confidence", b"enable_word_confidence", "enable_word_time_offsets", b"enable_word_time_offsets", "language", b"language", "max_alternatives", b"max_alternatives", "model_name", b"model_name", "transcript_normalization", b"transcript_normalization"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _Never  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["enable_automatic_punctuation", b"enable_automatic_punctuation", "enable_word_confidence", b"enable_word_confidence", "enable_word_time_offsets", b"enable_word_time_offsets", "language", b"language", "max_alternatives", b"max_alternatives", "model_name", b"model_name", "transcript_normalization", b"transcript_normalization"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-global___S2tCloudServiceGoogle = S2tCloudServiceGoogle
+Global___S2tCloudServiceGoogle: _TypeAlias = S2tCloudServiceGoogle  # noqa: Y015
 
-@typing.final
-class S2tCloudServiceMicrosoft(google.protobuf.message.Message):
+@_typing.final
+class S2tCloudServiceMicrosoft(_message.Message):
     """<p>S2tCloudServiceMicrosoft message contains settings for the Microsoft Azure Cloud service inference.</p>"""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    LANGUAGE_FIELD_NUMBER: builtins.int
-    USE_FAST_TRANSCRIPTION_API_FIELD_NUMBER: builtins.int
-    USE_DETAILED_OUTPUT_FORMAT_FIELD_NUMBER: builtins.int
-    language: builtins.str
+    LANGUAGE_FIELD_NUMBER: _builtins.int
+    USE_FAST_TRANSCRIPTION_API_FIELD_NUMBER: _builtins.int
+    USE_DETAILED_OUTPUT_FORMAT_FIELD_NUMBER: _builtins.int
+    language: _builtins.str
     """Language of the audio to transcribe by Microsoft Azure s2t cloud service. It should be 4-letter language code
     (BCP-47) e.g. &apos;en-US&apos; or &apos;de-DE&apos;.
     """
-    use_fast_transcription_api: builtins.bool
+    use_fast_transcription_api: _builtins.bool
     """Enables or disables the Microsoft Azure fast transcription API. It is faster than SDK but is in preview version.
     More details at: <a href="https://learn.microsoft.com/en-us/azure/ai-services/speech-service/fast-transcription-create">https://learn.microsoft.com/en-us/azure/ai-services/speech-service/fast-transcription-create</a>
     """
-    use_detailed_output_format: builtins.bool
+    use_detailed_output_format: _builtins.bool
     """Enables or disables the <code>detailed</code> format for the result of Microsoft Azure s2t service
     to add timestamps and confidences to the resulted transcript.
     """
     def __init__(
         self,
         *,
-        language: builtins.str = ...,
-        use_fast_transcription_api: builtins.bool = ...,
-        use_detailed_output_format: builtins.bool = ...,
+        language: _builtins.str = ...,
+        use_fast_transcription_api: _builtins.bool = ...,
+        use_detailed_output_format: _builtins.bool = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing.Literal["language", b"language", "use_detailed_output_format", b"use_detailed_output_format", "use_fast_transcription_api", b"use_fast_transcription_api"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _Never  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["language", b"language", "use_detailed_output_format", b"use_detailed_output_format", "use_fast_transcription_api", b"use_fast_transcription_api"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-global___S2tCloudServiceMicrosoft = S2tCloudServiceMicrosoft
+Global___S2tCloudServiceMicrosoft: _TypeAlias = S2tCloudServiceMicrosoft  # noqa: Y015
 
-@typing.final
-class Whisper(google.protobuf.message.Message):
+@_typing.final
+class Whisper(_message.Message):
     """<p>Whisper contains information about the Whisper model.</p>"""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    MODEL_PATH_FIELD_NUMBER: builtins.int
-    USE_GPU_FIELD_NUMBER: builtins.int
-    LANGUAGE_FIELD_NUMBER: builtins.int
-    TASK_FIELD_NUMBER: builtins.int
-    model_path: builtins.str
+    MODEL_PATH_FIELD_NUMBER: _builtins.int
+    USE_GPU_FIELD_NUMBER: _builtins.int
+    LANGUAGE_FIELD_NUMBER: _builtins.int
+    TASK_FIELD_NUMBER: _builtins.int
+    model_path: _builtins.str
     """Path to the model."""
-    use_gpu: builtins.bool
+    use_gpu: _builtins.bool
     """Indicates if GPU is used."""
-    language: builtins.str
+    language: _builtins.str
     """Default language of the model."""
-    task: builtins.str
+    task: _builtins.str
     """Default task of the model."""
     def __init__(
         self,
         *,
-        model_path: builtins.str = ...,
-        use_gpu: builtins.bool = ...,
-        language: builtins.str = ...,
-        task: builtins.str = ...,
+        model_path: _builtins.str = ...,
+        use_gpu: _builtins.bool = ...,
+        language: _builtins.str = ...,
+        task: _builtins.str = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing.Literal["language", b"language", "model_path", b"model_path", "task", b"task", "use_gpu", b"use_gpu"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _Never  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["language", b"language", "model_path", b"model_path", "task", b"task", "use_gpu", b"use_gpu"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-global___Whisper = Whisper
+Global___Whisper: _TypeAlias = Whisper  # noqa: Y015
 
-@typing.final
-class WhisperTriton(google.protobuf.message.Message):
+@_typing.final
+class WhisperTriton(_message.Message):
     """<p>WhisperTriton contains information about the Whisper model using Triton.</p>"""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    PROCESSOR_PATH_FIELD_NUMBER: builtins.int
-    TRITON_MODEL_NAME_FIELD_NUMBER: builtins.int
-    TRITON_MODEL_VERSION_FIELD_NUMBER: builtins.int
-    CHECK_STATUS_TIMEOUT_FIELD_NUMBER: builtins.int
-    LANGUAGE_FIELD_NUMBER: builtins.int
-    TASK_FIELD_NUMBER: builtins.int
-    TRITON_SERVER_HOST_FIELD_NUMBER: builtins.int
-    TRITON_SERVER_PORT_FIELD_NUMBER: builtins.int
-    processor_path: builtins.str
+    PROCESSOR_PATH_FIELD_NUMBER: _builtins.int
+    TRITON_MODEL_NAME_FIELD_NUMBER: _builtins.int
+    TRITON_MODEL_VERSION_FIELD_NUMBER: _builtins.int
+    CHECK_STATUS_TIMEOUT_FIELD_NUMBER: _builtins.int
+    LANGUAGE_FIELD_NUMBER: _builtins.int
+    TASK_FIELD_NUMBER: _builtins.int
+    TRITON_SERVER_HOST_FIELD_NUMBER: _builtins.int
+    TRITON_SERVER_PORT_FIELD_NUMBER: _builtins.int
+    processor_path: _builtins.str
     """Path to the processor."""
-    triton_model_name: builtins.str
+    triton_model_name: _builtins.str
     """Name of the Triton model."""
-    triton_model_version: builtins.str
+    triton_model_version: _builtins.str
     """Version of the Triton model."""
-    check_status_timeout: builtins.int
+    check_status_timeout: _builtins.int
     """Timeout for checking model status."""
-    language: builtins.str
+    language: _builtins.str
     """Default language of the model."""
-    task: builtins.str
+    task: _builtins.str
     """Default task of the model. E.g., transcribe, translate, etc."""
-    triton_server_host: builtins.str
+    triton_server_host: _builtins.str
     """Host name of triton inference server that serves the WhisperTriton model"""
-    triton_server_port: builtins.int
+    triton_server_port: _builtins.int
     """Port number of triton inference server that serves the WhisperTriton model"""
     def __init__(
         self,
         *,
-        processor_path: builtins.str = ...,
-        triton_model_name: builtins.str = ...,
-        triton_model_version: builtins.str = ...,
-        check_status_timeout: builtins.int = ...,
-        language: builtins.str = ...,
-        task: builtins.str = ...,
-        triton_server_host: builtins.str = ...,
-        triton_server_port: builtins.int = ...,
+        processor_path: _builtins.str = ...,
+        triton_model_name: _builtins.str = ...,
+        triton_model_version: _builtins.str = ...,
+        check_status_timeout: _builtins.int = ...,
+        language: _builtins.str = ...,
+        task: _builtins.str = ...,
+        triton_server_host: _builtins.str = ...,
+        triton_server_port: _builtins.int = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing.Literal["check_status_timeout", b"check_status_timeout", "language", b"language", "processor_path", b"processor_path", "task", b"task", "triton_model_name", b"triton_model_name", "triton_model_version", b"triton_model_version", "triton_server_host", b"triton_server_host", "triton_server_port", b"triton_server_port"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _Never  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["check_status_timeout", b"check_status_timeout", "language", b"language", "processor_path", b"processor_path", "task", b"task", "triton_model_name", b"triton_model_name", "triton_model_version", b"triton_model_version", "triton_server_host", b"triton_server_host", "triton_server_port", b"triton_server_port"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-global___WhisperTriton = WhisperTriton
+Global___WhisperTriton: _TypeAlias = WhisperTriton  # noqa: Y015
 
-@typing.final
-class Wav2Vec(google.protobuf.message.Message):
+@_typing.final
+class Wav2Vec(_message.Message):
     """<p>Wav2Vec contains information about the Wav2Vec model.</p>"""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    MODEL_PATH_FIELD_NUMBER: builtins.int
-    USE_GPU_FIELD_NUMBER: builtins.int
-    model_path: builtins.str
+    MODEL_PATH_FIELD_NUMBER: _builtins.int
+    USE_GPU_FIELD_NUMBER: _builtins.int
+    model_path: _builtins.str
     """Path to the model."""
-    use_gpu: builtins.bool
+    use_gpu: _builtins.bool
     """Indicates if GPU is used."""
     def __init__(
         self,
         *,
-        model_path: builtins.str = ...,
-        use_gpu: builtins.bool = ...,
+        model_path: _builtins.str = ...,
+        use_gpu: _builtins.bool = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing.Literal["model_path", b"model_path", "use_gpu", b"use_gpu"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _Never  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["model_path", b"model_path", "use_gpu", b"use_gpu"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-global___Wav2Vec = Wav2Vec
+Global___Wav2Vec: _TypeAlias = Wav2Vec  # noqa: Y015
 
-@typing.final
-class Wav2VecTriton(google.protobuf.message.Message):
+@_typing.final
+class Wav2VecTriton(_message.Message):
     """<p>Wav2VecTriton contains information about the Wav2Vec model using Triton.</p>"""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    PROCESSOR_PATH_FIELD_NUMBER: builtins.int
-    TRITON_MODEL_NAME_FIELD_NUMBER: builtins.int
-    TRITON_MODEL_VERSION_FIELD_NUMBER: builtins.int
-    CHECK_STATUS_TIMEOUT_FIELD_NUMBER: builtins.int
-    TRITON_SERVER_HOST_FIELD_NUMBER: builtins.int
-    TRITON_SERVER_PORT_FIELD_NUMBER: builtins.int
-    processor_path: builtins.str
+    PROCESSOR_PATH_FIELD_NUMBER: _builtins.int
+    TRITON_MODEL_NAME_FIELD_NUMBER: _builtins.int
+    TRITON_MODEL_VERSION_FIELD_NUMBER: _builtins.int
+    CHECK_STATUS_TIMEOUT_FIELD_NUMBER: _builtins.int
+    TRITON_SERVER_HOST_FIELD_NUMBER: _builtins.int
+    TRITON_SERVER_PORT_FIELD_NUMBER: _builtins.int
+    processor_path: _builtins.str
     """Path to the processor."""
-    triton_model_name: builtins.str
+    triton_model_name: _builtins.str
     """Name of the Triton model."""
-    triton_model_version: builtins.str
+    triton_model_version: _builtins.str
     """Version of the Triton model."""
-    check_status_timeout: builtins.int
+    check_status_timeout: _builtins.int
     """Timeout for checking model status."""
-    triton_server_host: builtins.str
+    triton_server_host: _builtins.str
     """Host name of triton inference server that serves the Wav2VecTriton model"""
-    triton_server_port: builtins.int
+    triton_server_port: _builtins.int
     """Port number of triton inference server that serves the Wav2VecTriton model"""
     def __init__(
         self,
         *,
-        processor_path: builtins.str = ...,
-        triton_model_name: builtins.str = ...,
-        triton_model_version: builtins.str = ...,
-        check_status_timeout: builtins.int = ...,
-        triton_server_host: builtins.str = ...,
-        triton_server_port: builtins.int = ...,
+        processor_path: _builtins.str = ...,
+        triton_model_name: _builtins.str = ...,
+        triton_model_version: _builtins.str = ...,
+        check_status_timeout: _builtins.int = ...,
+        triton_server_host: _builtins.str = ...,
+        triton_server_port: _builtins.int = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing.Literal["check_status_timeout", b"check_status_timeout", "processor_path", b"processor_path", "triton_model_name", b"triton_model_name", "triton_model_version", b"triton_model_version", "triton_server_host", b"triton_server_host", "triton_server_port", b"triton_server_port"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _Never  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["check_status_timeout", b"check_status_timeout", "processor_path", b"processor_path", "triton_model_name", b"triton_model_name", "triton_model_version", b"triton_model_version", "triton_server_host", b"triton_server_host", "triton_server_port", b"triton_server_port"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-global___Wav2VecTriton = Wav2VecTriton
+Global___Wav2VecTriton: _TypeAlias = Wav2VecTriton  # noqa: Y015
 
-@typing.final
-class Parakeet(google.protobuf.message.Message):
+@_typing.final
+class Parakeet(_message.Message):
     """<p>Parakeet contains information about the Parakeet model.</p>"""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    TRITON_MODEL_NAME_FIELD_NUMBER: builtins.int
-    TRITON_MODEL_VERSION_FIELD_NUMBER: builtins.int
-    CHECK_STATUS_TIMEOUT_FIELD_NUMBER: builtins.int
-    TRITON_SERVER_HOST_FIELD_NUMBER: builtins.int
-    TRITON_SERVER_PORT_FIELD_NUMBER: builtins.int
-    triton_model_name: builtins.str
+    TRITON_MODEL_NAME_FIELD_NUMBER: _builtins.int
+    TRITON_MODEL_VERSION_FIELD_NUMBER: _builtins.int
+    CHECK_STATUS_TIMEOUT_FIELD_NUMBER: _builtins.int
+    TRITON_SERVER_HOST_FIELD_NUMBER: _builtins.int
+    TRITON_SERVER_PORT_FIELD_NUMBER: _builtins.int
+    triton_model_name: _builtins.str
     """Name of the Triton model."""
-    triton_model_version: builtins.str
+    triton_model_version: _builtins.str
     """Version of the Triton model."""
-    check_status_timeout: builtins.int
+    check_status_timeout: _builtins.int
     """Timeout for checking model status."""
-    triton_server_host: builtins.str
+    triton_server_host: _builtins.str
     """Host name of triton inference server that serves the Parakeet model"""
-    triton_server_port: builtins.int
+    triton_server_port: _builtins.int
     """Port number of triton inference server that serves the Parakeet model"""
     def __init__(
         self,
         *,
-        triton_model_name: builtins.str = ...,
-        triton_model_version: builtins.str = ...,
-        check_status_timeout: builtins.int = ...,
-        triton_server_host: builtins.str = ...,
-        triton_server_port: builtins.int = ...,
+        triton_model_name: _builtins.str = ...,
+        triton_model_version: _builtins.str = ...,
+        check_status_timeout: _builtins.int = ...,
+        triton_server_host: _builtins.str = ...,
+        triton_server_port: _builtins.int = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing.Literal["check_status_timeout", b"check_status_timeout", "triton_model_name", b"triton_model_name", "triton_model_version", b"triton_model_version", "triton_server_host", b"triton_server_host", "triton_server_port", b"triton_server_port"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _Never  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["check_status_timeout", b"check_status_timeout", "triton_model_name", b"triton_model_name", "triton_model_version", b"triton_model_version", "triton_server_host", b"triton_server_host", "triton_server_port", b"triton_server_port"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-global___Parakeet = Parakeet
+Global___Parakeet: _TypeAlias = Parakeet  # noqa: Y015
 
-@typing.final
-class PtFiles(google.protobuf.message.Message):
+@_typing.final
+class PtFiles(_message.Message):
     """<p>PtFiles contains information about PT files.</p>"""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    PATH_FIELD_NUMBER: builtins.int
-    STEP_FIELD_NUMBER: builtins.int
-    path: builtins.str
+    PATH_FIELD_NUMBER: _builtins.int
+    STEP_FIELD_NUMBER: _builtins.int
+    path: _builtins.str
     """Path to the PT files."""
-    step: builtins.str
+    step: _builtins.str
     """Step for the PT files."""
     def __init__(
         self,
         *,
-        path: builtins.str = ...,
-        step: builtins.str = ...,
+        path: _builtins.str = ...,
+        step: _builtins.str = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing.Literal["path", b"path", "step", b"step"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _Never  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["path", b"path", "step", b"step"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-global___PtFiles = PtFiles
+Global___PtFiles: _TypeAlias = PtFiles  # noqa: Y015
 
-@typing.final
-class CkptFile(google.protobuf.message.Message):
+@_typing.final
+class CkptFile(_message.Message):
     """<p>CkptFile contains information about checkpoint files.</p>"""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    PATH_FIELD_NUMBER: builtins.int
-    path: builtins.str
+    PATH_FIELD_NUMBER: _builtins.int
+    path: _builtins.str
     """Path to the checkpoint file."""
     def __init__(
         self,
         *,
-        path: builtins.str = ...,
+        path: _builtins.str = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing.Literal["path", b"path"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _Never  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["path", b"path"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-global___CkptFile = CkptFile
+Global___CkptFile: _TypeAlias = CkptFile  # noqa: Y015
 
-@typing.final
-class LanguageModels(google.protobuf.message.Message):
+@_typing.final
+class LanguageModels(_message.Message):
     """<p>LanguageModels contains information about language models.</p>"""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    PATH_FIELD_NUMBER: builtins.int
-    BEAM_SIZE_FIELD_NUMBER: builtins.int
-    DEFAULT_LM_FIELD_NUMBER: builtins.int
-    BEAM_SEARCH_SCORER_ALPHA_FIELD_NUMBER: builtins.int
-    BEAM_SEARCH_SCORER_BETA_FIELD_NUMBER: builtins.int
-    path: builtins.str
+    PATH_FIELD_NUMBER: _builtins.int
+    BEAM_SIZE_FIELD_NUMBER: _builtins.int
+    DEFAULT_LM_FIELD_NUMBER: _builtins.int
+    BEAM_SEARCH_SCORER_ALPHA_FIELD_NUMBER: _builtins.int
+    BEAM_SEARCH_SCORER_BETA_FIELD_NUMBER: _builtins.int
+    path: _builtins.str
     """Path to the directory of language models."""
-    beam_size: builtins.int
+    beam_size: _builtins.int
     """Beam size for the search algorithm."""
-    default_lm: builtins.str
+    default_lm: _builtins.str
     """Default language model to be selected if none is given."""
-    beam_search_scorer_alpha: builtins.float
+    beam_search_scorer_alpha: _builtins.float
     """Weight for the language model scorer (alpha)."""
-    beam_search_scorer_beta: builtins.float
+    beam_search_scorer_beta: _builtins.float
     """Weight for the word insertion penalty (beta)."""
     def __init__(
         self,
         *,
-        path: builtins.str = ...,
-        beam_size: builtins.int = ...,
-        default_lm: builtins.str = ...,
-        beam_search_scorer_alpha: builtins.float = ...,
-        beam_search_scorer_beta: builtins.float = ...,
+        path: _builtins.str = ...,
+        beam_size: _builtins.int = ...,
+        default_lm: _builtins.str = ...,
+        beam_search_scorer_alpha: _builtins.float = ...,
+        beam_search_scorer_beta: _builtins.float = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing.Literal["beam_search_scorer_alpha", b"beam_search_scorer_alpha", "beam_search_scorer_beta", b"beam_search_scorer_beta", "beam_size", b"beam_size", "default_lm", b"default_lm", "path", b"path"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _Never  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["beam_search_scorer_alpha", b"beam_search_scorer_alpha", "beam_search_scorer_beta", b"beam_search_scorer_beta", "beam_size", b"beam_size", "default_lm", b"default_lm", "path", b"path"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-global___LanguageModels = LanguageModels
+Global___LanguageModels: _TypeAlias = LanguageModels  # noqa: Y015
 
-@typing.final
-class StreamingServer(google.protobuf.message.Message):
+@_typing.final
+class StreamingServer(_message.Message):
     """<p>StreamingServer contains information about the streaming server.</p>"""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    HOST_FIELD_NUMBER: builtins.int
-    PORT_FIELD_NUMBER: builtins.int
-    OUTPUT_STYLE_FIELD_NUMBER: builtins.int
-    STREAMING_SPEECH_RECOGNITION_FIELD_NUMBER: builtins.int
-    host: builtins.str
+    HOST_FIELD_NUMBER: _builtins.int
+    PORT_FIELD_NUMBER: _builtins.int
+    OUTPUT_STYLE_FIELD_NUMBER: _builtins.int
+    STREAMING_SPEECH_RECOGNITION_FIELD_NUMBER: _builtins.int
+    host: _builtins.str
     """Hostname of the streaming server."""
-    port: builtins.int
+    port: _builtins.int
     """Port number of the streaming server."""
-    output_style: builtins.str
+    output_style: _builtins.str
     """Output style for the streaming server."""
-    @property
-    def streaming_speech_recognition(self) -> global___StreamingSpeechRecognition:
+    @_builtins.property
+    def streaming_speech_recognition(self) -> Global___StreamingSpeechRecognition:
         """Configuration for streaming speech recognition."""
 
     def __init__(
         self,
         *,
-        host: builtins.str = ...,
-        port: builtins.int = ...,
-        output_style: builtins.str = ...,
-        streaming_speech_recognition: global___StreamingSpeechRecognition | None = ...,
+        host: _builtins.str = ...,
+        port: _builtins.int = ...,
+        output_style: _builtins.str = ...,
+        streaming_speech_recognition: Global___StreamingSpeechRecognition | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["streaming_speech_recognition", b"streaming_speech_recognition"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["host", b"host", "output_style", b"output_style", "port", b"port", "streaming_speech_recognition", b"streaming_speech_recognition"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _typing.Literal["streaming_speech_recognition", b"streaming_speech_recognition"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["host", b"host", "output_style", b"output_style", "port", b"port", "streaming_speech_recognition", b"streaming_speech_recognition"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-global___StreamingServer = StreamingServer
+Global___StreamingServer: _TypeAlias = StreamingServer  # noqa: Y015
 
-@typing.final
-class StreamingSpeechRecognition(google.protobuf.message.Message):
+@_typing.final
+class StreamingSpeechRecognition(_message.Message):
     """<p>StreamingSpeechRecognition contains information about streaming speech recognition settings.</p>"""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    TRANSCRIBE_NOT_FINAL_FIELD_NUMBER: builtins.int
-    DECODING_METHOD_FIELD_NUMBER: builtins.int
-    SAMPLING_RATE_FIELD_NUMBER: builtins.int
-    MIN_AUDIO_CHUNK_SIZE_FIELD_NUMBER: builtins.int
-    NEXT_CHUNK_TIMEOUT_FIELD_NUMBER: builtins.int
-    TURN_DETECTION_FIELD_NUMBER: builtins.int
-    TRANSCRIBE_NOT_FINAL_PERIOD_SECONDS_FIELD_NUMBER: builtins.int
-    transcribe_not_final: builtins.bool
+    TRANSCRIBE_NOT_FINAL_FIELD_NUMBER: _builtins.int
+    DECODING_METHOD_FIELD_NUMBER: _builtins.int
+    SAMPLING_RATE_FIELD_NUMBER: _builtins.int
+    MIN_AUDIO_CHUNK_SIZE_FIELD_NUMBER: _builtins.int
+    NEXT_CHUNK_TIMEOUT_FIELD_NUMBER: _builtins.int
+    TURN_DETECTION_FIELD_NUMBER: _builtins.int
+    TRANSCRIBE_NOT_FINAL_PERIOD_SECONDS_FIELD_NUMBER: _builtins.int
+    transcribe_not_final: _builtins.bool
     """Indicates whether to transcribe non-final results for every stream of this pipeline. Unset: the server
     default, which is now <code>true</code>; an explicit <code>false</code> opts the pipeline out of non-final
     results. A request's <code>UtteranceDetectionOptions.transcribe_not_final</code> overrides it. Declared
     <code>optional</code> (same field number, wire-compatible) so an explicit <code>false</code> can be told
     apart from unset.
     """
-    decoding_method: builtins.str
+    decoding_method: _builtins.str
     """Decoding method for speech recognition."""
-    sampling_rate: builtins.int
+    sampling_rate: _builtins.int
     """Sampling rate for audio input."""
-    min_audio_chunk_size: builtins.int
+    min_audio_chunk_size: _builtins.int
     """Minimum audio chunk size for processing."""
-    next_chunk_timeout: builtins.float
+    next_chunk_timeout: _builtins.float
     """Timeout between audio chunks; if exceeded, the stream will be stopped."""
-    transcribe_not_final_period_seconds: builtins.float
+    transcribe_not_final_period_seconds: _builtins.float
     """Optional. The minimum new audio, in seconds, between two non-final transcriptions of an utterance (the
     partial-transcription cadence) for every stream of this pipeline. Overrides the server setting
     <code>ONDEWO_S2T_INFERENCE_SLIDING_PERIOD_OF_TRANSCRIPT</code>; a request's
     <code>UtteranceDetectionOptions.transcribe_not_final_period_seconds</code> overrides it. Allowed: (0, 5]; the
     effective cadence is rounded up to whole <code>min_audio_chunk_size</code> chunks. Unset: the server setting.
     """
-    @property
-    def turn_detection(self) -> global___TurnDetectionOptions:
+    @_builtins.property
+    def turn_detection(self) -> Global___TurnDetectionOptions:
         """Configuration of the options to turn-detection in utterances"""
 
     def __init__(
         self,
         *,
-        transcribe_not_final: builtins.bool | None = ...,
-        decoding_method: builtins.str = ...,
-        sampling_rate: builtins.int = ...,
-        min_audio_chunk_size: builtins.int = ...,
-        next_chunk_timeout: builtins.float = ...,
-        turn_detection: global___TurnDetectionOptions | None = ...,
-        transcribe_not_final_period_seconds: builtins.float | None = ...,
+        transcribe_not_final: _builtins.bool | None = ...,
+        decoding_method: _builtins.str = ...,
+        sampling_rate: _builtins.int = ...,
+        min_audio_chunk_size: _builtins.int = ...,
+        next_chunk_timeout: _builtins.float = ...,
+        turn_detection: Global___TurnDetectionOptions | None = ...,
+        transcribe_not_final_period_seconds: _builtins.float | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["_transcribe_not_final", b"_transcribe_not_final", "_transcribe_not_final_period_seconds", b"_transcribe_not_final_period_seconds", "transcribe_not_final", b"transcribe_not_final", "transcribe_not_final_period_seconds", b"transcribe_not_final_period_seconds", "turn_detection", b"turn_detection"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["_transcribe_not_final", b"_transcribe_not_final", "_transcribe_not_final_period_seconds", b"_transcribe_not_final_period_seconds", "decoding_method", b"decoding_method", "min_audio_chunk_size", b"min_audio_chunk_size", "next_chunk_timeout", b"next_chunk_timeout", "sampling_rate", b"sampling_rate", "transcribe_not_final", b"transcribe_not_final", "transcribe_not_final_period_seconds", b"transcribe_not_final_period_seconds", "turn_detection", b"turn_detection"]) -> None: ...
-    @typing.overload
-    def WhichOneof(self, oneof_group: typing.Literal["_transcribe_not_final", b"_transcribe_not_final"]) -> typing.Literal["transcribe_not_final"] | None: ...
-    @typing.overload
-    def WhichOneof(self, oneof_group: typing.Literal["_transcribe_not_final_period_seconds", b"_transcribe_not_final_period_seconds"]) -> typing.Literal["transcribe_not_final_period_seconds"] | None: ...
+    _HasFieldArgType: _TypeAlias = _typing.Literal["_transcribe_not_final", b"_transcribe_not_final", "_transcribe_not_final_period_seconds", b"_transcribe_not_final_period_seconds", "transcribe_not_final", b"transcribe_not_final", "transcribe_not_final_period_seconds", b"transcribe_not_final_period_seconds", "turn_detection", b"turn_detection"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["_transcribe_not_final", b"_transcribe_not_final", "_transcribe_not_final_period_seconds", b"_transcribe_not_final_period_seconds", "decoding_method", b"decoding_method", "min_audio_chunk_size", b"min_audio_chunk_size", "next_chunk_timeout", b"next_chunk_timeout", "sampling_rate", b"sampling_rate", "transcribe_not_final", b"transcribe_not_final", "transcribe_not_final_period_seconds", b"transcribe_not_final_period_seconds", "turn_detection", b"turn_detection"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    _WhichOneofReturnType__transcribe_not_final: _TypeAlias = _typing.Literal["transcribe_not_final"]  # noqa: Y015
+    _WhichOneofArgType__transcribe_not_final: _TypeAlias = _typing.Literal["_transcribe_not_final", b"_transcribe_not_final"]  # noqa: Y015
+    _WhichOneofReturnType__transcribe_not_final_period_seconds: _TypeAlias = _typing.Literal["transcribe_not_final_period_seconds"]  # noqa: Y015
+    _WhichOneofArgType__transcribe_not_final_period_seconds: _TypeAlias = _typing.Literal["_transcribe_not_final_period_seconds", b"_transcribe_not_final_period_seconds"]  # noqa: Y015
+    @_typing.overload
+    def WhichOneof(self, oneof_group: _WhichOneofArgType__transcribe_not_final) -> _WhichOneofReturnType__transcribe_not_final | None: ...
+    @_typing.overload
+    def WhichOneof(self, oneof_group: _WhichOneofArgType__transcribe_not_final_period_seconds) -> _WhichOneofReturnType__transcribe_not_final_period_seconds | None: ...
 
-global___StreamingSpeechRecognition = StreamingSpeechRecognition
+Global___StreamingSpeechRecognition: _TypeAlias = StreamingSpeechRecognition  # noqa: Y015
 
-@typing.final
-class TurnDetectionOptions(google.protobuf.message.Message):
+@_typing.final
+class TurnDetectionOptions(_message.Message):
     """<p>TurnDetectionOptions configures turn detection: deciding, at a pause of the caller, whether the caller has
     finished the turn. Exactly one turn detector is chosen by <code>oneof_turn_detector</code>; the fields outside it
     apply to every detector.</p>
@@ -2064,44 +2288,66 @@ class TurnDetectionOptions(google.protobuf.message.Message):
     its own fields: none of the pipeline config's detector fields carry over.</p>
     """
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    ACTIVE_FIELD_NUMBER: builtins.int
-    FULL_UTTERANCE_DEPLOYMENT_FIELD_NUMBER: builtins.int
-    TURN_DETECTION_SYSTEM_PROMPT_FIELD_NUMBER: builtins.int
-    TURN_DETECTION_USER_PROMPT_FIELD_NUMBER: builtins.int
-    TURN_DETECTION_LLM_OPENAI_OPTIONS_FIELD_NUMBER: builtins.int
-    INCOMPLETE_MAX_SILENCE_SECONDS_FIELD_NUMBER: builtins.int
-    TURN_DETECTION_CONVERSATION_CONTEXT_FIELD_NUMBER: builtins.int
-    TURN_DETECTION_CHAT_LLM_OPTIONS_FIELD_NUMBER: builtins.int
-    TURN_DETECTION_END_OF_UTTERANCE_LLM_OPTIONS_FIELD_NUMBER: builtins.int
-    TURN_DETECTION_ONDEWO_DE_OPTIONS_FIELD_NUMBER: builtins.int
-    TURN_DETECTION_ONDEWO_DE_FUSION_OPTIONS_FIELD_NUMBER: builtins.int
-    TURN_DETECTION_PIPECAT_SMART_TURN_OPTIONS_FIELD_NUMBER: builtins.int
-    active: builtins.bool
+    ACTIVE_FIELD_NUMBER: _builtins.int
+    FULL_UTTERANCE_DEPLOYMENT_FIELD_NUMBER: _builtins.int
+    TURN_DETECTION_SYSTEM_PROMPT_FIELD_NUMBER: _builtins.int
+    TURN_DETECTION_USER_PROMPT_FIELD_NUMBER: _builtins.int
+    TURN_DETECTION_LLM_OPENAI_OPTIONS_FIELD_NUMBER: _builtins.int
+    INCOMPLETE_MAX_SILENCE_SECONDS_FIELD_NUMBER: _builtins.int
+    TURN_DETECTION_CONVERSATION_CONTEXT_FIELD_NUMBER: _builtins.int
+    TURN_DETECTION_CHAT_LLM_OPTIONS_FIELD_NUMBER: _builtins.int
+    TURN_DETECTION_END_OF_UTTERANCE_LLM_OPTIONS_FIELD_NUMBER: _builtins.int
+    TURN_DETECTION_ONDEWO_DE_OPTIONS_FIELD_NUMBER: _builtins.int
+    TURN_DETECTION_ONDEWO_DE_FUSION_OPTIONS_FIELD_NUMBER: _builtins.int
+    TURN_DETECTION_PIPECAT_SMART_TURN_OPTIONS_FIELD_NUMBER: _builtins.int
+    active: _builtins.bool
     """Optional. Indicates if the turn-detection feature is active."""
-    full_utterance_deployment: builtins.bool
+    full_utterance_deployment: _builtins.bool
     """Optional. Whether to transcribe the whole utterance when the end of a turn is detected. It increases the
     accuracy of the transcription at the cost of speed. If deactivated, only the audio after the last short
     silence is transcribed and the transcriptions of the short audio chunks between silences are concatenated.
     """
-    turn_detection_system_prompt: builtins.str
-    """Optional. Deprecated in favour of <code>turn_detection_chat_llm_options.system_prompt</code>, but still
-    honoured so that configurations written for ondewo-s2t-api 7.5.0 and earlier keep working unchanged. Read
-    only when <code>oneof_turn_detector</code> is not set.
-    """
-    turn_detection_user_prompt: builtins.str
-    """Optional. Deprecated in favour of <code>turn_detection_chat_llm_options.user_prompt</code>, but still
-    honoured. Read only when <code>oneof_turn_detector</code> is not set.
-    """
-    incomplete_max_silence_seconds: builtins.float
+    @_builtins.property
+    @_deprecated("""This field has been marked as deprecated using proto field options.""")
+    def turn_detection_system_prompt(self) -> _builtins.str:
+        """Optional. Deprecated in favour of <code>turn_detection_chat_llm_options.system_prompt</code>, but still
+        honoured so that configurations written for ondewo-s2t-api 7.5.0 and earlier keep working unchanged. Read
+        only when <code>oneof_turn_detector</code> is not set.
+        """
+
+    @turn_detection_system_prompt.setter
+    @_deprecated("""This field has been marked as deprecated using proto field options.""")
+    def turn_detection_system_prompt(self, value: _builtins.str) -> None:
+        """Optional. Deprecated in favour of <code>turn_detection_chat_llm_options.system_prompt</code>, but still
+        honoured so that configurations written for ondewo-s2t-api 7.5.0 and earlier keep working unchanged. Read
+        only when <code>oneof_turn_detector</code> is not set.
+        """
+
+    @_builtins.property
+    @_deprecated("""This field has been marked as deprecated using proto field options.""")
+    def turn_detection_user_prompt(self) -> _builtins.str:
+        """Optional. Deprecated in favour of <code>turn_detection_chat_llm_options.user_prompt</code>, but still
+        honoured. Read only when <code>oneof_turn_detector</code> is not set.
+        """
+
+    @turn_detection_user_prompt.setter
+    @_deprecated("""This field has been marked as deprecated using proto field options.""")
+    def turn_detection_user_prompt(self, value: _builtins.str) -> None:
+        """Optional. Deprecated in favour of <code>turn_detection_chat_llm_options.user_prompt</code>, but still
+        honoured. Read only when <code>oneof_turn_detector</code> is not set.
+        """
+
+    incomplete_max_silence_seconds: _builtins.float
     """Optional. Seconds of silence after an utterance judged NOT finished before it is finished anyway, valid
     range: 0 - 4. The server raises a value below the voice activity detection's <code>min_duration_off</code>
     to it. Unset = the server's configured value (default: the <code>min_duration_off</code> in use). Applies to
     every "not finished" verdict, whichever detector gave it, including a verdict that did not arrive in time.
     """
-    @property
-    def turn_detection_llm_openai_options(self) -> global___OpenaiLlmOptions:
+    @_builtins.property
+    @_deprecated("""This field has been marked as deprecated using proto field options.""")
+    def turn_detection_llm_openai_options(self) -> Global___OpenaiLlmOptions:
         """Optional. Deprecated in favour of <code>oneof_turn_detector</code>, but still honoured. Read only when
         <code>oneof_turn_detector</code> is not set; its <code>model</code> then selects the detector by its name, as
         before <code>oneof_turn_detector</code> existed: a name starting with <code>pipecat-smart-turn</code> selects
@@ -2112,8 +2358,8 @@ class TurnDetectionOptions(google.protobuf.message.Message):
         INVALID_ARGUMENT. On this path every detector-specific value is the server's configured value.
         """
 
-    @property
-    def turn_detection_conversation_context(self) -> global___TurnDetectionConversationContext:
+    @_builtins.property
+    def turn_detection_conversation_context(self) -> Global___TurnDetectionConversationContext:
         """Optional. The latest turns of the conversation before the caller's utterance under evaluation, handed to the
         end-of-utterance LLM as preceding chat turns so that it can judge the utterance against what was said
         before, e.g. a bare number answering a question for a number. Kept outside <code>oneof_turn_detector</code>
@@ -2127,82 +2373,100 @@ class TurnDetectionOptions(google.protobuf.message.Message):
         has no meaning.
         """
 
-    @property
-    def turn_detection_chat_llm_options(self) -> global___TurnDetectionChatLlmOptions:
+    @_builtins.property
+    def turn_detection_chat_llm_options(self) -> Global___TurnDetectionChatLlmOptions:
         """A chat LLM asked, with a prompt, whether the caller has finished the turn."""
 
-    @property
-    def turn_detection_end_of_utterance_llm_options(self) -> global___TurnDetectionEndOfUtteranceLlmOptions:
+    @_builtins.property
+    def turn_detection_end_of_utterance_llm_options(self) -> Global___TurnDetectionEndOfUtteranceLlmOptions:
         """An end-of-utterance LLM (LiveKit-shaped) that scores the probability of the end-of-utterance token."""
 
-    @property
-    def turn_detection_ondewo_de_options(self) -> global___TurnDetectionOndewoDeOptions:
+    @_builtins.property
+    def turn_detection_ondewo_de_options(self) -> Global___TurnDetectionOndewoDeOptions:
         """The ONDEWO German turn-detection model: the turn's text and timing, served by vLLM."""
 
-    @property
-    def turn_detection_ondewo_de_fusion_options(self) -> global___TurnDetectionOndewoDeFusionOptions:
+    @_builtins.property
+    def turn_detection_ondewo_de_fusion_options(self) -> Global___TurnDetectionOndewoDeFusionOptions:
         """The ONDEWO German fusion turn detector: the ONDEWO German text model on vLLM plus acoustic heads on
         Triton, combined into one end-of-turn probability.
         """
 
-    @property
-    def turn_detection_pipecat_smart_turn_options(self) -> global___TurnDetectionPipecatSmartTurnOptions:
+    @_builtins.property
+    def turn_detection_pipecat_smart_turn_options(self) -> Global___TurnDetectionPipecatSmartTurnOptions:
         """pipecat Smart Turn v3.2: audio only, served by Triton."""
 
     def __init__(
         self,
         *,
-        active: builtins.bool | None = ...,
-        full_utterance_deployment: builtins.bool | None = ...,
-        turn_detection_system_prompt: builtins.str | None = ...,
-        turn_detection_user_prompt: builtins.str | None = ...,
-        turn_detection_llm_openai_options: global___OpenaiLlmOptions | None = ...,
-        incomplete_max_silence_seconds: builtins.float | None = ...,
-        turn_detection_conversation_context: global___TurnDetectionConversationContext | None = ...,
-        turn_detection_chat_llm_options: global___TurnDetectionChatLlmOptions | None = ...,
-        turn_detection_end_of_utterance_llm_options: global___TurnDetectionEndOfUtteranceLlmOptions | None = ...,
-        turn_detection_ondewo_de_options: global___TurnDetectionOndewoDeOptions | None = ...,
-        turn_detection_ondewo_de_fusion_options: global___TurnDetectionOndewoDeFusionOptions | None = ...,
-        turn_detection_pipecat_smart_turn_options: global___TurnDetectionPipecatSmartTurnOptions | None = ...,
+        active: _builtins.bool | None = ...,
+        full_utterance_deployment: _builtins.bool | None = ...,
+        turn_detection_system_prompt: _builtins.str | None = ...,
+        turn_detection_user_prompt: _builtins.str | None = ...,
+        turn_detection_llm_openai_options: Global___OpenaiLlmOptions | None = ...,
+        incomplete_max_silence_seconds: _builtins.float | None = ...,
+        turn_detection_conversation_context: Global___TurnDetectionConversationContext | None = ...,
+        turn_detection_chat_llm_options: Global___TurnDetectionChatLlmOptions | None = ...,
+        turn_detection_end_of_utterance_llm_options: Global___TurnDetectionEndOfUtteranceLlmOptions | None = ...,
+        turn_detection_ondewo_de_options: Global___TurnDetectionOndewoDeOptions | None = ...,
+        turn_detection_ondewo_de_fusion_options: Global___TurnDetectionOndewoDeFusionOptions | None = ...,
+        turn_detection_pipecat_smart_turn_options: Global___TurnDetectionPipecatSmartTurnOptions | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["_active", b"_active", "_full_utterance_deployment", b"_full_utterance_deployment", "_incomplete_max_silence_seconds", b"_incomplete_max_silence_seconds", "_turn_detection_conversation_context", b"_turn_detection_conversation_context", "_turn_detection_llm_openai_options", b"_turn_detection_llm_openai_options", "_turn_detection_system_prompt", b"_turn_detection_system_prompt", "_turn_detection_user_prompt", b"_turn_detection_user_prompt", "active", b"active", "full_utterance_deployment", b"full_utterance_deployment", "incomplete_max_silence_seconds", b"incomplete_max_silence_seconds", "oneof_turn_detector", b"oneof_turn_detector", "turn_detection_chat_llm_options", b"turn_detection_chat_llm_options", "turn_detection_conversation_context", b"turn_detection_conversation_context", "turn_detection_end_of_utterance_llm_options", b"turn_detection_end_of_utterance_llm_options", "turn_detection_llm_openai_options", b"turn_detection_llm_openai_options", "turn_detection_ondewo_de_fusion_options", b"turn_detection_ondewo_de_fusion_options", "turn_detection_ondewo_de_options", b"turn_detection_ondewo_de_options", "turn_detection_pipecat_smart_turn_options", b"turn_detection_pipecat_smart_turn_options", "turn_detection_system_prompt", b"turn_detection_system_prompt", "turn_detection_user_prompt", b"turn_detection_user_prompt"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["_active", b"_active", "_full_utterance_deployment", b"_full_utterance_deployment", "_incomplete_max_silence_seconds", b"_incomplete_max_silence_seconds", "_turn_detection_conversation_context", b"_turn_detection_conversation_context", "_turn_detection_llm_openai_options", b"_turn_detection_llm_openai_options", "_turn_detection_system_prompt", b"_turn_detection_system_prompt", "_turn_detection_user_prompt", b"_turn_detection_user_prompt", "active", b"active", "full_utterance_deployment", b"full_utterance_deployment", "incomplete_max_silence_seconds", b"incomplete_max_silence_seconds", "oneof_turn_detector", b"oneof_turn_detector", "turn_detection_chat_llm_options", b"turn_detection_chat_llm_options", "turn_detection_conversation_context", b"turn_detection_conversation_context", "turn_detection_end_of_utterance_llm_options", b"turn_detection_end_of_utterance_llm_options", "turn_detection_llm_openai_options", b"turn_detection_llm_openai_options", "turn_detection_ondewo_de_fusion_options", b"turn_detection_ondewo_de_fusion_options", "turn_detection_ondewo_de_options", b"turn_detection_ondewo_de_options", "turn_detection_pipecat_smart_turn_options", b"turn_detection_pipecat_smart_turn_options", "turn_detection_system_prompt", b"turn_detection_system_prompt", "turn_detection_user_prompt", b"turn_detection_user_prompt"]) -> None: ...
-    @typing.overload
-    def WhichOneof(self, oneof_group: typing.Literal["_active", b"_active"]) -> typing.Literal["active"] | None: ...
-    @typing.overload
-    def WhichOneof(self, oneof_group: typing.Literal["_full_utterance_deployment", b"_full_utterance_deployment"]) -> typing.Literal["full_utterance_deployment"] | None: ...
-    @typing.overload
-    def WhichOneof(self, oneof_group: typing.Literal["_incomplete_max_silence_seconds", b"_incomplete_max_silence_seconds"]) -> typing.Literal["incomplete_max_silence_seconds"] | None: ...
-    @typing.overload
-    def WhichOneof(self, oneof_group: typing.Literal["_turn_detection_conversation_context", b"_turn_detection_conversation_context"]) -> typing.Literal["turn_detection_conversation_context"] | None: ...
-    @typing.overload
-    def WhichOneof(self, oneof_group: typing.Literal["_turn_detection_llm_openai_options", b"_turn_detection_llm_openai_options"]) -> typing.Literal["turn_detection_llm_openai_options"] | None: ...
-    @typing.overload
-    def WhichOneof(self, oneof_group: typing.Literal["_turn_detection_system_prompt", b"_turn_detection_system_prompt"]) -> typing.Literal["turn_detection_system_prompt"] | None: ...
-    @typing.overload
-    def WhichOneof(self, oneof_group: typing.Literal["_turn_detection_user_prompt", b"_turn_detection_user_prompt"]) -> typing.Literal["turn_detection_user_prompt"] | None: ...
-    @typing.overload
-    def WhichOneof(self, oneof_group: typing.Literal["oneof_turn_detector", b"oneof_turn_detector"]) -> typing.Literal["turn_detection_chat_llm_options", "turn_detection_end_of_utterance_llm_options", "turn_detection_ondewo_de_options", "turn_detection_ondewo_de_fusion_options", "turn_detection_pipecat_smart_turn_options"] | None: ...
+    _HasFieldArgType: _TypeAlias = _typing.Literal["_active", b"_active", "_full_utterance_deployment", b"_full_utterance_deployment", "_incomplete_max_silence_seconds", b"_incomplete_max_silence_seconds", "_turn_detection_conversation_context", b"_turn_detection_conversation_context", "_turn_detection_llm_openai_options", b"_turn_detection_llm_openai_options", "_turn_detection_system_prompt", b"_turn_detection_system_prompt", "_turn_detection_user_prompt", b"_turn_detection_user_prompt", "active", b"active", "full_utterance_deployment", b"full_utterance_deployment", "incomplete_max_silence_seconds", b"incomplete_max_silence_seconds", "oneof_turn_detector", b"oneof_turn_detector", "turn_detection_chat_llm_options", b"turn_detection_chat_llm_options", "turn_detection_conversation_context", b"turn_detection_conversation_context", "turn_detection_end_of_utterance_llm_options", b"turn_detection_end_of_utterance_llm_options", "turn_detection_llm_openai_options", b"turn_detection_llm_openai_options", "turn_detection_ondewo_de_fusion_options", b"turn_detection_ondewo_de_fusion_options", "turn_detection_ondewo_de_options", b"turn_detection_ondewo_de_options", "turn_detection_pipecat_smart_turn_options", b"turn_detection_pipecat_smart_turn_options", "turn_detection_system_prompt", b"turn_detection_system_prompt", "turn_detection_user_prompt", b"turn_detection_user_prompt"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["_active", b"_active", "_full_utterance_deployment", b"_full_utterance_deployment", "_incomplete_max_silence_seconds", b"_incomplete_max_silence_seconds", "_turn_detection_conversation_context", b"_turn_detection_conversation_context", "_turn_detection_llm_openai_options", b"_turn_detection_llm_openai_options", "_turn_detection_system_prompt", b"_turn_detection_system_prompt", "_turn_detection_user_prompt", b"_turn_detection_user_prompt", "active", b"active", "full_utterance_deployment", b"full_utterance_deployment", "incomplete_max_silence_seconds", b"incomplete_max_silence_seconds", "oneof_turn_detector", b"oneof_turn_detector", "turn_detection_chat_llm_options", b"turn_detection_chat_llm_options", "turn_detection_conversation_context", b"turn_detection_conversation_context", "turn_detection_end_of_utterance_llm_options", b"turn_detection_end_of_utterance_llm_options", "turn_detection_llm_openai_options", b"turn_detection_llm_openai_options", "turn_detection_ondewo_de_fusion_options", b"turn_detection_ondewo_de_fusion_options", "turn_detection_ondewo_de_options", b"turn_detection_ondewo_de_options", "turn_detection_pipecat_smart_turn_options", b"turn_detection_pipecat_smart_turn_options", "turn_detection_system_prompt", b"turn_detection_system_prompt", "turn_detection_user_prompt", b"turn_detection_user_prompt"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    _WhichOneofReturnType__active: _TypeAlias = _typing.Literal["active"]  # noqa: Y015
+    _WhichOneofArgType__active: _TypeAlias = _typing.Literal["_active", b"_active"]  # noqa: Y015
+    _WhichOneofReturnType__full_utterance_deployment: _TypeAlias = _typing.Literal["full_utterance_deployment"]  # noqa: Y015
+    _WhichOneofArgType__full_utterance_deployment: _TypeAlias = _typing.Literal["_full_utterance_deployment", b"_full_utterance_deployment"]  # noqa: Y015
+    _WhichOneofReturnType__incomplete_max_silence_seconds: _TypeAlias = _typing.Literal["incomplete_max_silence_seconds"]  # noqa: Y015
+    _WhichOneofArgType__incomplete_max_silence_seconds: _TypeAlias = _typing.Literal["_incomplete_max_silence_seconds", b"_incomplete_max_silence_seconds"]  # noqa: Y015
+    _WhichOneofReturnType__turn_detection_conversation_context: _TypeAlias = _typing.Literal["turn_detection_conversation_context"]  # noqa: Y015
+    _WhichOneofArgType__turn_detection_conversation_context: _TypeAlias = _typing.Literal["_turn_detection_conversation_context", b"_turn_detection_conversation_context"]  # noqa: Y015
+    _WhichOneofReturnType__turn_detection_llm_openai_options: _TypeAlias = _typing.Literal["turn_detection_llm_openai_options"]  # noqa: Y015
+    _WhichOneofArgType__turn_detection_llm_openai_options: _TypeAlias = _typing.Literal["_turn_detection_llm_openai_options", b"_turn_detection_llm_openai_options"]  # noqa: Y015
+    _WhichOneofReturnType__turn_detection_system_prompt: _TypeAlias = _typing.Literal["turn_detection_system_prompt"]  # noqa: Y015
+    _WhichOneofArgType__turn_detection_system_prompt: _TypeAlias = _typing.Literal["_turn_detection_system_prompt", b"_turn_detection_system_prompt"]  # noqa: Y015
+    _WhichOneofReturnType__turn_detection_user_prompt: _TypeAlias = _typing.Literal["turn_detection_user_prompt"]  # noqa: Y015
+    _WhichOneofArgType__turn_detection_user_prompt: _TypeAlias = _typing.Literal["_turn_detection_user_prompt", b"_turn_detection_user_prompt"]  # noqa: Y015
+    _WhichOneofReturnType_oneof_turn_detector: _TypeAlias = _typing.Literal["turn_detection_chat_llm_options", "turn_detection_end_of_utterance_llm_options", "turn_detection_ondewo_de_options", "turn_detection_ondewo_de_fusion_options", "turn_detection_pipecat_smart_turn_options"]  # noqa: Y015
+    _WhichOneofArgType_oneof_turn_detector: _TypeAlias = _typing.Literal["oneof_turn_detector", b"oneof_turn_detector"]  # noqa: Y015
+    @_typing.overload
+    def WhichOneof(self, oneof_group: _WhichOneofArgType__active) -> _WhichOneofReturnType__active | None: ...
+    @_typing.overload
+    def WhichOneof(self, oneof_group: _WhichOneofArgType__full_utterance_deployment) -> _WhichOneofReturnType__full_utterance_deployment | None: ...
+    @_typing.overload
+    def WhichOneof(self, oneof_group: _WhichOneofArgType__incomplete_max_silence_seconds) -> _WhichOneofReturnType__incomplete_max_silence_seconds | None: ...
+    @_typing.overload
+    def WhichOneof(self, oneof_group: _WhichOneofArgType__turn_detection_conversation_context) -> _WhichOneofReturnType__turn_detection_conversation_context | None: ...
+    @_typing.overload
+    def WhichOneof(self, oneof_group: _WhichOneofArgType__turn_detection_llm_openai_options) -> _WhichOneofReturnType__turn_detection_llm_openai_options | None: ...
+    @_typing.overload
+    def WhichOneof(self, oneof_group: _WhichOneofArgType__turn_detection_system_prompt) -> _WhichOneofReturnType__turn_detection_system_prompt | None: ...
+    @_typing.overload
+    def WhichOneof(self, oneof_group: _WhichOneofArgType__turn_detection_user_prompt) -> _WhichOneofReturnType__turn_detection_user_prompt | None: ...
+    @_typing.overload
+    def WhichOneof(self, oneof_group: _WhichOneofArgType_oneof_turn_detector) -> _WhichOneofReturnType_oneof_turn_detector | None: ...
 
-global___TurnDetectionOptions = TurnDetectionOptions
+Global___TurnDetectionOptions: _TypeAlias = TurnDetectionOptions  # noqa: Y015
 
-@typing.final
-class TurnDetectionChatLlmOptions(google.protobuf.message.Message):
+@_typing.final
+class TurnDetectionChatLlmOptions(_message.Message):
     """<p>TurnDetectionChatLlmOptions configures a chat LLM as the turn detector: the LLM is asked, with the prompts
     below and the transcription of the turn, whether the caller has finished.</p>
     """
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    OPENAI_LLM_OPTIONS_FIELD_NUMBER: builtins.int
-    SYSTEM_PROMPT_FIELD_NUMBER: builtins.int
-    USER_PROMPT_FIELD_NUMBER: builtins.int
-    system_prompt: builtins.str
+    OPENAI_LLM_OPTIONS_FIELD_NUMBER: _builtins.int
+    SYSTEM_PROMPT_FIELD_NUMBER: _builtins.int
+    USER_PROMPT_FIELD_NUMBER: _builtins.int
+    system_prompt: _builtins.str
     """Optional. System prompt that guides the LLM. Unset = the server's configured prompt."""
-    user_prompt: builtins.str
+    user_prompt: _builtins.str
     """Optional. User prompt that carries the turn under evaluation. Unset = the server's configured prompt."""
-    @property
-    def openai_llm_options(self) -> global___OpenaiLlmOptions:
+    @_builtins.property
+    def openai_llm_options(self) -> Global___OpenaiLlmOptions:
         """Optional. The OpenAI-compatible endpoint and model of the chat LLM. Unset fields take the server's
         configured values. A <code>model</code> starting with <code>pipecat-</code> or
         <code>ondewo-s2t-model-</code> is refused with INVALID_ARGUMENT: those detectors have their own options.
@@ -2211,60 +2475,68 @@ class TurnDetectionChatLlmOptions(google.protobuf.message.Message):
     def __init__(
         self,
         *,
-        openai_llm_options: global___OpenaiLlmOptions | None = ...,
-        system_prompt: builtins.str | None = ...,
-        user_prompt: builtins.str | None = ...,
+        openai_llm_options: Global___OpenaiLlmOptions | None = ...,
+        system_prompt: _builtins.str | None = ...,
+        user_prompt: _builtins.str | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["_openai_llm_options", b"_openai_llm_options", "_system_prompt", b"_system_prompt", "_user_prompt", b"_user_prompt", "openai_llm_options", b"openai_llm_options", "system_prompt", b"system_prompt", "user_prompt", b"user_prompt"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["_openai_llm_options", b"_openai_llm_options", "_system_prompt", b"_system_prompt", "_user_prompt", b"_user_prompt", "openai_llm_options", b"openai_llm_options", "system_prompt", b"system_prompt", "user_prompt", b"user_prompt"]) -> None: ...
-    @typing.overload
-    def WhichOneof(self, oneof_group: typing.Literal["_openai_llm_options", b"_openai_llm_options"]) -> typing.Literal["openai_llm_options"] | None: ...
-    @typing.overload
-    def WhichOneof(self, oneof_group: typing.Literal["_system_prompt", b"_system_prompt"]) -> typing.Literal["system_prompt"] | None: ...
-    @typing.overload
-    def WhichOneof(self, oneof_group: typing.Literal["_user_prompt", b"_user_prompt"]) -> typing.Literal["user_prompt"] | None: ...
+    _HasFieldArgType: _TypeAlias = _typing.Literal["_openai_llm_options", b"_openai_llm_options", "_system_prompt", b"_system_prompt", "_user_prompt", b"_user_prompt", "openai_llm_options", b"openai_llm_options", "system_prompt", b"system_prompt", "user_prompt", b"user_prompt"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["_openai_llm_options", b"_openai_llm_options", "_system_prompt", b"_system_prompt", "_user_prompt", b"_user_prompt", "openai_llm_options", b"openai_llm_options", "system_prompt", b"system_prompt", "user_prompt", b"user_prompt"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    _WhichOneofReturnType__openai_llm_options: _TypeAlias = _typing.Literal["openai_llm_options"]  # noqa: Y015
+    _WhichOneofArgType__openai_llm_options: _TypeAlias = _typing.Literal["_openai_llm_options", b"_openai_llm_options"]  # noqa: Y015
+    _WhichOneofReturnType__system_prompt: _TypeAlias = _typing.Literal["system_prompt"]  # noqa: Y015
+    _WhichOneofArgType__system_prompt: _TypeAlias = _typing.Literal["_system_prompt", b"_system_prompt"]  # noqa: Y015
+    _WhichOneofReturnType__user_prompt: _TypeAlias = _typing.Literal["user_prompt"]  # noqa: Y015
+    _WhichOneofArgType__user_prompt: _TypeAlias = _typing.Literal["_user_prompt", b"_user_prompt"]  # noqa: Y015
+    @_typing.overload
+    def WhichOneof(self, oneof_group: _WhichOneofArgType__openai_llm_options) -> _WhichOneofReturnType__openai_llm_options | None: ...
+    @_typing.overload
+    def WhichOneof(self, oneof_group: _WhichOneofArgType__system_prompt) -> _WhichOneofReturnType__system_prompt | None: ...
+    @_typing.overload
+    def WhichOneof(self, oneof_group: _WhichOneofArgType__user_prompt) -> _WhichOneofReturnType__user_prompt | None: ...
 
-global___TurnDetectionChatLlmOptions = TurnDetectionChatLlmOptions
+Global___TurnDetectionChatLlmOptions: _TypeAlias = TurnDetectionChatLlmOptions  # noqa: Y015
 
-@typing.final
-class TurnDetectionEndOfUtteranceLlmOptions(google.protobuf.message.Message):
+@_typing.final
+class TurnDetectionEndOfUtteranceLlmOptions(_message.Message):
     """<p>TurnDetectionEndOfUtteranceLlmOptions configures an end-of-utterance LLM (LiveKit-shaped, e.g.
     <code>livekit/turn-detector</code>) as the turn detector: the model scores the probability of the
     end-of-utterance token after the turn's transcription and, when
     <code>TurnDetectionOptions.turn_detection_conversation_context</code> is set, the turns before it.</p>
     """
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    OPENAI_LLM_OPTIONS_FIELD_NUMBER: builtins.int
-    END_OF_TURN_PROBABILITY_THRESHOLD_FIELD_NUMBER: builtins.int
-    TURN_DETECTION_HOLD_BANDS_FIELD_NUMBER: builtins.int
-    UNCERTAIN_MIN_WORDS_FIELD_NUMBER: builtins.int
-    EXACT_PROBABILITY_FIELD_NUMBER: builtins.int
-    end_of_turn_probability_threshold: builtins.float
+    OPENAI_LLM_OPTIONS_FIELD_NUMBER: _builtins.int
+    END_OF_TURN_PROBABILITY_THRESHOLD_FIELD_NUMBER: _builtins.int
+    TURN_DETECTION_HOLD_BANDS_FIELD_NUMBER: _builtins.int
+    UNCERTAIN_MIN_WORDS_FIELD_NUMBER: _builtins.int
+    EXACT_PROBABILITY_FIELD_NUMBER: _builtins.int
+    end_of_turn_probability_threshold: _builtins.float
     """Optional. The end-of-utterance probability at or above which the caller is taken to have finished the turn,
     valid range: 0 - 1. Unset = the server's configured value (default: the threshold configured for the
     language of the stream).
     """
-    uncertain_min_words: builtins.int
+    uncertain_min_words: _builtins.int
     """Optional. The minimum number of words an utterance needs before a hold band may hold it; a shorter
     utterance judged finished is committed at once. Unset = the server's configured value (default: 3).
     """
-    exact_probability: builtins.bool
+    exact_probability: _builtins.bool
     """Optional. Whether the exact probability of the end-of-utterance token is computed instead of being read
     from the returned top log probabilities. Unset = the server's configured value (default: false). Requires a
     deployment that returns prompt log probabilities (vLLM <code>prompt_logprobs</code>); on any other
     deployment the probability reads 0, so every turn is judged not finished and waits for
     <code>TurnDetectionOptions.incomplete_max_silence_seconds</code>.
     """
-    @property
-    def openai_llm_options(self) -> global___OpenaiLlmOptions:
+    @_builtins.property
+    def openai_llm_options(self) -> Global___OpenaiLlmOptions:
         """Optional. The OpenAI-compatible endpoint and served model name. Unset fields take the server's configured
         values.
         """
 
-    @property
-    def turn_detection_hold_bands(self) -> global___TurnDetectionHoldBands:
+    @_builtins.property
+    def turn_detection_hold_bands(self) -> Global___TurnDetectionHoldBands:
         """Optional. How long a turn judged finished, but only with a probability below a band's upper bound, waits
         for further silence before it is committed. Unset = the server's configured value (default: the bands
         configured for the language of the stream). A wrapper only so that "set with no bands" (a turn at or above
@@ -2274,46 +2546,58 @@ class TurnDetectionEndOfUtteranceLlmOptions(google.protobuf.message.Message):
     def __init__(
         self,
         *,
-        openai_llm_options: global___OpenaiLlmOptions | None = ...,
-        end_of_turn_probability_threshold: builtins.float | None = ...,
-        turn_detection_hold_bands: global___TurnDetectionHoldBands | None = ...,
-        uncertain_min_words: builtins.int | None = ...,
-        exact_probability: builtins.bool | None = ...,
+        openai_llm_options: Global___OpenaiLlmOptions | None = ...,
+        end_of_turn_probability_threshold: _builtins.float | None = ...,
+        turn_detection_hold_bands: Global___TurnDetectionHoldBands | None = ...,
+        uncertain_min_words: _builtins.int | None = ...,
+        exact_probability: _builtins.bool | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["_end_of_turn_probability_threshold", b"_end_of_turn_probability_threshold", "_exact_probability", b"_exact_probability", "_openai_llm_options", b"_openai_llm_options", "_turn_detection_hold_bands", b"_turn_detection_hold_bands", "_uncertain_min_words", b"_uncertain_min_words", "end_of_turn_probability_threshold", b"end_of_turn_probability_threshold", "exact_probability", b"exact_probability", "openai_llm_options", b"openai_llm_options", "turn_detection_hold_bands", b"turn_detection_hold_bands", "uncertain_min_words", b"uncertain_min_words"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["_end_of_turn_probability_threshold", b"_end_of_turn_probability_threshold", "_exact_probability", b"_exact_probability", "_openai_llm_options", b"_openai_llm_options", "_turn_detection_hold_bands", b"_turn_detection_hold_bands", "_uncertain_min_words", b"_uncertain_min_words", "end_of_turn_probability_threshold", b"end_of_turn_probability_threshold", "exact_probability", b"exact_probability", "openai_llm_options", b"openai_llm_options", "turn_detection_hold_bands", b"turn_detection_hold_bands", "uncertain_min_words", b"uncertain_min_words"]) -> None: ...
-    @typing.overload
-    def WhichOneof(self, oneof_group: typing.Literal["_end_of_turn_probability_threshold", b"_end_of_turn_probability_threshold"]) -> typing.Literal["end_of_turn_probability_threshold"] | None: ...
-    @typing.overload
-    def WhichOneof(self, oneof_group: typing.Literal["_exact_probability", b"_exact_probability"]) -> typing.Literal["exact_probability"] | None: ...
-    @typing.overload
-    def WhichOneof(self, oneof_group: typing.Literal["_openai_llm_options", b"_openai_llm_options"]) -> typing.Literal["openai_llm_options"] | None: ...
-    @typing.overload
-    def WhichOneof(self, oneof_group: typing.Literal["_turn_detection_hold_bands", b"_turn_detection_hold_bands"]) -> typing.Literal["turn_detection_hold_bands"] | None: ...
-    @typing.overload
-    def WhichOneof(self, oneof_group: typing.Literal["_uncertain_min_words", b"_uncertain_min_words"]) -> typing.Literal["uncertain_min_words"] | None: ...
+    _HasFieldArgType: _TypeAlias = _typing.Literal["_end_of_turn_probability_threshold", b"_end_of_turn_probability_threshold", "_exact_probability", b"_exact_probability", "_openai_llm_options", b"_openai_llm_options", "_turn_detection_hold_bands", b"_turn_detection_hold_bands", "_uncertain_min_words", b"_uncertain_min_words", "end_of_turn_probability_threshold", b"end_of_turn_probability_threshold", "exact_probability", b"exact_probability", "openai_llm_options", b"openai_llm_options", "turn_detection_hold_bands", b"turn_detection_hold_bands", "uncertain_min_words", b"uncertain_min_words"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["_end_of_turn_probability_threshold", b"_end_of_turn_probability_threshold", "_exact_probability", b"_exact_probability", "_openai_llm_options", b"_openai_llm_options", "_turn_detection_hold_bands", b"_turn_detection_hold_bands", "_uncertain_min_words", b"_uncertain_min_words", "end_of_turn_probability_threshold", b"end_of_turn_probability_threshold", "exact_probability", b"exact_probability", "openai_llm_options", b"openai_llm_options", "turn_detection_hold_bands", b"turn_detection_hold_bands", "uncertain_min_words", b"uncertain_min_words"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    _WhichOneofReturnType__end_of_turn_probability_threshold: _TypeAlias = _typing.Literal["end_of_turn_probability_threshold"]  # noqa: Y015
+    _WhichOneofArgType__end_of_turn_probability_threshold: _TypeAlias = _typing.Literal["_end_of_turn_probability_threshold", b"_end_of_turn_probability_threshold"]  # noqa: Y015
+    _WhichOneofReturnType__exact_probability: _TypeAlias = _typing.Literal["exact_probability"]  # noqa: Y015
+    _WhichOneofArgType__exact_probability: _TypeAlias = _typing.Literal["_exact_probability", b"_exact_probability"]  # noqa: Y015
+    _WhichOneofReturnType__openai_llm_options: _TypeAlias = _typing.Literal["openai_llm_options"]  # noqa: Y015
+    _WhichOneofArgType__openai_llm_options: _TypeAlias = _typing.Literal["_openai_llm_options", b"_openai_llm_options"]  # noqa: Y015
+    _WhichOneofReturnType__turn_detection_hold_bands: _TypeAlias = _typing.Literal["turn_detection_hold_bands"]  # noqa: Y015
+    _WhichOneofArgType__turn_detection_hold_bands: _TypeAlias = _typing.Literal["_turn_detection_hold_bands", b"_turn_detection_hold_bands"]  # noqa: Y015
+    _WhichOneofReturnType__uncertain_min_words: _TypeAlias = _typing.Literal["uncertain_min_words"]  # noqa: Y015
+    _WhichOneofArgType__uncertain_min_words: _TypeAlias = _typing.Literal["_uncertain_min_words", b"_uncertain_min_words"]  # noqa: Y015
+    @_typing.overload
+    def WhichOneof(self, oneof_group: _WhichOneofArgType__end_of_turn_probability_threshold) -> _WhichOneofReturnType__end_of_turn_probability_threshold | None: ...
+    @_typing.overload
+    def WhichOneof(self, oneof_group: _WhichOneofArgType__exact_probability) -> _WhichOneofReturnType__exact_probability | None: ...
+    @_typing.overload
+    def WhichOneof(self, oneof_group: _WhichOneofArgType__openai_llm_options) -> _WhichOneofReturnType__openai_llm_options | None: ...
+    @_typing.overload
+    def WhichOneof(self, oneof_group: _WhichOneofArgType__turn_detection_hold_bands) -> _WhichOneofReturnType__turn_detection_hold_bands | None: ...
+    @_typing.overload
+    def WhichOneof(self, oneof_group: _WhichOneofArgType__uncertain_min_words) -> _WhichOneofReturnType__uncertain_min_words | None: ...
 
-global___TurnDetectionEndOfUtteranceLlmOptions = TurnDetectionEndOfUtteranceLlmOptions
+Global___TurnDetectionEndOfUtteranceLlmOptions: _TypeAlias = TurnDetectionEndOfUtteranceLlmOptions  # noqa: Y015
 
-@typing.final
-class TurnDetectionOndewoDeOptions(google.protobuf.message.Message):
+@_typing.final
+class TurnDetectionOndewoDeOptions(_message.Message):
     """<p>TurnDetectionOndewoDeOptions configures the ONDEWO German turn-detection model as the turn detector. It judges
     the turn from its text and word timing and is served by vLLM.</p>
     """
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    OPENAI_LLM_OPTIONS_FIELD_NUMBER: builtins.int
-    END_OF_TURN_PROBABILITY_THRESHOLD_FIELD_NUMBER: builtins.int
-    end_of_turn_probability_threshold: builtins.float
+    OPENAI_LLM_OPTIONS_FIELD_NUMBER: _builtins.int
+    END_OF_TURN_PROBABILITY_THRESHOLD_FIELD_NUMBER: _builtins.int
+    end_of_turn_probability_threshold: _builtins.float
     """Optional. The end-of-turn probability the model must reach for the caller to be taken to have finished the
     turn, valid range: 0 - 1. A turn below it is judged not finished and waits for
     <code>TurnDetectionOptions.incomplete_max_silence_seconds</code>. Unset = the server's configured value
     (default: 0.5). Precedence: the request config's value, then the pipeline config's value, then the server's
     configured value.
     """
-    @property
-    def openai_llm_options(self) -> global___OpenaiLlmOptions:
+    @_builtins.property
+    def openai_llm_options(self) -> Global___OpenaiLlmOptions:
         """Optional. The vLLM deployment: <code>base_url</code>, <code>api_key</code> and <code>timeout</code> address
         it, <code>model</code> is the served model name, e.g.
         <code>ondewo-s2t-model-de-vad-tsd-ondewo-qwen3-0.6b</code>. Unset fields take the server's configured values.
@@ -2322,35 +2606,41 @@ class TurnDetectionOndewoDeOptions(google.protobuf.message.Message):
     def __init__(
         self,
         *,
-        openai_llm_options: global___OpenaiLlmOptions | None = ...,
-        end_of_turn_probability_threshold: builtins.float | None = ...,
+        openai_llm_options: Global___OpenaiLlmOptions | None = ...,
+        end_of_turn_probability_threshold: _builtins.float | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["_end_of_turn_probability_threshold", b"_end_of_turn_probability_threshold", "_openai_llm_options", b"_openai_llm_options", "end_of_turn_probability_threshold", b"end_of_turn_probability_threshold", "openai_llm_options", b"openai_llm_options"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["_end_of_turn_probability_threshold", b"_end_of_turn_probability_threshold", "_openai_llm_options", b"_openai_llm_options", "end_of_turn_probability_threshold", b"end_of_turn_probability_threshold", "openai_llm_options", b"openai_llm_options"]) -> None: ...
-    @typing.overload
-    def WhichOneof(self, oneof_group: typing.Literal["_end_of_turn_probability_threshold", b"_end_of_turn_probability_threshold"]) -> typing.Literal["end_of_turn_probability_threshold"] | None: ...
-    @typing.overload
-    def WhichOneof(self, oneof_group: typing.Literal["_openai_llm_options", b"_openai_llm_options"]) -> typing.Literal["openai_llm_options"] | None: ...
+    _HasFieldArgType: _TypeAlias = _typing.Literal["_end_of_turn_probability_threshold", b"_end_of_turn_probability_threshold", "_openai_llm_options", b"_openai_llm_options", "end_of_turn_probability_threshold", b"end_of_turn_probability_threshold", "openai_llm_options", b"openai_llm_options"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["_end_of_turn_probability_threshold", b"_end_of_turn_probability_threshold", "_openai_llm_options", b"_openai_llm_options", "end_of_turn_probability_threshold", b"end_of_turn_probability_threshold", "openai_llm_options", b"openai_llm_options"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    _WhichOneofReturnType__end_of_turn_probability_threshold: _TypeAlias = _typing.Literal["end_of_turn_probability_threshold"]  # noqa: Y015
+    _WhichOneofArgType__end_of_turn_probability_threshold: _TypeAlias = _typing.Literal["_end_of_turn_probability_threshold", b"_end_of_turn_probability_threshold"]  # noqa: Y015
+    _WhichOneofReturnType__openai_llm_options: _TypeAlias = _typing.Literal["openai_llm_options"]  # noqa: Y015
+    _WhichOneofArgType__openai_llm_options: _TypeAlias = _typing.Literal["_openai_llm_options", b"_openai_llm_options"]  # noqa: Y015
+    @_typing.overload
+    def WhichOneof(self, oneof_group: _WhichOneofArgType__end_of_turn_probability_threshold) -> _WhichOneofReturnType__end_of_turn_probability_threshold | None: ...
+    @_typing.overload
+    def WhichOneof(self, oneof_group: _WhichOneofArgType__openai_llm_options) -> _WhichOneofReturnType__openai_llm_options | None: ...
 
-global___TurnDetectionOndewoDeOptions = TurnDetectionOndewoDeOptions
+Global___TurnDetectionOndewoDeOptions: _TypeAlias = TurnDetectionOndewoDeOptions  # noqa: Y015
 
-@typing.final
-class TurnDetectionOndewoDeFusionOptions(google.protobuf.message.Message):
+@_typing.final
+class TurnDetectionOndewoDeFusionOptions(_message.Message):
     """<p>TurnDetectionOndewoDeFusionOptions configures the ONDEWO German fusion turn detector. It combines the ONDEWO
     German text model on vLLM, acoustic heads on Triton and signals computed from the stream into one end-of-turn
     probability. The Triton heads, the text model's served name and the weights file are server settings.</p>
     """
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    OPENAI_LLM_OPTIONS_FIELD_NUMBER: builtins.int
-    END_OF_TURN_PROBABILITY_THRESHOLD_FIELD_NUMBER: builtins.int
-    end_of_turn_probability_threshold: builtins.float
+    OPENAI_LLM_OPTIONS_FIELD_NUMBER: _builtins.int
+    END_OF_TURN_PROBABILITY_THRESHOLD_FIELD_NUMBER: _builtins.int
+    end_of_turn_probability_threshold: _builtins.float
     """Optional. The end-of-turn probability at or above which the caller is taken to have finished the turn,
     valid range: 0 - 1. Unset = the server's configured value, else the weights file's threshold.
     """
-    @property
-    def openai_llm_options(self) -> global___OpenaiLlmOptions:
+    @_builtins.property
+    def openai_llm_options(self) -> Global___OpenaiLlmOptions:
         """Optional. Addresses the vLLM deployment of the text model (<code>base_url</code>, <code>api_key</code>,
         <code>timeout</code>); <code>model</code> names the fusion variant, e.g.
         <code>ondewo-s2t-model-de-fusion-turn-detection</code>. Unset fields take the server's configured values.
@@ -2359,58 +2649,64 @@ class TurnDetectionOndewoDeFusionOptions(google.protobuf.message.Message):
     def __init__(
         self,
         *,
-        openai_llm_options: global___OpenaiLlmOptions | None = ...,
-        end_of_turn_probability_threshold: builtins.float | None = ...,
+        openai_llm_options: Global___OpenaiLlmOptions | None = ...,
+        end_of_turn_probability_threshold: _builtins.float | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["_end_of_turn_probability_threshold", b"_end_of_turn_probability_threshold", "_openai_llm_options", b"_openai_llm_options", "end_of_turn_probability_threshold", b"end_of_turn_probability_threshold", "openai_llm_options", b"openai_llm_options"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["_end_of_turn_probability_threshold", b"_end_of_turn_probability_threshold", "_openai_llm_options", b"_openai_llm_options", "end_of_turn_probability_threshold", b"end_of_turn_probability_threshold", "openai_llm_options", b"openai_llm_options"]) -> None: ...
-    @typing.overload
-    def WhichOneof(self, oneof_group: typing.Literal["_end_of_turn_probability_threshold", b"_end_of_turn_probability_threshold"]) -> typing.Literal["end_of_turn_probability_threshold"] | None: ...
-    @typing.overload
-    def WhichOneof(self, oneof_group: typing.Literal["_openai_llm_options", b"_openai_llm_options"]) -> typing.Literal["openai_llm_options"] | None: ...
+    _HasFieldArgType: _TypeAlias = _typing.Literal["_end_of_turn_probability_threshold", b"_end_of_turn_probability_threshold", "_openai_llm_options", b"_openai_llm_options", "end_of_turn_probability_threshold", b"end_of_turn_probability_threshold", "openai_llm_options", b"openai_llm_options"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["_end_of_turn_probability_threshold", b"_end_of_turn_probability_threshold", "_openai_llm_options", b"_openai_llm_options", "end_of_turn_probability_threshold", b"end_of_turn_probability_threshold", "openai_llm_options", b"openai_llm_options"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    _WhichOneofReturnType__end_of_turn_probability_threshold: _TypeAlias = _typing.Literal["end_of_turn_probability_threshold"]  # noqa: Y015
+    _WhichOneofArgType__end_of_turn_probability_threshold: _TypeAlias = _typing.Literal["_end_of_turn_probability_threshold", b"_end_of_turn_probability_threshold"]  # noqa: Y015
+    _WhichOneofReturnType__openai_llm_options: _TypeAlias = _typing.Literal["openai_llm_options"]  # noqa: Y015
+    _WhichOneofArgType__openai_llm_options: _TypeAlias = _typing.Literal["_openai_llm_options", b"_openai_llm_options"]  # noqa: Y015
+    @_typing.overload
+    def WhichOneof(self, oneof_group: _WhichOneofArgType__end_of_turn_probability_threshold) -> _WhichOneofReturnType__end_of_turn_probability_threshold | None: ...
+    @_typing.overload
+    def WhichOneof(self, oneof_group: _WhichOneofArgType__openai_llm_options) -> _WhichOneofReturnType__openai_llm_options | None: ...
 
-global___TurnDetectionOndewoDeFusionOptions = TurnDetectionOndewoDeFusionOptions
+Global___TurnDetectionOndewoDeFusionOptions: _TypeAlias = TurnDetectionOndewoDeFusionOptions  # noqa: Y015
 
-@typing.final
-class TurnDetectionPipecatSmartTurnOptions(google.protobuf.message.Message):
+@_typing.final
+class TurnDetectionPipecatSmartTurnOptions(_message.Message):
     """<p>TurnDetectionPipecatSmartTurnOptions configures pipecat Smart Turn v3.2 as the turn detector. It judges the
     turn from the caller's audio alone and is served by Triton.</p>
     <p>Model: <a href="https://github.com/pipecat-ai/smart-turn">pipecat Smart Turn</a></p>
     """
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    MODEL_NAME_FIELD_NUMBER: builtins.int
-    TRITON_SERVER_HOST_FIELD_NUMBER: builtins.int
-    TRITON_SERVER_PORT_FIELD_NUMBER: builtins.int
-    MAX_AUDIO_SECONDS_FIELD_NUMBER: builtins.int
-    TIMEOUT_SECONDS_FIELD_NUMBER: builtins.int
-    END_OF_TURN_PROBABILITY_THRESHOLD_FIELD_NUMBER: builtins.int
-    model_name: builtins.str
+    MODEL_NAME_FIELD_NUMBER: _builtins.int
+    TRITON_SERVER_HOST_FIELD_NUMBER: _builtins.int
+    TRITON_SERVER_PORT_FIELD_NUMBER: _builtins.int
+    MAX_AUDIO_SECONDS_FIELD_NUMBER: _builtins.int
+    TIMEOUT_SECONDS_FIELD_NUMBER: _builtins.int
+    END_OF_TURN_PROBABILITY_THRESHOLD_FIELD_NUMBER: _builtins.int
+    model_name: _builtins.str
     """Optional. Full name of the Triton model. Unset = the server's configured value (default:
     <code>ondewo-s2t-model-multi-turn-detection-pipecat-smart-turn-3.2-onnx-triton</code>).
     """
-    triton_server_host: builtins.str
+    triton_server_host: _builtins.str
     """Optional. Host name of the Triton inference server that serves the model, as
     <code>Pyannote.triton_server_host</code>. Unset = the server's configured value. The connection uses the
     server's Triton client TLS settings.
     """
-    triton_server_port: builtins.int
+    triton_server_port: _builtins.int
     """Optional. Port of the Triton inference server that serves the model, as
     <code>Pyannote.triton_server_port</code>. Unset = the server's configured value.
     """
-    max_audio_seconds: builtins.float
+    max_audio_seconds: _builtins.float
     """Optional. Seconds of the caller's audio, ending at the decision moment, that the model hears; valid range:
     1 - 8. Shorter audio is left-padded with silence to 8 s, as the model was trained. Unset = the server's
     configured value (default: 8).
     """
-    timeout_seconds: builtins.float
+    timeout_seconds: _builtins.float
     """Optional. Seconds to wait for Triton's answer, valid range: greater than 0, at most 5. A turn whose verdict
     does not arrive in time is judged not finished and waits for
     <code>TurnDetectionOptions.incomplete_max_silence_seconds</code>. Unset = the server's configured value
     (default: 0.2).
     """
-    end_of_turn_probability_threshold: builtins.float
+    end_of_turn_probability_threshold: _builtins.float
     """Optional. The end-of-turn probability Smart Turn must report for the caller to be taken to have finished the
     turn, valid range: 0 - 1. A turn below it is judged not finished and waits for
     <code>TurnDetectionOptions.incomplete_max_silence_seconds</code>. Unset = the server's configured value
@@ -2420,42 +2716,56 @@ class TurnDetectionPipecatSmartTurnOptions(google.protobuf.message.Message):
     def __init__(
         self,
         *,
-        model_name: builtins.str | None = ...,
-        triton_server_host: builtins.str | None = ...,
-        triton_server_port: builtins.int | None = ...,
-        max_audio_seconds: builtins.float | None = ...,
-        timeout_seconds: builtins.float | None = ...,
-        end_of_turn_probability_threshold: builtins.float | None = ...,
+        model_name: _builtins.str | None = ...,
+        triton_server_host: _builtins.str | None = ...,
+        triton_server_port: _builtins.int | None = ...,
+        max_audio_seconds: _builtins.float | None = ...,
+        timeout_seconds: _builtins.float | None = ...,
+        end_of_turn_probability_threshold: _builtins.float | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["_end_of_turn_probability_threshold", b"_end_of_turn_probability_threshold", "_max_audio_seconds", b"_max_audio_seconds", "_model_name", b"_model_name", "_timeout_seconds", b"_timeout_seconds", "_triton_server_host", b"_triton_server_host", "_triton_server_port", b"_triton_server_port", "end_of_turn_probability_threshold", b"end_of_turn_probability_threshold", "max_audio_seconds", b"max_audio_seconds", "model_name", b"model_name", "timeout_seconds", b"timeout_seconds", "triton_server_host", b"triton_server_host", "triton_server_port", b"triton_server_port"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["_end_of_turn_probability_threshold", b"_end_of_turn_probability_threshold", "_max_audio_seconds", b"_max_audio_seconds", "_model_name", b"_model_name", "_timeout_seconds", b"_timeout_seconds", "_triton_server_host", b"_triton_server_host", "_triton_server_port", b"_triton_server_port", "end_of_turn_probability_threshold", b"end_of_turn_probability_threshold", "max_audio_seconds", b"max_audio_seconds", "model_name", b"model_name", "timeout_seconds", b"timeout_seconds", "triton_server_host", b"triton_server_host", "triton_server_port", b"triton_server_port"]) -> None: ...
-    @typing.overload
-    def WhichOneof(self, oneof_group: typing.Literal["_end_of_turn_probability_threshold", b"_end_of_turn_probability_threshold"]) -> typing.Literal["end_of_turn_probability_threshold"] | None: ...
-    @typing.overload
-    def WhichOneof(self, oneof_group: typing.Literal["_max_audio_seconds", b"_max_audio_seconds"]) -> typing.Literal["max_audio_seconds"] | None: ...
-    @typing.overload
-    def WhichOneof(self, oneof_group: typing.Literal["_model_name", b"_model_name"]) -> typing.Literal["model_name"] | None: ...
-    @typing.overload
-    def WhichOneof(self, oneof_group: typing.Literal["_timeout_seconds", b"_timeout_seconds"]) -> typing.Literal["timeout_seconds"] | None: ...
-    @typing.overload
-    def WhichOneof(self, oneof_group: typing.Literal["_triton_server_host", b"_triton_server_host"]) -> typing.Literal["triton_server_host"] | None: ...
-    @typing.overload
-    def WhichOneof(self, oneof_group: typing.Literal["_triton_server_port", b"_triton_server_port"]) -> typing.Literal["triton_server_port"] | None: ...
+    _HasFieldArgType: _TypeAlias = _typing.Literal["_end_of_turn_probability_threshold", b"_end_of_turn_probability_threshold", "_max_audio_seconds", b"_max_audio_seconds", "_model_name", b"_model_name", "_timeout_seconds", b"_timeout_seconds", "_triton_server_host", b"_triton_server_host", "_triton_server_port", b"_triton_server_port", "end_of_turn_probability_threshold", b"end_of_turn_probability_threshold", "max_audio_seconds", b"max_audio_seconds", "model_name", b"model_name", "timeout_seconds", b"timeout_seconds", "triton_server_host", b"triton_server_host", "triton_server_port", b"triton_server_port"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["_end_of_turn_probability_threshold", b"_end_of_turn_probability_threshold", "_max_audio_seconds", b"_max_audio_seconds", "_model_name", b"_model_name", "_timeout_seconds", b"_timeout_seconds", "_triton_server_host", b"_triton_server_host", "_triton_server_port", b"_triton_server_port", "end_of_turn_probability_threshold", b"end_of_turn_probability_threshold", "max_audio_seconds", b"max_audio_seconds", "model_name", b"model_name", "timeout_seconds", b"timeout_seconds", "triton_server_host", b"triton_server_host", "triton_server_port", b"triton_server_port"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    _WhichOneofReturnType__end_of_turn_probability_threshold: _TypeAlias = _typing.Literal["end_of_turn_probability_threshold"]  # noqa: Y015
+    _WhichOneofArgType__end_of_turn_probability_threshold: _TypeAlias = _typing.Literal["_end_of_turn_probability_threshold", b"_end_of_turn_probability_threshold"]  # noqa: Y015
+    _WhichOneofReturnType__max_audio_seconds: _TypeAlias = _typing.Literal["max_audio_seconds"]  # noqa: Y015
+    _WhichOneofArgType__max_audio_seconds: _TypeAlias = _typing.Literal["_max_audio_seconds", b"_max_audio_seconds"]  # noqa: Y015
+    _WhichOneofReturnType__model_name: _TypeAlias = _typing.Literal["model_name"]  # noqa: Y015
+    _WhichOneofArgType__model_name: _TypeAlias = _typing.Literal["_model_name", b"_model_name"]  # noqa: Y015
+    _WhichOneofReturnType__timeout_seconds: _TypeAlias = _typing.Literal["timeout_seconds"]  # noqa: Y015
+    _WhichOneofArgType__timeout_seconds: _TypeAlias = _typing.Literal["_timeout_seconds", b"_timeout_seconds"]  # noqa: Y015
+    _WhichOneofReturnType__triton_server_host: _TypeAlias = _typing.Literal["triton_server_host"]  # noqa: Y015
+    _WhichOneofArgType__triton_server_host: _TypeAlias = _typing.Literal["_triton_server_host", b"_triton_server_host"]  # noqa: Y015
+    _WhichOneofReturnType__triton_server_port: _TypeAlias = _typing.Literal["triton_server_port"]  # noqa: Y015
+    _WhichOneofArgType__triton_server_port: _TypeAlias = _typing.Literal["_triton_server_port", b"_triton_server_port"]  # noqa: Y015
+    @_typing.overload
+    def WhichOneof(self, oneof_group: _WhichOneofArgType__end_of_turn_probability_threshold) -> _WhichOneofReturnType__end_of_turn_probability_threshold | None: ...
+    @_typing.overload
+    def WhichOneof(self, oneof_group: _WhichOneofArgType__max_audio_seconds) -> _WhichOneofReturnType__max_audio_seconds | None: ...
+    @_typing.overload
+    def WhichOneof(self, oneof_group: _WhichOneofArgType__model_name) -> _WhichOneofReturnType__model_name | None: ...
+    @_typing.overload
+    def WhichOneof(self, oneof_group: _WhichOneofArgType__timeout_seconds) -> _WhichOneofReturnType__timeout_seconds | None: ...
+    @_typing.overload
+    def WhichOneof(self, oneof_group: _WhichOneofArgType__triton_server_host) -> _WhichOneofReturnType__triton_server_host | None: ...
+    @_typing.overload
+    def WhichOneof(self, oneof_group: _WhichOneofArgType__triton_server_port) -> _WhichOneofReturnType__triton_server_port | None: ...
 
-global___TurnDetectionPipecatSmartTurnOptions = TurnDetectionPipecatSmartTurnOptions
+Global___TurnDetectionPipecatSmartTurnOptions: _TypeAlias = TurnDetectionPipecatSmartTurnOptions  # noqa: Y015
 
-@typing.final
-class TurnDetectionConversationContext(google.protobuf.message.Message):
+@_typing.final
+class TurnDetectionConversationContext(_message.Message):
     """<p>TurnDetectionConversationContext carries the latest turns of the conversation for
     <code>TurnDetectionEndOfUtteranceLlmOptions</code> (see
     <code>TurnDetectionOptions.turn_detection_conversation_context</code>). No other detector reads it.</p>
     """
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    TURN_DETECTION_CONTEXT_TURNS_FIELD_NUMBER: builtins.int
-    @property
-    def turn_detection_context_turns(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___TurnDetectionContextTurn]:
+    TURN_DETECTION_CONTEXT_TURNS_FIELD_NUMBER: _builtins.int
+    @_builtins.property
+    def turn_detection_context_turns(self) -> _containers.RepeatedCompositeFieldContainer[Global___TurnDetectionContextTurn]:
         """The turns of the conversation, oldest first. They EXCLUDE the caller's utterance under evaluation, which
         the server appends itself.
         """
@@ -2463,26 +2773,30 @@ class TurnDetectionConversationContext(google.protobuf.message.Message):
     def __init__(
         self,
         *,
-        turn_detection_context_turns: collections.abc.Iterable[global___TurnDetectionContextTurn] | None = ...,
+        turn_detection_context_turns: _abc.Iterable[Global___TurnDetectionContextTurn] | None = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing.Literal["turn_detection_context_turns", b"turn_detection_context_turns"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _Never  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["turn_detection_context_turns", b"turn_detection_context_turns"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-global___TurnDetectionConversationContext = TurnDetectionConversationContext
+Global___TurnDetectionConversationContext: _TypeAlias = TurnDetectionConversationContext  # noqa: Y015
 
-@typing.final
-class TurnDetectionContextTurn(google.protobuf.message.Message):
+@_typing.final
+class TurnDetectionContextTurn(_message.Message):
     """<p>One turn of the conversation context of the turn detection, read only by
     <code>TurnDetectionEndOfUtteranceLlmOptions</code>.</p>
     """
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
     class _Role:
-        ValueType = typing.NewType("ValueType", builtins.int)
-        V: typing_extensions.TypeAlias = ValueType
+        ValueType = _typing.NewType("ValueType", _builtins.int)
+        V: _TypeAlias = ValueType  # noqa: Y015
 
-    class _RoleEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[TurnDetectionContextTurn._Role.ValueType], builtins.type):
-        DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
+    class _RoleEnumTypeWrapper(_enum_type_wrapper._EnumTypeWrapper[TurnDetectionContextTurn._Role.ValueType], _builtins.type):
+        DESCRIPTOR: _descriptor.EnumDescriptor
         ROLE_UNSPECIFIED: TurnDetectionContextTurn._Role.ValueType  # 0
         """Unspecified role. The server ignores a turn without a role."""
         ROLE_USER: TurnDetectionContextTurn._Role.ValueType  # 1
@@ -2504,33 +2818,37 @@ class TurnDetectionContextTurn(google.protobuf.message.Message):
     utterance.
     """
 
-    ROLE_FIELD_NUMBER: builtins.int
-    TEXT_FIELD_NUMBER: builtins.int
-    role: global___TurnDetectionContextTurn.Role.ValueType
+    ROLE_FIELD_NUMBER: _builtins.int
+    TEXT_FIELD_NUMBER: _builtins.int
+    role: Global___TurnDetectionContextTurn.Role.ValueType
     """Who spoke the turn."""
-    text: builtins.str
+    text: _builtins.str
     """The text of the turn."""
     def __init__(
         self,
         *,
-        role: global___TurnDetectionContextTurn.Role.ValueType = ...,
-        text: builtins.str = ...,
+        role: Global___TurnDetectionContextTurn.Role.ValueType = ...,
+        text: _builtins.str = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing.Literal["role", b"role", "text", b"text"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _Never  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["role", b"role", "text", b"text"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-global___TurnDetectionContextTurn = TurnDetectionContextTurn
+Global___TurnDetectionContextTurn: _TypeAlias = TurnDetectionContextTurn  # noqa: Y015
 
-@typing.final
-class TurnDetectionHoldBands(google.protobuf.message.Message):
+@_typing.final
+class TurnDetectionHoldBands(_message.Message):
     """<p>TurnDetectionHoldBands carries the hold bands of <code>TurnDetectionEndOfUtteranceLlmOptions</code>. No other
     detector reads them.</p>
     """
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    TURN_DETECTION_HOLD_BANDS_FIELD_NUMBER: builtins.int
-    @property
-    def turn_detection_hold_bands(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___TurnDetectionHoldBand]:
+    TURN_DETECTION_HOLD_BANDS_FIELD_NUMBER: _builtins.int
+    @_builtins.property
+    def turn_detection_hold_bands(self) -> _containers.RepeatedCompositeFieldContainer[Global___TurnDetectionHoldBand]:
         """The bands, each holding a turn judged finished with a probability below its upper bound: the first band,
         sorted by <code>upper_probability</code>, whose upper probability exceeds the end-of-utterance probability
         decides the hold. A probability above every band is finished at once.
@@ -2539,176 +2857,192 @@ class TurnDetectionHoldBands(google.protobuf.message.Message):
     def __init__(
         self,
         *,
-        turn_detection_hold_bands: collections.abc.Iterable[global___TurnDetectionHoldBand] | None = ...,
+        turn_detection_hold_bands: _abc.Iterable[Global___TurnDetectionHoldBand] | None = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing.Literal["turn_detection_hold_bands", b"turn_detection_hold_bands"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _Never  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["turn_detection_hold_bands", b"turn_detection_hold_bands"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-global___TurnDetectionHoldBands = TurnDetectionHoldBands
+Global___TurnDetectionHoldBands: _TypeAlias = TurnDetectionHoldBands  # noqa: Y015
 
-@typing.final
-class TurnDetectionHoldBand(google.protobuf.message.Message):
+@_typing.final
+class TurnDetectionHoldBand(_message.Message):
     """<p>One hold band of <code>TurnDetectionEndOfUtteranceLlmOptions</code>.</p>"""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    UPPER_PROBABILITY_FIELD_NUMBER: builtins.int
-    MAX_SILENCE_SECONDS_FIELD_NUMBER: builtins.int
-    upper_probability: builtins.float
+    UPPER_PROBABILITY_FIELD_NUMBER: _builtins.int
+    MAX_SILENCE_SECONDS_FIELD_NUMBER: _builtins.int
+    upper_probability: _builtins.float
     """The exclusive upper bound of the end-of-utterance probabilities this band covers, valid range: 0 - 1."""
-    max_silence_seconds: builtins.float
+    max_silence_seconds: _builtins.float
     """Seconds of silence a turn in this band waits before it is committed, valid range: 0 - 4. The server never
     holds longer than <code>TurnDetectionOptions.incomplete_max_silence_seconds</code>.
     """
     def __init__(
         self,
         *,
-        upper_probability: builtins.float = ...,
-        max_silence_seconds: builtins.float = ...,
+        upper_probability: _builtins.float = ...,
+        max_silence_seconds: _builtins.float = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing.Literal["max_silence_seconds", b"max_silence_seconds", "upper_probability", b"upper_probability"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _Never  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["max_silence_seconds", b"max_silence_seconds", "upper_probability", b"upper_probability"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-global___TurnDetectionHoldBand = TurnDetectionHoldBand
+Global___TurnDetectionHoldBand: _TypeAlias = TurnDetectionHoldBand  # noqa: Y015
 
-@typing.final
-class OpenaiLlmOptions(google.protobuf.message.Message):
+@_typing.final
+class OpenaiLlmOptions(_message.Message):
     """<p>Configuration options for OpenAI client chat completion requests used in turn detection and LLM post-processing.</p>"""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    @typing.final
-    class DefaultHeadersEntry(google.protobuf.message.Message):
-        DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    @_typing.final
+    class DefaultHeadersEntry(_message.Message):
+        DESCRIPTOR: _descriptor.Descriptor
 
-        KEY_FIELD_NUMBER: builtins.int
-        VALUE_FIELD_NUMBER: builtins.int
-        key: builtins.str
-        value: builtins.str
+        KEY_FIELD_NUMBER: _builtins.int
+        VALUE_FIELD_NUMBER: _builtins.int
+        key: _builtins.str
+        value: _builtins.str
         def __init__(
             self,
             *,
-            key: builtins.str = ...,
-            value: builtins.str = ...,
+            key: _builtins.str = ...,
+            value: _builtins.str = ...,
         ) -> None: ...
-        def ClearField(self, field_name: typing.Literal["key", b"key", "value", b"value"]) -> None: ...
+        _HasFieldArgType: _TypeAlias = _Never  # noqa: Y015
+        def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+        _ClearFieldArgType: _TypeAlias = _typing.Literal["key", b"key", "value", b"value"]  # noqa: Y015
+        def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+        def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-    @typing.final
-    class LogitBiasEntry(google.protobuf.message.Message):
-        DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    @_typing.final
+    class LogitBiasEntry(_message.Message):
+        DESCRIPTOR: _descriptor.Descriptor
 
-        KEY_FIELD_NUMBER: builtins.int
-        VALUE_FIELD_NUMBER: builtins.int
-        key: builtins.str
-        value: builtins.int
+        KEY_FIELD_NUMBER: _builtins.int
+        VALUE_FIELD_NUMBER: _builtins.int
+        key: _builtins.str
+        value: _builtins.int
         def __init__(
             self,
             *,
-            key: builtins.str = ...,
-            value: builtins.int = ...,
+            key: _builtins.str = ...,
+            value: _builtins.int = ...,
         ) -> None: ...
-        def ClearField(self, field_name: typing.Literal["key", b"key", "value", b"value"]) -> None: ...
+        _HasFieldArgType: _TypeAlias = _Never  # noqa: Y015
+        def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+        _ClearFieldArgType: _TypeAlias = _typing.Literal["key", b"key", "value", b"value"]  # noqa: Y015
+        def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+        def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-    API_KEY_FIELD_NUMBER: builtins.int
-    ORGANIZATION_FIELD_NUMBER: builtins.int
-    PROJECT_FIELD_NUMBER: builtins.int
-    WEBHOOK_SECRET_FIELD_NUMBER: builtins.int
-    BASE_URL_FIELD_NUMBER: builtins.int
-    WEBSOCKET_BASE_URL_FIELD_NUMBER: builtins.int
-    TIMEOUT_FIELD_NUMBER: builtins.int
-    MAX_RETRIES_FIELD_NUMBER: builtins.int
-    DEFAULT_HEADERS_FIELD_NUMBER: builtins.int
-    DEFAULT_QUERY_FIELD_NUMBER: builtins.int
-    STRICT_RESPONSE_VALIDATION_FIELD_NUMBER: builtins.int
-    MODEL_FIELD_NUMBER: builtins.int
-    FREQUENCY_PENALTY_FIELD_NUMBER: builtins.int
-    LOGIT_BIAS_FIELD_NUMBER: builtins.int
-    LOGPROBS_FIELD_NUMBER: builtins.int
-    MAX_COMPLETION_TOKENS_FIELD_NUMBER: builtins.int
-    MAX_TOKENS_FIELD_NUMBER: builtins.int
-    METADATA_FIELD_NUMBER: builtins.int
-    N_FIELD_NUMBER: builtins.int
-    PRESENCE_PENALTY_FIELD_NUMBER: builtins.int
-    PROMPT_CACHE_KEY_FIELD_NUMBER: builtins.int
-    REASONING_EFFORT_FIELD_NUMBER: builtins.int
-    SEED_FIELD_NUMBER: builtins.int
-    SERVICE_TIER_FIELD_NUMBER: builtins.int
-    STOP_FIELD_NUMBER: builtins.int
-    STORE_FIELD_NUMBER: builtins.int
-    TEMPERATURE_FIELD_NUMBER: builtins.int
-    TOP_LOGPROBS_FIELD_NUMBER: builtins.int
-    TOP_P_FIELD_NUMBER: builtins.int
-    USER_FIELD_NUMBER: builtins.int
-    VERBOSITY_FIELD_NUMBER: builtins.int
-    EXTRA_HEADERS_FIELD_NUMBER: builtins.int
-    EXTRA_QUERY_FIELD_NUMBER: builtins.int
-    EXTRA_BODY_FIELD_NUMBER: builtins.int
-    api_key: builtins.str
+    API_KEY_FIELD_NUMBER: _builtins.int
+    ORGANIZATION_FIELD_NUMBER: _builtins.int
+    PROJECT_FIELD_NUMBER: _builtins.int
+    WEBHOOK_SECRET_FIELD_NUMBER: _builtins.int
+    BASE_URL_FIELD_NUMBER: _builtins.int
+    WEBSOCKET_BASE_URL_FIELD_NUMBER: _builtins.int
+    TIMEOUT_FIELD_NUMBER: _builtins.int
+    MAX_RETRIES_FIELD_NUMBER: _builtins.int
+    DEFAULT_HEADERS_FIELD_NUMBER: _builtins.int
+    DEFAULT_QUERY_FIELD_NUMBER: _builtins.int
+    STRICT_RESPONSE_VALIDATION_FIELD_NUMBER: _builtins.int
+    MODEL_FIELD_NUMBER: _builtins.int
+    FREQUENCY_PENALTY_FIELD_NUMBER: _builtins.int
+    LOGIT_BIAS_FIELD_NUMBER: _builtins.int
+    LOGPROBS_FIELD_NUMBER: _builtins.int
+    MAX_COMPLETION_TOKENS_FIELD_NUMBER: _builtins.int
+    MAX_TOKENS_FIELD_NUMBER: _builtins.int
+    METADATA_FIELD_NUMBER: _builtins.int
+    N_FIELD_NUMBER: _builtins.int
+    PRESENCE_PENALTY_FIELD_NUMBER: _builtins.int
+    PROMPT_CACHE_KEY_FIELD_NUMBER: _builtins.int
+    REASONING_EFFORT_FIELD_NUMBER: _builtins.int
+    SEED_FIELD_NUMBER: _builtins.int
+    SERVICE_TIER_FIELD_NUMBER: _builtins.int
+    STOP_FIELD_NUMBER: _builtins.int
+    STORE_FIELD_NUMBER: _builtins.int
+    TEMPERATURE_FIELD_NUMBER: _builtins.int
+    TOP_LOGPROBS_FIELD_NUMBER: _builtins.int
+    TOP_P_FIELD_NUMBER: _builtins.int
+    USER_FIELD_NUMBER: _builtins.int
+    VERBOSITY_FIELD_NUMBER: _builtins.int
+    EXTRA_HEADERS_FIELD_NUMBER: _builtins.int
+    EXTRA_QUERY_FIELD_NUMBER: _builtins.int
+    EXTRA_BODY_FIELD_NUMBER: _builtins.int
+    api_key: _builtins.str
     """Optional. The API key used to authenticate with the OpenAI API."""
-    organization: builtins.str
+    organization: _builtins.str
     """Optional. The organization ID associated with the OpenAI account, used for billing and access control."""
-    project: builtins.str
+    project: _builtins.str
     """Optional. The project ID associated with the OpenAI account."""
-    webhook_secret: builtins.str
+    webhook_secret: _builtins.str
     """Optional. The webhook secret used to validate incoming webhook events from OpenAI."""
-    base_url: builtins.str
+    base_url: _builtins.str
     """Optional. The base URL for the OpenAI API. Overrides the default endpoint, useful for proxies or
     compatible third-party providers.
     """
-    websocket_base_url: builtins.str
+    websocket_base_url: _builtins.str
     """Optional. The base URL for OpenAI WebSocket connections. Overrides the default WebSocket endpoint."""
-    timeout: builtins.float
+    timeout: _builtins.float
     """Optional. The timeout in seconds for requests to the OpenAI API. Applies to the entire request
     lifecycle including connection, sending, and receiving.
     """
-    max_retries: builtins.int
+    max_retries: _builtins.int
     """Optional. The maximum number of retries to attempt when a request fails due to a transient error.
     Defaults to 2.
     """
-    strict_response_validation: builtins.bool
+    strict_response_validation: _builtins.bool
     """Optional. If true, enables strict validation of response payloads returned by the OpenAI API."""
-    model: builtins.str
+    model: _builtins.str
     """Required. The name or identifier of the OpenAI model to use for chat completion
     (e.g., "gpt-4o", "gpt-4o-mini", "o3").
     """
-    frequency_penalty: builtins.float
+    frequency_penalty: _builtins.float
     """Optional. A number between -2.0 and 2.0. Positive values penalize new tokens based on their
     existing frequency in the text so far, decreasing the likelihood of the model repeating the same
     line verbatim.
     """
-    logprobs: builtins.bool
+    logprobs: _builtins.bool
     """Optional. Whether to return log probabilities of the output tokens. If true, returns the log
     probabilities of each output token in the response.
     """
-    max_completion_tokens: builtins.int
+    max_completion_tokens: _builtins.int
     """Optional. An upper bound for the number of tokens that can be generated for a completion,
     including visible output tokens and reasoning tokens.
     """
-    max_tokens: builtins.int
+    max_tokens: _builtins.int
     """Optional. The maximum number of tokens that can be generated in the chat completion.
     Deprecated in favor of max_completion_tokens.
     """
-    n: builtins.int
+    n: _builtins.int
     """Optional. The number of chat completion choices to generate for each input message. Note that
     costs are multiplied by the number of choices generated.
     """
-    presence_penalty: builtins.float
+    presence_penalty: _builtins.float
     """Optional. A number between -2.0 and 2.0. Positive values penalize new tokens based on whether
     they have already appeared in the text, increasing the likelihood of the model discussing new topics.
     """
-    prompt_cache_key: builtins.str
+    prompt_cache_key: _builtins.str
     """Optional. Used by OpenAI to cache responses for similar requests to optimize your cache hit rates. Replaces the
     `user` field. [Learn more](https://platform.openai.com/docs/guides/prompt-caching).
     """
-    reasoning_effort: global___ReasoningEffort.ValueType
+    reasoning_effort: Global___ReasoningEffort.ValueType
     """Optional. Constrains effort on reasoning for
     [reasoning models](https://platform.openai.com/docs/guides/reasoning). Currently supported values are `none`,
     `minimal`, `low`, `medium`, `high`, and `xhigh`. Reducing reasoning effort can result in faster responses and
     fewer tokens used on reasoning in a response.
     """
-    seed: builtins.int
+    seed: _builtins.int
     """Optional. If specified, the system will make a best effort to sample deterministically given the
     same seed and parameters, enabling reproducible outputs.
     """
-    service_tier: global___ServiceTier.ValueType
+    service_tier: Global___ServiceTier.ValueType
     """Optional. Specifies the processing type used for serving the request.
     - If set to 'auto', then the request will be processed with the service tier configured in the Project settings.
       Unless otherwise configured, the Project will use 'default'.
@@ -2722,75 +3056,75 @@ class OpenaiLlmOptions(google.protobuf.message.Message):
     processing mode actually used to serve the request. This response value may be different from the value set in
     the parameter.
     """
-    store: builtins.bool
+    store: _builtins.bool
     """Optional. Whether to store the output of this chat completion request for use in model
     distillation, evals, or the stored completions dashboard.
     """
-    temperature: builtins.float
+    temperature: _builtins.float
     """Optional. What sampling temperature to use, between 0 and 2. Higher values (e.g., 0.8) make the
     output more random, while lower values (e.g., 0.2) make it more focused and deterministic.
     """
-    top_logprobs: builtins.int
+    top_logprobs: _builtins.int
     """Optional. An integer between 0 and 20 specifying the number of most likely tokens to return at
     each token position, each with an associated log probability. Requires logprobs to be true.
     """
-    top_p: builtins.float
+    top_p: _builtins.float
     """Optional. An alternative to sampling with temperature, called nucleus sampling. The model
     considers only the tokens with top_p probability mass. Ranges from 0 to 1.
     """
-    user: builtins.str
+    user: _builtins.str
     """Optional. This field is being replaced by `safety_identifier` and `prompt_cache_key`. Use `prompt_cache_key`
     instead to maintain caching optimizations. A stable identifier for your end-users. Used to boost cache hit rates
      by better bucketing similar requests and to help OpenAI detect and prevent abuse.
     [Learn more](https://platform.openai.com/docs/guides/safety-best-practices#safety-identifiers).
     """
-    verbosity: global___Verbosity.ValueType
+    verbosity: Global___Verbosity.ValueType
     """Optional. Constrains the verbosity of the model's response. Lower values will result in more concise responses,
     while higher values will result in more verbose responses.
     Currently supported values are `low`, `medium`, and `high`.
     """
-    @property
-    def default_headers(self) -> google.protobuf.internal.containers.ScalarMap[builtins.str, builtins.str]:
+    @_builtins.property
+    def default_headers(self) -> _containers.ScalarMap[_builtins.str, _builtins.str]:
         """Optional. Default HTTP headers to include with every request to the OpenAI API."""
 
-    @property
-    def default_query(self) -> google.protobuf.struct_pb2.Struct:
+    @_builtins.property
+    def default_query(self) -> _struct_pb2.Struct:
         """Optional. Default query parameters to append to every request URL sent to the OpenAI API.
         Values can be of any type (string, number, boolean, list), hence the use of Struct.
         """
 
-    @property
-    def logit_bias(self) -> google.protobuf.internal.containers.ScalarMap[builtins.str, builtins.int]:
+    @_builtins.property
+    def logit_bias(self) -> _containers.ScalarMap[_builtins.str, _builtins.int]:
         """Optional. Modifies the likelihood of specified tokens appearing in the completion. Maps token IDs
         (as strings) to bias values from -100 to 100. Mathematically added to the logits before sampling.
         """
 
-    @property
-    def metadata(self) -> google.protobuf.struct_pb2.Struct:
+    @_builtins.property
+    def metadata(self) -> _struct_pb2.Struct:
         """Optional. Set of 16 key-value pairs that can be attached to an object. This can be useful for storing additional
         information about the object in a structured format, and querying for objects via API or the dashboard.
         """
 
-    @property
-    def stop(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
+    @_builtins.property
+    def stop(self) -> _containers.RepeatedScalarFieldContainer[_builtins.str]:
         """Optional. Not supported with latest reasoning models `o3` and `o4-mini`. Up to 4 sequences where the API will
         stop generating further tokens. The returned text will not contain the stop sequence.
         """
 
-    @property
-    def extra_headers(self) -> google.protobuf.struct_pb2.Struct:
+    @_builtins.property
+    def extra_headers(self) -> _struct_pb2.Struct:
         """Optional. Additional HTTP headers to send with the request. These are merged with and override
         default_headers for this specific request only.
         """
 
-    @property
-    def extra_query(self) -> google.protobuf.struct_pb2.Struct:
+    @_builtins.property
+    def extra_query(self) -> _struct_pb2.Struct:
         """Optional. Additional query parameters to send with the request. These are merged with and override
         default_query for this specific request only.
         """
 
-    @property
-    def extra_body(self) -> google.protobuf.struct_pb2.Struct:
+    @_builtins.property
+    def extra_body(self) -> _struct_pb2.Struct:
         """Optional. Additional JSON properties to include in the request body. Useful for accessing new or
         undocumented API parameters.
         """
@@ -2798,146 +3132,208 @@ class OpenaiLlmOptions(google.protobuf.message.Message):
     def __init__(
         self,
         *,
-        api_key: builtins.str | None = ...,
-        organization: builtins.str | None = ...,
-        project: builtins.str | None = ...,
-        webhook_secret: builtins.str | None = ...,
-        base_url: builtins.str | None = ...,
-        websocket_base_url: builtins.str | None = ...,
-        timeout: builtins.float | None = ...,
-        max_retries: builtins.int | None = ...,
-        default_headers: collections.abc.Mapping[builtins.str, builtins.str] | None = ...,
-        default_query: google.protobuf.struct_pb2.Struct | None = ...,
-        strict_response_validation: builtins.bool | None = ...,
-        model: builtins.str = ...,
-        frequency_penalty: builtins.float | None = ...,
-        logit_bias: collections.abc.Mapping[builtins.str, builtins.int] | None = ...,
-        logprobs: builtins.bool | None = ...,
-        max_completion_tokens: builtins.int | None = ...,
-        max_tokens: builtins.int | None = ...,
-        metadata: google.protobuf.struct_pb2.Struct | None = ...,
-        n: builtins.int | None = ...,
-        presence_penalty: builtins.float | None = ...,
-        prompt_cache_key: builtins.str | None = ...,
-        reasoning_effort: global___ReasoningEffort.ValueType | None = ...,
-        seed: builtins.int | None = ...,
-        service_tier: global___ServiceTier.ValueType | None = ...,
-        stop: collections.abc.Iterable[builtins.str] | None = ...,
-        store: builtins.bool | None = ...,
-        temperature: builtins.float | None = ...,
-        top_logprobs: builtins.int | None = ...,
-        top_p: builtins.float | None = ...,
-        user: builtins.str | None = ...,
-        verbosity: global___Verbosity.ValueType | None = ...,
-        extra_headers: google.protobuf.struct_pb2.Struct | None = ...,
-        extra_query: google.protobuf.struct_pb2.Struct | None = ...,
-        extra_body: google.protobuf.struct_pb2.Struct | None = ...,
+        api_key: _builtins.str | None = ...,
+        organization: _builtins.str | None = ...,
+        project: _builtins.str | None = ...,
+        webhook_secret: _builtins.str | None = ...,
+        base_url: _builtins.str | None = ...,
+        websocket_base_url: _builtins.str | None = ...,
+        timeout: _builtins.float | None = ...,
+        max_retries: _builtins.int | None = ...,
+        default_headers: _abc.Mapping[_builtins.str, _builtins.str] | None = ...,
+        default_query: _struct_pb2.Struct | None = ...,
+        strict_response_validation: _builtins.bool | None = ...,
+        model: _builtins.str = ...,
+        frequency_penalty: _builtins.float | None = ...,
+        logit_bias: _abc.Mapping[_builtins.str, _builtins.int] | None = ...,
+        logprobs: _builtins.bool | None = ...,
+        max_completion_tokens: _builtins.int | None = ...,
+        max_tokens: _builtins.int | None = ...,
+        metadata: _struct_pb2.Struct | None = ...,
+        n: _builtins.int | None = ...,
+        presence_penalty: _builtins.float | None = ...,
+        prompt_cache_key: _builtins.str | None = ...,
+        reasoning_effort: Global___ReasoningEffort.ValueType | None = ...,
+        seed: _builtins.int | None = ...,
+        service_tier: Global___ServiceTier.ValueType | None = ...,
+        stop: _abc.Iterable[_builtins.str] | None = ...,
+        store: _builtins.bool | None = ...,
+        temperature: _builtins.float | None = ...,
+        top_logprobs: _builtins.int | None = ...,
+        top_p: _builtins.float | None = ...,
+        user: _builtins.str | None = ...,
+        verbosity: Global___Verbosity.ValueType | None = ...,
+        extra_headers: _struct_pb2.Struct | None = ...,
+        extra_query: _struct_pb2.Struct | None = ...,
+        extra_body: _struct_pb2.Struct | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["_api_key", b"_api_key", "_base_url", b"_base_url", "_default_query", b"_default_query", "_extra_body", b"_extra_body", "_extra_headers", b"_extra_headers", "_extra_query", b"_extra_query", "_frequency_penalty", b"_frequency_penalty", "_logprobs", b"_logprobs", "_max_completion_tokens", b"_max_completion_tokens", "_max_retries", b"_max_retries", "_max_tokens", b"_max_tokens", "_metadata", b"_metadata", "_n", b"_n", "_organization", b"_organization", "_presence_penalty", b"_presence_penalty", "_project", b"_project", "_prompt_cache_key", b"_prompt_cache_key", "_reasoning_effort", b"_reasoning_effort", "_seed", b"_seed", "_service_tier", b"_service_tier", "_store", b"_store", "_strict_response_validation", b"_strict_response_validation", "_temperature", b"_temperature", "_timeout", b"_timeout", "_top_logprobs", b"_top_logprobs", "_top_p", b"_top_p", "_user", b"_user", "_verbosity", b"_verbosity", "_webhook_secret", b"_webhook_secret", "_websocket_base_url", b"_websocket_base_url", "api_key", b"api_key", "base_url", b"base_url", "default_query", b"default_query", "extra_body", b"extra_body", "extra_headers", b"extra_headers", "extra_query", b"extra_query", "frequency_penalty", b"frequency_penalty", "logprobs", b"logprobs", "max_completion_tokens", b"max_completion_tokens", "max_retries", b"max_retries", "max_tokens", b"max_tokens", "metadata", b"metadata", "n", b"n", "organization", b"organization", "presence_penalty", b"presence_penalty", "project", b"project", "prompt_cache_key", b"prompt_cache_key", "reasoning_effort", b"reasoning_effort", "seed", b"seed", "service_tier", b"service_tier", "store", b"store", "strict_response_validation", b"strict_response_validation", "temperature", b"temperature", "timeout", b"timeout", "top_logprobs", b"top_logprobs", "top_p", b"top_p", "user", b"user", "verbosity", b"verbosity", "webhook_secret", b"webhook_secret", "websocket_base_url", b"websocket_base_url"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["_api_key", b"_api_key", "_base_url", b"_base_url", "_default_query", b"_default_query", "_extra_body", b"_extra_body", "_extra_headers", b"_extra_headers", "_extra_query", b"_extra_query", "_frequency_penalty", b"_frequency_penalty", "_logprobs", b"_logprobs", "_max_completion_tokens", b"_max_completion_tokens", "_max_retries", b"_max_retries", "_max_tokens", b"_max_tokens", "_metadata", b"_metadata", "_n", b"_n", "_organization", b"_organization", "_presence_penalty", b"_presence_penalty", "_project", b"_project", "_prompt_cache_key", b"_prompt_cache_key", "_reasoning_effort", b"_reasoning_effort", "_seed", b"_seed", "_service_tier", b"_service_tier", "_store", b"_store", "_strict_response_validation", b"_strict_response_validation", "_temperature", b"_temperature", "_timeout", b"_timeout", "_top_logprobs", b"_top_logprobs", "_top_p", b"_top_p", "_user", b"_user", "_verbosity", b"_verbosity", "_webhook_secret", b"_webhook_secret", "_websocket_base_url", b"_websocket_base_url", "api_key", b"api_key", "base_url", b"base_url", "default_headers", b"default_headers", "default_query", b"default_query", "extra_body", b"extra_body", "extra_headers", b"extra_headers", "extra_query", b"extra_query", "frequency_penalty", b"frequency_penalty", "logit_bias", b"logit_bias", "logprobs", b"logprobs", "max_completion_tokens", b"max_completion_tokens", "max_retries", b"max_retries", "max_tokens", b"max_tokens", "metadata", b"metadata", "model", b"model", "n", b"n", "organization", b"organization", "presence_penalty", b"presence_penalty", "project", b"project", "prompt_cache_key", b"prompt_cache_key", "reasoning_effort", b"reasoning_effort", "seed", b"seed", "service_tier", b"service_tier", "stop", b"stop", "store", b"store", "strict_response_validation", b"strict_response_validation", "temperature", b"temperature", "timeout", b"timeout", "top_logprobs", b"top_logprobs", "top_p", b"top_p", "user", b"user", "verbosity", b"verbosity", "webhook_secret", b"webhook_secret", "websocket_base_url", b"websocket_base_url"]) -> None: ...
-    @typing.overload
-    def WhichOneof(self, oneof_group: typing.Literal["_api_key", b"_api_key"]) -> typing.Literal["api_key"] | None: ...
-    @typing.overload
-    def WhichOneof(self, oneof_group: typing.Literal["_base_url", b"_base_url"]) -> typing.Literal["base_url"] | None: ...
-    @typing.overload
-    def WhichOneof(self, oneof_group: typing.Literal["_default_query", b"_default_query"]) -> typing.Literal["default_query"] | None: ...
-    @typing.overload
-    def WhichOneof(self, oneof_group: typing.Literal["_extra_body", b"_extra_body"]) -> typing.Literal["extra_body"] | None: ...
-    @typing.overload
-    def WhichOneof(self, oneof_group: typing.Literal["_extra_headers", b"_extra_headers"]) -> typing.Literal["extra_headers"] | None: ...
-    @typing.overload
-    def WhichOneof(self, oneof_group: typing.Literal["_extra_query", b"_extra_query"]) -> typing.Literal["extra_query"] | None: ...
-    @typing.overload
-    def WhichOneof(self, oneof_group: typing.Literal["_frequency_penalty", b"_frequency_penalty"]) -> typing.Literal["frequency_penalty"] | None: ...
-    @typing.overload
-    def WhichOneof(self, oneof_group: typing.Literal["_logprobs", b"_logprobs"]) -> typing.Literal["logprobs"] | None: ...
-    @typing.overload
-    def WhichOneof(self, oneof_group: typing.Literal["_max_completion_tokens", b"_max_completion_tokens"]) -> typing.Literal["max_completion_tokens"] | None: ...
-    @typing.overload
-    def WhichOneof(self, oneof_group: typing.Literal["_max_retries", b"_max_retries"]) -> typing.Literal["max_retries"] | None: ...
-    @typing.overload
-    def WhichOneof(self, oneof_group: typing.Literal["_max_tokens", b"_max_tokens"]) -> typing.Literal["max_tokens"] | None: ...
-    @typing.overload
-    def WhichOneof(self, oneof_group: typing.Literal["_metadata", b"_metadata"]) -> typing.Literal["metadata"] | None: ...
-    @typing.overload
-    def WhichOneof(self, oneof_group: typing.Literal["_n", b"_n"]) -> typing.Literal["n"] | None: ...
-    @typing.overload
-    def WhichOneof(self, oneof_group: typing.Literal["_organization", b"_organization"]) -> typing.Literal["organization"] | None: ...
-    @typing.overload
-    def WhichOneof(self, oneof_group: typing.Literal["_presence_penalty", b"_presence_penalty"]) -> typing.Literal["presence_penalty"] | None: ...
-    @typing.overload
-    def WhichOneof(self, oneof_group: typing.Literal["_project", b"_project"]) -> typing.Literal["project"] | None: ...
-    @typing.overload
-    def WhichOneof(self, oneof_group: typing.Literal["_prompt_cache_key", b"_prompt_cache_key"]) -> typing.Literal["prompt_cache_key"] | None: ...
-    @typing.overload
-    def WhichOneof(self, oneof_group: typing.Literal["_reasoning_effort", b"_reasoning_effort"]) -> typing.Literal["reasoning_effort"] | None: ...
-    @typing.overload
-    def WhichOneof(self, oneof_group: typing.Literal["_seed", b"_seed"]) -> typing.Literal["seed"] | None: ...
-    @typing.overload
-    def WhichOneof(self, oneof_group: typing.Literal["_service_tier", b"_service_tier"]) -> typing.Literal["service_tier"] | None: ...
-    @typing.overload
-    def WhichOneof(self, oneof_group: typing.Literal["_store", b"_store"]) -> typing.Literal["store"] | None: ...
-    @typing.overload
-    def WhichOneof(self, oneof_group: typing.Literal["_strict_response_validation", b"_strict_response_validation"]) -> typing.Literal["strict_response_validation"] | None: ...
-    @typing.overload
-    def WhichOneof(self, oneof_group: typing.Literal["_temperature", b"_temperature"]) -> typing.Literal["temperature"] | None: ...
-    @typing.overload
-    def WhichOneof(self, oneof_group: typing.Literal["_timeout", b"_timeout"]) -> typing.Literal["timeout"] | None: ...
-    @typing.overload
-    def WhichOneof(self, oneof_group: typing.Literal["_top_logprobs", b"_top_logprobs"]) -> typing.Literal["top_logprobs"] | None: ...
-    @typing.overload
-    def WhichOneof(self, oneof_group: typing.Literal["_top_p", b"_top_p"]) -> typing.Literal["top_p"] | None: ...
-    @typing.overload
-    def WhichOneof(self, oneof_group: typing.Literal["_user", b"_user"]) -> typing.Literal["user"] | None: ...
-    @typing.overload
-    def WhichOneof(self, oneof_group: typing.Literal["_verbosity", b"_verbosity"]) -> typing.Literal["verbosity"] | None: ...
-    @typing.overload
-    def WhichOneof(self, oneof_group: typing.Literal["_webhook_secret", b"_webhook_secret"]) -> typing.Literal["webhook_secret"] | None: ...
-    @typing.overload
-    def WhichOneof(self, oneof_group: typing.Literal["_websocket_base_url", b"_websocket_base_url"]) -> typing.Literal["websocket_base_url"] | None: ...
+    _HasFieldArgType: _TypeAlias = _typing.Literal["_api_key", b"_api_key", "_base_url", b"_base_url", "_default_query", b"_default_query", "_extra_body", b"_extra_body", "_extra_headers", b"_extra_headers", "_extra_query", b"_extra_query", "_frequency_penalty", b"_frequency_penalty", "_logprobs", b"_logprobs", "_max_completion_tokens", b"_max_completion_tokens", "_max_retries", b"_max_retries", "_max_tokens", b"_max_tokens", "_metadata", b"_metadata", "_n", b"_n", "_organization", b"_organization", "_presence_penalty", b"_presence_penalty", "_project", b"_project", "_prompt_cache_key", b"_prompt_cache_key", "_reasoning_effort", b"_reasoning_effort", "_seed", b"_seed", "_service_tier", b"_service_tier", "_store", b"_store", "_strict_response_validation", b"_strict_response_validation", "_temperature", b"_temperature", "_timeout", b"_timeout", "_top_logprobs", b"_top_logprobs", "_top_p", b"_top_p", "_user", b"_user", "_verbosity", b"_verbosity", "_webhook_secret", b"_webhook_secret", "_websocket_base_url", b"_websocket_base_url", "api_key", b"api_key", "base_url", b"base_url", "default_query", b"default_query", "extra_body", b"extra_body", "extra_headers", b"extra_headers", "extra_query", b"extra_query", "frequency_penalty", b"frequency_penalty", "logprobs", b"logprobs", "max_completion_tokens", b"max_completion_tokens", "max_retries", b"max_retries", "max_tokens", b"max_tokens", "metadata", b"metadata", "n", b"n", "organization", b"organization", "presence_penalty", b"presence_penalty", "project", b"project", "prompt_cache_key", b"prompt_cache_key", "reasoning_effort", b"reasoning_effort", "seed", b"seed", "service_tier", b"service_tier", "store", b"store", "strict_response_validation", b"strict_response_validation", "temperature", b"temperature", "timeout", b"timeout", "top_logprobs", b"top_logprobs", "top_p", b"top_p", "user", b"user", "verbosity", b"verbosity", "webhook_secret", b"webhook_secret", "websocket_base_url", b"websocket_base_url"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["_api_key", b"_api_key", "_base_url", b"_base_url", "_default_query", b"_default_query", "_extra_body", b"_extra_body", "_extra_headers", b"_extra_headers", "_extra_query", b"_extra_query", "_frequency_penalty", b"_frequency_penalty", "_logprobs", b"_logprobs", "_max_completion_tokens", b"_max_completion_tokens", "_max_retries", b"_max_retries", "_max_tokens", b"_max_tokens", "_metadata", b"_metadata", "_n", b"_n", "_organization", b"_organization", "_presence_penalty", b"_presence_penalty", "_project", b"_project", "_prompt_cache_key", b"_prompt_cache_key", "_reasoning_effort", b"_reasoning_effort", "_seed", b"_seed", "_service_tier", b"_service_tier", "_store", b"_store", "_strict_response_validation", b"_strict_response_validation", "_temperature", b"_temperature", "_timeout", b"_timeout", "_top_logprobs", b"_top_logprobs", "_top_p", b"_top_p", "_user", b"_user", "_verbosity", b"_verbosity", "_webhook_secret", b"_webhook_secret", "_websocket_base_url", b"_websocket_base_url", "api_key", b"api_key", "base_url", b"base_url", "default_headers", b"default_headers", "default_query", b"default_query", "extra_body", b"extra_body", "extra_headers", b"extra_headers", "extra_query", b"extra_query", "frequency_penalty", b"frequency_penalty", "logit_bias", b"logit_bias", "logprobs", b"logprobs", "max_completion_tokens", b"max_completion_tokens", "max_retries", b"max_retries", "max_tokens", b"max_tokens", "metadata", b"metadata", "model", b"model", "n", b"n", "organization", b"organization", "presence_penalty", b"presence_penalty", "project", b"project", "prompt_cache_key", b"prompt_cache_key", "reasoning_effort", b"reasoning_effort", "seed", b"seed", "service_tier", b"service_tier", "stop", b"stop", "store", b"store", "strict_response_validation", b"strict_response_validation", "temperature", b"temperature", "timeout", b"timeout", "top_logprobs", b"top_logprobs", "top_p", b"top_p", "user", b"user", "verbosity", b"verbosity", "webhook_secret", b"webhook_secret", "websocket_base_url", b"websocket_base_url"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    _WhichOneofReturnType__api_key: _TypeAlias = _typing.Literal["api_key"]  # noqa: Y015
+    _WhichOneofArgType__api_key: _TypeAlias = _typing.Literal["_api_key", b"_api_key"]  # noqa: Y015
+    _WhichOneofReturnType__base_url: _TypeAlias = _typing.Literal["base_url"]  # noqa: Y015
+    _WhichOneofArgType__base_url: _TypeAlias = _typing.Literal["_base_url", b"_base_url"]  # noqa: Y015
+    _WhichOneofReturnType__default_query: _TypeAlias = _typing.Literal["default_query"]  # noqa: Y015
+    _WhichOneofArgType__default_query: _TypeAlias = _typing.Literal["_default_query", b"_default_query"]  # noqa: Y015
+    _WhichOneofReturnType__extra_body: _TypeAlias = _typing.Literal["extra_body"]  # noqa: Y015
+    _WhichOneofArgType__extra_body: _TypeAlias = _typing.Literal["_extra_body", b"_extra_body"]  # noqa: Y015
+    _WhichOneofReturnType__extra_headers: _TypeAlias = _typing.Literal["extra_headers"]  # noqa: Y015
+    _WhichOneofArgType__extra_headers: _TypeAlias = _typing.Literal["_extra_headers", b"_extra_headers"]  # noqa: Y015
+    _WhichOneofReturnType__extra_query: _TypeAlias = _typing.Literal["extra_query"]  # noqa: Y015
+    _WhichOneofArgType__extra_query: _TypeAlias = _typing.Literal["_extra_query", b"_extra_query"]  # noqa: Y015
+    _WhichOneofReturnType__frequency_penalty: _TypeAlias = _typing.Literal["frequency_penalty"]  # noqa: Y015
+    _WhichOneofArgType__frequency_penalty: _TypeAlias = _typing.Literal["_frequency_penalty", b"_frequency_penalty"]  # noqa: Y015
+    _WhichOneofReturnType__logprobs: _TypeAlias = _typing.Literal["logprobs"]  # noqa: Y015
+    _WhichOneofArgType__logprobs: _TypeAlias = _typing.Literal["_logprobs", b"_logprobs"]  # noqa: Y015
+    _WhichOneofReturnType__max_completion_tokens: _TypeAlias = _typing.Literal["max_completion_tokens"]  # noqa: Y015
+    _WhichOneofArgType__max_completion_tokens: _TypeAlias = _typing.Literal["_max_completion_tokens", b"_max_completion_tokens"]  # noqa: Y015
+    _WhichOneofReturnType__max_retries: _TypeAlias = _typing.Literal["max_retries"]  # noqa: Y015
+    _WhichOneofArgType__max_retries: _TypeAlias = _typing.Literal["_max_retries", b"_max_retries"]  # noqa: Y015
+    _WhichOneofReturnType__max_tokens: _TypeAlias = _typing.Literal["max_tokens"]  # noqa: Y015
+    _WhichOneofArgType__max_tokens: _TypeAlias = _typing.Literal["_max_tokens", b"_max_tokens"]  # noqa: Y015
+    _WhichOneofReturnType__metadata: _TypeAlias = _typing.Literal["metadata"]  # noqa: Y015
+    _WhichOneofArgType__metadata: _TypeAlias = _typing.Literal["_metadata", b"_metadata"]  # noqa: Y015
+    _WhichOneofReturnType__n: _TypeAlias = _typing.Literal["n"]  # noqa: Y015
+    _WhichOneofArgType__n: _TypeAlias = _typing.Literal["_n", b"_n"]  # noqa: Y015
+    _WhichOneofReturnType__organization: _TypeAlias = _typing.Literal["organization"]  # noqa: Y015
+    _WhichOneofArgType__organization: _TypeAlias = _typing.Literal["_organization", b"_organization"]  # noqa: Y015
+    _WhichOneofReturnType__presence_penalty: _TypeAlias = _typing.Literal["presence_penalty"]  # noqa: Y015
+    _WhichOneofArgType__presence_penalty: _TypeAlias = _typing.Literal["_presence_penalty", b"_presence_penalty"]  # noqa: Y015
+    _WhichOneofReturnType__project: _TypeAlias = _typing.Literal["project"]  # noqa: Y015
+    _WhichOneofArgType__project: _TypeAlias = _typing.Literal["_project", b"_project"]  # noqa: Y015
+    _WhichOneofReturnType__prompt_cache_key: _TypeAlias = _typing.Literal["prompt_cache_key"]  # noqa: Y015
+    _WhichOneofArgType__prompt_cache_key: _TypeAlias = _typing.Literal["_prompt_cache_key", b"_prompt_cache_key"]  # noqa: Y015
+    _WhichOneofReturnType__reasoning_effort: _TypeAlias = _typing.Literal["reasoning_effort"]  # noqa: Y015
+    _WhichOneofArgType__reasoning_effort: _TypeAlias = _typing.Literal["_reasoning_effort", b"_reasoning_effort"]  # noqa: Y015
+    _WhichOneofReturnType__seed: _TypeAlias = _typing.Literal["seed"]  # noqa: Y015
+    _WhichOneofArgType__seed: _TypeAlias = _typing.Literal["_seed", b"_seed"]  # noqa: Y015
+    _WhichOneofReturnType__service_tier: _TypeAlias = _typing.Literal["service_tier"]  # noqa: Y015
+    _WhichOneofArgType__service_tier: _TypeAlias = _typing.Literal["_service_tier", b"_service_tier"]  # noqa: Y015
+    _WhichOneofReturnType__store: _TypeAlias = _typing.Literal["store"]  # noqa: Y015
+    _WhichOneofArgType__store: _TypeAlias = _typing.Literal["_store", b"_store"]  # noqa: Y015
+    _WhichOneofReturnType__strict_response_validation: _TypeAlias = _typing.Literal["strict_response_validation"]  # noqa: Y015
+    _WhichOneofArgType__strict_response_validation: _TypeAlias = _typing.Literal["_strict_response_validation", b"_strict_response_validation"]  # noqa: Y015
+    _WhichOneofReturnType__temperature: _TypeAlias = _typing.Literal["temperature"]  # noqa: Y015
+    _WhichOneofArgType__temperature: _TypeAlias = _typing.Literal["_temperature", b"_temperature"]  # noqa: Y015
+    _WhichOneofReturnType__timeout: _TypeAlias = _typing.Literal["timeout"]  # noqa: Y015
+    _WhichOneofArgType__timeout: _TypeAlias = _typing.Literal["_timeout", b"_timeout"]  # noqa: Y015
+    _WhichOneofReturnType__top_logprobs: _TypeAlias = _typing.Literal["top_logprobs"]  # noqa: Y015
+    _WhichOneofArgType__top_logprobs: _TypeAlias = _typing.Literal["_top_logprobs", b"_top_logprobs"]  # noqa: Y015
+    _WhichOneofReturnType__top_p: _TypeAlias = _typing.Literal["top_p"]  # noqa: Y015
+    _WhichOneofArgType__top_p: _TypeAlias = _typing.Literal["_top_p", b"_top_p"]  # noqa: Y015
+    _WhichOneofReturnType__user: _TypeAlias = _typing.Literal["user"]  # noqa: Y015
+    _WhichOneofArgType__user: _TypeAlias = _typing.Literal["_user", b"_user"]  # noqa: Y015
+    _WhichOneofReturnType__verbosity: _TypeAlias = _typing.Literal["verbosity"]  # noqa: Y015
+    _WhichOneofArgType__verbosity: _TypeAlias = _typing.Literal["_verbosity", b"_verbosity"]  # noqa: Y015
+    _WhichOneofReturnType__webhook_secret: _TypeAlias = _typing.Literal["webhook_secret"]  # noqa: Y015
+    _WhichOneofArgType__webhook_secret: _TypeAlias = _typing.Literal["_webhook_secret", b"_webhook_secret"]  # noqa: Y015
+    _WhichOneofReturnType__websocket_base_url: _TypeAlias = _typing.Literal["websocket_base_url"]  # noqa: Y015
+    _WhichOneofArgType__websocket_base_url: _TypeAlias = _typing.Literal["_websocket_base_url", b"_websocket_base_url"]  # noqa: Y015
+    @_typing.overload
+    def WhichOneof(self, oneof_group: _WhichOneofArgType__api_key) -> _WhichOneofReturnType__api_key | None: ...
+    @_typing.overload
+    def WhichOneof(self, oneof_group: _WhichOneofArgType__base_url) -> _WhichOneofReturnType__base_url | None: ...
+    @_typing.overload
+    def WhichOneof(self, oneof_group: _WhichOneofArgType__default_query) -> _WhichOneofReturnType__default_query | None: ...
+    @_typing.overload
+    def WhichOneof(self, oneof_group: _WhichOneofArgType__extra_body) -> _WhichOneofReturnType__extra_body | None: ...
+    @_typing.overload
+    def WhichOneof(self, oneof_group: _WhichOneofArgType__extra_headers) -> _WhichOneofReturnType__extra_headers | None: ...
+    @_typing.overload
+    def WhichOneof(self, oneof_group: _WhichOneofArgType__extra_query) -> _WhichOneofReturnType__extra_query | None: ...
+    @_typing.overload
+    def WhichOneof(self, oneof_group: _WhichOneofArgType__frequency_penalty) -> _WhichOneofReturnType__frequency_penalty | None: ...
+    @_typing.overload
+    def WhichOneof(self, oneof_group: _WhichOneofArgType__logprobs) -> _WhichOneofReturnType__logprobs | None: ...
+    @_typing.overload
+    def WhichOneof(self, oneof_group: _WhichOneofArgType__max_completion_tokens) -> _WhichOneofReturnType__max_completion_tokens | None: ...
+    @_typing.overload
+    def WhichOneof(self, oneof_group: _WhichOneofArgType__max_retries) -> _WhichOneofReturnType__max_retries | None: ...
+    @_typing.overload
+    def WhichOneof(self, oneof_group: _WhichOneofArgType__max_tokens) -> _WhichOneofReturnType__max_tokens | None: ...
+    @_typing.overload
+    def WhichOneof(self, oneof_group: _WhichOneofArgType__metadata) -> _WhichOneofReturnType__metadata | None: ...
+    @_typing.overload
+    def WhichOneof(self, oneof_group: _WhichOneofArgType__n) -> _WhichOneofReturnType__n | None: ...
+    @_typing.overload
+    def WhichOneof(self, oneof_group: _WhichOneofArgType__organization) -> _WhichOneofReturnType__organization | None: ...
+    @_typing.overload
+    def WhichOneof(self, oneof_group: _WhichOneofArgType__presence_penalty) -> _WhichOneofReturnType__presence_penalty | None: ...
+    @_typing.overload
+    def WhichOneof(self, oneof_group: _WhichOneofArgType__project) -> _WhichOneofReturnType__project | None: ...
+    @_typing.overload
+    def WhichOneof(self, oneof_group: _WhichOneofArgType__prompt_cache_key) -> _WhichOneofReturnType__prompt_cache_key | None: ...
+    @_typing.overload
+    def WhichOneof(self, oneof_group: _WhichOneofArgType__reasoning_effort) -> _WhichOneofReturnType__reasoning_effort | None: ...
+    @_typing.overload
+    def WhichOneof(self, oneof_group: _WhichOneofArgType__seed) -> _WhichOneofReturnType__seed | None: ...
+    @_typing.overload
+    def WhichOneof(self, oneof_group: _WhichOneofArgType__service_tier) -> _WhichOneofReturnType__service_tier | None: ...
+    @_typing.overload
+    def WhichOneof(self, oneof_group: _WhichOneofArgType__store) -> _WhichOneofReturnType__store | None: ...
+    @_typing.overload
+    def WhichOneof(self, oneof_group: _WhichOneofArgType__strict_response_validation) -> _WhichOneofReturnType__strict_response_validation | None: ...
+    @_typing.overload
+    def WhichOneof(self, oneof_group: _WhichOneofArgType__temperature) -> _WhichOneofReturnType__temperature | None: ...
+    @_typing.overload
+    def WhichOneof(self, oneof_group: _WhichOneofArgType__timeout) -> _WhichOneofReturnType__timeout | None: ...
+    @_typing.overload
+    def WhichOneof(self, oneof_group: _WhichOneofArgType__top_logprobs) -> _WhichOneofReturnType__top_logprobs | None: ...
+    @_typing.overload
+    def WhichOneof(self, oneof_group: _WhichOneofArgType__top_p) -> _WhichOneofReturnType__top_p | None: ...
+    @_typing.overload
+    def WhichOneof(self, oneof_group: _WhichOneofArgType__user) -> _WhichOneofReturnType__user | None: ...
+    @_typing.overload
+    def WhichOneof(self, oneof_group: _WhichOneofArgType__verbosity) -> _WhichOneofReturnType__verbosity | None: ...
+    @_typing.overload
+    def WhichOneof(self, oneof_group: _WhichOneofArgType__webhook_secret) -> _WhichOneofReturnType__webhook_secret | None: ...
+    @_typing.overload
+    def WhichOneof(self, oneof_group: _WhichOneofArgType__websocket_base_url) -> _WhichOneofReturnType__websocket_base_url | None: ...
 
-global___OpenaiLlmOptions = OpenaiLlmOptions
+Global___OpenaiLlmOptions: _TypeAlias = OpenaiLlmOptions  # noqa: Y015
 
-@typing.final
-class VoiceActivityDetection(google.protobuf.message.Message):
+@_typing.final
+class VoiceActivityDetection(_message.Message):
     """<p>VoiceActivityDetection contains information about voice activity detection settings.</p>"""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    ACTIVE_FIELD_NUMBER: builtins.int
-    SAMPLING_RATE_FIELD_NUMBER: builtins.int
-    PYANNOTE_FIELD_NUMBER: builtins.int
-    SILERO_FIELD_NUMBER: builtins.int
-    WESPEAKER_TSD_FIELD_NUMBER: builtins.int
-    VAD_METHOD_FIELD_NUMBER: builtins.int
-    TSD_METHOD_FIELD_NUMBER: builtins.int
-    active: builtins.str
+    ACTIVE_FIELD_NUMBER: _builtins.int
+    SAMPLING_RATE_FIELD_NUMBER: _builtins.int
+    PYANNOTE_FIELD_NUMBER: _builtins.int
+    SILERO_FIELD_NUMBER: _builtins.int
+    WESPEAKER_TSD_FIELD_NUMBER: _builtins.int
+    VAD_METHOD_FIELD_NUMBER: _builtins.int
+    TSD_METHOD_FIELD_NUMBER: _builtins.int
+    active: _builtins.str
     """Deprecated in favour of <code>vad_method</code>, but still honoured so that configurations
     written before that field existed keep working unchanged. One of &apos;pyannote&apos; or
     &apos;silero&apos;. Read only when <code>vad_method</code> is
     <code>VAD_METHOD_UNSPECIFIED</code>.
     """
-    sampling_rate: builtins.int
+    sampling_rate: _builtins.int
     """Sampling rate for voice activity detection."""
-    vad_method: global___VadMethod.ValueType
+    vad_method: Global___VadMethod.ValueType
     """Which model splits the stream into utterances. Takes precedence over <code>active</code>;
     leave unset to keep using <code>active</code>.
     """
-    tsd_method: global___TsdMethod.ValueType
+    tsd_method: Global___TsdMethod.ValueType
     """Which model decides whether an utterance came from the main speaker. Independent of
     <code>vad_method</code>, except that <code>TSD_METHOD_PYANNOTE</code> requires Pyannote to
     also be the active VAD. Leave unset to keep the behaviour of older configurations.
     """
-    @property
-    def pyannote(self) -> global___Pyannote:
+    @_builtins.property
+    def pyannote(self) -> Global___Pyannote:
         """Configuration for the Pyannote model. Read when Pyannote is the resolved VAD or TSD method."""
 
-    @property
-    def silero(self) -> global___Silero:
+    @_builtins.property
+    def silero(self) -> Global___Silero:
         """Configuration for the Silero model. Read when Silero is the resolved VAD method."""
 
-    @property
-    def wespeaker_tsd(self) -> global___WespeakerTsd:
+    @_builtins.property
+    def wespeaker_tsd(self) -> Global___WespeakerTsd:
         """Configuration for WeSpeaker target-speaker detection. Read when WeSpeaker is the resolved
         TSD method.
         """
@@ -2945,65 +3341,72 @@ class VoiceActivityDetection(google.protobuf.message.Message):
     def __init__(
         self,
         *,
-        active: builtins.str = ...,
-        sampling_rate: builtins.int = ...,
-        pyannote: global___Pyannote | None = ...,
-        silero: global___Silero | None = ...,
-        wespeaker_tsd: global___WespeakerTsd | None = ...,
-        vad_method: global___VadMethod.ValueType = ...,
-        tsd_method: global___TsdMethod.ValueType = ...,
+        active: _builtins.str = ...,
+        sampling_rate: _builtins.int = ...,
+        pyannote: Global___Pyannote | None = ...,
+        silero: Global___Silero | None = ...,
+        wespeaker_tsd: Global___WespeakerTsd | None = ...,
+        vad_method: Global___VadMethod.ValueType = ...,
+        tsd_method: Global___TsdMethod.ValueType = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["pyannote", b"pyannote", "silero", b"silero", "wespeaker_tsd", b"wespeaker_tsd"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["active", b"active", "pyannote", b"pyannote", "sampling_rate", b"sampling_rate", "silero", b"silero", "tsd_method", b"tsd_method", "vad_method", b"vad_method", "wespeaker_tsd", b"wespeaker_tsd"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _typing.Literal["pyannote", b"pyannote", "silero", b"silero", "wespeaker_tsd", b"wespeaker_tsd"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["active", b"active", "pyannote", b"pyannote", "sampling_rate", b"sampling_rate", "silero", b"silero", "tsd_method", b"tsd_method", "vad_method", b"vad_method", "wespeaker_tsd", b"wespeaker_tsd"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-global___VoiceActivityDetection = VoiceActivityDetection
+Global___VoiceActivityDetection: _TypeAlias = VoiceActivityDetection  # noqa: Y015
 
-@typing.final
-class Pyannote(google.protobuf.message.Message):
+@_typing.final
+class Pyannote(_message.Message):
     """<p>Pyannote contains configuration for the Pyannote voice activity detection model.</p>
     <p>Library: <a href="https://github.com/pyannote/pyannote-audio/blob/develop/tutorials/voice_activity_detection.ipynb">pyannote-audio</a></p>
     """
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    MODEL_NAME_FIELD_NUMBER: builtins.int
-    MIN_AUDIO_SIZE_FIELD_NUMBER: builtins.int
-    MIN_DURATION_OFF_FIELD_NUMBER: builtins.int
-    MIN_DURATION_ON_FIELD_NUMBER: builtins.int
-    TRITON_SERVER_HOST_FIELD_NUMBER: builtins.int
-    TRITON_SERVER_PORT_FIELD_NUMBER: builtins.int
-    model_name: builtins.str
+    MODEL_NAME_FIELD_NUMBER: _builtins.int
+    MIN_AUDIO_SIZE_FIELD_NUMBER: _builtins.int
+    MIN_DURATION_OFF_FIELD_NUMBER: _builtins.int
+    MIN_DURATION_ON_FIELD_NUMBER: _builtins.int
+    TRITON_SERVER_HOST_FIELD_NUMBER: _builtins.int
+    TRITON_SERVER_PORT_FIELD_NUMBER: _builtins.int
+    model_name: _builtins.str
     """Full name of the Pyannote model."""
-    min_audio_size: builtins.int
+    min_audio_size: _builtins.int
     """Minimum audio size for processing."""
-    min_duration_off: builtins.float
+    min_duration_off: _builtins.float
     """Fill inactive regions shorter than that many seconds.
     Example <a href="https://github.com/pyannote/pyannote-audio/blob/develop/tutorials/voice_activity_detection.ipynb">notebook</a>
     """
-    min_duration_on: builtins.float
+    min_duration_on: _builtins.float
     """Remove active regions shorter than that many seconds.
     Example <a href="https://github.com/pyannote/pyannote-audio/blob/develop/tutorials/voice_activity_detection.ipynb">notebook</a>
     """
-    triton_server_host: builtins.str
+    triton_server_host: _builtins.str
     """Host name of triton inference server that serves the Pyannote model"""
-    triton_server_port: builtins.int
+    triton_server_port: _builtins.int
     """Port number of triton inference server that serves the Pyannote model"""
     def __init__(
         self,
         *,
-        model_name: builtins.str = ...,
-        min_audio_size: builtins.int = ...,
-        min_duration_off: builtins.float = ...,
-        min_duration_on: builtins.float = ...,
-        triton_server_host: builtins.str = ...,
-        triton_server_port: builtins.int = ...,
+        model_name: _builtins.str = ...,
+        min_audio_size: _builtins.int = ...,
+        min_duration_off: _builtins.float = ...,
+        min_duration_on: _builtins.float = ...,
+        triton_server_host: _builtins.str = ...,
+        triton_server_port: _builtins.int = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing.Literal["min_audio_size", b"min_audio_size", "min_duration_off", b"min_duration_off", "min_duration_on", b"min_duration_on", "model_name", b"model_name", "triton_server_host", b"triton_server_host", "triton_server_port", b"triton_server_port"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _Never  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["min_audio_size", b"min_audio_size", "min_duration_off", b"min_duration_off", "min_duration_on", b"min_duration_on", "model_name", b"model_name", "triton_server_host", b"triton_server_host", "triton_server_port", b"triton_server_port"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-global___Pyannote = Pyannote
+Global___Pyannote: _TypeAlias = Pyannote  # noqa: Y015
 
-@typing.final
-class Silero(google.protobuf.message.Message):
+@_typing.final
+class Silero(_message.Message):
     """<p>Silero contains configuration for the Silero voice activity detection model.</p>
     <p>Unlike <code>Pyannote</code>, Silero is configured with its own parameters rather than
     <code>(min_duration_on, min_duration_off)</code>. They carry exactly the meaning they have
@@ -3011,73 +3414,83 @@ class Silero(google.protobuf.message.Message):
     <p>Library: <a href="https://github.com/snakers4/silero-vad">silero-vad</a></p>
     """
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    MODEL_NAME_FIELD_NUMBER: builtins.int
-    MIN_AUDIO_SIZE_FIELD_NUMBER: builtins.int
-    THRESHOLD_FIELD_NUMBER: builtins.int
-    MIN_SPEECH_DURATION_MS_FIELD_NUMBER: builtins.int
-    MIN_SILENCE_DURATION_MS_FIELD_NUMBER: builtins.int
-    SPEECH_PAD_MS_FIELD_NUMBER: builtins.int
-    TRITON_SERVER_HOST_FIELD_NUMBER: builtins.int
-    TRITON_SERVER_PORT_FIELD_NUMBER: builtins.int
-    model_name: builtins.str
+    MODEL_NAME_FIELD_NUMBER: _builtins.int
+    MIN_AUDIO_SIZE_FIELD_NUMBER: _builtins.int
+    THRESHOLD_FIELD_NUMBER: _builtins.int
+    MIN_SPEECH_DURATION_MS_FIELD_NUMBER: _builtins.int
+    MIN_SILENCE_DURATION_MS_FIELD_NUMBER: _builtins.int
+    SPEECH_PAD_MS_FIELD_NUMBER: _builtins.int
+    TRITON_SERVER_HOST_FIELD_NUMBER: _builtins.int
+    TRITON_SERVER_PORT_FIELD_NUMBER: _builtins.int
+    model_name: _builtins.str
     """Full name of the Silero model."""
-    min_audio_size: builtins.int
+    min_audio_size: _builtins.int
     """Minimum audio size for processing."""
-    threshold: builtins.float
+    threshold: _builtins.float
     """Speech probability, in [0, 1], above which a frame counts as speech. A run of speech
     ends at the hysteresis threshold <code>threshold - 0.15</code>, as it does upstream, so
     this sets both the onset and - through that offset - the release point.
     Optional, and explicitly so: 0 is a legitimate value here, and without presence tracking
     it would be indistinguishable from an unset field and silently replaced by the default.
     """
-    min_speech_duration_ms: builtins.float
+    min_speech_duration_ms: _builtins.float
     """Speech runs shorter than this many milliseconds are discarded. A run still open at the
     end of the buffer is kept regardless, since more audio may extend it.
     Optional for the same reason as <code>threshold</code>: 0 means &apos;discard nothing&apos;.
     """
-    min_silence_duration_ms: builtins.float
+    min_silence_duration_ms: _builtins.float
     """Silence, in milliseconds, that must follow the last speech before an utterance is
     declared to have ended.
     Optional for the same reason as <code>threshold</code>: 0 means &apos;end the utterance as
     soon as the speech stops&apos;.
     """
-    speech_pad_ms: builtins.float
+    speech_pad_ms: _builtins.float
     """Padding, in milliseconds, added on each side of the detected boundary.
     Optional for the same reason as <code>threshold</code>: 0 means &apos;no padding&apos;.
     """
-    triton_server_host: builtins.str
+    triton_server_host: _builtins.str
     """Host name of triton inference server that serves the Silero model"""
-    triton_server_port: builtins.int
+    triton_server_port: _builtins.int
     """Port number of triton inference server that serves the Silero model"""
     def __init__(
         self,
         *,
-        model_name: builtins.str = ...,
-        min_audio_size: builtins.int = ...,
-        threshold: builtins.float | None = ...,
-        min_speech_duration_ms: builtins.float | None = ...,
-        min_silence_duration_ms: builtins.float | None = ...,
-        speech_pad_ms: builtins.float | None = ...,
-        triton_server_host: builtins.str = ...,
-        triton_server_port: builtins.int = ...,
+        model_name: _builtins.str = ...,
+        min_audio_size: _builtins.int = ...,
+        threshold: _builtins.float | None = ...,
+        min_speech_duration_ms: _builtins.float | None = ...,
+        min_silence_duration_ms: _builtins.float | None = ...,
+        speech_pad_ms: _builtins.float | None = ...,
+        triton_server_host: _builtins.str = ...,
+        triton_server_port: _builtins.int = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["_min_silence_duration_ms", b"_min_silence_duration_ms", "_min_speech_duration_ms", b"_min_speech_duration_ms", "_speech_pad_ms", b"_speech_pad_ms", "_threshold", b"_threshold", "min_silence_duration_ms", b"min_silence_duration_ms", "min_speech_duration_ms", b"min_speech_duration_ms", "speech_pad_ms", b"speech_pad_ms", "threshold", b"threshold"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["_min_silence_duration_ms", b"_min_silence_duration_ms", "_min_speech_duration_ms", b"_min_speech_duration_ms", "_speech_pad_ms", b"_speech_pad_ms", "_threshold", b"_threshold", "min_audio_size", b"min_audio_size", "min_silence_duration_ms", b"min_silence_duration_ms", "min_speech_duration_ms", b"min_speech_duration_ms", "model_name", b"model_name", "speech_pad_ms", b"speech_pad_ms", "threshold", b"threshold", "triton_server_host", b"triton_server_host", "triton_server_port", b"triton_server_port"]) -> None: ...
-    @typing.overload
-    def WhichOneof(self, oneof_group: typing.Literal["_min_silence_duration_ms", b"_min_silence_duration_ms"]) -> typing.Literal["min_silence_duration_ms"] | None: ...
-    @typing.overload
-    def WhichOneof(self, oneof_group: typing.Literal["_min_speech_duration_ms", b"_min_speech_duration_ms"]) -> typing.Literal["min_speech_duration_ms"] | None: ...
-    @typing.overload
-    def WhichOneof(self, oneof_group: typing.Literal["_speech_pad_ms", b"_speech_pad_ms"]) -> typing.Literal["speech_pad_ms"] | None: ...
-    @typing.overload
-    def WhichOneof(self, oneof_group: typing.Literal["_threshold", b"_threshold"]) -> typing.Literal["threshold"] | None: ...
+    _HasFieldArgType: _TypeAlias = _typing.Literal["_min_silence_duration_ms", b"_min_silence_duration_ms", "_min_speech_duration_ms", b"_min_speech_duration_ms", "_speech_pad_ms", b"_speech_pad_ms", "_threshold", b"_threshold", "min_silence_duration_ms", b"min_silence_duration_ms", "min_speech_duration_ms", b"min_speech_duration_ms", "speech_pad_ms", b"speech_pad_ms", "threshold", b"threshold"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["_min_silence_duration_ms", b"_min_silence_duration_ms", "_min_speech_duration_ms", b"_min_speech_duration_ms", "_speech_pad_ms", b"_speech_pad_ms", "_threshold", b"_threshold", "min_audio_size", b"min_audio_size", "min_silence_duration_ms", b"min_silence_duration_ms", "min_speech_duration_ms", b"min_speech_duration_ms", "model_name", b"model_name", "speech_pad_ms", b"speech_pad_ms", "threshold", b"threshold", "triton_server_host", b"triton_server_host", "triton_server_port", b"triton_server_port"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    _WhichOneofReturnType__min_silence_duration_ms: _TypeAlias = _typing.Literal["min_silence_duration_ms"]  # noqa: Y015
+    _WhichOneofArgType__min_silence_duration_ms: _TypeAlias = _typing.Literal["_min_silence_duration_ms", b"_min_silence_duration_ms"]  # noqa: Y015
+    _WhichOneofReturnType__min_speech_duration_ms: _TypeAlias = _typing.Literal["min_speech_duration_ms"]  # noqa: Y015
+    _WhichOneofArgType__min_speech_duration_ms: _TypeAlias = _typing.Literal["_min_speech_duration_ms", b"_min_speech_duration_ms"]  # noqa: Y015
+    _WhichOneofReturnType__speech_pad_ms: _TypeAlias = _typing.Literal["speech_pad_ms"]  # noqa: Y015
+    _WhichOneofArgType__speech_pad_ms: _TypeAlias = _typing.Literal["_speech_pad_ms", b"_speech_pad_ms"]  # noqa: Y015
+    _WhichOneofReturnType__threshold: _TypeAlias = _typing.Literal["threshold"]  # noqa: Y015
+    _WhichOneofArgType__threshold: _TypeAlias = _typing.Literal["_threshold", b"_threshold"]  # noqa: Y015
+    @_typing.overload
+    def WhichOneof(self, oneof_group: _WhichOneofArgType__min_silence_duration_ms) -> _WhichOneofReturnType__min_silence_duration_ms | None: ...
+    @_typing.overload
+    def WhichOneof(self, oneof_group: _WhichOneofArgType__min_speech_duration_ms) -> _WhichOneofReturnType__min_speech_duration_ms | None: ...
+    @_typing.overload
+    def WhichOneof(self, oneof_group: _WhichOneofArgType__speech_pad_ms) -> _WhichOneofReturnType__speech_pad_ms | None: ...
+    @_typing.overload
+    def WhichOneof(self, oneof_group: _WhichOneofArgType__threshold) -> _WhichOneofReturnType__threshold | None: ...
 
-global___Silero = Silero
+Global___Silero: _TypeAlias = Silero  # noqa: Y015
 
-@typing.final
-class WespeakerTsd(google.protobuf.message.Message):
+@_typing.final
+class WespeakerTsd(_message.Message):
     """<p>WespeakerTsd contains configuration for the WeSpeaker target-speaker detection (TSD)
     model. Given a reference speaker embedding, it decides whether a newly detected utterance
     was spoken by the same person, so that speech from a different speaker (e.g. background
@@ -3085,544 +3498,650 @@ class WespeakerTsd(google.protobuf.message.Message):
     <p>Library: <a href="https://huggingface.co/pyannote/wespeaker-voxceleb-resnet34-LM">wespeaker-voxceleb-resnet34-LM</a></p>
     """
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    ACTIVE_FIELD_NUMBER: builtins.int
-    MODEL_NAME_FIELD_NUMBER: builtins.int
-    TRITON_SERVER_HOST_FIELD_NUMBER: builtins.int
-    TRITON_SERVER_PORT_FIELD_NUMBER: builtins.int
-    SIMILARITY_THRESHOLD_FIELD_NUMBER: builtins.int
-    MIN_AUDIO_LENGTH_FIELD_NUMBER: builtins.int
-    REFERENCE_MAX_LENGTH_FIELD_NUMBER: builtins.int
-    active: builtins.bool
+    ACTIVE_FIELD_NUMBER: _builtins.int
+    MODEL_NAME_FIELD_NUMBER: _builtins.int
+    TRITON_SERVER_HOST_FIELD_NUMBER: _builtins.int
+    TRITON_SERVER_PORT_FIELD_NUMBER: _builtins.int
+    SIMILARITY_THRESHOLD_FIELD_NUMBER: _builtins.int
+    MIN_AUDIO_LENGTH_FIELD_NUMBER: _builtins.int
+    REFERENCE_MAX_LENGTH_FIELD_NUMBER: _builtins.int
+    active: _builtins.bool
     """Indicates if target-speaker detection is active."""
-    model_name: builtins.str
+    model_name: _builtins.str
     """Full name of the WeSpeaker model."""
-    triton_server_host: builtins.str
+    triton_server_host: _builtins.str
     """Host name of triton inference server that serves the WeSpeaker model"""
-    triton_server_port: builtins.int
+    triton_server_port: _builtins.int
     """Port number of triton inference server that serves the WeSpeaker model"""
-    similarity_threshold: builtins.float
+    similarity_threshold: _builtins.float
     """Cosine similarity, in [-1, 1], above which a candidate utterance is judged to come
     from the same speaker as the reference.
     Optional, and explicitly so: 0 sits in the middle of the valid range, and without
     presence tracking it would be indistinguishable from an unset field.
     """
-    min_audio_length: builtins.float
+    min_audio_length: _builtins.float
     """Utterances shorter than this many seconds carry too little speaker information to
     judge, and are treated as undecided rather than rejected.
     Optional for the same reason as <code>similarity_threshold</code>: 0 means &apos;judge
     every utterance, however short&apos;.
     """
-    reference_max_length: builtins.float
+    reference_max_length: _builtins.float
     """The reference audio is cropped to its most recent this-many seconds before being
     embedded.
     """
     def __init__(
         self,
         *,
-        active: builtins.bool = ...,
-        model_name: builtins.str = ...,
-        triton_server_host: builtins.str = ...,
-        triton_server_port: builtins.int = ...,
-        similarity_threshold: builtins.float | None = ...,
-        min_audio_length: builtins.float | None = ...,
-        reference_max_length: builtins.float = ...,
+        active: _builtins.bool = ...,
+        model_name: _builtins.str = ...,
+        triton_server_host: _builtins.str = ...,
+        triton_server_port: _builtins.int = ...,
+        similarity_threshold: _builtins.float | None = ...,
+        min_audio_length: _builtins.float | None = ...,
+        reference_max_length: _builtins.float = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["_min_audio_length", b"_min_audio_length", "_similarity_threshold", b"_similarity_threshold", "min_audio_length", b"min_audio_length", "similarity_threshold", b"similarity_threshold"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["_min_audio_length", b"_min_audio_length", "_similarity_threshold", b"_similarity_threshold", "active", b"active", "min_audio_length", b"min_audio_length", "model_name", b"model_name", "reference_max_length", b"reference_max_length", "similarity_threshold", b"similarity_threshold", "triton_server_host", b"triton_server_host", "triton_server_port", b"triton_server_port"]) -> None: ...
-    @typing.overload
-    def WhichOneof(self, oneof_group: typing.Literal["_min_audio_length", b"_min_audio_length"]) -> typing.Literal["min_audio_length"] | None: ...
-    @typing.overload
-    def WhichOneof(self, oneof_group: typing.Literal["_similarity_threshold", b"_similarity_threshold"]) -> typing.Literal["similarity_threshold"] | None: ...
+    _HasFieldArgType: _TypeAlias = _typing.Literal["_min_audio_length", b"_min_audio_length", "_similarity_threshold", b"_similarity_threshold", "min_audio_length", b"min_audio_length", "similarity_threshold", b"similarity_threshold"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["_min_audio_length", b"_min_audio_length", "_similarity_threshold", b"_similarity_threshold", "active", b"active", "min_audio_length", b"min_audio_length", "model_name", b"model_name", "reference_max_length", b"reference_max_length", "similarity_threshold", b"similarity_threshold", "triton_server_host", b"triton_server_host", "triton_server_port", b"triton_server_port"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    _WhichOneofReturnType__min_audio_length: _TypeAlias = _typing.Literal["min_audio_length"]  # noqa: Y015
+    _WhichOneofArgType__min_audio_length: _TypeAlias = _typing.Literal["_min_audio_length", b"_min_audio_length"]  # noqa: Y015
+    _WhichOneofReturnType__similarity_threshold: _TypeAlias = _typing.Literal["similarity_threshold"]  # noqa: Y015
+    _WhichOneofArgType__similarity_threshold: _TypeAlias = _typing.Literal["_similarity_threshold", b"_similarity_threshold"]  # noqa: Y015
+    @_typing.overload
+    def WhichOneof(self, oneof_group: _WhichOneofArgType__min_audio_length) -> _WhichOneofReturnType__min_audio_length | None: ...
+    @_typing.overload
+    def WhichOneof(self, oneof_group: _WhichOneofArgType__similarity_threshold) -> _WhichOneofReturnType__similarity_threshold | None: ...
 
-global___WespeakerTsd = WespeakerTsd
+Global___WespeakerTsd: _TypeAlias = WespeakerTsd  # noqa: Y015
 
-@typing.final
-class PostProcessing(google.protobuf.message.Message):
+@_typing.final
+class PostProcessing(_message.Message):
     """<p>PostProcessing contains the configuration for post-processing.</p>"""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    PIPELINE_FIELD_NUMBER: builtins.int
-    POST_PROCESSORS_FIELD_NUMBER: builtins.int
-    @property
-    def pipeline(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
+    PIPELINE_FIELD_NUMBER: _builtins.int
+    POST_PROCESSORS_FIELD_NUMBER: _builtins.int
+    @_builtins.property
+    def pipeline(self) -> _containers.RepeatedScalarFieldContainer[_builtins.str]:
         """List of names of active post-processors."""
 
-    @property
-    def post_processors(self) -> global___PostProcessors:
+    @_builtins.property
+    def post_processors(self) -> Global___PostProcessors:
         """Post-processor configurations."""
 
     def __init__(
         self,
         *,
-        pipeline: collections.abc.Iterable[builtins.str] | None = ...,
-        post_processors: global___PostProcessors | None = ...,
+        pipeline: _abc.Iterable[_builtins.str] | None = ...,
+        post_processors: Global___PostProcessors | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["post_processors", b"post_processors"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["pipeline", b"pipeline", "post_processors", b"post_processors"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _typing.Literal["post_processors", b"post_processors"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["pipeline", b"pipeline", "post_processors", b"post_processors"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-global___PostProcessing = PostProcessing
+Global___PostProcessing: _TypeAlias = PostProcessing  # noqa: Y015
 
-@typing.final
-class PostProcessors(google.protobuf.message.Message):
+@_typing.final
+class PostProcessors(_message.Message):
     """<p>PostProcessors contains configurations for post-processors.</p>"""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    SYM_SPELL_FIELD_NUMBER: builtins.int
-    NORMALIZATION_FIELD_NUMBER: builtins.int
-    LLM_POST_PROCESSING_FIELD_NUMBER: builtins.int
-    @property
-    def sym_spell(self) -> global___SymSpell:
+    SYM_SPELL_FIELD_NUMBER: _builtins.int
+    NORMALIZATION_FIELD_NUMBER: _builtins.int
+    LLM_POST_PROCESSING_FIELD_NUMBER: _builtins.int
+    @_builtins.property
+    def sym_spell(self) -> Global___SymSpell:
         """Configuration of the SymSpell spelling correction."""
 
-    @property
-    def normalization(self) -> global___S2tNormalization:
+    @_builtins.property
+    def normalization(self) -> Global___S2tNormalization:
         """Configuration of the normalization object."""
 
-    @property
-    def llm_post_processing(self) -> global___S2tLlmPostProcessing:
+    @_builtins.property
+    def llm_post_processing(self) -> Global___S2tLlmPostProcessing:
         """Configuration of the LLM post-processing."""
 
     def __init__(
         self,
         *,
-        sym_spell: global___SymSpell | None = ...,
-        normalization: global___S2tNormalization | None = ...,
-        llm_post_processing: global___S2tLlmPostProcessing | None = ...,
+        sym_spell: Global___SymSpell | None = ...,
+        normalization: Global___S2tNormalization | None = ...,
+        llm_post_processing: Global___S2tLlmPostProcessing | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["llm_post_processing", b"llm_post_processing", "normalization", b"normalization", "sym_spell", b"sym_spell"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["llm_post_processing", b"llm_post_processing", "normalization", b"normalization", "sym_spell", b"sym_spell"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _typing.Literal["llm_post_processing", b"llm_post_processing", "normalization", b"normalization", "sym_spell", b"sym_spell"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["llm_post_processing", b"llm_post_processing", "normalization", b"normalization", "sym_spell", b"sym_spell"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-global___PostProcessors = PostProcessors
+Global___PostProcessors: _TypeAlias = PostProcessors  # noqa: Y015
 
-@typing.final
-class SymSpell(google.protobuf.message.Message):
+@_typing.final
+class SymSpell(_message.Message):
     """<p>SymSpell contains configuration for the SymSpell spelling correction.</p>"""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    DICT_PATH_FIELD_NUMBER: builtins.int
-    MAX_DICTIONARY_EDIT_DISTANCE_FIELD_NUMBER: builtins.int
-    PREFIX_LENGTH_FIELD_NUMBER: builtins.int
-    dict_path: builtins.str
+    DICT_PATH_FIELD_NUMBER: _builtins.int
+    MAX_DICTIONARY_EDIT_DISTANCE_FIELD_NUMBER: _builtins.int
+    PREFIX_LENGTH_FIELD_NUMBER: _builtins.int
+    dict_path: _builtins.str
     """Path to the dictionary used by symspell"""
-    max_dictionary_edit_distance: builtins.int
+    max_dictionary_edit_distance: _builtins.int
     """The maximal edit-distance to consider for spelling correction (affects performance - bigger number
     takes longer to process!)
     """
-    prefix_length: builtins.int
+    prefix_length: _builtins.int
     """The length (number of characters) of the prefix to consider for filtering"""
     def __init__(
         self,
         *,
-        dict_path: builtins.str = ...,
-        max_dictionary_edit_distance: builtins.int = ...,
-        prefix_length: builtins.int = ...,
+        dict_path: _builtins.str = ...,
+        max_dictionary_edit_distance: _builtins.int = ...,
+        prefix_length: _builtins.int = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing.Literal["dict_path", b"dict_path", "max_dictionary_edit_distance", b"max_dictionary_edit_distance", "prefix_length", b"prefix_length"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _Never  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["dict_path", b"dict_path", "max_dictionary_edit_distance", b"max_dictionary_edit_distance", "prefix_length", b"prefix_length"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-global___SymSpell = SymSpell
+Global___SymSpell: _TypeAlias = SymSpell  # noqa: Y015
 
-@typing.final
-class S2tNormalization(google.protobuf.message.Message):
+@_typing.final
+class S2tNormalization(_message.Message):
     """<p>S2tNormalization contains configuration for the speech-to-text normalization.</p>"""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    LANGUAGE_FIELD_NUMBER: builtins.int
-    PIPELINE_FIELD_NUMBER: builtins.int
-    language: builtins.str
+    LANGUAGE_FIELD_NUMBER: _builtins.int
+    PIPELINE_FIELD_NUMBER: _builtins.int
+    language: _builtins.str
     """Language for normalization of transcriptions."""
-    @property
-    def pipeline(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
+    @_builtins.property
+    def pipeline(self) -> _containers.RepeatedScalarFieldContainer[_builtins.str]:
         """List of names of active normalizations."""
 
     def __init__(
         self,
         *,
-        language: builtins.str = ...,
-        pipeline: collections.abc.Iterable[builtins.str] | None = ...,
+        language: _builtins.str = ...,
+        pipeline: _abc.Iterable[_builtins.str] | None = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing.Literal["language", b"language", "pipeline", b"pipeline"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _Never  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["language", b"language", "pipeline", b"pipeline"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-global___S2tNormalization = S2tNormalization
+Global___S2tNormalization: _TypeAlias = S2tNormalization  # noqa: Y015
 
-@typing.final
-class S2tLlmPostProcessing(google.protobuf.message.Message):
+@_typing.final
+class S2tLlmPostProcessing(_message.Message):
     """<p>S2tLlmPostProcessing contains configuration for the speech-to-text postprocessing with LLM.</p>"""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    S2T_LLM_POST_PROCESSING_OPENAI_OPTIONS_FIELD_NUMBER: builtins.int
-    S2T_LLM_POST_PROCESSING_SYSTEM_PROMPT_FIELD_NUMBER: builtins.int
-    S2T_LLM_POST_PROCESSING_ENDING_PROMPT_FIELD_NUMBER: builtins.int
-    S2T_LLM_POST_PROCESSING_CASING_OPTIONS_FIELD_NUMBER: builtins.int
-    S2T_LLM_POST_PROCESSING_PUNCTUATION_OPTIONS_FIELD_NUMBER: builtins.int
-    S2T_LLM_POST_PROCESSING_SPELLING_CORRECTION_OPTIONS_FIELD_NUMBER: builtins.int
-    S2T_LLM_POST_PROCESSING_SEMANTIC_CORRECTION_OPTIONS_FIELD_NUMBER: builtins.int
-    S2T_LLM_POST_PROCESSING_TRANSLATION_OPTIONS_FIELD_NUMBER: builtins.int
-    S2T_LLM_POST_PROCESSING_INVERSE_NORMALIZATION_OPTIONS_FIELD_NUMBER: builtins.int
-    S2T_LLM_POST_PROCESSING_NORMALIZATION_OPTIONS_FIELD_NUMBER: builtins.int
-    S2T_LLM_POST_PROCESSING_SUMMARIZATION_OPTIONS_FIELD_NUMBER: builtins.int
-    S2T_LLM_POST_PROCESSING_USER_PROMPT_OPTIONS_FIELD_NUMBER: builtins.int
-    s2t_llm_post_processing_system_prompt: builtins.str
+    S2T_LLM_POST_PROCESSING_OPENAI_OPTIONS_FIELD_NUMBER: _builtins.int
+    S2T_LLM_POST_PROCESSING_SYSTEM_PROMPT_FIELD_NUMBER: _builtins.int
+    S2T_LLM_POST_PROCESSING_ENDING_PROMPT_FIELD_NUMBER: _builtins.int
+    S2T_LLM_POST_PROCESSING_CASING_OPTIONS_FIELD_NUMBER: _builtins.int
+    S2T_LLM_POST_PROCESSING_PUNCTUATION_OPTIONS_FIELD_NUMBER: _builtins.int
+    S2T_LLM_POST_PROCESSING_SPELLING_CORRECTION_OPTIONS_FIELD_NUMBER: _builtins.int
+    S2T_LLM_POST_PROCESSING_SEMANTIC_CORRECTION_OPTIONS_FIELD_NUMBER: _builtins.int
+    S2T_LLM_POST_PROCESSING_TRANSLATION_OPTIONS_FIELD_NUMBER: _builtins.int
+    S2T_LLM_POST_PROCESSING_INVERSE_NORMALIZATION_OPTIONS_FIELD_NUMBER: _builtins.int
+    S2T_LLM_POST_PROCESSING_NORMALIZATION_OPTIONS_FIELD_NUMBER: _builtins.int
+    S2T_LLM_POST_PROCESSING_SUMMARIZATION_OPTIONS_FIELD_NUMBER: _builtins.int
+    S2T_LLM_POST_PROCESSING_USER_PROMPT_OPTIONS_FIELD_NUMBER: _builtins.int
+    s2t_llm_post_processing_system_prompt: _builtins.str
     """Optional. System prompt used to guide the LLM model for post-processing."""
-    s2t_llm_post_processing_ending_prompt: builtins.str
+    s2t_llm_post_processing_ending_prompt: _builtins.str
     """Optional. Ending prompt appended to the accumulated prompts of the active post-processing tasks."""
-    @property
-    def s2t_llm_post_processing_openai_options(self) -> global___OpenaiLlmOptions:
+    @_builtins.property
+    def s2t_llm_post_processing_openai_options(self) -> Global___OpenaiLlmOptions:
         """Optional. Configuration options for the OpenAI client used for post-processing."""
 
-    @property
-    def s2t_llm_post_processing_casing_options(self) -> global___S2tLlmPostProcessingSubTaskOptions:
+    @_builtins.property
+    def s2t_llm_post_processing_casing_options(self) -> Global___S2tLlmPostProcessingSubTaskOptions:
         """Optional. Configuration of the options to casing task in LLM post-processing."""
 
-    @property
-    def s2t_llm_post_processing_punctuation_options(self) -> global___S2tLlmPostProcessingSubTaskOptions:
+    @_builtins.property
+    def s2t_llm_post_processing_punctuation_options(self) -> Global___S2tLlmPostProcessingSubTaskOptions:
         """Optional. Configuration of the options to punctuation task in LLM post-processing."""
 
-    @property
-    def s2t_llm_post_processing_spelling_correction_options(self) -> global___S2tLlmPostProcessingSubTaskOptions:
+    @_builtins.property
+    def s2t_llm_post_processing_spelling_correction_options(self) -> Global___S2tLlmPostProcessingSubTaskOptions:
         """Optional. Configuration of the options to spelling-correction task in LLM post-processing."""
 
-    @property
-    def s2t_llm_post_processing_semantic_correction_options(self) -> global___S2tLlmPostProcessingSubTaskOptions:
+    @_builtins.property
+    def s2t_llm_post_processing_semantic_correction_options(self) -> Global___S2tLlmPostProcessingSubTaskOptions:
         """Optional. Configuration of the options to semantic-correction task in LLM post-processing."""
 
-    @property
-    def s2t_llm_post_processing_translation_options(self) -> global___S2tLlmPostProcessingTranslationOptions:
+    @_builtins.property
+    def s2t_llm_post_processing_translation_options(self) -> Global___S2tLlmPostProcessingTranslationOptions:
         """Optional. Configuration of the options to translation task in LLM post-processing."""
 
-    @property
-    def s2t_llm_post_processing_inverse_normalization_options(self) -> global___S2tLlmPostProcessingInverseNormalizationOptions:
+    @_builtins.property
+    def s2t_llm_post_processing_inverse_normalization_options(self) -> Global___S2tLlmPostProcessingInverseNormalizationOptions:
         """Optional. Configuration of the options to inverse-normalization task in LLM post-processing."""
 
-    @property
-    def s2t_llm_post_processing_normalization_options(self) -> global___S2tLlmPostProcessingNormalizationOptions:
+    @_builtins.property
+    def s2t_llm_post_processing_normalization_options(self) -> Global___S2tLlmPostProcessingNormalizationOptions:
         """Optional. Configuration of the options to normalization task in LLM post-processing."""
 
-    @property
-    def s2t_llm_post_processing_summarization_options(self) -> global___S2tLlmPostProcessingSummarizationOptions:
+    @_builtins.property
+    def s2t_llm_post_processing_summarization_options(self) -> Global___S2tLlmPostProcessingSummarizationOptions:
         """Optional. Configuration of the options to summarization task in LLM post-processing."""
 
-    @property
-    def s2t_llm_post_processing_user_prompt_options(self) -> global___S2tLlmPostProcessingSubTaskOptions:
+    @_builtins.property
+    def s2t_llm_post_processing_user_prompt_options(self) -> Global___S2tLlmPostProcessingSubTaskOptions:
         """Optional. Configuration of the options to user-prompt task in LLM post-processing."""
 
     def __init__(
         self,
         *,
-        s2t_llm_post_processing_openai_options: global___OpenaiLlmOptions | None = ...,
-        s2t_llm_post_processing_system_prompt: builtins.str | None = ...,
-        s2t_llm_post_processing_ending_prompt: builtins.str | None = ...,
-        s2t_llm_post_processing_casing_options: global___S2tLlmPostProcessingSubTaskOptions | None = ...,
-        s2t_llm_post_processing_punctuation_options: global___S2tLlmPostProcessingSubTaskOptions | None = ...,
-        s2t_llm_post_processing_spelling_correction_options: global___S2tLlmPostProcessingSubTaskOptions | None = ...,
-        s2t_llm_post_processing_semantic_correction_options: global___S2tLlmPostProcessingSubTaskOptions | None = ...,
-        s2t_llm_post_processing_translation_options: global___S2tLlmPostProcessingTranslationOptions | None = ...,
-        s2t_llm_post_processing_inverse_normalization_options: global___S2tLlmPostProcessingInverseNormalizationOptions | None = ...,
-        s2t_llm_post_processing_normalization_options: global___S2tLlmPostProcessingNormalizationOptions | None = ...,
-        s2t_llm_post_processing_summarization_options: global___S2tLlmPostProcessingSummarizationOptions | None = ...,
-        s2t_llm_post_processing_user_prompt_options: global___S2tLlmPostProcessingSubTaskOptions | None = ...,
+        s2t_llm_post_processing_openai_options: Global___OpenaiLlmOptions | None = ...,
+        s2t_llm_post_processing_system_prompt: _builtins.str | None = ...,
+        s2t_llm_post_processing_ending_prompt: _builtins.str | None = ...,
+        s2t_llm_post_processing_casing_options: Global___S2tLlmPostProcessingSubTaskOptions | None = ...,
+        s2t_llm_post_processing_punctuation_options: Global___S2tLlmPostProcessingSubTaskOptions | None = ...,
+        s2t_llm_post_processing_spelling_correction_options: Global___S2tLlmPostProcessingSubTaskOptions | None = ...,
+        s2t_llm_post_processing_semantic_correction_options: Global___S2tLlmPostProcessingSubTaskOptions | None = ...,
+        s2t_llm_post_processing_translation_options: Global___S2tLlmPostProcessingTranslationOptions | None = ...,
+        s2t_llm_post_processing_inverse_normalization_options: Global___S2tLlmPostProcessingInverseNormalizationOptions | None = ...,
+        s2t_llm_post_processing_normalization_options: Global___S2tLlmPostProcessingNormalizationOptions | None = ...,
+        s2t_llm_post_processing_summarization_options: Global___S2tLlmPostProcessingSummarizationOptions | None = ...,
+        s2t_llm_post_processing_user_prompt_options: Global___S2tLlmPostProcessingSubTaskOptions | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["_s2t_llm_post_processing_casing_options", b"_s2t_llm_post_processing_casing_options", "_s2t_llm_post_processing_ending_prompt", b"_s2t_llm_post_processing_ending_prompt", "_s2t_llm_post_processing_inverse_normalization_options", b"_s2t_llm_post_processing_inverse_normalization_options", "_s2t_llm_post_processing_normalization_options", b"_s2t_llm_post_processing_normalization_options", "_s2t_llm_post_processing_openai_options", b"_s2t_llm_post_processing_openai_options", "_s2t_llm_post_processing_punctuation_options", b"_s2t_llm_post_processing_punctuation_options", "_s2t_llm_post_processing_semantic_correction_options", b"_s2t_llm_post_processing_semantic_correction_options", "_s2t_llm_post_processing_spelling_correction_options", b"_s2t_llm_post_processing_spelling_correction_options", "_s2t_llm_post_processing_summarization_options", b"_s2t_llm_post_processing_summarization_options", "_s2t_llm_post_processing_system_prompt", b"_s2t_llm_post_processing_system_prompt", "_s2t_llm_post_processing_translation_options", b"_s2t_llm_post_processing_translation_options", "_s2t_llm_post_processing_user_prompt_options", b"_s2t_llm_post_processing_user_prompt_options", "s2t_llm_post_processing_casing_options", b"s2t_llm_post_processing_casing_options", "s2t_llm_post_processing_ending_prompt", b"s2t_llm_post_processing_ending_prompt", "s2t_llm_post_processing_inverse_normalization_options", b"s2t_llm_post_processing_inverse_normalization_options", "s2t_llm_post_processing_normalization_options", b"s2t_llm_post_processing_normalization_options", "s2t_llm_post_processing_openai_options", b"s2t_llm_post_processing_openai_options", "s2t_llm_post_processing_punctuation_options", b"s2t_llm_post_processing_punctuation_options", "s2t_llm_post_processing_semantic_correction_options", b"s2t_llm_post_processing_semantic_correction_options", "s2t_llm_post_processing_spelling_correction_options", b"s2t_llm_post_processing_spelling_correction_options", "s2t_llm_post_processing_summarization_options", b"s2t_llm_post_processing_summarization_options", "s2t_llm_post_processing_system_prompt", b"s2t_llm_post_processing_system_prompt", "s2t_llm_post_processing_translation_options", b"s2t_llm_post_processing_translation_options", "s2t_llm_post_processing_user_prompt_options", b"s2t_llm_post_processing_user_prompt_options"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["_s2t_llm_post_processing_casing_options", b"_s2t_llm_post_processing_casing_options", "_s2t_llm_post_processing_ending_prompt", b"_s2t_llm_post_processing_ending_prompt", "_s2t_llm_post_processing_inverse_normalization_options", b"_s2t_llm_post_processing_inverse_normalization_options", "_s2t_llm_post_processing_normalization_options", b"_s2t_llm_post_processing_normalization_options", "_s2t_llm_post_processing_openai_options", b"_s2t_llm_post_processing_openai_options", "_s2t_llm_post_processing_punctuation_options", b"_s2t_llm_post_processing_punctuation_options", "_s2t_llm_post_processing_semantic_correction_options", b"_s2t_llm_post_processing_semantic_correction_options", "_s2t_llm_post_processing_spelling_correction_options", b"_s2t_llm_post_processing_spelling_correction_options", "_s2t_llm_post_processing_summarization_options", b"_s2t_llm_post_processing_summarization_options", "_s2t_llm_post_processing_system_prompt", b"_s2t_llm_post_processing_system_prompt", "_s2t_llm_post_processing_translation_options", b"_s2t_llm_post_processing_translation_options", "_s2t_llm_post_processing_user_prompt_options", b"_s2t_llm_post_processing_user_prompt_options", "s2t_llm_post_processing_casing_options", b"s2t_llm_post_processing_casing_options", "s2t_llm_post_processing_ending_prompt", b"s2t_llm_post_processing_ending_prompt", "s2t_llm_post_processing_inverse_normalization_options", b"s2t_llm_post_processing_inverse_normalization_options", "s2t_llm_post_processing_normalization_options", b"s2t_llm_post_processing_normalization_options", "s2t_llm_post_processing_openai_options", b"s2t_llm_post_processing_openai_options", "s2t_llm_post_processing_punctuation_options", b"s2t_llm_post_processing_punctuation_options", "s2t_llm_post_processing_semantic_correction_options", b"s2t_llm_post_processing_semantic_correction_options", "s2t_llm_post_processing_spelling_correction_options", b"s2t_llm_post_processing_spelling_correction_options", "s2t_llm_post_processing_summarization_options", b"s2t_llm_post_processing_summarization_options", "s2t_llm_post_processing_system_prompt", b"s2t_llm_post_processing_system_prompt", "s2t_llm_post_processing_translation_options", b"s2t_llm_post_processing_translation_options", "s2t_llm_post_processing_user_prompt_options", b"s2t_llm_post_processing_user_prompt_options"]) -> None: ...
-    @typing.overload
-    def WhichOneof(self, oneof_group: typing.Literal["_s2t_llm_post_processing_casing_options", b"_s2t_llm_post_processing_casing_options"]) -> typing.Literal["s2t_llm_post_processing_casing_options"] | None: ...
-    @typing.overload
-    def WhichOneof(self, oneof_group: typing.Literal["_s2t_llm_post_processing_ending_prompt", b"_s2t_llm_post_processing_ending_prompt"]) -> typing.Literal["s2t_llm_post_processing_ending_prompt"] | None: ...
-    @typing.overload
-    def WhichOneof(self, oneof_group: typing.Literal["_s2t_llm_post_processing_inverse_normalization_options", b"_s2t_llm_post_processing_inverse_normalization_options"]) -> typing.Literal["s2t_llm_post_processing_inverse_normalization_options"] | None: ...
-    @typing.overload
-    def WhichOneof(self, oneof_group: typing.Literal["_s2t_llm_post_processing_normalization_options", b"_s2t_llm_post_processing_normalization_options"]) -> typing.Literal["s2t_llm_post_processing_normalization_options"] | None: ...
-    @typing.overload
-    def WhichOneof(self, oneof_group: typing.Literal["_s2t_llm_post_processing_openai_options", b"_s2t_llm_post_processing_openai_options"]) -> typing.Literal["s2t_llm_post_processing_openai_options"] | None: ...
-    @typing.overload
-    def WhichOneof(self, oneof_group: typing.Literal["_s2t_llm_post_processing_punctuation_options", b"_s2t_llm_post_processing_punctuation_options"]) -> typing.Literal["s2t_llm_post_processing_punctuation_options"] | None: ...
-    @typing.overload
-    def WhichOneof(self, oneof_group: typing.Literal["_s2t_llm_post_processing_semantic_correction_options", b"_s2t_llm_post_processing_semantic_correction_options"]) -> typing.Literal["s2t_llm_post_processing_semantic_correction_options"] | None: ...
-    @typing.overload
-    def WhichOneof(self, oneof_group: typing.Literal["_s2t_llm_post_processing_spelling_correction_options", b"_s2t_llm_post_processing_spelling_correction_options"]) -> typing.Literal["s2t_llm_post_processing_spelling_correction_options"] | None: ...
-    @typing.overload
-    def WhichOneof(self, oneof_group: typing.Literal["_s2t_llm_post_processing_summarization_options", b"_s2t_llm_post_processing_summarization_options"]) -> typing.Literal["s2t_llm_post_processing_summarization_options"] | None: ...
-    @typing.overload
-    def WhichOneof(self, oneof_group: typing.Literal["_s2t_llm_post_processing_system_prompt", b"_s2t_llm_post_processing_system_prompt"]) -> typing.Literal["s2t_llm_post_processing_system_prompt"] | None: ...
-    @typing.overload
-    def WhichOneof(self, oneof_group: typing.Literal["_s2t_llm_post_processing_translation_options", b"_s2t_llm_post_processing_translation_options"]) -> typing.Literal["s2t_llm_post_processing_translation_options"] | None: ...
-    @typing.overload
-    def WhichOneof(self, oneof_group: typing.Literal["_s2t_llm_post_processing_user_prompt_options", b"_s2t_llm_post_processing_user_prompt_options"]) -> typing.Literal["s2t_llm_post_processing_user_prompt_options"] | None: ...
+    _HasFieldArgType: _TypeAlias = _typing.Literal["_s2t_llm_post_processing_casing_options", b"_s2t_llm_post_processing_casing_options", "_s2t_llm_post_processing_ending_prompt", b"_s2t_llm_post_processing_ending_prompt", "_s2t_llm_post_processing_inverse_normalization_options", b"_s2t_llm_post_processing_inverse_normalization_options", "_s2t_llm_post_processing_normalization_options", b"_s2t_llm_post_processing_normalization_options", "_s2t_llm_post_processing_openai_options", b"_s2t_llm_post_processing_openai_options", "_s2t_llm_post_processing_punctuation_options", b"_s2t_llm_post_processing_punctuation_options", "_s2t_llm_post_processing_semantic_correction_options", b"_s2t_llm_post_processing_semantic_correction_options", "_s2t_llm_post_processing_spelling_correction_options", b"_s2t_llm_post_processing_spelling_correction_options", "_s2t_llm_post_processing_summarization_options", b"_s2t_llm_post_processing_summarization_options", "_s2t_llm_post_processing_system_prompt", b"_s2t_llm_post_processing_system_prompt", "_s2t_llm_post_processing_translation_options", b"_s2t_llm_post_processing_translation_options", "_s2t_llm_post_processing_user_prompt_options", b"_s2t_llm_post_processing_user_prompt_options", "s2t_llm_post_processing_casing_options", b"s2t_llm_post_processing_casing_options", "s2t_llm_post_processing_ending_prompt", b"s2t_llm_post_processing_ending_prompt", "s2t_llm_post_processing_inverse_normalization_options", b"s2t_llm_post_processing_inverse_normalization_options", "s2t_llm_post_processing_normalization_options", b"s2t_llm_post_processing_normalization_options", "s2t_llm_post_processing_openai_options", b"s2t_llm_post_processing_openai_options", "s2t_llm_post_processing_punctuation_options", b"s2t_llm_post_processing_punctuation_options", "s2t_llm_post_processing_semantic_correction_options", b"s2t_llm_post_processing_semantic_correction_options", "s2t_llm_post_processing_spelling_correction_options", b"s2t_llm_post_processing_spelling_correction_options", "s2t_llm_post_processing_summarization_options", b"s2t_llm_post_processing_summarization_options", "s2t_llm_post_processing_system_prompt", b"s2t_llm_post_processing_system_prompt", "s2t_llm_post_processing_translation_options", b"s2t_llm_post_processing_translation_options", "s2t_llm_post_processing_user_prompt_options", b"s2t_llm_post_processing_user_prompt_options"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["_s2t_llm_post_processing_casing_options", b"_s2t_llm_post_processing_casing_options", "_s2t_llm_post_processing_ending_prompt", b"_s2t_llm_post_processing_ending_prompt", "_s2t_llm_post_processing_inverse_normalization_options", b"_s2t_llm_post_processing_inverse_normalization_options", "_s2t_llm_post_processing_normalization_options", b"_s2t_llm_post_processing_normalization_options", "_s2t_llm_post_processing_openai_options", b"_s2t_llm_post_processing_openai_options", "_s2t_llm_post_processing_punctuation_options", b"_s2t_llm_post_processing_punctuation_options", "_s2t_llm_post_processing_semantic_correction_options", b"_s2t_llm_post_processing_semantic_correction_options", "_s2t_llm_post_processing_spelling_correction_options", b"_s2t_llm_post_processing_spelling_correction_options", "_s2t_llm_post_processing_summarization_options", b"_s2t_llm_post_processing_summarization_options", "_s2t_llm_post_processing_system_prompt", b"_s2t_llm_post_processing_system_prompt", "_s2t_llm_post_processing_translation_options", b"_s2t_llm_post_processing_translation_options", "_s2t_llm_post_processing_user_prompt_options", b"_s2t_llm_post_processing_user_prompt_options", "s2t_llm_post_processing_casing_options", b"s2t_llm_post_processing_casing_options", "s2t_llm_post_processing_ending_prompt", b"s2t_llm_post_processing_ending_prompt", "s2t_llm_post_processing_inverse_normalization_options", b"s2t_llm_post_processing_inverse_normalization_options", "s2t_llm_post_processing_normalization_options", b"s2t_llm_post_processing_normalization_options", "s2t_llm_post_processing_openai_options", b"s2t_llm_post_processing_openai_options", "s2t_llm_post_processing_punctuation_options", b"s2t_llm_post_processing_punctuation_options", "s2t_llm_post_processing_semantic_correction_options", b"s2t_llm_post_processing_semantic_correction_options", "s2t_llm_post_processing_spelling_correction_options", b"s2t_llm_post_processing_spelling_correction_options", "s2t_llm_post_processing_summarization_options", b"s2t_llm_post_processing_summarization_options", "s2t_llm_post_processing_system_prompt", b"s2t_llm_post_processing_system_prompt", "s2t_llm_post_processing_translation_options", b"s2t_llm_post_processing_translation_options", "s2t_llm_post_processing_user_prompt_options", b"s2t_llm_post_processing_user_prompt_options"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    _WhichOneofReturnType__s2t_llm_post_processing_casing_options: _TypeAlias = _typing.Literal["s2t_llm_post_processing_casing_options"]  # noqa: Y015
+    _WhichOneofArgType__s2t_llm_post_processing_casing_options: _TypeAlias = _typing.Literal["_s2t_llm_post_processing_casing_options", b"_s2t_llm_post_processing_casing_options"]  # noqa: Y015
+    _WhichOneofReturnType__s2t_llm_post_processing_ending_prompt: _TypeAlias = _typing.Literal["s2t_llm_post_processing_ending_prompt"]  # noqa: Y015
+    _WhichOneofArgType__s2t_llm_post_processing_ending_prompt: _TypeAlias = _typing.Literal["_s2t_llm_post_processing_ending_prompt", b"_s2t_llm_post_processing_ending_prompt"]  # noqa: Y015
+    _WhichOneofReturnType__s2t_llm_post_processing_inverse_normalization_options: _TypeAlias = _typing.Literal["s2t_llm_post_processing_inverse_normalization_options"]  # noqa: Y015
+    _WhichOneofArgType__s2t_llm_post_processing_inverse_normalization_options: _TypeAlias = _typing.Literal["_s2t_llm_post_processing_inverse_normalization_options", b"_s2t_llm_post_processing_inverse_normalization_options"]  # noqa: Y015
+    _WhichOneofReturnType__s2t_llm_post_processing_normalization_options: _TypeAlias = _typing.Literal["s2t_llm_post_processing_normalization_options"]  # noqa: Y015
+    _WhichOneofArgType__s2t_llm_post_processing_normalization_options: _TypeAlias = _typing.Literal["_s2t_llm_post_processing_normalization_options", b"_s2t_llm_post_processing_normalization_options"]  # noqa: Y015
+    _WhichOneofReturnType__s2t_llm_post_processing_openai_options: _TypeAlias = _typing.Literal["s2t_llm_post_processing_openai_options"]  # noqa: Y015
+    _WhichOneofArgType__s2t_llm_post_processing_openai_options: _TypeAlias = _typing.Literal["_s2t_llm_post_processing_openai_options", b"_s2t_llm_post_processing_openai_options"]  # noqa: Y015
+    _WhichOneofReturnType__s2t_llm_post_processing_punctuation_options: _TypeAlias = _typing.Literal["s2t_llm_post_processing_punctuation_options"]  # noqa: Y015
+    _WhichOneofArgType__s2t_llm_post_processing_punctuation_options: _TypeAlias = _typing.Literal["_s2t_llm_post_processing_punctuation_options", b"_s2t_llm_post_processing_punctuation_options"]  # noqa: Y015
+    _WhichOneofReturnType__s2t_llm_post_processing_semantic_correction_options: _TypeAlias = _typing.Literal["s2t_llm_post_processing_semantic_correction_options"]  # noqa: Y015
+    _WhichOneofArgType__s2t_llm_post_processing_semantic_correction_options: _TypeAlias = _typing.Literal["_s2t_llm_post_processing_semantic_correction_options", b"_s2t_llm_post_processing_semantic_correction_options"]  # noqa: Y015
+    _WhichOneofReturnType__s2t_llm_post_processing_spelling_correction_options: _TypeAlias = _typing.Literal["s2t_llm_post_processing_spelling_correction_options"]  # noqa: Y015
+    _WhichOneofArgType__s2t_llm_post_processing_spelling_correction_options: _TypeAlias = _typing.Literal["_s2t_llm_post_processing_spelling_correction_options", b"_s2t_llm_post_processing_spelling_correction_options"]  # noqa: Y015
+    _WhichOneofReturnType__s2t_llm_post_processing_summarization_options: _TypeAlias = _typing.Literal["s2t_llm_post_processing_summarization_options"]  # noqa: Y015
+    _WhichOneofArgType__s2t_llm_post_processing_summarization_options: _TypeAlias = _typing.Literal["_s2t_llm_post_processing_summarization_options", b"_s2t_llm_post_processing_summarization_options"]  # noqa: Y015
+    _WhichOneofReturnType__s2t_llm_post_processing_system_prompt: _TypeAlias = _typing.Literal["s2t_llm_post_processing_system_prompt"]  # noqa: Y015
+    _WhichOneofArgType__s2t_llm_post_processing_system_prompt: _TypeAlias = _typing.Literal["_s2t_llm_post_processing_system_prompt", b"_s2t_llm_post_processing_system_prompt"]  # noqa: Y015
+    _WhichOneofReturnType__s2t_llm_post_processing_translation_options: _TypeAlias = _typing.Literal["s2t_llm_post_processing_translation_options"]  # noqa: Y015
+    _WhichOneofArgType__s2t_llm_post_processing_translation_options: _TypeAlias = _typing.Literal["_s2t_llm_post_processing_translation_options", b"_s2t_llm_post_processing_translation_options"]  # noqa: Y015
+    _WhichOneofReturnType__s2t_llm_post_processing_user_prompt_options: _TypeAlias = _typing.Literal["s2t_llm_post_processing_user_prompt_options"]  # noqa: Y015
+    _WhichOneofArgType__s2t_llm_post_processing_user_prompt_options: _TypeAlias = _typing.Literal["_s2t_llm_post_processing_user_prompt_options", b"_s2t_llm_post_processing_user_prompt_options"]  # noqa: Y015
+    @_typing.overload
+    def WhichOneof(self, oneof_group: _WhichOneofArgType__s2t_llm_post_processing_casing_options) -> _WhichOneofReturnType__s2t_llm_post_processing_casing_options | None: ...
+    @_typing.overload
+    def WhichOneof(self, oneof_group: _WhichOneofArgType__s2t_llm_post_processing_ending_prompt) -> _WhichOneofReturnType__s2t_llm_post_processing_ending_prompt | None: ...
+    @_typing.overload
+    def WhichOneof(self, oneof_group: _WhichOneofArgType__s2t_llm_post_processing_inverse_normalization_options) -> _WhichOneofReturnType__s2t_llm_post_processing_inverse_normalization_options | None: ...
+    @_typing.overload
+    def WhichOneof(self, oneof_group: _WhichOneofArgType__s2t_llm_post_processing_normalization_options) -> _WhichOneofReturnType__s2t_llm_post_processing_normalization_options | None: ...
+    @_typing.overload
+    def WhichOneof(self, oneof_group: _WhichOneofArgType__s2t_llm_post_processing_openai_options) -> _WhichOneofReturnType__s2t_llm_post_processing_openai_options | None: ...
+    @_typing.overload
+    def WhichOneof(self, oneof_group: _WhichOneofArgType__s2t_llm_post_processing_punctuation_options) -> _WhichOneofReturnType__s2t_llm_post_processing_punctuation_options | None: ...
+    @_typing.overload
+    def WhichOneof(self, oneof_group: _WhichOneofArgType__s2t_llm_post_processing_semantic_correction_options) -> _WhichOneofReturnType__s2t_llm_post_processing_semantic_correction_options | None: ...
+    @_typing.overload
+    def WhichOneof(self, oneof_group: _WhichOneofArgType__s2t_llm_post_processing_spelling_correction_options) -> _WhichOneofReturnType__s2t_llm_post_processing_spelling_correction_options | None: ...
+    @_typing.overload
+    def WhichOneof(self, oneof_group: _WhichOneofArgType__s2t_llm_post_processing_summarization_options) -> _WhichOneofReturnType__s2t_llm_post_processing_summarization_options | None: ...
+    @_typing.overload
+    def WhichOneof(self, oneof_group: _WhichOneofArgType__s2t_llm_post_processing_system_prompt) -> _WhichOneofReturnType__s2t_llm_post_processing_system_prompt | None: ...
+    @_typing.overload
+    def WhichOneof(self, oneof_group: _WhichOneofArgType__s2t_llm_post_processing_translation_options) -> _WhichOneofReturnType__s2t_llm_post_processing_translation_options | None: ...
+    @_typing.overload
+    def WhichOneof(self, oneof_group: _WhichOneofArgType__s2t_llm_post_processing_user_prompt_options) -> _WhichOneofReturnType__s2t_llm_post_processing_user_prompt_options | None: ...
 
-global___S2tLlmPostProcessing = S2tLlmPostProcessing
+Global___S2tLlmPostProcessing: _TypeAlias = S2tLlmPostProcessing  # noqa: Y015
 
-@typing.final
-class S2tLlmPostProcessingTranslationOptions(google.protobuf.message.Message):
+@_typing.final
+class S2tLlmPostProcessingTranslationOptions(_message.Message):
     """<p>Configuration of the options to translation task in LLM post-processing.</p>"""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    ACTIVE_FIELD_NUMBER: builtins.int
-    LANGUAGE_FIELD_NUMBER: builtins.int
-    PROMPT_FIELD_NUMBER: builtins.int
-    active: builtins.bool
+    ACTIVE_FIELD_NUMBER: _builtins.int
+    LANGUAGE_FIELD_NUMBER: _builtins.int
+    PROMPT_FIELD_NUMBER: _builtins.int
+    active: _builtins.bool
     """Optional. Indicates if the translation task of LLM post-processing is active."""
-    language: builtins.str
+    language: _builtins.str
     """Optional. Target language of the translation task of LLM post-processing."""
-    prompt: builtins.str
+    prompt: _builtins.str
     """Optional. Custom prompt to guide the LLM for translation. Overrides the default prompt when set."""
     def __init__(
         self,
         *,
-        active: builtins.bool | None = ...,
-        language: builtins.str | None = ...,
-        prompt: builtins.str | None = ...,
+        active: _builtins.bool | None = ...,
+        language: _builtins.str | None = ...,
+        prompt: _builtins.str | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["_active", b"_active", "_language", b"_language", "_prompt", b"_prompt", "active", b"active", "language", b"language", "prompt", b"prompt"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["_active", b"_active", "_language", b"_language", "_prompt", b"_prompt", "active", b"active", "language", b"language", "prompt", b"prompt"]) -> None: ...
-    @typing.overload
-    def WhichOneof(self, oneof_group: typing.Literal["_active", b"_active"]) -> typing.Literal["active"] | None: ...
-    @typing.overload
-    def WhichOneof(self, oneof_group: typing.Literal["_language", b"_language"]) -> typing.Literal["language"] | None: ...
-    @typing.overload
-    def WhichOneof(self, oneof_group: typing.Literal["_prompt", b"_prompt"]) -> typing.Literal["prompt"] | None: ...
+    _HasFieldArgType: _TypeAlias = _typing.Literal["_active", b"_active", "_language", b"_language", "_prompt", b"_prompt", "active", b"active", "language", b"language", "prompt", b"prompt"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["_active", b"_active", "_language", b"_language", "_prompt", b"_prompt", "active", b"active", "language", b"language", "prompt", b"prompt"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    _WhichOneofReturnType__active: _TypeAlias = _typing.Literal["active"]  # noqa: Y015
+    _WhichOneofArgType__active: _TypeAlias = _typing.Literal["_active", b"_active"]  # noqa: Y015
+    _WhichOneofReturnType__language: _TypeAlias = _typing.Literal["language"]  # noqa: Y015
+    _WhichOneofArgType__language: _TypeAlias = _typing.Literal["_language", b"_language"]  # noqa: Y015
+    _WhichOneofReturnType__prompt: _TypeAlias = _typing.Literal["prompt"]  # noqa: Y015
+    _WhichOneofArgType__prompt: _TypeAlias = _typing.Literal["_prompt", b"_prompt"]  # noqa: Y015
+    @_typing.overload
+    def WhichOneof(self, oneof_group: _WhichOneofArgType__active) -> _WhichOneofReturnType__active | None: ...
+    @_typing.overload
+    def WhichOneof(self, oneof_group: _WhichOneofArgType__language) -> _WhichOneofReturnType__language | None: ...
+    @_typing.overload
+    def WhichOneof(self, oneof_group: _WhichOneofArgType__prompt) -> _WhichOneofReturnType__prompt | None: ...
 
-global___S2tLlmPostProcessingTranslationOptions = S2tLlmPostProcessingTranslationOptions
+Global___S2tLlmPostProcessingTranslationOptions: _TypeAlias = S2tLlmPostProcessingTranslationOptions  # noqa: Y015
 
-@typing.final
-class S2tLlmPostProcessingInverseNormalizationOptions(google.protobuf.message.Message):
+@_typing.final
+class S2tLlmPostProcessingInverseNormalizationOptions(_message.Message):
     """<p>Configuration of the options to inverse-normalization task in LLM post-processing.</p>"""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    ACTIVE_FIELD_NUMBER: builtins.int
-    EMAIL_FIELD_NUMBER: builtins.int
-    PHONE_NUMBER_FIELD_NUMBER: builtins.int
-    DATE_AND_TIME_FIELD_NUMBER: builtins.int
-    CREDIT_CARD_NUMBER_FIELD_NUMBER: builtins.int
-    SOCIAL_SECURITY_NUMBER_FIELD_NUMBER: builtins.int
-    TIME_ZONE_FIELD_NUMBER: builtins.int
-    active: builtins.bool
+    ACTIVE_FIELD_NUMBER: _builtins.int
+    EMAIL_FIELD_NUMBER: _builtins.int
+    PHONE_NUMBER_FIELD_NUMBER: _builtins.int
+    DATE_AND_TIME_FIELD_NUMBER: _builtins.int
+    CREDIT_CARD_NUMBER_FIELD_NUMBER: _builtins.int
+    SOCIAL_SECURITY_NUMBER_FIELD_NUMBER: _builtins.int
+    TIME_ZONE_FIELD_NUMBER: _builtins.int
+    active: _builtins.bool
     """Optional. Indicates if the inverse-normalization task of LLM post-processing is active."""
-    @property
-    def email(self) -> global___S2tLlmPostProcessingSubTaskOptions:
+    @_builtins.property
+    def email(self) -> Global___S2tLlmPostProcessingSubTaskOptions:
         """Optional. Configuration of the inverse-normalization of email address sub-task."""
 
-    @property
-    def phone_number(self) -> global___S2tLlmPostProcessingSubTaskOptions:
+    @_builtins.property
+    def phone_number(self) -> Global___S2tLlmPostProcessingSubTaskOptions:
         """Optional. Configuration of the inverse-normalization of phone number sub-task."""
 
-    @property
-    def date_and_time(self) -> global___S2tLlmPostProcessingSubTaskOptions:
+    @_builtins.property
+    def date_and_time(self) -> Global___S2tLlmPostProcessingSubTaskOptions:
         """Optional. Configuration of the inverse-normalization of date and time sub-task."""
 
-    @property
-    def credit_card_number(self) -> global___S2tLlmPostProcessingSubTaskOptions:
+    @_builtins.property
+    def credit_card_number(self) -> Global___S2tLlmPostProcessingSubTaskOptions:
         """Optional. Configuration of the inverse-normalization of credit card number sub-task."""
 
-    @property
-    def social_security_number(self) -> global___S2tLlmPostProcessingSubTaskOptions:
+    @_builtins.property
+    def social_security_number(self) -> Global___S2tLlmPostProcessingSubTaskOptions:
         """Optional. Configuration of the inverse-normalization of social security number sub-task."""
 
-    @property
-    def time_zone(self) -> global___S2tLlmPostProcessingSubTaskOptions:
+    @_builtins.property
+    def time_zone(self) -> Global___S2tLlmPostProcessingSubTaskOptions:
         """Optional. Configuration of the inverse-normalization of time zone sub-task."""
 
     def __init__(
         self,
         *,
-        active: builtins.bool | None = ...,
-        email: global___S2tLlmPostProcessingSubTaskOptions | None = ...,
-        phone_number: global___S2tLlmPostProcessingSubTaskOptions | None = ...,
-        date_and_time: global___S2tLlmPostProcessingSubTaskOptions | None = ...,
-        credit_card_number: global___S2tLlmPostProcessingSubTaskOptions | None = ...,
-        social_security_number: global___S2tLlmPostProcessingSubTaskOptions | None = ...,
-        time_zone: global___S2tLlmPostProcessingSubTaskOptions | None = ...,
+        active: _builtins.bool | None = ...,
+        email: Global___S2tLlmPostProcessingSubTaskOptions | None = ...,
+        phone_number: Global___S2tLlmPostProcessingSubTaskOptions | None = ...,
+        date_and_time: Global___S2tLlmPostProcessingSubTaskOptions | None = ...,
+        credit_card_number: Global___S2tLlmPostProcessingSubTaskOptions | None = ...,
+        social_security_number: Global___S2tLlmPostProcessingSubTaskOptions | None = ...,
+        time_zone: Global___S2tLlmPostProcessingSubTaskOptions | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["_active", b"_active", "_credit_card_number", b"_credit_card_number", "_date_and_time", b"_date_and_time", "_email", b"_email", "_phone_number", b"_phone_number", "_social_security_number", b"_social_security_number", "_time_zone", b"_time_zone", "active", b"active", "credit_card_number", b"credit_card_number", "date_and_time", b"date_and_time", "email", b"email", "phone_number", b"phone_number", "social_security_number", b"social_security_number", "time_zone", b"time_zone"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["_active", b"_active", "_credit_card_number", b"_credit_card_number", "_date_and_time", b"_date_and_time", "_email", b"_email", "_phone_number", b"_phone_number", "_social_security_number", b"_social_security_number", "_time_zone", b"_time_zone", "active", b"active", "credit_card_number", b"credit_card_number", "date_and_time", b"date_and_time", "email", b"email", "phone_number", b"phone_number", "social_security_number", b"social_security_number", "time_zone", b"time_zone"]) -> None: ...
-    @typing.overload
-    def WhichOneof(self, oneof_group: typing.Literal["_active", b"_active"]) -> typing.Literal["active"] | None: ...
-    @typing.overload
-    def WhichOneof(self, oneof_group: typing.Literal["_credit_card_number", b"_credit_card_number"]) -> typing.Literal["credit_card_number"] | None: ...
-    @typing.overload
-    def WhichOneof(self, oneof_group: typing.Literal["_date_and_time", b"_date_and_time"]) -> typing.Literal["date_and_time"] | None: ...
-    @typing.overload
-    def WhichOneof(self, oneof_group: typing.Literal["_email", b"_email"]) -> typing.Literal["email"] | None: ...
-    @typing.overload
-    def WhichOneof(self, oneof_group: typing.Literal["_phone_number", b"_phone_number"]) -> typing.Literal["phone_number"] | None: ...
-    @typing.overload
-    def WhichOneof(self, oneof_group: typing.Literal["_social_security_number", b"_social_security_number"]) -> typing.Literal["social_security_number"] | None: ...
-    @typing.overload
-    def WhichOneof(self, oneof_group: typing.Literal["_time_zone", b"_time_zone"]) -> typing.Literal["time_zone"] | None: ...
+    _HasFieldArgType: _TypeAlias = _typing.Literal["_active", b"_active", "_credit_card_number", b"_credit_card_number", "_date_and_time", b"_date_and_time", "_email", b"_email", "_phone_number", b"_phone_number", "_social_security_number", b"_social_security_number", "_time_zone", b"_time_zone", "active", b"active", "credit_card_number", b"credit_card_number", "date_and_time", b"date_and_time", "email", b"email", "phone_number", b"phone_number", "social_security_number", b"social_security_number", "time_zone", b"time_zone"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["_active", b"_active", "_credit_card_number", b"_credit_card_number", "_date_and_time", b"_date_and_time", "_email", b"_email", "_phone_number", b"_phone_number", "_social_security_number", b"_social_security_number", "_time_zone", b"_time_zone", "active", b"active", "credit_card_number", b"credit_card_number", "date_and_time", b"date_and_time", "email", b"email", "phone_number", b"phone_number", "social_security_number", b"social_security_number", "time_zone", b"time_zone"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    _WhichOneofReturnType__active: _TypeAlias = _typing.Literal["active"]  # noqa: Y015
+    _WhichOneofArgType__active: _TypeAlias = _typing.Literal["_active", b"_active"]  # noqa: Y015
+    _WhichOneofReturnType__credit_card_number: _TypeAlias = _typing.Literal["credit_card_number"]  # noqa: Y015
+    _WhichOneofArgType__credit_card_number: _TypeAlias = _typing.Literal["_credit_card_number", b"_credit_card_number"]  # noqa: Y015
+    _WhichOneofReturnType__date_and_time: _TypeAlias = _typing.Literal["date_and_time"]  # noqa: Y015
+    _WhichOneofArgType__date_and_time: _TypeAlias = _typing.Literal["_date_and_time", b"_date_and_time"]  # noqa: Y015
+    _WhichOneofReturnType__email: _TypeAlias = _typing.Literal["email"]  # noqa: Y015
+    _WhichOneofArgType__email: _TypeAlias = _typing.Literal["_email", b"_email"]  # noqa: Y015
+    _WhichOneofReturnType__phone_number: _TypeAlias = _typing.Literal["phone_number"]  # noqa: Y015
+    _WhichOneofArgType__phone_number: _TypeAlias = _typing.Literal["_phone_number", b"_phone_number"]  # noqa: Y015
+    _WhichOneofReturnType__social_security_number: _TypeAlias = _typing.Literal["social_security_number"]  # noqa: Y015
+    _WhichOneofArgType__social_security_number: _TypeAlias = _typing.Literal["_social_security_number", b"_social_security_number"]  # noqa: Y015
+    _WhichOneofReturnType__time_zone: _TypeAlias = _typing.Literal["time_zone"]  # noqa: Y015
+    _WhichOneofArgType__time_zone: _TypeAlias = _typing.Literal["_time_zone", b"_time_zone"]  # noqa: Y015
+    @_typing.overload
+    def WhichOneof(self, oneof_group: _WhichOneofArgType__active) -> _WhichOneofReturnType__active | None: ...
+    @_typing.overload
+    def WhichOneof(self, oneof_group: _WhichOneofArgType__credit_card_number) -> _WhichOneofReturnType__credit_card_number | None: ...
+    @_typing.overload
+    def WhichOneof(self, oneof_group: _WhichOneofArgType__date_and_time) -> _WhichOneofReturnType__date_and_time | None: ...
+    @_typing.overload
+    def WhichOneof(self, oneof_group: _WhichOneofArgType__email) -> _WhichOneofReturnType__email | None: ...
+    @_typing.overload
+    def WhichOneof(self, oneof_group: _WhichOneofArgType__phone_number) -> _WhichOneofReturnType__phone_number | None: ...
+    @_typing.overload
+    def WhichOneof(self, oneof_group: _WhichOneofArgType__social_security_number) -> _WhichOneofReturnType__social_security_number | None: ...
+    @_typing.overload
+    def WhichOneof(self, oneof_group: _WhichOneofArgType__time_zone) -> _WhichOneofReturnType__time_zone | None: ...
 
-global___S2tLlmPostProcessingInverseNormalizationOptions = S2tLlmPostProcessingInverseNormalizationOptions
+Global___S2tLlmPostProcessingInverseNormalizationOptions: _TypeAlias = S2tLlmPostProcessingInverseNormalizationOptions  # noqa: Y015
 
-@typing.final
-class S2tLlmPostProcessingNormalizationOptions(google.protobuf.message.Message):
+@_typing.final
+class S2tLlmPostProcessingNormalizationOptions(_message.Message):
     """<p>Configuration of the options to normalization task in LLM post-processing.</p>"""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    ACTIVE_FIELD_NUMBER: builtins.int
-    EMAIL_FIELD_NUMBER: builtins.int
-    PHONE_NUMBER_FIELD_NUMBER: builtins.int
-    DATE_AND_TIME_FIELD_NUMBER: builtins.int
-    CREDIT_CARD_NUMBER_FIELD_NUMBER: builtins.int
-    SOCIAL_SECURITY_NUMBER_FIELD_NUMBER: builtins.int
-    TIME_ZONE_FIELD_NUMBER: builtins.int
-    active: builtins.bool
+    ACTIVE_FIELD_NUMBER: _builtins.int
+    EMAIL_FIELD_NUMBER: _builtins.int
+    PHONE_NUMBER_FIELD_NUMBER: _builtins.int
+    DATE_AND_TIME_FIELD_NUMBER: _builtins.int
+    CREDIT_CARD_NUMBER_FIELD_NUMBER: _builtins.int
+    SOCIAL_SECURITY_NUMBER_FIELD_NUMBER: _builtins.int
+    TIME_ZONE_FIELD_NUMBER: _builtins.int
+    active: _builtins.bool
     """Optional. Indicates if the normalization task of LLM post-processing is active."""
-    @property
-    def email(self) -> global___S2tLlmPostProcessingSubTaskOptions:
+    @_builtins.property
+    def email(self) -> Global___S2tLlmPostProcessingSubTaskOptions:
         """Optional. Configuration of the normalization of email address sub-task."""
 
-    @property
-    def phone_number(self) -> global___S2tLlmPostProcessingSubTaskOptions:
+    @_builtins.property
+    def phone_number(self) -> Global___S2tLlmPostProcessingSubTaskOptions:
         """Optional. Configuration of the normalization of phone number sub-task."""
 
-    @property
-    def date_and_time(self) -> global___S2tLlmPostProcessingSubTaskOptions:
+    @_builtins.property
+    def date_and_time(self) -> Global___S2tLlmPostProcessingSubTaskOptions:
         """Optional. Configuration of the normalization of date and time sub-task."""
 
-    @property
-    def credit_card_number(self) -> global___S2tLlmPostProcessingSubTaskOptions:
+    @_builtins.property
+    def credit_card_number(self) -> Global___S2tLlmPostProcessingSubTaskOptions:
         """Optional. Configuration of the normalization of credit card number sub-task."""
 
-    @property
-    def social_security_number(self) -> global___S2tLlmPostProcessingSubTaskOptions:
+    @_builtins.property
+    def social_security_number(self) -> Global___S2tLlmPostProcessingSubTaskOptions:
         """Optional. Configuration of the normalization of social security number sub-task."""
 
-    @property
-    def time_zone(self) -> global___S2tLlmPostProcessingSubTaskOptions:
+    @_builtins.property
+    def time_zone(self) -> Global___S2tLlmPostProcessingSubTaskOptions:
         """Optional. Configuration of the normalization of time zone sub-task."""
 
     def __init__(
         self,
         *,
-        active: builtins.bool | None = ...,
-        email: global___S2tLlmPostProcessingSubTaskOptions | None = ...,
-        phone_number: global___S2tLlmPostProcessingSubTaskOptions | None = ...,
-        date_and_time: global___S2tLlmPostProcessingSubTaskOptions | None = ...,
-        credit_card_number: global___S2tLlmPostProcessingSubTaskOptions | None = ...,
-        social_security_number: global___S2tLlmPostProcessingSubTaskOptions | None = ...,
-        time_zone: global___S2tLlmPostProcessingSubTaskOptions | None = ...,
+        active: _builtins.bool | None = ...,
+        email: Global___S2tLlmPostProcessingSubTaskOptions | None = ...,
+        phone_number: Global___S2tLlmPostProcessingSubTaskOptions | None = ...,
+        date_and_time: Global___S2tLlmPostProcessingSubTaskOptions | None = ...,
+        credit_card_number: Global___S2tLlmPostProcessingSubTaskOptions | None = ...,
+        social_security_number: Global___S2tLlmPostProcessingSubTaskOptions | None = ...,
+        time_zone: Global___S2tLlmPostProcessingSubTaskOptions | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["_active", b"_active", "_credit_card_number", b"_credit_card_number", "_date_and_time", b"_date_and_time", "_email", b"_email", "_phone_number", b"_phone_number", "_social_security_number", b"_social_security_number", "_time_zone", b"_time_zone", "active", b"active", "credit_card_number", b"credit_card_number", "date_and_time", b"date_and_time", "email", b"email", "phone_number", b"phone_number", "social_security_number", b"social_security_number", "time_zone", b"time_zone"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["_active", b"_active", "_credit_card_number", b"_credit_card_number", "_date_and_time", b"_date_and_time", "_email", b"_email", "_phone_number", b"_phone_number", "_social_security_number", b"_social_security_number", "_time_zone", b"_time_zone", "active", b"active", "credit_card_number", b"credit_card_number", "date_and_time", b"date_and_time", "email", b"email", "phone_number", b"phone_number", "social_security_number", b"social_security_number", "time_zone", b"time_zone"]) -> None: ...
-    @typing.overload
-    def WhichOneof(self, oneof_group: typing.Literal["_active", b"_active"]) -> typing.Literal["active"] | None: ...
-    @typing.overload
-    def WhichOneof(self, oneof_group: typing.Literal["_credit_card_number", b"_credit_card_number"]) -> typing.Literal["credit_card_number"] | None: ...
-    @typing.overload
-    def WhichOneof(self, oneof_group: typing.Literal["_date_and_time", b"_date_and_time"]) -> typing.Literal["date_and_time"] | None: ...
-    @typing.overload
-    def WhichOneof(self, oneof_group: typing.Literal["_email", b"_email"]) -> typing.Literal["email"] | None: ...
-    @typing.overload
-    def WhichOneof(self, oneof_group: typing.Literal["_phone_number", b"_phone_number"]) -> typing.Literal["phone_number"] | None: ...
-    @typing.overload
-    def WhichOneof(self, oneof_group: typing.Literal["_social_security_number", b"_social_security_number"]) -> typing.Literal["social_security_number"] | None: ...
-    @typing.overload
-    def WhichOneof(self, oneof_group: typing.Literal["_time_zone", b"_time_zone"]) -> typing.Literal["time_zone"] | None: ...
+    _HasFieldArgType: _TypeAlias = _typing.Literal["_active", b"_active", "_credit_card_number", b"_credit_card_number", "_date_and_time", b"_date_and_time", "_email", b"_email", "_phone_number", b"_phone_number", "_social_security_number", b"_social_security_number", "_time_zone", b"_time_zone", "active", b"active", "credit_card_number", b"credit_card_number", "date_and_time", b"date_and_time", "email", b"email", "phone_number", b"phone_number", "social_security_number", b"social_security_number", "time_zone", b"time_zone"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["_active", b"_active", "_credit_card_number", b"_credit_card_number", "_date_and_time", b"_date_and_time", "_email", b"_email", "_phone_number", b"_phone_number", "_social_security_number", b"_social_security_number", "_time_zone", b"_time_zone", "active", b"active", "credit_card_number", b"credit_card_number", "date_and_time", b"date_and_time", "email", b"email", "phone_number", b"phone_number", "social_security_number", b"social_security_number", "time_zone", b"time_zone"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    _WhichOneofReturnType__active: _TypeAlias = _typing.Literal["active"]  # noqa: Y015
+    _WhichOneofArgType__active: _TypeAlias = _typing.Literal["_active", b"_active"]  # noqa: Y015
+    _WhichOneofReturnType__credit_card_number: _TypeAlias = _typing.Literal["credit_card_number"]  # noqa: Y015
+    _WhichOneofArgType__credit_card_number: _TypeAlias = _typing.Literal["_credit_card_number", b"_credit_card_number"]  # noqa: Y015
+    _WhichOneofReturnType__date_and_time: _TypeAlias = _typing.Literal["date_and_time"]  # noqa: Y015
+    _WhichOneofArgType__date_and_time: _TypeAlias = _typing.Literal["_date_and_time", b"_date_and_time"]  # noqa: Y015
+    _WhichOneofReturnType__email: _TypeAlias = _typing.Literal["email"]  # noqa: Y015
+    _WhichOneofArgType__email: _TypeAlias = _typing.Literal["_email", b"_email"]  # noqa: Y015
+    _WhichOneofReturnType__phone_number: _TypeAlias = _typing.Literal["phone_number"]  # noqa: Y015
+    _WhichOneofArgType__phone_number: _TypeAlias = _typing.Literal["_phone_number", b"_phone_number"]  # noqa: Y015
+    _WhichOneofReturnType__social_security_number: _TypeAlias = _typing.Literal["social_security_number"]  # noqa: Y015
+    _WhichOneofArgType__social_security_number: _TypeAlias = _typing.Literal["_social_security_number", b"_social_security_number"]  # noqa: Y015
+    _WhichOneofReturnType__time_zone: _TypeAlias = _typing.Literal["time_zone"]  # noqa: Y015
+    _WhichOneofArgType__time_zone: _TypeAlias = _typing.Literal["_time_zone", b"_time_zone"]  # noqa: Y015
+    @_typing.overload
+    def WhichOneof(self, oneof_group: _WhichOneofArgType__active) -> _WhichOneofReturnType__active | None: ...
+    @_typing.overload
+    def WhichOneof(self, oneof_group: _WhichOneofArgType__credit_card_number) -> _WhichOneofReturnType__credit_card_number | None: ...
+    @_typing.overload
+    def WhichOneof(self, oneof_group: _WhichOneofArgType__date_and_time) -> _WhichOneofReturnType__date_and_time | None: ...
+    @_typing.overload
+    def WhichOneof(self, oneof_group: _WhichOneofArgType__email) -> _WhichOneofReturnType__email | None: ...
+    @_typing.overload
+    def WhichOneof(self, oneof_group: _WhichOneofArgType__phone_number) -> _WhichOneofReturnType__phone_number | None: ...
+    @_typing.overload
+    def WhichOneof(self, oneof_group: _WhichOneofArgType__social_security_number) -> _WhichOneofReturnType__social_security_number | None: ...
+    @_typing.overload
+    def WhichOneof(self, oneof_group: _WhichOneofArgType__time_zone) -> _WhichOneofReturnType__time_zone | None: ...
 
-global___S2tLlmPostProcessingNormalizationOptions = S2tLlmPostProcessingNormalizationOptions
+Global___S2tLlmPostProcessingNormalizationOptions: _TypeAlias = S2tLlmPostProcessingNormalizationOptions  # noqa: Y015
 
-@typing.final
-class S2tLlmPostProcessingSummarizationOptions(google.protobuf.message.Message):
+@_typing.final
+class S2tLlmPostProcessingSummarizationOptions(_message.Message):
     """<p>Configuration of the options to summarization task in LLM post-processing.</p>"""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    ACTIVE_FIELD_NUMBER: builtins.int
-    PROMPT_FIELD_NUMBER: builtins.int
-    MIN_CHARS_FIELD_NUMBER: builtins.int
-    MAX_CHARS_FIELD_NUMBER: builtins.int
-    active: builtins.bool
+    ACTIVE_FIELD_NUMBER: _builtins.int
+    PROMPT_FIELD_NUMBER: _builtins.int
+    MIN_CHARS_FIELD_NUMBER: _builtins.int
+    MAX_CHARS_FIELD_NUMBER: _builtins.int
+    active: _builtins.bool
     """Optional. Indicates if the summarization task of LLM post-processing is active."""
-    prompt: builtins.str
+    prompt: _builtins.str
     """Optional. Custom prompt to guide the LLM for summarization. Overrides the default prompt when set."""
-    min_chars: builtins.int
+    min_chars: _builtins.int
     """Optional. Minimum number of characters of the summary generated in summarization task of LLM post-processing."""
-    max_chars: builtins.int
+    max_chars: _builtins.int
     """Optional. Maximum number of characters of the summary generated in summarization task of LLM post-processing."""
     def __init__(
         self,
         *,
-        active: builtins.bool | None = ...,
-        prompt: builtins.str | None = ...,
-        min_chars: builtins.int | None = ...,
-        max_chars: builtins.int | None = ...,
+        active: _builtins.bool | None = ...,
+        prompt: _builtins.str | None = ...,
+        min_chars: _builtins.int | None = ...,
+        max_chars: _builtins.int | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["_active", b"_active", "_max_chars", b"_max_chars", "_min_chars", b"_min_chars", "_prompt", b"_prompt", "active", b"active", "max_chars", b"max_chars", "min_chars", b"min_chars", "prompt", b"prompt"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["_active", b"_active", "_max_chars", b"_max_chars", "_min_chars", b"_min_chars", "_prompt", b"_prompt", "active", b"active", "max_chars", b"max_chars", "min_chars", b"min_chars", "prompt", b"prompt"]) -> None: ...
-    @typing.overload
-    def WhichOneof(self, oneof_group: typing.Literal["_active", b"_active"]) -> typing.Literal["active"] | None: ...
-    @typing.overload
-    def WhichOneof(self, oneof_group: typing.Literal["_max_chars", b"_max_chars"]) -> typing.Literal["max_chars"] | None: ...
-    @typing.overload
-    def WhichOneof(self, oneof_group: typing.Literal["_min_chars", b"_min_chars"]) -> typing.Literal["min_chars"] | None: ...
-    @typing.overload
-    def WhichOneof(self, oneof_group: typing.Literal["_prompt", b"_prompt"]) -> typing.Literal["prompt"] | None: ...
+    _HasFieldArgType: _TypeAlias = _typing.Literal["_active", b"_active", "_max_chars", b"_max_chars", "_min_chars", b"_min_chars", "_prompt", b"_prompt", "active", b"active", "max_chars", b"max_chars", "min_chars", b"min_chars", "prompt", b"prompt"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["_active", b"_active", "_max_chars", b"_max_chars", "_min_chars", b"_min_chars", "_prompt", b"_prompt", "active", b"active", "max_chars", b"max_chars", "min_chars", b"min_chars", "prompt", b"prompt"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    _WhichOneofReturnType__active: _TypeAlias = _typing.Literal["active"]  # noqa: Y015
+    _WhichOneofArgType__active: _TypeAlias = _typing.Literal["_active", b"_active"]  # noqa: Y015
+    _WhichOneofReturnType__max_chars: _TypeAlias = _typing.Literal["max_chars"]  # noqa: Y015
+    _WhichOneofArgType__max_chars: _TypeAlias = _typing.Literal["_max_chars", b"_max_chars"]  # noqa: Y015
+    _WhichOneofReturnType__min_chars: _TypeAlias = _typing.Literal["min_chars"]  # noqa: Y015
+    _WhichOneofArgType__min_chars: _TypeAlias = _typing.Literal["_min_chars", b"_min_chars"]  # noqa: Y015
+    _WhichOneofReturnType__prompt: _TypeAlias = _typing.Literal["prompt"]  # noqa: Y015
+    _WhichOneofArgType__prompt: _TypeAlias = _typing.Literal["_prompt", b"_prompt"]  # noqa: Y015
+    @_typing.overload
+    def WhichOneof(self, oneof_group: _WhichOneofArgType__active) -> _WhichOneofReturnType__active | None: ...
+    @_typing.overload
+    def WhichOneof(self, oneof_group: _WhichOneofArgType__max_chars) -> _WhichOneofReturnType__max_chars | None: ...
+    @_typing.overload
+    def WhichOneof(self, oneof_group: _WhichOneofArgType__min_chars) -> _WhichOneofReturnType__min_chars | None: ...
+    @_typing.overload
+    def WhichOneof(self, oneof_group: _WhichOneofArgType__prompt) -> _WhichOneofReturnType__prompt | None: ...
 
-global___S2tLlmPostProcessingSummarizationOptions = S2tLlmPostProcessingSummarizationOptions
+Global___S2tLlmPostProcessingSummarizationOptions: _TypeAlias = S2tLlmPostProcessingSummarizationOptions  # noqa: Y015
 
-@typing.final
-class S2tLlmPostProcessingSubTaskOptions(google.protobuf.message.Message):
+@_typing.final
+class S2tLlmPostProcessingSubTaskOptions(_message.Message):
     """<p>Common configuration for an individual LLM post-processing sub-task (e.g. email, phone number,
     date and time, credit card number, social security number, time zone).
     Used by both normalization and inverse-normalization tasks.</p>
     """
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    ACTIVE_FIELD_NUMBER: builtins.int
-    PROMPT_FIELD_NUMBER: builtins.int
-    active: builtins.bool
+    ACTIVE_FIELD_NUMBER: _builtins.int
+    PROMPT_FIELD_NUMBER: _builtins.int
+    active: _builtins.bool
     """Optional. Indicates if this sub-task is active."""
-    prompt: builtins.str
+    prompt: _builtins.str
     """Optional. Custom prompt to guide the LLM for this sub-task. Overrides the default prompt
     when set.
     """
     def __init__(
         self,
         *,
-        active: builtins.bool | None = ...,
-        prompt: builtins.str | None = ...,
+        active: _builtins.bool | None = ...,
+        prompt: _builtins.str | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["_active", b"_active", "_prompt", b"_prompt", "active", b"active", "prompt", b"prompt"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["_active", b"_active", "_prompt", b"_prompt", "active", b"active", "prompt", b"prompt"]) -> None: ...
-    @typing.overload
-    def WhichOneof(self, oneof_group: typing.Literal["_active", b"_active"]) -> typing.Literal["active"] | None: ...
-    @typing.overload
-    def WhichOneof(self, oneof_group: typing.Literal["_prompt", b"_prompt"]) -> typing.Literal["prompt"] | None: ...
+    _HasFieldArgType: _TypeAlias = _typing.Literal["_active", b"_active", "_prompt", b"_prompt", "active", b"active", "prompt", b"prompt"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["_active", b"_active", "_prompt", b"_prompt", "active", b"active", "prompt", b"prompt"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    _WhichOneofReturnType__active: _TypeAlias = _typing.Literal["active"]  # noqa: Y015
+    _WhichOneofArgType__active: _TypeAlias = _typing.Literal["_active", b"_active"]  # noqa: Y015
+    _WhichOneofReturnType__prompt: _TypeAlias = _typing.Literal["prompt"]  # noqa: Y015
+    _WhichOneofArgType__prompt: _TypeAlias = _typing.Literal["_prompt", b"_prompt"]  # noqa: Y015
+    @_typing.overload
+    def WhichOneof(self, oneof_group: _WhichOneofArgType__active) -> _WhichOneofReturnType__active | None: ...
+    @_typing.overload
+    def WhichOneof(self, oneof_group: _WhichOneofArgType__prompt) -> _WhichOneofReturnType__prompt | None: ...
 
-global___S2tLlmPostProcessingSubTaskOptions = S2tLlmPostProcessingSubTaskOptions
+Global___S2tLlmPostProcessingSubTaskOptions: _TypeAlias = S2tLlmPostProcessingSubTaskOptions  # noqa: Y015
 
-@typing.final
-class Logging(google.protobuf.message.Message):
+@_typing.final
+class Logging(_message.Message):
     """<p>Logging contains configuration for logging.</p>"""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    TYPE_FIELD_NUMBER: builtins.int
-    PATH_FIELD_NUMBER: builtins.int
-    type: builtins.str
+    TYPE_FIELD_NUMBER: _builtins.int
+    PATH_FIELD_NUMBER: _builtins.int
+    type: _builtins.str
     """Type of logging."""
-    path: builtins.str
+    path: _builtins.str
     """Path for logging."""
     def __init__(
         self,
         *,
-        type: builtins.str = ...,
-        path: builtins.str = ...,
+        type: _builtins.str = ...,
+        path: _builtins.str = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing.Literal["path", b"path", "type", b"type"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _Never  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["path", b"path", "type", b"type"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-global___Logging = Logging
+Global___Logging: _TypeAlias = Logging  # noqa: Y015
 
-@typing.final
-class ListS2tLanguageModelsRequest(google.protobuf.message.Message):
+@_typing.final
+class ListS2tLanguageModelsRequest(_message.Message):
     """/////////////////////////////////////////
     GET LIST OF AVAILABLE LANGUAGE MODELS //
     /////////////////////////////////////////
@@ -3630,11 +4149,11 @@ class ListS2tLanguageModelsRequest(google.protobuf.message.Message):
     <p>ListS2tLanguageModelsRequest is used to request a list of available language models for specified pipelines.</p>
     """
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    IDS_FIELD_NUMBER: builtins.int
-    @property
-    def ids(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
+    IDS_FIELD_NUMBER: _builtins.int
+    @_builtins.property
+    def ids(self) -> _containers.RepeatedScalarFieldContainer[_builtins.str]:
         """List of pipeline IDs to retrieve their available language models.
         Example: [&quot;pipeline_1&quot;, &quot;pipeline_2&quot;]
         """
@@ -3642,45 +4161,53 @@ class ListS2tLanguageModelsRequest(google.protobuf.message.Message):
     def __init__(
         self,
         *,
-        ids: collections.abc.Iterable[builtins.str] | None = ...,
+        ids: _abc.Iterable[_builtins.str] | None = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing.Literal["ids", b"ids"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _Never  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["ids", b"ids"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-global___ListS2tLanguageModelsRequest = ListS2tLanguageModelsRequest
+Global___ListS2tLanguageModelsRequest: _TypeAlias = ListS2tLanguageModelsRequest  # noqa: Y015
 
-@typing.final
-class LanguageModelPipelineId(google.protobuf.message.Message):
+@_typing.final
+class LanguageModelPipelineId(_message.Message):
     """<p>LanguageModelPipelineId contains information about a pipeline and its available language models.</p>"""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    PIPELINE_ID_FIELD_NUMBER: builtins.int
-    MODEL_NAMES_FIELD_NUMBER: builtins.int
-    pipeline_id: builtins.str
+    PIPELINE_ID_FIELD_NUMBER: _builtins.int
+    MODEL_NAMES_FIELD_NUMBER: _builtins.int
+    pipeline_id: _builtins.str
     """A pipeline ID. Example: &quot;pipeline_1&quot;"""
-    @property
-    def model_names(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
+    @_builtins.property
+    def model_names(self) -> _containers.RepeatedScalarFieldContainer[_builtins.str]:
         """A list of all available language models for the corresponding pipeline ID. Example: [&quot;model_1&quot;, &quot;model_2&quot;]"""
 
     def __init__(
         self,
         *,
-        pipeline_id: builtins.str = ...,
-        model_names: collections.abc.Iterable[builtins.str] | None = ...,
+        pipeline_id: _builtins.str = ...,
+        model_names: _abc.Iterable[_builtins.str] | None = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing.Literal["model_names", b"model_names", "pipeline_id", b"pipeline_id"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _Never  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["model_names", b"model_names", "pipeline_id", b"pipeline_id"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-global___LanguageModelPipelineId = LanguageModelPipelineId
+Global___LanguageModelPipelineId: _TypeAlias = LanguageModelPipelineId  # noqa: Y015
 
-@typing.final
-class ListS2tLanguageModelsResponse(google.protobuf.message.Message):
+@_typing.final
+class ListS2tLanguageModelsResponse(_message.Message):
     """<p>ListS2tLanguageModelsResponse is used to return the available language models for specified pipelines.</p>"""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    LM_PIPELINE_IDS_FIELD_NUMBER: builtins.int
-    @property
-    def lm_pipeline_ids(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___LanguageModelPipelineId]:
+    LM_PIPELINE_IDS_FIELD_NUMBER: _builtins.int
+    @_builtins.property
+    def lm_pipeline_ids(self) -> _containers.RepeatedCompositeFieldContainer[Global___LanguageModelPipelineId]:
         """Response is a list of <code>LanguageModelPipelineId</code>, where each element contains a pipeline ID and its associated
         language models.
         Example: [{pipeline_id: &quot;pipeline_1&quot;, model_names: [&quot;model_1&quot;, &quot;model_2&quot;]}, {pipeline_id: &quot;pipeline_2&quot;,
@@ -3690,14 +4217,18 @@ class ListS2tLanguageModelsResponse(google.protobuf.message.Message):
     def __init__(
         self,
         *,
-        lm_pipeline_ids: collections.abc.Iterable[global___LanguageModelPipelineId] | None = ...,
+        lm_pipeline_ids: _abc.Iterable[Global___LanguageModelPipelineId] | None = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing.Literal["lm_pipeline_ids", b"lm_pipeline_ids"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _Never  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["lm_pipeline_ids", b"lm_pipeline_ids"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-global___ListS2tLanguageModelsResponse = ListS2tLanguageModelsResponse
+Global___ListS2tLanguageModelsResponse: _TypeAlias = ListS2tLanguageModelsResponse  # noqa: Y015
 
-@typing.final
-class CreateUserLanguageModelRequest(google.protobuf.message.Message):
+@_typing.final
+class CreateUserLanguageModelRequest(_message.Message):
     """///////////////////////////////////
     CUSTOM LANGUAGE MODEL FEATURES  //
     ///////////////////////////////////
@@ -3705,86 +4236,102 @@ class CreateUserLanguageModelRequest(google.protobuf.message.Message):
     <p>CreateUserLanguageModelRequest is used to request the creation of a new user-specific language model.</p>
     """
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    LANGUAGE_MODEL_NAME_FIELD_NUMBER: builtins.int
-    language_model_name: builtins.str
+    LANGUAGE_MODEL_NAME_FIELD_NUMBER: _builtins.int
+    language_model_name: _builtins.str
     """Name of the language model to create. Example: &quot;user_lm_1&quot;"""
     def __init__(
         self,
         *,
-        language_model_name: builtins.str = ...,
+        language_model_name: _builtins.str = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing.Literal["language_model_name", b"language_model_name"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _Never  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["language_model_name", b"language_model_name"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-global___CreateUserLanguageModelRequest = CreateUserLanguageModelRequest
+Global___CreateUserLanguageModelRequest: _TypeAlias = CreateUserLanguageModelRequest  # noqa: Y015
 
-@typing.final
-class DeleteUserLanguageModelRequest(google.protobuf.message.Message):
+@_typing.final
+class DeleteUserLanguageModelRequest(_message.Message):
     """<p>DeleteUserLanguageModelRequest is used to request the deletion of a user-specific language model.</p>"""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    LANGUAGE_MODEL_NAME_FIELD_NUMBER: builtins.int
-    language_model_name: builtins.str
+    LANGUAGE_MODEL_NAME_FIELD_NUMBER: _builtins.int
+    language_model_name: _builtins.str
     """Name of the language model to delete. Example: &quot;user_lm_1&quot;"""
     def __init__(
         self,
         *,
-        language_model_name: builtins.str = ...,
+        language_model_name: _builtins.str = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing.Literal["language_model_name", b"language_model_name"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _Never  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["language_model_name", b"language_model_name"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-global___DeleteUserLanguageModelRequest = DeleteUserLanguageModelRequest
+Global___DeleteUserLanguageModelRequest: _TypeAlias = DeleteUserLanguageModelRequest  # noqa: Y015
 
-@typing.final
-class AddDataToUserLanguageModelRequest(google.protobuf.message.Message):
+@_typing.final
+class AddDataToUserLanguageModelRequest(_message.Message):
     """<p>AddDataToUserLanguageModelRequest is used to request the addition of data to a user-specific language model.</p>"""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    LANGUAGE_MODEL_NAME_FIELD_NUMBER: builtins.int
-    ZIPPED_DATA_FIELD_NUMBER: builtins.int
-    language_model_name: builtins.str
+    LANGUAGE_MODEL_NAME_FIELD_NUMBER: _builtins.int
+    ZIPPED_DATA_FIELD_NUMBER: _builtins.int
+    language_model_name: _builtins.str
     """Name of the language model to which to add data. Example: &quot;user_lm_1&quot;"""
-    zipped_data: builtins.bytes
+    zipped_data: _builtins.bytes
     """Zip file containing data in the form of text files.
     Example: A zip file with text files containing sentences or phrases in the target language.
     """
     def __init__(
         self,
         *,
-        language_model_name: builtins.str = ...,
-        zipped_data: builtins.bytes = ...,
+        language_model_name: _builtins.str = ...,
+        zipped_data: _builtins.bytes = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing.Literal["language_model_name", b"language_model_name", "zipped_data", b"zipped_data"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _Never  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["language_model_name", b"language_model_name", "zipped_data", b"zipped_data"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-global___AddDataToUserLanguageModelRequest = AddDataToUserLanguageModelRequest
+Global___AddDataToUserLanguageModelRequest: _TypeAlias = AddDataToUserLanguageModelRequest  # noqa: Y015
 
-@typing.final
-class TrainUserLanguageModelRequest(google.protobuf.message.Message):
+@_typing.final
+class TrainUserLanguageModelRequest(_message.Message):
     """<p>TrainUserLanguageModelRequest is used to request the training of a user-specific language model.</p>"""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    LANGUAGE_MODEL_NAME_FIELD_NUMBER: builtins.int
-    ORDER_FIELD_NUMBER: builtins.int
-    language_model_name: builtins.str
+    LANGUAGE_MODEL_NAME_FIELD_NUMBER: _builtins.int
+    ORDER_FIELD_NUMBER: _builtins.int
+    language_model_name: _builtins.str
     """Name of the language model to train. Example: &quot;user_lm_1&quot;"""
-    order: builtins.int
+    order: _builtins.int
     """Order n of the ngram. Example: 3 (for trigram model)"""
     def __init__(
         self,
         *,
-        language_model_name: builtins.str = ...,
-        order: builtins.int = ...,
+        language_model_name: _builtins.str = ...,
+        order: _builtins.int = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing.Literal["language_model_name", b"language_model_name", "order", b"order"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _Never  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["language_model_name", b"language_model_name", "order", b"order"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-global___TrainUserLanguageModelRequest = TrainUserLanguageModelRequest
+Global___TrainUserLanguageModelRequest: _TypeAlias = TrainUserLanguageModelRequest  # noqa: Y015
 
-@typing.final
-class ListS2tNormalizationPipelinesRequest(google.protobuf.message.Message):
+@_typing.final
+class ListS2tNormalizationPipelinesRequest(_message.Message):
     """//////////////////////
     LIST OF S2T NORMALIZATION PIPELINES //
     //////////////////////
@@ -3793,29 +4340,33 @@ class ListS2tNormalizationPipelinesRequest(google.protobuf.message.Message):
     <p>Filter pipelines by attributes in request.</p>
     """
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    LANGUAGE_FIELD_NUMBER: builtins.int
-    language: builtins.str
+    LANGUAGE_FIELD_NUMBER: _builtins.int
+    language: _builtins.str
     """Optional. Define the language."""
     def __init__(
         self,
         *,
-        language: builtins.str = ...,
+        language: _builtins.str = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing.Literal["language", b"language"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _Never  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["language", b"language"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-global___ListS2tNormalizationPipelinesRequest = ListS2tNormalizationPipelinesRequest
+Global___ListS2tNormalizationPipelinesRequest: _TypeAlias = ListS2tNormalizationPipelinesRequest  # noqa: Y015
 
-@typing.final
-class ListS2tNormalizationPipelinesResponse(google.protobuf.message.Message):
+@_typing.final
+class ListS2tNormalizationPipelinesResponse(_message.Message):
     """<p>The response message for <code>ListS2tNormalizationPipelines</code>.</p>"""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    S2T_NORMALIZATION_PIPELINES_FIELD_NUMBER: builtins.int
-    @property
-    def s2t_normalization_pipelines(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
+    S2T_NORMALIZATION_PIPELINES_FIELD_NUMBER: _builtins.int
+    @_builtins.property
+    def s2t_normalization_pipelines(self) -> _containers.RepeatedScalarFieldContainer[_builtins.str]:
         """Required. Representation of a list of normalization pipelines configurations.
         Retrieved by <code>ListS2tNormalizationPipelines</code>, containing the configurations of
         normalization pipelines with the specifications received in the <code>ListS2tNormalizationPipelinesRequest</code>.
@@ -3824,8 +4375,12 @@ class ListS2tNormalizationPipelinesResponse(google.protobuf.message.Message):
     def __init__(
         self,
         *,
-        s2t_normalization_pipelines: collections.abc.Iterable[builtins.str] | None = ...,
+        s2t_normalization_pipelines: _abc.Iterable[_builtins.str] | None = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing.Literal["s2t_normalization_pipelines", b"s2t_normalization_pipelines"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _Never  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["s2t_normalization_pipelines", b"s2t_normalization_pipelines"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-global___ListS2tNormalizationPipelinesResponse = ListS2tNormalizationPipelinesResponse
+Global___ListS2tNormalizationPipelinesResponse: _TypeAlias = ListS2tNormalizationPipelinesResponse  # noqa: Y015
