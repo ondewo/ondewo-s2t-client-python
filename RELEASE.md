@@ -2,6 +2,15 @@
 
 *****************
 
+## Release ONDEWO S2T Python Client 7.6.3
+
+### Bug Fixes
+
+* [[OND236-120]](https://ondewo.atlassian.net/browse/OND236-120) `loguru` is a runtime dependency. 7.6.2's `utils/keycloak.py` logs through it, but it was declared only in the `dev` extra, so importing the client from a wheel installed on its own raised `ModuleNotFoundError: No module named 'loguru'`; every environment that also installed `dev` hid it.
+* [[OND236-120]](https://ondewo.atlassian.net/browse/OND236-120) `test_runtime_imports_are_declared.py` (shared verbatim by every python SDK) fails for any third-party module the package imports that is not a declared runtime dependency.
+
+*****************
+
 ## Release ONDEWO S2T Python Client 7.6.2
 
 ### New Features
